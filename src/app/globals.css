@@ -176,13 +176,69 @@
     /* ── Typography ──────────────────────────────────────── */
     --font-family-display: 'Inter Display', var(--font-sans), sans-serif;
     --font-family-base: 'Inter', var(--font-sans), sans-serif;
-    --text-h1: 56px;
-    --text-h2: 48px;
-    --text-h3: 40px;
-    --text-h4: 32px;
-    --text-base: 16px;
-    --text-label: 14px;
-    --letter-spacing-label: 0.84px;
+
+    /* Title scale (px) */
+    --font-title-h1-size: 56px;
+    --font-title-h1-line: 64px;
+    --font-title-h1-weight: 800;
+    --font-title-h1-tracking: -0.01em;
+
+    --font-title-h2-size: 48px;
+    --font-title-h2-line: 56px;
+    --font-title-h2-weight: 800;
+    --font-title-h2-tracking: -0.01em;
+
+    --font-title-h3-size: 40px;
+    --font-title-h3-line: 48px;
+    --font-title-h3-weight: 800;
+    --font-title-h3-tracking: -0.01em;
+
+    --font-title-h4-size: 32px;
+    --font-title-h4-line: 40px;
+    --font-title-h4-weight: 700;
+    --font-title-h4-tracking: -0.005em;
+
+    --font-title-h5-size: 24px;
+    --font-title-h5-line: 32px;
+    --font-title-h5-weight: 700;
+    --font-title-h5-tracking: 0;
+
+    --font-title-h6-size: 22px;
+    --font-title-h6-line: 30px;
+    --font-title-h6-weight: 700;
+    --font-title-h6-tracking: 0;
+
+    --font-title-h7-size: 18px;
+    --font-title-h7-line: 22px;
+    --font-title-h7-weight: 700;
+    --font-title-h7-tracking: 0;
+
+    /* Paragraph scale (Regular / SemiBold) */
+    --font-paragraph-xl-size: 24px;
+    --font-paragraph-xl-line: 32px;
+
+    --font-paragraph-l-size: 18px;
+    --font-paragraph-l-line: 24px;
+
+    --font-paragraph-m-size: 16px;
+    --font-paragraph-m-line: 24px;
+
+    --font-paragraph-s-size: 14px;
+    --font-paragraph-s-line: 20px;
+
+    --font-paragraph-xs-size: 12px;
+    --font-paragraph-xs-line: 16px;
+
+    /* Label scale */
+    --font-label-l-size: 18px;
+    --font-label-l-line: 28px;
+    --font-label-m-size: 16px;
+    --font-label-m-line: 24px;
+    --font-label-s-size: 14px;
+    --font-label-s-line: 20px;
+    --font-label-xs-size: 12px;
+    --font-label-xs-line: 16px;
+    --font-label-tracking: 0.06em;  /* ~6% letter spacing */
   }
 
   /* ── Dark Mode (future use) ──────────────────────── */
@@ -237,41 +293,78 @@
     text-wrap: balance;
   }
 
-  /* Display heading — hero sections */
+  /* Titles — map to Figma title scale */
   .heading-display {
-    @apply text-4xl font-black leading-[1.1] tracking-tight md:text-5xl lg:text-[56px];
+    font-family: var(--font-family-display);
+    font-size: var(--font-title-h1-size);
+    line-height: var(--font-title-h1-line);
+    font-weight: var(--font-title-h1-weight);
+    letter-spacing: var(--font-title-h1-tracking);
   }
 
   .heading-1 {
-    @apply text-3xl font-bold leading-tight tracking-tight sm:text-4xl;
+    font-family: var(--font-family-display);
+    font-size: var(--font-title-h2-size);
+    line-height: var(--font-title-h2-line);
+    font-weight: var(--font-title-h2-weight);
+    letter-spacing: var(--font-title-h2-tracking);
   }
 
   .heading-2 {
-    @apply text-2xl font-bold leading-tight tracking-tight sm:text-3xl;
+    font-family: var(--font-family-display);
+    font-size: var(--font-title-h3-size);
+    line-height: var(--font-title-h3-line);
+    font-weight: var(--font-title-h3-weight);
+    letter-spacing: var(--font-title-h3-tracking);
   }
 
   .heading-3 {
-    @apply text-xl font-semibold leading-snug sm:text-2xl;
+    font-family: var(--font-family-display);
+    font-size: var(--font-title-h4-size);
+    line-height: var(--font-title-h4-line);
+    font-weight: var(--font-title-h4-weight);
+    letter-spacing: var(--font-title-h4-tracking);
   }
 
   .heading-4 {
-    @apply text-lg font-semibold leading-snug;
+    font-family: var(--font-family-display);
+    font-size: var(--font-title-h5-size);
+    line-height: var(--font-title-h5-line);
+    font-weight: var(--font-title-h5-weight);
+    letter-spacing: var(--font-title-h5-tracking);
   }
 
   .body-large {
-    @apply text-lg leading-relaxed text-muted-foreground;
+    font-family: var(--font-family-base);
+    font-size: var(--font-paragraph-l-size);
+    line-height: var(--font-paragraph-l-line);
+    font-weight: 400;
+    color: hsl(var(--text-neutrals-800));
   }
 
   .body-base {
-    @apply text-base leading-relaxed text-muted-foreground;
+    font-family: var(--font-family-base);
+    font-size: var(--font-paragraph-m-size);
+    line-height: var(--font-paragraph-m-line);
+    font-weight: 400;
+    color: hsl(var(--text-neutrals-800));
   }
 
   .body-small {
-    @apply text-sm leading-relaxed text-muted-foreground;
+    font-family: var(--font-family-base);
+    font-size: var(--font-paragraph-s-size);
+    line-height: var(--font-paragraph-s-line);
+    font-weight: 400;
+    color: hsl(var(--text-neutrals-800));
   }
 
   .label-caps {
-    @apply text-xs font-semibold uppercase tracking-widest;
+    font-family: var(--font-family-base);
+    font-size: var(--font-label-xs-size);
+    line-height: var(--font-label-xs-line);
+    font-weight: 700;
+    letter-spacing: var(--font-label-tracking);
+    text-transform: uppercase;
   }
 
   /* Section spacing — controls vertical rhythm */
