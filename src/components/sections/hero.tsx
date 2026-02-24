@@ -29,7 +29,7 @@ export default function HeroSection() {
         <div className="mx-auto max-w-4xl text-center">
           {/* Eyebrow */}
           <p className="text-sm md:text-base font-bold text-[#99825d] uppercase tracking-wider mb-5">
-            For Product Designers, UX Teams &amp; Founders
+            Forr Product Designers, UX Teams &amp; Founders
           </p>
 
           {/* H1 */}
