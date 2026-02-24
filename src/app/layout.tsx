@@ -52,6 +52,9 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" suppressHydrationWarning>
+      <head>
+        <script src="https://mcp.figma.com/mcp/html-to-design/capture.js" async></script>
+      </head>
       <body className={`${fontSans.variable} ${fontDisplay.variable} font-sans antialiased`}>
         {children}
         <Toaster />
