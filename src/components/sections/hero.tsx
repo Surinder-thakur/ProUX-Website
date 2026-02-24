@@ -15,7 +15,7 @@ const stats = [
 
 function StarIcon() {
   return (
-    <svg className="h-4 w-4 fill-[#1a2130]" viewBox="0 0 20 20">
+    <svg className="h-4 w-4 fill-current text-foreground" viewBox="0 0 20 20">
       <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
     </svg>
   );
@@ -23,23 +23,27 @@ function StarIcon() {
 
 export default function HeroSection() {
   return (
-    <section className="bg-[#f8f7f4] pt-32 pb-16 md:pb-24 overflow-hidden">
+    <section className="bg-background pt-32 pb-16 md:pb-24 overflow-hidden">
       <div className="container-default">
         {/* Hero content — centered */}
-        <div className="mx-auto max-w-4xl text-center">
+        <div className="mx-auto max-w-5xl xl:max-w-6xl text-center">
           {/* Eyebrow */}
-          <p className="text-sm md:text-base font-bold text-[#99825d] uppercase tracking-wider mb-5">
+          <p className="text-sm md:text-base font-regular text-[hsl(var(--text-primary-600))] uppercase tracking-wider mb-5">
             For Product Designers, UX Teams &amp; Founders
           </p>
 
           {/* H1 */}
-          <h1 className="text-4xl md:text-5xl lg:text-[56px] leading-[1.1] font-black text-slate-900 tracking-tight mb-6">
-            AI-First UX Intelligence Platform for{" "}
-            <span className="text-[#B9573D]">Every Stage of Design</span>
+          <h1 className="text-4xl md:text-5xl lg:text-[56px] leading-[1.2] font-black text-foreground tracking-tight mb-6">
+            <span className="block lg:whitespace-nowrap">
+              AI-First UX Intelligence Platform for
+            </span>
+            <span className="block mt-2 text-primary">
+              Every Stage of Design
+            </span>
           </h1>
 
           {/* Subtitle */}
-          <p className="text-lg md:text-[22px] leading-[1.6] font-normal text-[#4A5568] mx-auto max-w-2xl mb-8">
+          <p className="text-md md:text-[22px] leading-[1.5] font-normal text-[hsl(var(--text-neutrals-800))] mx-auto max-w-3xl mb-8">
             AI-powered UX intelligence for research, audits, and optimization
             grounded in 350+ expert guidelines &amp; insights.
           </p>
@@ -48,7 +52,7 @@ export default function HeroSection() {
           <div className="mb-10">
             <Link
               href="https://app.proux.design/Auth"
-              className="btn-shine inline-flex items-center justify-center bg-[#B9573D] text-white rounded-[14px] px-8 py-4 font-semibold uppercase tracking-wide shadow-lg transition-all hover:shadow-xl hover:brightness-110"
+              className="btn-shine inline-flex items-center justify-center bg-primary text-primary-foreground rounded-[14px] px-8 py-4 font-semibold uppercase tracking-wide shadow-lg transition-all hover:shadow-xl hover:brightness-110"
             >
               Get Started Free
             </Link>
@@ -56,7 +60,7 @@ export default function HeroSection() {
 
           {/* Certifications row */}
           <div className="mb-14 flex flex-col items-center gap-4">
-            <p className="font-medium text-[#212529] text-[14px] tracking-[0.96px] uppercase opacity-80">
+            <p className="font-medium text-foreground text-[14px] tracking-[0.96px] uppercase opacity-80">
               Built by Certified Professionals
             </p>
             <div className="flex items-center gap-6">
@@ -76,7 +80,7 @@ export default function HeroSection() {
 
         {/* Product preview image card */}
         <div className="mx-auto max-w-[915px]">
-          <div className="bg-white rounded-[24px] shadow-[0px_-16px_94px_10px_rgba(222,215,179,0.3)] overflow-hidden">
+          <div className="bg-card rounded-[24px] shadow-[0px_-16px_94px_10px_rgba(222,215,179,0.3)] overflow-hidden">
             <Image
               src="/images/hero-dashboard.png"
               alt="ProUX AI-First UX Intelligence Platform Dashboard"
@@ -97,11 +101,11 @@ export default function HeroSection() {
                 className="flex items-center gap-3 py-4 sm:py-0"
               >
                 <div className="relative leading-[40px]">
-                  <span className="text-[36px] font-black text-[#1a2130]">
+                  <span className="text-[36px] font-black text-foreground">
                     {stat.value}
                   </span>
                   {"valueSuffix" in stat && stat.valueSuffix && (
-                    <span className="text-[18px] font-medium text-[#696f7b] align-baseline">
+                    <span className="text-[18px] font-medium text-muted-foreground align-baseline">
                       {stat.valueSuffix}
                     </span>
                   )}
@@ -114,11 +118,11 @@ export default function HeroSection() {
                       ))}
                     </div>
                   )}
-                  <p className="text-[12px] font-bold leading-[15px] text-[#99825d] uppercase tracking-[1.2px] whitespace-nowrap">
+                  <p className="text-[12px] font-bold leading-[15px] text-[hsl(var(--text-primary-600))] uppercase tracking-[1.2px] whitespace-nowrap">
                     {stat.labelLine1}
                   </p>
                   {stat.labelLine2 && (
-                    <p className="text-[12px] font-bold leading-[15px] text-[#99825d] uppercase tracking-[1.2px]">
+                    <p className="text-[12px] font-bold leading-[15px] text-[hsl(var(--text-primary-600))] uppercase tracking-[1.2px]">
                       {stat.labelLine2}
                     </p>
                   )}
