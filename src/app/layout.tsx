@@ -3,53 +3,45 @@ import { Inter } from "next/font/google";
 import { Toaster } from "@/components/ui/toaster";
 import "./globals.css";
 
-/* =============================================================================
- * DESIGNERS: Font Configuration
- * =============================================================================
- * Change the Google Font import to update the site's typeface.
- * Popular alternatives: "DM_Sans", "Plus_Jakarta_Sans", "Outfit", "Manrope"
- *
- * To switch fonts:
- * 1. Import the new font from "next/font/google"
- * 2. Update the variable name below
- * 3. The entire site will update automatically
- * ========================================================================== */
 const fontSans = Inter({
   subsets: ["latin"],
   variable: "--font-sans",
 });
 
-/* =============================================================================
- * DESIGNERS: SEO Metadata
- * Update title, description, and Open Graph info for search engines.
- * ========================================================================== */
+const fontDisplay = Inter({
+  subsets: ["latin"],
+  variable: "--font-display",
+  weight: ["700", "800", "900"],
+});
+
 export const metadata: Metadata = {
   title: {
-    default: "ProUX — UX Consulting, Training & Tools",
+    default: "ProUX — AI-First UX Intelligence Platform",
     template: "%s | ProUX",
   },
   description:
-    "Empowering teams to create exceptional user experiences through expert UX consulting, professional training courses, and powerful design tools.",
+    "Get AI-powered UX feedback, proven design principles, and expert-curated resources — all in one platform built by certified UX professionals.",
   keywords: [
     "UX consulting",
     "UX training",
     "user experience",
     "design courses",
     "UX tools",
+    "AI UX",
   ],
   openGraph: {
     type: "website",
     locale: "en_US",
     siteName: "ProUX",
-    title: "ProUX — UX Consulting, Training & Tools",
+    title: "ProUX — AI-First UX Intelligence Platform",
     description:
-      "Empowering teams to create exceptional user experiences.",
+      "Get AI-powered UX feedback, proven design principles, and expert-curated resources.",
   },
   twitter: {
     card: "summary_large_image",
-    title: "ProUX — UX Consulting, Training & Tools",
+    title: "ProUX — AI-First UX Intelligence Platform",
     description:
-      "Empowering teams to create exceptional user experiences.",
+      "Get AI-powered UX feedback, proven design principles, and expert-curated resources.",
   },
 };
 
@@ -60,7 +52,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" suppressHydrationWarning>
-      <body className={`${fontSans.variable} font-sans antialiased`}>
+      <body className={`${fontSans.variable} ${fontDisplay.variable} font-sans antialiased`}>
         {children}
         <Toaster />
       </body>
