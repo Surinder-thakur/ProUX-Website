@@ -1,14 +1,9 @@
+"use client";
+
 import Link from "next/link";
+import { useState, useEffect } from "react";
 import { Separator } from "@/components/ui/separator";
 
-/* =============================================================================
- * DESIGNERS: Footer Configuration
- * =============================================================================
- * Update link arrays, contact info, and social links below.
- * Footer matches the live ProUX design with 4-column layout.
- * ========================================================================== */
-
-/* DESIGNERS: ProUX Footer Logo SVG — larger version with full wordmark */
 function ProUXLogoFooter({ className }: { className?: string }) {
   return (
     <svg
@@ -55,7 +50,6 @@ function ProUXLogoFooter({ className }: { className?: string }) {
   );
 }
 
-/* DESIGNERS: Social icons — add/remove social platforms here */
 function LinkedInIcon() {
   return (
     <svg className="h-5 w-5 fill-current" viewBox="0 0 24 24">
@@ -95,11 +89,30 @@ const footerNav = {
 };
 
 export function Footer() {
+  const [bottomCTAVisible, setBottomCTAVisible] = useState(false);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      // Check if mobile secondary nav bottom CTA is visible
+      // It appears when scrolled past one viewport height, on mobile only
+      const isMobile = window.innerWidth < 768;
+      const pastViewport = window.scrollY > window.innerHeight;
+      setBottomCTAVisible(isMobile && pastViewport);
+    };
+
+    window.addEventListener("scroll", handleScroll, { passive: true });
+    window.addEventListener("resize", handleScroll, { passive: true });
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+      window.removeEventListener("resize", handleScroll);
+    };
+  }, []);
+
   return (
     <footer className="border-t bg-white">
       <div className="container-default section-padding">
         <div className="grid gap-12 sm:grid-cols-2 lg:grid-cols-4">
-          {/* ── Brand Column ─────────────────────────────────────── */}
+          {/* Brand Column */}
           <div className="space-y-6">
             <Link href="/">
               <ProUXLogoFooter className="h-8 w-auto" />
@@ -123,7 +136,6 @@ export function Footer() {
               , NN/g certified UX consultant. 12,000+ designers trained. $100M+
               in measurable impact.
             </p>
-            {/* DESIGNERS: Social media icons — update links */}
             <div className="flex items-center gap-3">
               <Link
                 href="#"
@@ -140,7 +152,7 @@ export function Footer() {
             </div>
           </div>
 
-          {/* ── Contact Column ───────────────────────────────────── */}
+          {/* Contact Column */}
           <div className="space-y-6">
             <h4 className="label-caps text-proux-copper">Contact</h4>
             <div className="space-y-3">
@@ -162,7 +174,7 @@ export function Footer() {
             </div>
           </div>
 
-          {/* ── Navigation Column ────────────────────────────────── */}
+          {/* Navigation Column */}
           <div className="space-y-6">
             <h4 className="label-caps text-muted-foreground">
               {footerNav.navigation.title}
@@ -181,7 +193,7 @@ export function Footer() {
             </ul>
           </div>
 
-          {/* ── Company Column ───────────────────────────────────── */}
+          {/* Company Column */}
           <div className="space-y-6">
             <h4 className="label-caps text-muted-foreground">
               {footerNav.company.title}
@@ -203,7 +215,7 @@ export function Footer() {
 
         <Separator className="my-10" />
 
-        {/* ── Bottom Bar ─────────────────────────────────────────── */}
+        {/* Bottom Bar */}
         <div className="flex flex-col items-center justify-between gap-4 sm:flex-row">
           <p className="text-sm text-muted-foreground">
             &copy; {new Date().getFullYear()} ProUX{" "}
@@ -230,12 +242,14 @@ export function Footer() {
         </div>
       </div>
 
-      {/* DESIGNERS: WhatsApp floating button — update phone number link */}
+      {/* WhatsApp floating button — lifts on mobile when bottom CTA is visible */}
       <Link
-        href="https://wa.me/919878977771"
+        href="https://wa.me/919878977771?text=Hi%2C%20I%27m%20interested%20in%20the%20ProUX%20platform%20and%20also%20exploring%20consulting%20services.%20Are%20you%20available%20for%20a%20quick%20call%3F"
         target="_blank"
         rel="noopener noreferrer"
-        className="fixed bottom-6 right-6 z-50 flex h-14 w-14 items-center justify-center rounded-full bg-[#25D366] text-white shadow-lg transition-transform hover:scale-110"
+        className={`fixed right-6 z-50 flex h-14 w-14 items-center justify-center rounded-full bg-[#25D366] text-white shadow-lg transition-all hover:scale-110 ${
+          bottomCTAVisible ? "bottom-24" : "bottom-6"
+        } md:bottom-6`}
         aria-label="Chat on WhatsApp"
       >
         <svg className="h-7 w-7" fill="currentColor" viewBox="0 0 24 24">

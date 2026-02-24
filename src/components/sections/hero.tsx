@@ -1,158 +1,131 @@
-/* =============================================================================
- * HERO SECTION
- * =============================================================================
- * DESIGNERS: This is the first thing visitors see. Key customization points:
- * - Sub-navigation links
- * - Headline text & highlighted phrase
- * - Description copy
- * - CTA button text & link
- * - Certification badges
- * - Hero dashboard image
- * - Stats bar numbers
- * - Feature pills
- * ========================================================================== */
-
 import Image from "next/image";
 import Link from "next/link";
 
-/* DESIGNERS: Sub-navigation items. Update href values to match your section IDs. */
-const subNavItems = [
-  { label: "Features", href: "#features" },
-  { label: "Pricing", href: "#pricing" },
-  { label: "FAQ", href: "#faq" },
-  { label: "Get Started", href: "#get-started" },
-];
-
-/* DESIGNERS: Stats bar data. Update numbers and labels as needed. */
-const stats = [
-  { value: "12k+", label: "Product Designers" },
-  { value: "4.98/5", label: "Positive Reviews" },
-  { value: "100%", label: "Money Back Guarantee" },
-];
-
-/* DESIGNERS: Feature pills displayed below the hero image. */
-const featurePills = [
-  "AI Design Scanner",
-  "UX Principles",
-  "Psychology Patterns",
-  "Real Product Analysis",
-  "Guidelines Library",
-  "AI Specialists",
-];
-
-/* DESIGNERS: Certification badges shown below the CTA. */
 const certBadges = [
   { src: "/images/badge-nng.png", alt: "Nielsen Norman Group Certification" },
   { src: "/images/badge-cua.png", alt: "CUA Certification" },
   { src: "/images/badge-cdpa.png", alt: "CDPA Certification" },
 ];
 
+const stats = [
+  { value: "12k+", labelLine1: "Design Engineers", labelLine2: "TRAINED", hasStars: false },
+  { value: "4.98", valueSuffix: "/5", labelLine1: "Positive Reviews", labelLine2: "", hasStars: true },
+  { value: "100%", labelLine1: "Money Back", labelLine2: "GUARANTEE", hasStars: false },
+];
+
+function StarIcon() {
+  return (
+    <svg className="h-4 w-4 fill-[#1a2130]" viewBox="0 0 20 20">
+      <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
+    </svg>
+  );
+}
+
 export default function HeroSection() {
   return (
-    <section
-      id="hero"
-      className="bg-proux-warm section-padding overflow-hidden"
-    >
+    <section className="bg-[#f8f7f4] pt-32 pb-16 md:pb-24 overflow-hidden">
       <div className="container-default">
-        {/* ── DESIGNERS: Sub-navigation ──────────────────────────────── */}
-        <nav className="mb-10 flex flex-wrap items-center justify-center gap-2 sm:gap-4">
-          {subNavItems.map((item) => (
-            <Link
-              key={item.label}
-              href={item.href}
-              className="body-small rounded-full border border-border bg-white px-4 py-2 font-medium text-foreground transition-colors hover:border-primary hover:text-primary"
-            >
-              {item.label}
-            </Link>
-          ))}
-        </nav>
-
-        {/* ── DESIGNERS: Hero content ───────────────────────────────── */}
+        {/* Hero content — centered */}
         <div className="mx-auto max-w-4xl text-center">
-          {/* DESIGNERS: Eyebrow text above the headline */}
-          <p className="label-caps mb-4 text-proux-copper">
+          {/* Eyebrow */}
+          <p className="text-sm md:text-base font-bold text-[#99825d] uppercase tracking-wider mb-5">
             For Product Designers, UX Teams &amp; Founders
           </p>
 
-          {/* DESIGNERS: Main headline. The <span> applies copper highlight. */}
-          <h1 className="heading-display mb-6 text-proux-navy">
+          {/* H1 */}
+          <h1 className="text-4xl md:text-5xl lg:text-[56px] leading-[1.1] font-black text-slate-900 tracking-tight mb-6">
             AI-First UX Intelligence Platform for{" "}
-            <span className="text-proux-copper">Every Stage of Design</span>
+            <span className="text-[#B9573D]">Every Stage of Design</span>
           </h1>
 
-          {/* DESIGNERS: Supporting description text */}
-          <p className="body-large mx-auto mb-8 max-w-2xl">
-            Get AI-powered UX feedback, proven design principles, and
-            expert-curated resources — all in one platform built by certified
-            UX professionals.
+          {/* Subtitle */}
+          <p className="text-lg md:text-[22px] leading-[1.6] font-normal text-[#4A5568] mx-auto max-w-2xl mb-8">
+            AI-powered UX intelligence for research, audits, and optimization
+            grounded in 350+ expert guidelines &amp; insights.
           </p>
 
-          {/* DESIGNERS: Primary CTA button — update href for your signup flow */}
-          <div className="mb-8">
+          {/* CTA button with shine */}
+          <div className="mb-10">
             <Link
-              href="#get-started"
-              className="inline-flex items-center justify-center rounded-full bg-primary px-8 py-4 text-base font-semibold text-primary-foreground shadow-lg transition-all hover:bg-primary/90 hover:shadow-xl"
+              href="https://app.proux.design/Auth"
+              className="btn-shine inline-flex items-center justify-center bg-[#B9573D] text-white rounded-[14px] px-8 py-4 font-semibold uppercase tracking-wide shadow-lg transition-all hover:shadow-xl hover:brightness-110"
             >
               Get Started Free
             </Link>
           </div>
 
-          {/* ── DESIGNERS: Certification badges ─────────────────────── */}
-          <div className="mb-12 flex flex-col items-center gap-3">
-            <p className="label-caps text-muted-foreground">
+          {/* Certifications row */}
+          <div className="mb-14 flex flex-col items-center gap-4">
+            <p className="font-medium text-[#212529] text-[14px] tracking-[0.96px] uppercase opacity-80">
               Built by Certified Professionals
             </p>
-            <div className="flex items-center gap-4">
+            <div className="flex items-center gap-6">
               {certBadges.map((badge) => (
                 <Image
                   key={badge.alt}
                   src={badge.src}
                   alt={badge.alt}
-                  width={48}
-                  height={48}
-                  className="h-10 w-auto opacity-70 grayscale transition-all hover:opacity-100 hover:grayscale-0 sm:h-12"
+                  width={127}
+                  height={127}
+                  className="h-[95px] md:h-[127px] w-auto"
                 />
               ))}
             </div>
           </div>
         </div>
 
-        {/* ── DESIGNERS: Hero dashboard image ───────────────────────── */}
-        <div className="relative mx-auto max-w-5xl">
-          <div className="overflow-hidden rounded-xl border border-border bg-white shadow-2xl">
+        {/* Product preview image card */}
+        <div className="mx-auto max-w-[915px]">
+          <div className="bg-white rounded-[24px] shadow-[0px_-16px_94px_10px_rgba(222,215,179,0.3)] overflow-hidden">
             <Image
               src="/images/hero-dashboard.png"
               alt="ProUX AI-First UX Intelligence Platform Dashboard"
-              width={1200}
-              height={720}
+              width={915}
+              height={549}
               className="h-auto w-full"
               priority
             />
           </div>
         </div>
 
-        {/* ── DESIGNERS: Stats bar ──────────────────────────────────── */}
-        <div className="mt-12 grid grid-cols-1 gap-6 sm:grid-cols-3 sm:gap-8">
-          {stats.map((stat) => (
-            <div key={stat.label} className="text-center">
-              <p className="text-2xl font-bold text-proux-navy sm:text-3xl">
-                {stat.value}
-              </p>
-              <p className="body-small mt-1">{stat.label}</p>
-            </div>
-          ))}
-        </div>
-
-        {/* ── DESIGNERS: Feature pills ──────────────────────────────── */}
-        <div className="mt-10 flex flex-wrap items-center justify-center gap-2 sm:gap-3">
-          {featurePills.map((pill) => (
-            <span
-              key={pill}
-              className="rounded-full border border-border bg-white px-4 py-2 text-sm font-medium text-foreground"
-            >
-              {pill}
-            </span>
-          ))}
+        {/* Stats bar */}
+        <div className="mt-12 mx-auto">
+          <div className="flex flex-col sm:flex-row items-center justify-center gap-8 sm:gap-10">
+            {stats.map((stat) => (
+              <div
+                key={stat.labelLine1}
+                className="flex items-center gap-3 py-4 sm:py-0"
+              >
+                <div className="relative leading-[40px]">
+                  <span className="text-[36px] font-black text-[#1a2130]">
+                    {stat.value}
+                  </span>
+                  {"valueSuffix" in stat && stat.valueSuffix && (
+                    <span className="text-[18px] font-medium text-[#696f7b] align-baseline">
+                      {stat.valueSuffix}
+                    </span>
+                  )}
+                </div>
+                <div>
+                  {stat.hasStars && (
+                    <div className="flex items-center gap-0.5 mb-0.5">
+                      {[...Array(5)].map((_, i) => (
+                        <StarIcon key={i} />
+                      ))}
+                    </div>
+                  )}
+                  <p className="text-[12px] font-bold leading-[15px] text-[#99825d] uppercase tracking-[1.2px] whitespace-nowrap">
+                    {stat.labelLine1}
+                  </p>
+                  {stat.labelLine2 && (
+                    <p className="text-[12px] font-bold leading-[15px] text-[#99825d] uppercase tracking-[1.2px]">
+                      {stat.labelLine2}
+                    </p>
+                  )}
+                </div>
+              </div>
+            ))}
+          </div>
         </div>
       </div>
     </section>
