@@ -7,7 +7,7 @@ const certBadges = [
   { src: "/images/badge-cdpa.png", alt: "CDPA Certification" },
 ];
 
-const stats = [
+const trustStats = [
   { value: "12k+", labelLine1: "Design Engineers", labelLine2: "TRAINED", hasStars: false },
   { value: "4.98", valueSuffix: "/5", labelLine1: "Positive Reviews", labelLine2: "", hasStars: true },
   { value: "100%", labelLine1: "Money Back", labelLine2: "GUARANTEE", hasStars: false },
@@ -92,10 +92,10 @@ export default function HeroSection() {
           </div>
         </div>
 
-        {/* Stats bar */}
+        {/* Trust stats */}
         <div className="mt-12 mx-auto">
           <div className="flex flex-col sm:flex-row items-center justify-center gap-8 sm:gap-10">
-            {stats.map((stat) => (
+            {trustStats.map((stat) => (
               <div
                 key={stat.labelLine1}
                 className="flex items-center gap-3 py-4 sm:py-0"
@@ -104,7 +104,7 @@ export default function HeroSection() {
                   <span className="text-[36px] font-black text-foreground">
                     {stat.value}
                   </span>
-                  {"valueSuffix" in stat && stat.valueSuffix && (
+                  {stat.valueSuffix && (
                     <span className="text-[18px] font-medium text-muted-foreground align-baseline">
                       {stat.valueSuffix}
                     </span>

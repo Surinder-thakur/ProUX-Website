@@ -1,274 +1,353 @@
-/* =============================================================================
- * FEATURES SECTION
- * =============================================================================
- * DESIGNERS: Six feature blocks with alternating layouts. Key customization:
- * - Section heading
- * - Feature titles, descriptions & bullet points
- * - Testimonial quotes & avatars
- * - Product screenshot images (mobile + desktop)
- * - Alternating layout direction (image left/right)
- * ========================================================================== */
+"use client";
 
+import React, { useState, useRef } from "react";
 import Image from "next/image";
+import { motion } from "motion/react";
+import { Check } from "lucide-react";
 
-/* DESIGNERS: Update feature data to match your product offering. */
-const features = [
+/* ── Types ──────────────────────────────────────────────────────────────── */
+
+interface Testimonial {
+  quote: string;
+  name: string;
+  role: string;
+  image: string;
+}
+
+interface Feature {
+  title: React.ReactNode;
+  description: string;
+  checks: string[];
+  image: string;
+  imageAlt: string;
+  mobileImage: string;
+  testimonial: Testimonial;
+}
+
+/* ── Data ───────────────────────────────────────────────────────────────── */
+
+const features: Feature[] = [
   {
-    id: "scanner",
-    title: "AI-Powered Design Scanner",
+    title: (
+      <>
+        AI-Powered <br className="lg:hidden" /> Design Scanner
+      </>
+    ),
     description:
-      "Upload any design and get instant, actionable feedback powered by AI. Our scanner analyzes your layouts against hundreds of proven UX principles and identifies improvements in seconds.",
-    bullets: [
-      "Instant analysis of any design file or URL",
-      "Actionable recommendations based on UX best practices",
-      "Severity scoring to prioritize what matters most",
-      "Export reports for stakeholder presentations",
+      "Get instant UX scores with prioritized issues and actionable fixes mapped to 350+ expert guidelines.",
+    checks: [
+      "Audit any URL or design file in minutes",
+      "Get scored feedback across UX, UI, content, and CRO",
+      "Get continuous contextual feedback on iterations",
     ],
-    testimonial: {
-      quote:
-        "The AI Scanner caught usability issues our entire team missed. It's like having a senior UX reviewer available 24/7.",
-      name: "Lisa Chen",
-      role: "Lead Product Designer at Shopify",
-      avatar: "/images/testimonial-lisa.jpg",
-    },
+    image: "/images/scanner-desktop.png",
+    imageAlt: "AI-Powered Design Scanner Interface",
     mobileImage: "/images/scanner-mobile.png",
-    desktopImage: "/images/scanner-desktop.png",
-    mobileAlt: "AI Design Scanner mobile view",
-    desktopAlt: "AI Design Scanner desktop view",
-  },
-  {
-    id: "specialists",
-    title: "AI-First UX Specialists",
-    description:
-      "Access a team of AI-powered UX specialists, each trained on specific domains. From e-commerce to SaaS, healthcare to fintech — get expert-level guidance tailored to your industry.",
-    bullets: [
-      "Domain-specific UX expertise on demand",
-      "Trained on thousands of real product analyses",
-      "Contextual advice for your specific industry",
-      "Available 24/7 with instant responses",
-    ],
     testimonial: {
       quote:
-        "Having AI specialists for our specific industry saved us months of research. The recommendations are spot-on every time.",
-      name: "Jordan Rivera",
-      role: "UX Manager at Stripe",
-      avatar: "/images/testimonial-jordan.jpg",
+        "The Design Scanner found 8 conversion blockers we didn't see. Fixed them before launch and our signup rate jumped 34%. Worth every penny.",
+      name: "Lisa Martinez",
+      role: "Founder, ShopLocal",
+      image: "/images/testimonial-lisa.jpg",
     },
+  },
+  {
+    title: (
+      <>
+        AI-First <br className="lg:hidden" /> UX Specialists
+      </>
+    ),
+    description:
+      "Access AI specialists trained by certified UX professionals to support every stage of your design process.",
+    checks: [
+      "Work faster with AI agents specialized for each design stage",
+      "Expanding library with new specialists added continuously",
+    ],
+    image: "/images/specialists-desktop.png",
+    imageAlt: "AI specialists assisting with design tasks",
     mobileImage: "/images/specialists-mobile.png",
-    desktopImage: "/images/specialists-desktop.png",
-    mobileAlt: "AI UX Specialists mobile view",
-    desktopAlt: "AI UX Specialists desktop view",
-  },
-  {
-    id: "principles",
-    title: "UX Principles & Psychology",
-    description:
-      "Master the cognitive psychology behind great design. Browse our curated library of UX principles, mental models, and behavioral patterns with real-world examples and implementation guides.",
-    bullets: [
-      "100+ proven UX principles and psychology patterns",
-      "Real-world examples from top products",
-      "Implementation guides for each principle",
-      "Filter by category, impact, and use case",
-    ],
     testimonial: {
       quote:
-        "This library transformed how our team thinks about design decisions. Every principle comes with actionable guidance.",
-      name: "Nina Patel",
-      role: "Senior Designer at Airbnb",
-      avatar: "/images/testimonial-nina.jpg",
+        "I used to wait 3 days for design feedback. Now I get expert input from multiple specialists in minutes. Shipping features 5x faster now.",
+      name: "Jordan Lee",
+      role: "Junior Designer, SaaS Startup",
+      image: "/images/testimonial-jordan.jpg",
     },
+  },
+  {
+    title: (
+      <>
+        UX Principles &amp; <br className="lg:hidden" /> Psychology
+      </>
+    ),
+    description:
+      "Learn from 350+ proven principles with real product examples showing exactly when and how to apply them.",
+    checks: [
+      "Filter by goal: conversion, retention, engagement, and more",
+      "See annotated product examples with expert implementation notes",
+    ],
+    image: "/images/principles-desktop.png",
+    imageAlt: "UX principles and psychology concepts",
     mobileImage: "/images/principles-mobile.png",
-    desktopImage: "/images/principles-desktop.png",
-    mobileAlt: "UX Principles mobile view",
-    desktopAlt: "UX Principles desktop view",
-  },
-  {
-    id: "guidelines",
-    title: "Curated Guidelines Library",
-    description:
-      "Stop reinventing the wheel. Access our expert-curated library of design guidelines, component patterns, and accessibility standards used by leading design teams worldwide.",
-    bullets: [
-      "Platform-specific guidelines (iOS, Android, Web)",
-      "Component-level best practices",
-      "Accessibility standards and WCAG compliance",
-      "Regular updates with latest industry standards",
-    ],
     testimonial: {
       quote:
-        "The guidelines library is our team's single source of truth. It ensures consistency across every product we ship.",
-      name: "Priya Sharma",
-      role: "Design Lead at Microsoft",
-      avatar: "/images/testimonial-priya.jpg",
+        "I learned more in 2 weeks with ProUX than in 6 months of YouTube tutorials. Seeing real examples next to principles makes everything click.",
+      name: "Nina Rodriguez",
+      role: "Junior Designer, Retail Platform",
+      image: "/images/testimonial-nina.jpg",
     },
+  },
+  {
+    title: (
+      <>
+        Curated Guidelines <br className="lg:hidden" /> Library
+      </>
+    ),
+    description:
+      "Access step-by-step implementation checklists and page-specific guidelines for every design type and industry.",
+    checks: [
+      "Guidelines tailored to each page type and user journey",
+      "Continuously updated library with new guidelines and patterns",
+    ],
+    image: "/images/guidelines-desktop.png",
+    imageAlt: "Library of design guidelines and checklists",
     mobileImage: "/images/guidelines-mobile.png",
-    desktopImage: "/images/guidelines-desktop.png",
-    mobileAlt: "Guidelines Library mobile view",
-    desktopAlt: "Guidelines Library desktop view",
-  },
-  {
-    id: "analysis",
-    title: "Real Product Analysis Library",
-    description:
-      "Learn from the best by studying detailed UX breakdowns of top-performing products. See exactly what makes successful products work and apply those patterns to your own designs.",
-    bullets: [
-      "500+ in-depth product UX analyses",
-      "Before/after comparisons with measurable impact",
-      "Industry-specific teardowns and case studies",
-      "New analyses added weekly",
-    ],
     testimonial: {
       quote:
-        "Studying real product analyses gave our team inspiration and confidence. We stopped guessing and started designing with evidence.",
-      name: "Tom Wilson",
-      role: "Product Designer at Netflix",
-      avatar: "/images/testimonial-tom.jpg",
+        "The page-specific guidelines cut my design time in half. I don't second-guess anymore, just follow the checklist and ship with confidence.",
+      name: "Priya Sharma",
+      role: "Product Designer, FinTech",
+      image: "/images/testimonial-priya.jpg",
     },
+  },
+  {
+    title: (
+      <>
+        Real Product <br className="lg:hidden" /> Analysis Library
+      </>
+    ),
+    description:
+      "Learn from scored examples of real product pages showing what works, what doesn't, and how to fix common UX issues.",
+    checks: [
+      "See real products scored against ProUX principles and guidelines",
+      "Understand why designs succeed or fail with expert annotations",
+    ],
+    image: "/images/analysis-desktop.png",
+    imageAlt: "Analysis of real product pages and UX scoring",
     mobileImage: "/images/analysis-mobile.png",
-    desktopImage: "/images/analysis-desktop.png",
-    mobileAlt: "Product Analysis Library mobile view",
-    desktopAlt: "Product Analysis Library desktop view",
-  },
-  {
-    id: "insights",
-    title: "Real-World UX Insight Database",
-    description:
-      "Access a living database of UX insights gathered from real user research across industries. Make data-driven design decisions backed by actual user behavior patterns.",
-    bullets: [
-      "Thousands of validated UX insights",
-      "Searchable by industry, pattern, or component",
-      "Backed by real user research data",
-      "Continuously updated with new findings",
-    ],
     testimonial: {
       quote:
-        "The insight database is pure gold. It's replaced hours of user research with instant access to validated patterns.",
-      name: "Kevin Park",
-      role: "Head of UX at Figma",
-      avatar: "/images/testimonial-kevin.jpg",
+        "The scored breakdowns are brutal and honest. Finally, someone showing what actually works vs what just looks pretty. My conversion rates prove it.",
+      name: "Tom Bradley",
+      role: "Founder, EventSpace",
+      image: "/images/testimonial-tom.jpg",
     },
+  },
+  {
+    title: (
+      <>
+        Real-World <br className="lg:hidden" /> UX Insight Database
+      </>
+    ),
+    description:
+      "Explore real product designs with expert analysis of UX decisions, business impact, and key takeaways for designers.",
+    checks: [
+      "See why companies made specific UX decisions and the reasoning behind them",
+      "Learn how design choices impact both business goals and user experience",
+    ],
+    image: "/images/insights-desktop.png",
+    imageAlt: "Database of real-world UX insights and business impacts",
     mobileImage: "/images/insights-mobile.png",
-    desktopImage: "/images/insights-desktop.png",
-    mobileAlt: "UX Insight Database mobile view",
-    desktopAlt: "UX Insight Database desktop view",
+    testimonial: {
+      quote:
+        "I pitched a navigation change using the Walmart case study from ProUX. Got exec buy-in in 10 minutes. Real company examples make selling ideas so much easier.",
+      name: "Kevin Park",
+      role: "Head of Design, Growth Startup",
+      image: "/images/testimonial-kevin.jpg",
+    },
   },
 ];
 
-export default function FeaturesSection() {
+/* ── Feature Card ───────────────────────────────────────────────────────── */
+
+function FeatureCard({
+  feature,
+  index,
+  className,
+}: {
+  feature: Feature;
+  index: number;
+  className?: string;
+}) {
+  const isReversed = index % 2 !== 0;
+
   return (
-    <section id="features" className="section-padding bg-white">
-      <div className="container-default">
-        {/* ── DESIGNERS: Section heading ─────────────────────────────── */}
-        <div className="mx-auto mb-16 max-w-3xl text-center lg:mb-20">
-          <p className="label-caps mb-4 text-proux-copper">Platform Features</p>
-          <h2 className="heading-1 text-proux-navy">
-            Everything You Need for Smarter UX Decisions
-          </h2>
-        </div>
+    <motion.div
+      initial={{ opacity: 0, y: 50, scale: 0.95 }}
+      whileInView={{ opacity: 1, y: 0, scale: 1 }}
+      viewport={{ once: true, margin: "0px" }}
+      transition={{ duration: 0.5, ease: "easeOut" }}
+      className={`bg-[hsl(var(--bg-primary-100))] rounded-[24px] overflow-hidden ${className || ""}`}
+    >
+      <div
+        className={`flex flex-col ${
+          isReversed ? "lg:flex-row-reverse" : "lg:flex-row"
+        } items-center p-5 md:p-8 lg:p-[40px] gap-5 lg:gap-16 h-full`}
+      >
+        {/* Text column */}
+        <div className="flex flex-col items-start text-left w-full lg:w-[38%] space-y-6 lg:space-y-8 flex-grow">
+          <div className="space-y-2 lg:space-y-4">
+            <h3 className="text-[20px] md:text-2xl lg:text-[28px] font-bold text-foreground leading-[1.1] tracking-tight">
+              {feature.title}
+            </h3>
+            <p className="text-base md:text-lg font-medium text-secondary leading-relaxed">
+              {feature.description}
+            </p>
+          </div>
 
-        {/* ── DESIGNERS: Feature blocks ──────────────────────────────── */}
-        <div className="space-y-20 lg:space-y-32">
-          {features.map((feature, index) => {
-            /* DESIGNERS: Alternating layout — even index = image right, odd = image left */
-            const isReversed = index % 2 !== 0;
-
-            return (
-              <div
-                key={feature.id}
-                className={`flex flex-col items-center gap-10 lg:gap-16 ${
-                  isReversed ? "lg:flex-row-reverse" : "lg:flex-row"
-                }`}
-              >
-                {/* ── Text content ──────────────────────────────────── */}
-                <div className="flex-1 space-y-6">
-                  {/* DESIGNERS: Feature title */}
-                  <h3 className="heading-2 text-proux-navy">{feature.title}</h3>
-
-                  {/* DESIGNERS: Feature description */}
-                  <p className="body-large">{feature.description}</p>
-
-                  {/* DESIGNERS: Bullet points */}
-                  <ul className="space-y-3">
-                    {feature.bullets.map((bullet) => (
-                      <li key={bullet} className="flex items-start gap-3">
-                        <svg
-                          className="mt-1 h-5 w-5 flex-shrink-0 text-proux-copper"
-                          fill="none"
-                          viewBox="0 0 24 24"
-                          strokeWidth={2}
-                          stroke="currentColor"
-                        >
-                          <path
-                            strokeLinecap="round"
-                            strokeLinejoin="round"
-                            d="M4.5 12.75l6 6 9-13.5"
-                          />
-                        </svg>
-                        <span className="body-base text-foreground">
-                          {bullet}
-                        </span>
-                      </li>
-                    ))}
-                  </ul>
-
-                  {/* DESIGNERS: Testimonial quote */}
-                  <blockquote className="mt-8 rounded-xl border border-border bg-proux-warm p-6">
-                    <p className="body-base mb-4 italic text-foreground">
-                      &ldquo;{feature.testimonial.quote}&rdquo;
-                    </p>
-                    <div className="flex items-center gap-3">
-                      <Image
-                        src={feature.testimonial.avatar}
-                        alt={feature.testimonial.name}
-                        width={40}
-                        height={40}
-                        className="rounded-full"
-                      />
-                      <div>
-                        <p className="text-sm font-semibold text-proux-navy">
-                          {feature.testimonial.name}
-                        </p>
-                        <p className="text-xs text-muted-foreground">
-                          {feature.testimonial.role}
-                        </p>
-                      </div>
-                    </div>
-                  </blockquote>
+          {/* Checklist */}
+          <div className="space-y-3 lg:space-y-4 w-full">
+            {feature.checks.map((item, i) => (
+              <div key={i} className="flex items-start gap-3">
+                <div className="w-6 h-6 rounded-full bg-[#47AB19] flex items-center justify-center shrink-0 mt-0.5">
+                  <Check className="w-3.5 h-3.5 text-white stroke-[3]" />
                 </div>
-
-                {/* ── Product screenshots ───────────────────────────── */}
-                <div className="relative flex-1">
-                  <div className="relative">
-                    {/* DESIGNERS: Desktop screenshot (background) */}
-                    <div className="overflow-hidden rounded-xl border border-border bg-white shadow-xl">
-                      <Image
-                        src={feature.desktopImage}
-                        alt={feature.desktopAlt}
-                        width={600}
-                        height={400}
-                        className="h-auto w-full"
-                      />
-                    </div>
-
-                    {/* DESIGNERS: Mobile screenshot (overlapping, bottom-right) */}
-                    <div
-                      className={`absolute -bottom-6 ${
-                        isReversed ? "-left-4 sm:-left-8" : "-right-4 sm:-right-8"
-                      } w-[35%] overflow-hidden rounded-xl border border-border bg-white shadow-xl`}
-                    >
-                      <Image
-                        src={feature.mobileImage}
-                        alt={feature.mobileAlt}
-                        width={200}
-                        height={400}
-                        className="h-auto w-full"
-                      />
-                    </div>
-                  </div>
-                </div>
+                <span className="text-sm md:text-base font-medium text-secondary">
+                  {item}
+                </span>
               </div>
-            );
-          })}
+            ))}
+          </div>
+
+          {/* Testimonial */}
+          <div className="w-full mt-2 p-6 bg-background rounded-[24px] border border-[hsl(var(--border-primary-200))]">
+            <p className="text-[15px] font-medium text-foreground leading-relaxed mb-6">
+              &ldquo;{feature.testimonial.quote}&rdquo;
+            </p>
+            <div className="flex items-center gap-3">
+              <Image
+                src={feature.testimonial.image}
+                alt={feature.testimonial.name}
+                width={40}
+                height={40}
+                className="w-10 h-10 rounded-full object-cover object-top shrink-0"
+              />
+              <div>
+                <p className="text-[15px] font-bold text-foreground">
+                  {feature.testimonial.name}
+                </p>
+                <p className="text-[13px] font-medium text-muted-foreground">
+                  {feature.testimonial.role}
+                </p>
+              </div>
+            </div>
+          </div>
         </div>
+
+        {/* Mobile image */}
+        <div className="w-[calc(100%+40px)] -mx-5 -mb-5 md:w-[calc(100%+64px)] md:-mx-8 md:-mb-8 lg:hidden block">
+          <Image
+            src={feature.mobileImage}
+            alt={`${feature.imageAlt} Mobile`}
+            width={680}
+            height={480}
+            className="w-full h-auto block"
+          />
+        </div>
+
+        {/* Desktop image */}
+        <div className="w-full lg:w-[62%] h-[300px] md:h-[400px] lg:h-[540px] relative hidden lg:flex items-center justify-center shrink-0">
+          <Image
+            src={feature.image}
+            alt={feature.imageAlt}
+            fill
+            className="object-cover object-left-top rounded-xl"
+          />
+        </div>
+      </div>
+    </motion.div>
+  );
+}
+
+/* ── Main Section ───────────────────────────────────────────────────────── */
+
+export default function FeaturesSection() {
+  const [activeIndex, setActiveIndex] = useState(0);
+  const scrollRef = useRef<HTMLDivElement>(null);
+
+  const handleScroll = () => {
+    if (!scrollRef.current) return;
+    const container = scrollRef.current;
+    const center = container.scrollLeft + container.offsetWidth / 2;
+    const children = container.children;
+    let closestIndex = 0;
+    let minDistance = Number.MAX_VALUE;
+
+    for (let i = 0; i < children.length; i++) {
+      const child = children[i] as HTMLElement;
+      const childCenter = child.offsetLeft + child.offsetWidth / 2;
+      const distance = Math.abs(center - childCenter);
+      if (distance < minDistance) {
+        minDistance = distance;
+        closestIndex = i;
+      }
+    }
+    setActiveIndex(closestIndex);
+  };
+
+  return (
+    <section
+      id="features"
+      className="w-full max-w-[1100px] mx-auto px-4 lg:px-0 py-16 scroll-mt-[56px] md:scroll-mt-[24px]"
+    >
+      {/* Section header */}
+      <div className="flex flex-col items-center text-center mb-12 space-y-4">
+        <motion.h2
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          className="text-3xl md:text-4xl font-extrabold text-foreground tracking-tight leading-tight"
+        >
+          Everything You Need <br /> for Smarter UX Decisions
+        </motion.h2>
+        <motion.p
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ delay: 0.1 }}
+          className="text-lg md:text-xl font-medium text-muted-foreground max-w-2xl leading-relaxed"
+        >
+          AI specialists, Design Scanner, 350+ expert principles, and real
+          product insights — all in one platform.
+        </motion.p>
+      </div>
+
+      {/* Cards: horizontal scroll on mobile, vertical stack on desktop */}
+      <div
+        ref={scrollRef}
+        onScroll={handleScroll}
+        className="flex lg:flex-col overflow-x-auto lg:overflow-visible snap-x snap-mandatory lg:snap-none gap-4 lg:gap-8 px-4 lg:px-0 pb-8 lg:pb-0 -mx-4 lg:mx-0 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
+      >
+        {features.map((feature, index) => (
+          <FeatureCard
+            key={index}
+            feature={feature}
+            index={index}
+            className="w-[85vw] max-w-[340px] lg:w-full lg:max-w-none snap-center flex-shrink-0 lg:flex-shrink"
+          />
+        ))}
+      </div>
+
+      {/* Mobile dot indicators */}
+      <div className="flex justify-center gap-2 lg:hidden mt-2">
+        {features.map((_, index) => (
+          <div
+            key={index}
+            className={`h-1 rounded-full transition-all duration-300 ${
+              index === activeIndex ? "w-8 bg-foreground" : "w-2 bg-border"
+            }`}
+          />
+        ))}
       </div>
     </section>
   );
