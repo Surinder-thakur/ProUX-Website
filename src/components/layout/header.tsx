@@ -105,7 +105,7 @@ export function Header() {
                 className={`text-[14px] font-medium px-4 py-2 rounded-lg transition-colors ${
                   isActive
                     ? "bg-[#F0EEE4] text-[#1A2130]"
-                    : "text-[#4A5568] hover:bg-[#F0EEE4] hover:text-[#1A2130]"
+                    : "text-[#4A5568] hover:text-primary"
                 }`}
               >
                 {item.label}
@@ -161,7 +161,7 @@ export function Header() {
                   className={`text-[14px] font-medium px-4 py-3 rounded-lg transition-colors ${
                     isActive
                       ? "bg-[#F0EEE4] text-[#1A2130]"
-                      : "text-[#4A5568] hover:bg-[#F0EEE4]"
+                      : "text-[#4A5568] hover:text-primary"
                   }`}
                 >
                   {item.label}
