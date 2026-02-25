@@ -1,4 +1,4 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import { Inter } from "next/font/google";
 import { Toaster } from "@/components/ui/toaster";
 import "./globals.css";
@@ -13,6 +13,12 @@ const fontDisplay = Inter({
   variable: "--font-display",
   weight: ["700", "800", "900"],
 });
+
+export const viewport: Viewport = {
+  width: "device-width",
+  initialScale: 1,
+  maximumScale: 5,
+};
 
 export const metadata: Metadata = {
   title: {
@@ -52,9 +58,11 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" suppressHydrationWarning>
-      <head>
-        <script src="https://mcp.figma.com/mcp/html-to-design/capture.js" async></script>
-      </head>
+      {process.env.NODE_ENV === "development" && (
+        <head>
+          <script src="https://mcp.figma.com/mcp/html-to-design/capture.js" async></script>
+        </head>
+      )}
       <body className={`${fontSans.variable} ${fontDisplay.variable} font-sans antialiased`}>
         {children}
         <Toaster />

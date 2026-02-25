@@ -1,167 +1,229 @@
-/* =============================================================================
- * TESTIMONIALS MARQUEE SECTION
- * =============================================================================
- * DESIGNERS: Infinite scrolling testimonial cards. Customize:
- * - Section heading & subheading
- * - Testimonial cards (quote, name, role, avatar, rating)
- * - Scroll speed (via CSS animation duration in globals.css)
- * - Number of visible rows (currently 2 rows)
- * ========================================================================== */
+import React from "react";
 
-import Image from "next/image";
+/* ── 5-Star SVG (inline paths) ─────────────────────────────────────────── */
 
-/* DESIGNERS: Testimonial data. Add or remove testimonials as needed.
- * The marquee duplicates items automatically for seamless infinite scroll. */
-const testimonials = [
+const STAR_PATHS = [
+  "M8.33326 1.53054L10.4353 5.78905L15.136 6.47612L11.7346 9.78905L12.5373 14.4693L8.33326 12.2584L4.12918 14.4693L4.9319 9.78905L1.53054 6.47612L6.23122 5.78905L8.33326 1.53054Z",
+  "M25.9388 1.53061L28.0408 5.78912L32.7415 6.47619L29.3401 9.78912L30.1429 14.4694L25.9388 12.2585L21.7347 14.4694L22.5374 9.78912L19.1361 6.47619L23.8367 5.78912L25.9388 1.53061Z",
+  "M43.5442 1.53061L45.6463 5.78912L50.3469 6.47619L46.9456 9.78912L47.7483 14.4694L43.5442 12.2585L39.3401 14.4694L40.1429 9.78912L36.7415 6.47619L41.4422 5.78912L43.5442 1.53061Z",
+  "M61.1497 1.53061L63.2517 5.78912L67.9524 6.47619L64.551 9.78912L65.3537 14.4694L61.1497 12.2585L56.9456 14.4694L57.7483 9.78912L54.3469 6.47619L59.0476 5.78912L61.1497 1.53061Z",
+  "M78.7551 1.53061L80.8571 5.78912L85.5578 6.47619L82.1565 9.78912L82.9592 14.4694L78.7551 12.2585L74.551 14.4694L75.3537 9.78912L71.9524 6.47619L76.6531 5.78912L78.7551 1.53061Z",
+];
+
+function FiveStars() {
+  return (
+    <div className="h-4 relative shrink-0 w-[87px]">
+      <svg
+        className="block size-full"
+        fill="none"
+        preserveAspectRatio="none"
+        viewBox="0 0 88 16"
+      >
+        {STAR_PATHS.map((d, i) => (
+          <path key={i} d={d} className="fill-accent" />
+        ))}
+      </svg>
+    </div>
+  );
+}
+
+/* ── Testimonial Data ──────────────────────────────────────────────────── */
+
+interface Testimonial {
+  quote: string;
+  author: string;
+}
+
+const testimonialsRow1: Testimonial[] = [
   {
-    id: 1,
     quote:
-      "ProUX transformed our design process. The AI Scanner alone saved us 20+ hours per sprint on design reviews.",
-    name: "Lisa Chen",
-    role: "Lead Product Designer",
-    company: "Shopify",
-    avatar: "/images/testimonial-lisa.jpg",
-    rating: 5,
+      "\"ProUX's AI agents helped us ship our MVP redesign in 8 days instead of a month. The scored feedback gave us confidence we were doing it right.\"",
+    author: "— David Chen, Founder",
   },
   {
-    id: 2,
     quote:
-      "The UX principles library is like having a senior mentor available 24/7. Our junior designers ramped up in half the time.",
-    name: "Jordan Rivera",
-    role: "UX Manager",
-    company: "Stripe",
-    avatar: "/images/testimonial-jordan.jpg",
-    rating: 5,
+      "\"We don't have a UX team yet. ProUX's guidelines and real product examples taught us what good design looks like. Best $400 we've spent.\"",
+    author: "— Lisa Martinez, Co-Founder",
   },
   {
-    id: 3,
     quote:
-      "Finally, a tool that bridges the gap between design theory and practice. The real product analyses are incredibly valuable.",
-    name: "Nina Patel",
-    role: "Senior Designer",
-    company: "Airbnb",
-    avatar: "/images/testimonial-nina.jpg",
-    rating: 5,
+      "\"The Design Scanner caught 12 conversion blockers we completely missed. Fixed them and saw a 34% lift in signups within two weeks.\"",
+    author: "— Ryan Cooper, Founder",
   },
   {
-    id: 4,
     quote:
-      "ProUX helped us make data-driven design decisions from day one. Our conversion rates improved by 34% in just two months.",
-    name: "Priya Sharma",
-    role: "Design Lead",
-    company: "Microsoft",
-    avatar: "/images/testimonial-priya.jpg",
-    rating: 5,
+      "\"Before ProUX, we were guessing. Now we make design decisions backed by 350+ principles. Our investor meetings got a lot easier to explain.\"",
+    author: "— Priya Sharma, Founder",
   },
   {
-    id: 5,
     quote:
-      "The AI specialists feature is a game-changer. It's like having expert consultants for every industry vertical we work with.",
-    name: "Tom Wilson",
-    role: "Product Designer",
-    company: "Netflix",
-    avatar: "/images/testimonial-tom.jpg",
-    rating: 5,
+      "\"ProUX's AI specialists gave us expert-level UX feedback without hiring a consultant. Saved us 3 weeks and thousands of dollars on our launch.\"",
+    author: "— Tom Bradley, Founder",
   },
   {
-    id: 6,
     quote:
-      "Best investment our design team has made. The guidelines library alone is worth 10x the subscription price.",
-    name: "Kevin Park",
-    role: "Head of UX",
-    company: "Figma",
-    avatar: "/images/testimonial-kevin.jpg",
-    rating: 5,
+      "\"The UX+AI specialists feel like having 18 senior designers on call. I get research insights, content feedback, and accessibility checks in minutes.\"",
+    author: "— Maya Patel, Senior Product Designer",
+  },
+  {
+    quote:
+      "\"I scan every iteration through ProUX before presenting to stakeholders. The scored feedback helps me catch issues early and ship better work.\"",
+    author: "— Jake Morrison, Product Designer",
+  },
+  {
+    quote:
+      "\"The annotated product examples are gold. I see exactly why certain UX patterns work and how to apply them to my own projects.\"",
+    author: "— Sarah Kim, UX Designer",
+  },
+  {
+    quote:
+      "\"Design reviews used to take days. Now I get instant feedback from ProUX's AI agents, iterate faster, and present with way more confidence.\"",
+    author: "— Alex Thompson, Product Designer",
+  },
+  {
+    quote:
+      "\"As a junior designer, ProUX's guidelines taught me UX fundamentals faster than any course. I'm making decisions my senior designers actually trust now.\"",
+    author: "— Jordan Lee, Junior Designer",
   },
 ];
 
-/* Star rating component */
-function Stars({ count }: { count: number }) {
+const testimonialsRow2: Testimonial[] = [
+  {
+    quote:
+      "\"ProUX's case studies show me how companies like Walmart apply UX principles. I'm not just learning theory, I'm seeing what actually works in production.\"",
+    author: "— Emily Chen, Product Designer",
+  },
+  {
+    quote:
+      "\"The ProUX score gives me an objective measure of design quality. I can track improvements over iterations and prove value to my PM.\"",
+    author: "— Marcus Johnson, Lead Designer",
+  },
+  {
+    quote:
+      "\"When stakeholders question my designs, I show them ProUX's principle-backed rationale. Suddenly my recommendations have way more weight.\"",
+    author: "— Nina Rodriguez, UX Designer",
+  },
+  {
+    quote:
+      "\"ProUX catches things I miss: content clarity issues, accessibility problems, CRO opportunities. It's like having a full design audit team in one tool.\"",
+    author: "— Chris Anderson, Senior Designer",
+  },
+  {
+    quote:
+      "\"I ship designs 2x faster with ProUX because I'm not second-guessing every decision. The AI agents give me expert validation in real-time.\"",
+    author: "— Taylor Morgan, Product Designer",
+  },
+  {
+    quote:
+      "\"ProUX's guidelines keep our 5-person design team aligned. We reference the same principles and examples, so our designs feel consistent across products.\"",
+    author: "— Rachel Stevens, Design Lead",
+  },
+  {
+    quote:
+      "\"New team members learn our UX standards in days instead of months using ProUX's library. They're shipping quality work from week one.\"",
+    author: "— Kevin Park, Head of Design",
+  },
+  {
+    quote:
+      "\"ProUX's AI specialists handle competitor research, user journey analysis, and design audits. My team focuses on creative work instead of grunt work.\"",
+    author: "— Amanda Foster, UX Manager",
+  },
+  {
+    quote:
+      "\"ProUX's Design Scanner ensures every designer hits our quality standards before handoff. Fewer rounds of revisions, happier developers.\"",
+    author: "— Daniel White, Design Director",
+  },
+  {
+    quote:
+      "\"Before ProUX, design decisions were debates. Now we scan options, compare ProUX scores, and pick the winner backed by 350+ principles. Way less drama.\"",
+    author: "— Sophie Martinez, Senior UX Lead",
+  },
+];
+
+/* ── Testimonial Card ──────────────────────────────────────────────────── */
+
+function TestimonialCard({ quote, author }: Testimonial) {
   return (
-    <div className="flex gap-0.5">
-      {Array.from({ length: count }).map((_, i) => (
-        <svg
-          key={i}
-          className="h-4 w-4 text-amber-400"
-          fill="currentColor"
-          viewBox="0 0 20 20"
-        >
-          <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
-        </svg>
-      ))}
+    <div className="flex flex-col justify-between shrink-0 w-[326px] h-[200px] px-6 py-5 bg-[hsl(var(--sidebar))] rounded-[calc(var(--radius)+6px)]">
+      <div className="flex flex-col gap-2 items-start w-full">
+        <FiveStars />
+        <p className="text-sm font-medium text-foreground leading-5 tracking-[-0.154px]">
+          {quote}
+        </p>
+      </div>
+      <p className="text-sm font-normal text-foreground leading-5 tracking-[-0.084px]">
+        {author}
+      </p>
     </div>
   );
 }
 
-/* Single testimonial card */
-function TestimonialCard({
-  testimonial,
+/* ── Scrolling Row ─────────────────────────────────────────────────────── */
+
+function ScrollRow({
+  testimonials,
+  direction,
 }: {
-  testimonial: (typeof testimonials)[number];
+  testimonials: Testimonial[];
+  direction: "left" | "right";
 }) {
+  const items = [
+    ...testimonials,
+    ...testimonials,
+    ...testimonials,
+    ...testimonials,
+  ];
+
   return (
-    <div className="w-[340px] flex-shrink-0 rounded-xl border border-border bg-white p-6 shadow-sm sm:w-[380px]">
-      <Stars count={testimonial.rating} />
-      <p className="mb-5 mt-4 text-sm leading-relaxed text-foreground">
-        &ldquo;{testimonial.quote}&rdquo;
-      </p>
-      <div className="flex items-center gap-3">
-        <Image
-          src={testimonial.avatar}
-          alt={testimonial.name}
-          width={40}
-          height={40}
-          className="rounded-full"
-        />
-        <div>
-          <p className="text-sm font-semibold text-proux-navy">
-            {testimonial.name}
-          </p>
-          <p className="text-xs text-muted-foreground">
-            {testimonial.role} at {testimonial.company}
-          </p>
-        </div>
+    <div className="flex overflow-hidden w-full group">
+      <div
+        className={`flex shrink-0 gap-6 pl-6 ${
+          direction === "left"
+            ? "animate-[scroll-left_200s_linear_infinite]"
+            : "animate-[scroll-right_200s_linear_infinite]"
+        } group-hover:[animation-play-state:paused] motion-reduce:animate-none motion-reduce:translate-x-0`}
+      >
+        {items.map((item, i) => (
+          <TestimonialCard key={i} quote={item.quote} author={item.author} />
+        ))}
       </div>
     </div>
   );
 }
+
+/* ── Main Section ──────────────────────────────────────────────────────── */
 
 export default function TestimonialsSection() {
   return (
-    <section className="section-padding bg-proux-warm overflow-hidden">
-      <div className="container-default mb-12 text-center">
-        {/* ── DESIGNERS: Section heading ─────────────────────────────── */}
-        <p className="label-caps mb-4 text-proux-copper">Testimonials</p>
-        <h2 className="heading-1 text-proux-navy">
-          Trusted by 12,000+ Product Designers and UX Teams
-        </h2>
-      </div>
+    <section className="py-16 md:py-20 w-full overflow-hidden bg-card">
+      {/* Keyframe animations */}
+      <style>{`
+        @keyframes scroll-left {
+          0% { transform: translateX(0); }
+          100% { transform: translateX(-50%); }
+        }
+        @keyframes scroll-right {
+          0% { transform: translateX(-50%); }
+          100% { transform: translateX(0); }
+        }
+      `}</style>
 
-      {/* ── DESIGNERS: Marquee row 1 (scrolls left) ─────────────────── */}
-      <div className="mb-6 flex gap-6 overflow-hidden">
-        <div className="animate-marquee flex gap-6">
-          {/* Original set */}
-          {testimonials.map((t) => (
-            <TestimonialCard key={`row1-${t.id}`} testimonial={t} />
-          ))}
-          {/* Duplicate set for seamless loop */}
-          {testimonials.map((t) => (
-            <TestimonialCard key={`row1-dup-${t.id}`} testimonial={t} />
-          ))}
+      <div className="flex flex-col items-center gap-12">
+        {/* Section header */}
+        <div className="flex flex-col items-center gap-4 text-center px-4 max-w-[900px]">
+          <h2 className="text-[32px] md:text-[40px] font-extrabold text-foreground leading-[1.15] tracking-tight">
+            Trusted by 12,000+ <br /> Product Designers and UX Teams
+          </h2>
+          <p className="text-lg md:text-xl font-medium text-muted-foreground max-w-2xl leading-relaxed">
+            See how designers ship faster, make confident decisions, and
+            advance their careers with ProUX.
+          </p>
         </div>
-      </div>
 
-      {/* ── DESIGNERS: Marquee row 2 (scrolls right / reverse) ──────── */}
-      <div className="flex gap-6 overflow-hidden">
-        <div className="animate-marquee-reverse flex gap-6">
-          {/* Original set (reversed order for variety) */}
-          {[...testimonials].reverse().map((t) => (
-            <TestimonialCard key={`row2-${t.id}`} testimonial={t} />
-          ))}
-          {/* Duplicate set for seamless loop */}
-          {[...testimonials].reverse().map((t) => (
-            <TestimonialCard key={`row2-dup-${t.id}`} testimonial={t} />
-          ))}
+        {/* Scrolling rows */}
+        <div className="flex flex-col gap-6 w-full">
+          <ScrollRow testimonials={testimonialsRow1} direction="left" />
+          <ScrollRow testimonials={testimonialsRow2} direction="right" />
         </div>
       </div>
     </section>

@@ -155,6 +155,7 @@
 
     /* ── Sidebar ──────────────────────────────────────────── */
     --sidebar: 40 18% 96%;              /* rgba(248, 247, 244, 1.00) = #f8f7f4 */
+    --sidebar-border: var(--gold-300);  /* #C3BA99 — muted gold for card dividers */
 
     /* ── Chart Colors ─────────────────────────────────────── */
     --chart-1: 14 52% 48%;
