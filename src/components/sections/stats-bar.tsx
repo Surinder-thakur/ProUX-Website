@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 
 /* ── Custom icons from Figma Make build ──────────────────────────────── */
 
@@ -143,69 +143,82 @@ const valuePropItems = [
 /* ── Component ────────────────────────────────────────────────────────── */
 
 export default function StatsBar() {
-  const [visible, setVisible] = useState(true);
+  const inFlowRef = useRef<HTMLDivElement>(null);
+  const [showFixed, setShowFixed] = useState(true);
 
   useEffect(() => {
     const handleScroll = () => {
-      // Stay visible through first & second fold (~2x viewport height),
-      // then hide after that
-      const twoFolds = window.innerHeight * 2;
-      setVisible(window.scrollY < twoFolds);
+      if (!inFlowRef.current) return;
+      const rect = inFlowRef.current.getBoundingClientRect();
+      // Hide fixed bar the instant the in-flow bar's bottom reaches viewport bottom.
+      // At that moment both bars are at the exact same visual position — no flash.
+      setShowFixed(rect.bottom > window.innerHeight);
     };
 
     window.addEventListener("scroll", handleScroll, { passive: true });
+    handleScroll();
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-  return (
-    <div
-      className={`fixed bottom-0 left-0 right-0 z-40 transition-all duration-500 ${
-        visible
-          ? "translate-y-0 opacity-100"
-          : "translate-y-full opacity-0 pointer-events-none"
-      }`}
-    >
-      <div className="bg-card/95 backdrop-blur-xl border-t border-[hsl(var(--border-primary-200))] shadow-[0_-8px_30px_rgba(0,0,0,0.04)]">
-        <div className="container-default py-5 lg:py-6">
-          {/* Desktop: 4 items in a row */}
-          <div className="hidden lg:flex items-center justify-between">
-            {valuePropItems.map((item, index) => (
-              <div key={item.line1} className="flex items-center">
-                {index > 0 && (
-                  <div className="h-10 w-px mx-6 bg-[hsl(var(--neutral-200))]" />
-                )}
-                <div className="flex items-center gap-3">
-                  <div className="w-11 h-11 flex-shrink-0 flex items-center justify-center">
-                    <item.icon className="w-full h-full" />
-                  </div>
-                  <span className="text-[13px] font-bold text-foreground leading-tight tracking-wide">
-                    {item.line1}
-                    <br />
-                    {item.line2}
-                  </span>
+  const barInner = (
+    <div className="bg-gradient-to-b from-[#f0ede5] via-[#f5f3ed] to-[#faf9f7] backdrop-blur-xl border-t border-[#dfdbc9] shadow-[0_-3px_16px_rgba(0,0,0,0.05)]">
+      <div className="px-[24px] lg:px-[100px] py-5 lg:py-5">
+        {/* Desktop: 4 items in a row */}
+        <div className="hidden lg:flex items-center justify-center">
+          {valuePropItems.map((item, index) => (
+            <div key={item.line1} className="flex items-center">
+              {index > 0 && (
+                <div className="h-9 w-px mx-10 bg-[#e2e0da]" />
+              )}
+              <div className="flex items-center gap-3">
+                <div className="w-9 h-9 flex-shrink-0 flex items-center justify-center">
+                  <item.icon className="w-full h-full" />
                 </div>
-              </div>
-            ))}
-          </div>
-
-          {/* Mobile / Tablet: 2x2 grid */}
-          <div className="grid grid-cols-2 gap-x-4 gap-y-6 lg:hidden">
-            {valuePropItems.map((item) => (
-              <div
-                key={item.line1}
-                className="flex flex-col sm:flex-row items-center gap-3 text-center sm:text-left"
-              >
-                <div className="w-10 h-10 flex-shrink-0 flex items-center justify-center text-[hsl(var(--text-primary-600))] bg-[hsl(var(--text-primary-600))]/5 rounded-full">
-                  <item.icon className="w-6 h-6" />
-                </div>
-                <span className="text-[13px] font-bold text-foreground leading-tight tracking-wide">
-                  {item.line1} {item.line2}
+                <span className="text-[12.5px] font-semibold text-[#1A2130] leading-tight tracking-wide">
+                  {item.line1}
+                  <br />
+                  {item.line2}
                 </span>
               </div>
-            ))}
-          </div>
+            </div>
+          ))}
+        </div>
+
+        {/* Mobile / Tablet: 2x2 grid */}
+        <div className="grid grid-cols-2 gap-x-4 gap-y-6 lg:hidden">
+          {valuePropItems.map((item) => (
+            <div
+              key={item.line1}
+              className="flex flex-col sm:flex-row items-center gap-3 text-center sm:text-left"
+            >
+              <div className="w-10 h-10 flex-shrink-0 flex items-center justify-center text-[hsl(var(--text-primary-600))] bg-[hsl(var(--text-primary-600))]/5 rounded-full">
+                <item.icon className="w-6 h-6" />
+              </div>
+              <span className="text-[13px] font-bold text-foreground leading-tight tracking-wide">
+                {item.line1} {item.line2}
+              </span>
+            </div>
+          ))}
         </div>
       </div>
     </div>
+  );
+
+  return (
+    <>
+      {/* Fixed bar at bottom — sits on top (z-50) so when both overlap it covers the in-flow one */}
+      <div
+        className={`fixed bottom-0 left-0 right-0 z-50 ${
+          showFixed ? "" : "invisible pointer-events-none"
+        }`}
+      >
+        {barInner}
+      </div>
+
+      {/* In-flow bar — scrolls naturally with the page */}
+      <div ref={inFlowRef} className="relative z-40">
+        {barInner}
+      </div>
+    </>
   );
 }

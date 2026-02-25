@@ -269,6 +269,39 @@ function FeatureCard({
   );
 }
 
+/* ── Layout Options ─────────────────────────────────────────────────────── */
+
+/* Option A: Sticky Card Stack — cards stack on top of each other while scrolling */
+function StickyStackLayout({ features: items }: { features: Feature[] }) {
+  return (
+    <div className="relative">
+      {items.map((feature, index) => (
+        <div
+          key={index}
+          className="sticky"
+          style={{ top: `${80 + index * 20}px` }}
+        >
+          <motion.div
+            initial={{ opacity: 0, y: 60 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, margin: "-50px" }}
+            transition={{ duration: 0.5 }}
+          >
+            <FeatureCard
+              feature={feature}
+              index={index}
+              className="w-full mb-6 shadow-[0_2px_8px_rgba(0,0,0,0.04)]"
+            />
+          </motion.div>
+        </div>
+      ))}
+      {/* Extra space at bottom so last card can fully scroll into view */}
+      <div className="h-[40vh]" />
+    </div>
+  );
+}
+
+
 /* ── Main Section ───────────────────────────────────────────────────────── */
 
 export default function FeaturesSection() {
@@ -322,32 +355,37 @@ export default function FeaturesSection() {
         </motion.p>
       </div>
 
-      {/* Cards: horizontal scroll on mobile, vertical stack on desktop */}
-      <div
-        ref={scrollRef}
-        onScroll={handleScroll}
-        className="flex lg:flex-col overflow-x-auto lg:overflow-visible snap-x snap-mandatory lg:snap-none gap-4 lg:gap-8 px-4 lg:px-0 pb-8 lg:pb-0 -mx-4 lg:mx-0 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
-      >
-        {features.map((feature, index) => (
-          <FeatureCard
-            key={index}
-            feature={feature}
-            index={index}
-            className="w-[85vw] max-w-[340px] lg:w-full lg:max-w-none snap-center flex-shrink-0 lg:flex-shrink"
-          />
-        ))}
+      {/* Desktop: Sticky Stack */}
+      <div className="hidden lg:block">
+        <StickyStackLayout features={features} />
       </div>
 
-      {/* Mobile dot indicators */}
-      <div className="flex justify-center gap-2 lg:hidden mt-2">
-        {features.map((_, index) => (
-          <div
-            key={index}
-            className={`h-1 rounded-full transition-all duration-300 ${
-              index === activeIndex ? "w-8 bg-foreground" : "w-2 bg-border"
-            }`}
-          />
-        ))}
+      {/* Mobile: horizontal scroll */}
+      <div className="lg:hidden">
+        <div
+          ref={scrollRef}
+          onScroll={handleScroll}
+          className="flex overflow-x-auto snap-x snap-mandatory gap-4 px-4 pb-8 -mx-4 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
+        >
+          {features.map((feature, index) => (
+            <FeatureCard
+              key={index}
+              feature={feature}
+              index={index}
+              className="w-[85vw] max-w-[340px] snap-center flex-shrink-0"
+            />
+          ))}
+        </div>
+        <div className="flex justify-center gap-2 mt-2">
+          {features.map((_, index) => (
+            <div
+              key={index}
+              className={`h-1 rounded-full transition-all duration-300 ${
+                index === activeIndex ? "w-8 bg-foreground" : "w-2 bg-border"
+              }`}
+            />
+          ))}
+        </div>
       </div>
     </section>
   );
