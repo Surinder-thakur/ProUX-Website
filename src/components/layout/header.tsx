@@ -8,7 +8,7 @@ import { Menu, X } from "lucide-react";
 const navigation = [
   { label: "Product", href: "/" },
   { label: "UX Consulting", href: "/ux-consulting" },
-  { label: "AI-First UX Training", href: "/training" },
+  { label: "AI Design Training", href: "/training" },
   { label: "Free Articles", href: "/free-articles" },
 ];
 
@@ -81,18 +81,18 @@ export function Header() {
     <header
       className={`fixed top-0 left-0 right-0 z-50 border-b border-[#dfdbc9] transition-all duration-300 ${
         scrolled
-          ? "bg-white/95 backdrop-blur-md py-3"
-          : "bg-[#f8f7f4] py-5"
+          ? "bg-white/95 backdrop-blur-md py-3.5"
+          : "bg-[#f8f7f4] py-4"
       } ${hidden ? "-translate-y-full" : "translate-y-0"}`}
     >
-      <div className="container-default flex items-center justify-between">
-        {/* Logo */}
+      <div className="flex items-center justify-between px-[24px] lg:px-[100px]">
+        {/* Logo — far left */}
         <Link href="/" className="flex-shrink-0">
-          <ProUXLogo className="h-5 w-auto sm:h-6" />
+          <ProUXLogo className="h-[15px] w-auto sm:h-[18px]" />
         </Link>
 
-        {/* Desktop Navigation */}
-        <nav className="hidden items-center gap-1 lg:flex">
+        {/* Desktop Navigation — centered */}
+        <nav className="hidden items-center gap-4 lg:flex absolute left-1/2 -translate-x-1/2">
           {navigation.map((item) => {
             const isActive =
               item.href === "/"
@@ -102,29 +102,32 @@ export function Header() {
               <Link
                 key={item.href}
                 href={item.href}
-                className={`text-[14px] font-medium px-4 py-2 rounded-lg transition-colors ${
+                className={`group relative text-[14px] font-medium px-3.5 py-2 rounded-lg transition-colors ${
                   isActive
                     ? "bg-[#F0EEE4] text-[#1A2130]"
-                    : "text-[#4A5568] hover:text-primary"
+                    : "text-[#4A5568] hover:text-[#B55331]"
                 }`}
               >
                 {item.label}
+                {!isActive && (
+                  <span className="absolute top-1/2 right-[3px] -translate-y-1/2 h-[5px] w-[5px] rounded-full bg-[#B55331] opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
+                )}
               </Link>
             );
           })}
         </nav>
 
-        {/* Desktop CTA Buttons */}
-        <div className="hidden items-center gap-3 lg:flex">
+        {/* Desktop CTA Buttons — far right */}
+        <div className="hidden items-center gap-2.5 lg:flex">
           <Link
             href="https://app.proux.design/Auth"
-            className="text-[14px] font-bold uppercase rounded-[12px] px-5 py-3 text-[#1A2130] transition-colors hover:bg-[#F0EEE4]"
+            className="text-[14px] font-bold uppercase rounded-[11px] px-5 py-2.5 text-[#1A2130] transition-colors hover:bg-[#F0EEE4]"
           >
             Log In
           </Link>
           <Link
             href="https://app.proux.design/Auth"
-            className="text-[14px] font-bold uppercase rounded-[12px] px-5 py-3 bg-[#1a2130] text-white shadow-md transition-colors hover:bg-[#2F415F]"
+            className="text-[14px] font-bold uppercase rounded-[11px] px-5 py-2.5 bg-[#1a2130] text-white shadow-md transition-colors hover:bg-[#2F415F]"
           >
             Start Free Trial
           </Link>
@@ -158,7 +161,7 @@ export function Header() {
                   key={item.href}
                   href={item.href}
                   onClick={() => setMobileOpen(false)}
-                  className={`text-[14px] font-medium px-4 py-3 rounded-lg transition-colors ${
+                  className={`text-[13px] font-medium px-4 py-2.5 rounded-lg transition-colors ${
                     isActive
                       ? "bg-[#F0EEE4] text-[#1A2130]"
                       : "text-[#4A5568] hover:text-primary"
@@ -172,14 +175,14 @@ export function Header() {
               <Link
                 href="https://app.proux.design/Auth"
                 onClick={() => setMobileOpen(false)}
-                className="text-[14px] font-bold uppercase text-center rounded-[12px] px-5 py-3 text-[#1A2130] border border-[#dfdbc9] transition-colors hover:bg-[#F0EEE4]"
+                className="text-[13px] font-bold uppercase text-center rounded-[10px] px-4 py-2.5 text-[#1A2130] border border-[#dfdbc9] transition-colors hover:bg-[#F0EEE4]"
               >
                 Log In
               </Link>
               <Link
                 href="https://app.proux.design/Auth"
                 onClick={() => setMobileOpen(false)}
-                className="text-[14px] font-bold uppercase text-center rounded-[12px] px-5 py-3 bg-[#1a2130] text-white shadow-md transition-colors hover:bg-[#2F415F]"
+                className="text-[13px] font-bold uppercase text-center rounded-[10px] px-4 py-2.5 bg-[#1a2130] text-white shadow-md transition-colors hover:bg-[#2F415F]"
               >
                 Start Free Trial
               </Link>

@@ -153,35 +153,44 @@ const benefits: BenefitItem[] = [
 
 export default function BenefitStatsSection() {
   return (
-    <section className="relative w-full bg-foreground text-primary-foreground">
-      <div className="container-default py-12 md:py-[100px]">
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-[50px] md:gap-12 lg:gap-20 justify-items-center">
+    <section className="relative w-full bg-[#242424] text-white">
+      <div className="container-default py-12 md:py-16 lg:py-20">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-10 md:gap-8 lg:gap-12 justify-items-center">
           {benefits.map((item, i) => (
             <div
               key={i}
-              className="flex flex-col items-center text-center w-full max-w-[420px]"
+              className="flex flex-col items-center text-center w-full"
             >
-              {item.icon}
+              {/* Icon — fixed height for row alignment */}
+              <div className="h-[68px] flex items-end justify-center text-white">
+                {item.icon}
+              </div>
 
-              {/* Title + Subtitle */}
-              <div className="flex flex-col gap-1 mb-3 md:mb-4">
-                <h3 className="text-3xl md:text-4xl font-extrabold text-primary-foreground tracking-tight leading-tight whitespace-nowrap">
+              {/* Title — fixed height for row alignment */}
+              <div className="h-[48px] flex items-center justify-center">
+                <h3 className="text-2xl md:text-[28px] lg:text-[32px] font-extrabold text-white tracking-tight leading-tight whitespace-nowrap">
                   {item.title}
                 </h3>
-                <p className="text-lg md:text-xl font-medium text-primary-foreground/80">
+              </div>
+
+              {/* Subtitle — fixed height, single line */}
+              <div className="h-[32px] flex items-center justify-center mb-4">
+                <p className="text-[15px] md:text-[16px] font-medium text-[#E7E7E7]/80 whitespace-nowrap">
                   {item.subtitle}
                 </p>
               </div>
 
-              {/* Extra Info Pill */}
-              <div className="inline-flex items-center justify-center px-5 py-3 mb-0 md:mb-6 rounded-2xl border border-white/10 bg-white/5 backdrop-blur-sm">
-                <p className="text-sm font-medium text-primary-foreground/90 text-center leading-snug">
-                  {item.extraInfo}
-                </p>
+              {/* Extra Info Pill — fixed height for alignment */}
+              <div className="h-[60px] flex items-center justify-center mb-5">
+                <div className="inline-flex items-center justify-center px-5 py-2.5 rounded-xl border border-[#4F4F4F] bg-[#4F4F4F]/20">
+                  <p className="text-[13px] font-medium text-[#E7E7E7]/85 text-center leading-snug">
+                    {item.extraInfo}
+                  </p>
+                </div>
               </div>
 
-              {/* Description — hidden on mobile */}
-              <p className="hidden md:block text-sm md:text-base leading-relaxed text-muted-foreground">
+              {/* Description */}
+              <p className="hidden md:block text-[14px] leading-relaxed text-[#B0B0B0] max-w-[340px]">
                 {item.description}
               </p>
             </div>

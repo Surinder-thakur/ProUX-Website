@@ -23,17 +23,17 @@ function StarIcon() {
 
 export default function HeroSection() {
   return (
-    <section className="bg-background pt-32 pb-16 md:pb-24 overflow-hidden">
+    <section className="bg-background pt-28 pb-14 md:pb-20 overflow-hidden">
       <div className="container-default">
         {/* Hero content — centered */}
         <div className="mx-auto max-w-5xl xl:max-w-6xl text-center">
           {/* Eyebrow */}
-          <p className="text-sm md:text-base font-regular text-[hsl(var(--text-primary-600))] uppercase tracking-wider mb-5">
+          <p className="text-xs md:text-sm font-regular text-[hsl(var(--text-primary-600))] uppercase tracking-wider mb-6">
             For Product Designers, UX Teams &amp; Founders
           </p>
 
           {/* H1 */}
-          <h1 className="text-4xl md:text-5xl lg:text-[56px] leading-[1.2] font-black text-foreground tracking-tight mb-6">
+          <h1 className="text-3xl md:text-4xl lg:text-[48px] leading-[1.2] font-black text-foreground tracking-tight mb-6">
             <span className="block lg:whitespace-nowrap">
               AI-First UX Intelligence Platform for
             </span>
@@ -43,7 +43,7 @@ export default function HeroSection() {
           </h1>
 
           {/* Subtitle */}
-          <p className="text-md md:text-[22px] leading-[1.5] font-normal text-[hsl(var(--text-neutrals-800))] mx-auto max-w-3xl mb-8">
+          <p className="text-sm md:text-base lg:text-[18px] leading-[1.6] font-normal text-[hsl(var(--text-neutrals-800))] mx-auto max-w-2xl mb-8">
             AI-powered UX intelligence for research, audits, and optimization
             grounded in 350+ expert guidelines &amp; insights.
           </p>
@@ -52,18 +52,18 @@ export default function HeroSection() {
           <div className="mb-10">
             <Link
               href="https://app.proux.design/Auth"
-              className="btn-shine inline-flex items-center justify-center bg-primary text-primary-foreground rounded-[14px] px-8 py-4 font-semibold uppercase tracking-wide shadow-lg transition-all hover:shadow-xl hover:brightness-110"
+              className="btn-shine inline-flex items-center justify-center bg-primary text-primary-foreground rounded-[12px] px-7 py-3.5 text-[14px] font-semibold uppercase tracking-wide shadow-lg transition-all hover:shadow-xl hover:brightness-110"
             >
               Get Started Free
             </Link>
           </div>
 
           {/* Certifications row */}
-          <div className="mb-14 flex flex-col items-center gap-4">
-            <p className="font-medium text-foreground text-[14px] tracking-[0.96px] uppercase opacity-80">
+          <div className="mb-12 flex flex-col items-center gap-4">
+            <p className="font-medium text-foreground text-[12px] tracking-[0.96px] uppercase opacity-80">
               Built by Certified Professionals
             </p>
-            <div className="flex items-center gap-6">
+            <div className="flex items-center gap-5">
               {certBadges.map((badge) => (
                 <Image
                   key={badge.alt}
@@ -71,7 +71,7 @@ export default function HeroSection() {
                   alt={badge.alt}
                   width={127}
                   height={127}
-                  className="h-[95px] md:h-[127px] w-auto"
+                  className="h-[92px] md:h-[115px] w-auto"
                 />
               ))}
             </div>
