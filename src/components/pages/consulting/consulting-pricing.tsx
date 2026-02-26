@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { Shield, Rocket, Award, Building2, Layers, Check } from "lucide-react";
+import { Shield, Rocket, Award, Building2, Layers } from "lucide-react";
 import Link from "next/link";
 
 /* -------------------------------------------------------------------------- */
