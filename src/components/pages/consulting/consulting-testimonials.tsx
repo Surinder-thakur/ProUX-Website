@@ -2,8 +2,14 @@
 
 import { useState, useRef, useEffect, useCallback } from "react";
 import { motion } from "motion/react";
-import { Play, Star } from "lucide-react";
+import { Star, Volume2, VolumeX } from "lucide-react";
 import { cn } from "@/lib/utils";
+import Image from "next/image";
+import dynamic from "next/dynamic";
+
+const MuxPlayer = dynamic(() => import("@mux/mux-player-react"), {
+  ssr: false,
+});
 
 /* ── Star Row ──────────────────────────────────────────────────────────── */
 
@@ -27,7 +33,7 @@ interface TextTestimonial {
   badge: string;
   author: string;
   role: string;
-  avatarBg: string;
+  avatar: string;
 }
 
 interface VideoTestimonial {
@@ -35,6 +41,8 @@ interface VideoTestimonial {
   company: string;
   role: string;
   country: string;
+  playbackId: string;
+  thumbnail: string;
 }
 
 /* ── Data ──────────────────────────────────────────────────────────────── */
@@ -46,7 +54,7 @@ const textTestimonials: TextTestimonial[] = [
     badge: "+67% conversions",
     author: "Arthur Andreasyan",
     role: "Founder, Puffy",
-    avatarBg: "bg-[#99825d]",
+    avatar: "/images/consulting/testimonials/arthur-andreasyan.png",
   },
   {
     quote:
@@ -54,7 +62,7 @@ const textTestimonials: TextTestimonial[] = [
     badge: "Launched in 3 months",
     author: "Carlos Arias",
     role: "Founder, Medellin",
-    avatarBg: "bg-[hsl(var(--text-primary-600))]",
+    avatar: "/images/consulting/testimonials/carlos-arias.png",
   },
   {
     quote:
@@ -62,7 +70,7 @@ const textTestimonials: TextTestimonial[] = [
     badge: "+30% conversions",
     author: "Avin Kline",
     role: "CEO, Lucyd",
-    avatarBg: "bg-[#B55331]",
+    avatar: "/images/consulting/testimonials/avin-kline.png",
   },
 ];
 
@@ -72,58 +80,65 @@ const videoTestimonials: VideoTestimonial[] = [
     company: "E SCALE",
     role: "Founder.",
     country: "USA",
+    playbackId: "tiHdYo75dWes1VQVTu9cKTH7847OYE4L9ym3ZQrzR74",
+    thumbnail:
+      "https://image.mux.com/tiHdYo75dWes1VQVTu9cKTH7847OYE4L9ym3ZQrzR74/thumbnail.jpg?width=534&height=844&fit_mode=smartcrop",
   },
   {
     name: "José Navarro",
     company: "Barefoot Media",
     role: "Founder.",
     country: "Australia",
+    playbackId: "MrJhG4G7EZeEpwgFZ2jvePX00WEb00MMEyufGnU4qn6jA",
+    thumbnail:
+      "https://image.mux.com/MrJhG4G7EZeEpwgFZ2jvePX00WEb00MMEyufGnU4qn6jA/thumbnail.jpg?width=534&height=844&fit_mode=smartcrop",
   },
   {
     name: "Sheila Raper",
     company: "AJElite Homes",
     role: "MD.",
     country: "USA",
+    playbackId: "cHXw1rpS02oMIuHrWQbXo00KEzQOUwBtntX02wqwnmgGPk",
+    thumbnail: "/images/consulting/testimonials/sheila-raper.jpg",
   },
   {
     name: "Uli Schönleber",
     company: "Ooliv",
     role: "Founder.",
     country: "Germany",
+    playbackId: "zPouJKbggQnYr02ysA00AFAKRkciXA93Prerd00XOcAG9s",
+    thumbnail: "/images/consulting/testimonials/uli-schonleber.jpg",
   },
 ];
 
-/* ── Floating Heart ────────────────────────────────────────────────────── */
+/* ── Heart Animation (matches live site) ───────────────────────────────── */
 
-function FloatingHeart({
-  delay,
-  x,
-  size,
-}: {
-  delay: number;
-  x: number;
-  size: number;
-}) {
+const heartPath = "M27.6491 1.57407C23.4031 -1.03039 19.6973 0.0191798 17.4711 1.69102C16.5583 2.37652 16.1019 2.71926 15.8333 2.71926C15.5648 2.71926 15.1084 2.37652 14.1956 1.69102C11.9694 0.0191798 8.26355 -1.03039 4.01761 1.57407C-1.55472 4.99215 -2.81561 16.2685 10.0376 25.782C12.4857 27.594 13.7098 28.5 15.8333 28.5C17.9569 28.5 19.1809 27.594 21.6291 25.782C34.4823 16.2685 33.2214 4.99215 27.6491 1.57407Z";
+
+function FloatingHearts() {
   return (
-    <motion.span
-      className="absolute bottom-0 text-red-400 pointer-events-none select-none"
-      style={{ left: `${x}%`, fontSize: size }}
-      initial={{ opacity: 0, y: 0 }}
-      animate={{
-        opacity: [0, 1, 1, 0],
-        y: [0, -30, -60, -90],
-      }}
-      transition={{
-        duration: 3,
-        delay,
-        repeat: Infinity,
-        repeatDelay: 1,
-        ease: "easeOut",
-      }}
-      aria-hidden="true"
-    >
-      &#10084;
-    </motion.span>
+    <div className="relative size-16 mb-2" aria-hidden="true">
+      {/* Heart 1 — ghost/faded, rotated */}
+      <motion.svg
+        className="absolute top-0 left-0 size-10 text-destructive opacity-20 rotate-[-20deg]"
+        viewBox="0 0 32 29"
+        fill="currentColor"
+        animate={{ y: [0, -8, 0] }}
+        transition={{ duration: 3, repeat: Infinity, ease: "easeInOut" }}
+      >
+        <path d={heartPath} />
+      </motion.svg>
+      {/* Heart 2 — solid, full opacity */}
+      <motion.svg
+        className="absolute bottom-0 right-0 size-10 text-destructive"
+        viewBox="0 0 32 29"
+        fill="currentColor"
+        animate={{ y: [0, -6, 0] }}
+        transition={{ duration: 2.5, repeat: Infinity, ease: "easeInOut", delay: 0.4 }}
+      >
+        <path d={heartPath} />
+      </motion.svg>
+    </div>
   );
 }
 
@@ -151,12 +166,12 @@ function TextTestimonialCard({ testimonial }: { testimonial: TextTestimonial }) 
 
       {/* Author */}
       <div className="flex items-center gap-3 mt-auto">
-        <div
-          className={cn(
-            "h-10 w-10 rounded-full flex-shrink-0",
-            testimonial.avatarBg
-          )}
-          aria-hidden="true"
+        <Image
+          src={testimonial.avatar}
+          alt={testimonial.author}
+          width={40}
+          height={40}
+          className="h-10 w-10 rounded-full flex-shrink-0 object-cover"
         />
         <div>
           <p className="text-sm font-semibold text-foreground">
@@ -176,35 +191,67 @@ function VideoTestimonialCard({
 }: {
   testimonial: VideoTestimonial;
 }) {
-  const [hovered, setHovered] = useState(false);
+  const [isMuted, setIsMuted] = useState(true);
+  const containerRef = useRef<HTMLDivElement>(null);
+
+  const handleToggleMute = () => {
+    const player = containerRef.current?.querySelector("mux-player") as
+      | (HTMLElement & { muted: boolean })
+      | null;
+    if (player) {
+      player.muted = !player.muted;
+      setIsMuted(player.muted);
+    }
+  };
 
   return (
     <div
-      className="relative flex-shrink-0 snap-start rounded-[24px] overflow-hidden cursor-pointer group"
+      ref={containerRef}
+      className="relative flex-shrink-0 snap-start rounded-[24px] overflow-hidden cursor-pointer group bg-neutral-900"
       style={{ aspectRatio: "267/422" }}
-      onMouseEnter={() => setHovered(true)}
-      onMouseLeave={() => setHovered(false)}
+      onClick={handleToggleMute}
     >
-      {/* Placeholder background */}
-      <div className="absolute inset-0 bg-[#2a2a2a]" />
+      {/* Mux Video Player — always playing muted by default */}
+      <MuxPlayer
+        playbackId={testimonial.playbackId}
+        autoPlay="muted"
+        loop
+        streamType="on-demand"
+        preload="auto"
+        style={
+          {
+            position: "absolute",
+            inset: "0",
+            width: "100%",
+            height: "100%",
+            "--media-object-fit": "cover",
+            "--media-object-position": "center",
+            "--controls": "none",
+          } as Record<string, string>
+        }
+      />
 
-      {/* Play icon overlay */}
+      {/* Volume icon — visible on hover when muted, always when unmuted */}
       <div
         className={cn(
-          "absolute inset-0 z-10 flex items-center justify-center transition-opacity duration-300",
-          hovered ? "opacity-100" : "opacity-0"
+          "absolute top-4 right-4 z-20 transition-opacity duration-300",
+          isMuted ? "opacity-0 group-hover:opacity-100" : "opacity-100"
         )}
       >
-        <div className="flex h-14 w-14 items-center justify-center rounded-full bg-white/90 shadow-lg">
-          <Play className="h-6 w-6 fill-foreground text-foreground ml-0.5" />
+        <div className="flex h-9 w-9 items-center justify-center rounded-full bg-black/50 backdrop-blur-sm">
+          {isMuted ? (
+            <VolumeX className="h-4 w-4 text-white" />
+          ) : (
+            <Volume2 className="h-4 w-4 text-white" />
+          )}
         </div>
       </div>
 
       {/* Bottom gradient overlay */}
-      <div className="absolute inset-x-0 bottom-0 h-1/2 bg-gradient-to-t from-black/80 via-black/40 to-transparent z-[5]" />
+      <div className="absolute inset-x-0 bottom-0 h-1/2 bg-gradient-to-t from-black/80 via-black/40 to-transparent z-[5] pointer-events-none" />
 
       {/* Card info */}
-      <div className="absolute inset-x-0 bottom-0 z-10 p-5">
+      <div className="absolute inset-x-0 bottom-0 z-10 p-5 pointer-events-none">
         <p className="text-base font-bold text-white leading-tight">
           {testimonial.name}
         </p>
@@ -243,6 +290,14 @@ function ScrollDots({
   );
 }
 
+/* ── Header avatars ────────────────────────────────────────────────────── */
+
+const headerAvatars = [
+  { src: "/images/consulting/testimonials/avatar-1.png", alt: "Satisfied ProUX client" },
+  { src: "/images/consulting/testimonials/avatar-2.png", alt: "ProUX consulting client" },
+  { src: "/images/consulting/testimonials/avatar-3.png", alt: "ProUX design client" },
+];
+
 /* ── Main Component ────────────────────────────────────────────────────── */
 
 export default function ConsultingTestimonials() {
@@ -272,9 +327,17 @@ export default function ConsultingTestimonials() {
         <div className="flex flex-col items-center text-center mb-12 md:mb-16">
           {/* Stacked avatars */}
           <div className="flex items-center -space-x-4 mb-4">
-            <div className="h-10 w-10 rounded-full bg-[#99825d] border-2 border-[hsl(var(--bg-primary-50))] z-[3]" />
-            <div className="h-10 w-10 rounded-full bg-[hsl(var(--text-primary-600))] border-2 border-[hsl(var(--bg-primary-50))] z-[2]" />
-            <div className="h-10 w-10 rounded-full bg-[#B55331] border-2 border-[hsl(var(--bg-primary-50))] z-[1]" />
+            {headerAvatars.map((avatar, i) => (
+              <Image
+                key={i}
+                src={avatar.src}
+                alt={avatar.alt}
+                width={40}
+                height={40}
+                className="h-10 w-10 rounded-full border-2 border-[hsl(var(--bg-primary-50))] object-cover"
+                style={{ zIndex: 3 - i }}
+              />
+            ))}
           </div>
 
           {/* Star rating badge */}
@@ -298,7 +361,7 @@ export default function ConsultingTestimonials() {
         </div>
 
         {/* ── Text Testimonials Grid ─────────────────────────────────── */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-16 md:mb-20">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 items-start mb-16 md:mb-20">
           {textTestimonials.map((t) => (
             <TextTestimonialCard key={t.author} testimonial={t} />
           ))}
@@ -306,16 +369,14 @@ export default function ConsultingTestimonials() {
 
         {/* ── Video Testimonials ─────────────────────────────────────── */}
         <div className="pb-12 md:pb-16">
-          {/* Video heading with floating hearts */}
-          <div className="flex items-center justify-center gap-3 mb-10">
-            <h3 className="text-xl md:text-2xl font-bold text-foreground text-center leading-snug">
-              Unscripted Clips From the People Who Signed the Checks
+          {/* Video heading with floating hearts above */}
+          <div className="flex flex-col items-center mb-10">
+            <FloatingHearts />
+            <h3 className="text-2xl md:text-[32px] font-bold text-foreground text-center leading-[1.2] tracking-tight max-w-2xl">
+              Unscripted Clips From the People
+              <br className="hidden md:block" />
+              Who Signed the Checks
             </h3>
-            <div className="relative h-8 w-8 flex-shrink-0">
-              <FloatingHeart delay={0} x={20} size={16} />
-              <FloatingHeart delay={1} x={50} size={14} />
-              <FloatingHeart delay={2} x={70} size={12} />
-            </div>
           </div>
 
           {/* Desktop: 4-column grid */}

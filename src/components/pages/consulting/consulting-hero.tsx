@@ -4,12 +4,6 @@ import { useRef, useEffect } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { ArrowRight, Info } from "lucide-react";
-import {
-  Tooltip,
-  TooltipTrigger,
-  TooltipContent,
-  TooltipProvider,
-} from "@/components/ui/tooltip";
 
 /* -------------------------------------------------------------------------- */
 /*  Trust badge data                                                          */
@@ -126,39 +120,38 @@ export default function ConsultingHero() {
 
       <section
         ref={sectionRef}
-        className="relative overflow-hidden bg-[hsl(var(--bg-primary-50))] pt-32 pb-8 md:pb-12"
+        className="relative bg-[hsl(var(--bg-primary-50))] pt-32 pb-8 md:pb-12"
       >
-        {/* ── Decorative parallax blobs ───────────────────────────────── */}
-        <div
-          ref={blob1Ref}
-          className="pointer-events-none absolute -top-24 -left-32 h-[420px] w-[420px] rounded-full bg-[hsl(var(--gold-200)/0.4)] blur-[100px] transition-transform duration-700 ease-out"
-          aria-hidden="true"
-        />
-        <div
-          ref={blob2Ref}
-          className="pointer-events-none absolute -right-20 top-1/3 h-[350px] w-[350px] rounded-full bg-[hsl(var(--brown-100)/0.35)] blur-[90px] transition-transform duration-700 ease-out"
-          aria-hidden="true"
-        />
-        <div
-          ref={blob3Ref}
-          className="pointer-events-none absolute bottom-0 left-1/2 h-[300px] w-[300px] -translate-x-1/2 rounded-full bg-[hsl(var(--blue-100)/0.3)] blur-[80px] transition-transform duration-700 ease-out"
-          aria-hidden="true"
-        />
+        {/* ── Decorative parallax blobs (clipped to section) ─────────── */}
+        <div className="pointer-events-none absolute inset-0 overflow-hidden" aria-hidden="true">
+          <div
+            ref={blob1Ref}
+            className="absolute -top-24 -left-32 h-[420px] w-[420px] rounded-full bg-[hsl(var(--gold-200)/0.4)] blur-[100px] transition-transform duration-700 ease-out"
+          />
+          <div
+            ref={blob2Ref}
+            className="absolute -right-20 top-1/3 h-[350px] w-[350px] rounded-full bg-[hsl(var(--brown-100)/0.35)] blur-[90px] transition-transform duration-700 ease-out"
+          />
+          <div
+            ref={blob3Ref}
+            className="absolute bottom-0 left-1/2 h-[300px] w-[300px] -translate-x-1/2 rounded-full bg-[hsl(var(--blue-100)/0.3)] blur-[80px] transition-transform duration-700 ease-out"
+          />
+        </div>
 
         {/* ── Container ──────────────────────────────────────────────── */}
         <div className="container-default relative z-10">
           {/* ── Two-column grid ─────────────────────────────────────── */}
-          <div className="grid grid-cols-1 items-center gap-10 lg:grid-cols-[1.35fr_0.65fr] lg:gap-16">
+          <div className="grid grid-cols-1 items-center gap-10 lg:grid-cols-[1.2fr_0.8fr] lg:gap-16">
             {/* ── Left column: text content ─────────────────────────── */}
             <div className="text-center lg:text-left">
               {/* Eyebrow */}
-              <p className="label-caps mb-5 text-[hsl(var(--text-primary-600))]">
+              <p className="text-xs md:text-sm font-normal text-[hsl(var(--text-primary-600))] uppercase tracking-wider mb-5">
                 For Founders &amp; Business Owners
               </p>
 
               {/* Headline */}
               <h1
-                className="mb-4 font-extrabold tracking-tight text-foreground"
+                className="mb-4 font-black tracking-tight text-foreground"
                 style={{
                   fontFamily: "var(--font-family-display)",
                   fontSize: "clamp(2.25rem, 5vw, 3.5rem)",
@@ -173,7 +166,7 @@ export default function ConsultingHero() {
 
               {/* Subheadline */}
               <p
-                className="mb-8 text-[hsl(var(--text-neutrals-800))]"
+                className="mb-8 font-medium text-[hsl(var(--text-neutrals-800))]"
                 style={{
                   fontFamily: "var(--font-family-base)",
                   fontSize: "clamp(1.125rem, 2vw, var(--font-paragraph-xl-size))",
@@ -184,7 +177,7 @@ export default function ConsultingHero() {
               </p>
 
               {/* CTA buttons */}
-              <div className="mb-8 flex flex-col items-center gap-4 sm:flex-row lg:items-start lg:justify-start">
+              <div className="mb-8 flex flex-col items-center gap-4 sm:flex-row sm:items-center lg:justify-start">
                 <Link
                   href="#consultation"
                   className="btn-consulting-shine inline-flex items-center justify-center rounded-[12px] bg-primary px-7 py-3.5 text-[14px] font-semibold uppercase tracking-wide text-primary-foreground shadow-lg transition-all hover:brightness-110 hover:shadow-xl"
@@ -202,61 +195,41 @@ export default function ConsultingHero() {
               </div>
 
               {/* Trust badges */}
-              <TooltipProvider delayDuration={200}>
-                <div className="mb-10 flex flex-wrap items-center justify-center gap-x-6 gap-y-3 lg:justify-start">
-                  {trustBadges.map((badge) => (
-                    <div
-                      key={badge.label}
-                      className="flex items-center gap-2"
-                    >
-                      <GreenCheck />
-                      <span className="text-[13px] font-medium text-[hsl(var(--text-neutrals-800))]">
-                        {badge.label}
+              <div className="mb-10 flex flex-wrap items-center justify-center gap-x-6 gap-y-3 lg:justify-start">
+                {trustBadges.map((badge) => (
+                  <div
+                    key={badge.label}
+                    className="flex items-center gap-2"
+                  >
+                    <GreenCheck />
+                    <span className="text-[15px] font-semibold text-[hsl(var(--text-neutrals-800))]">
+                      {badge.label}
+                    </span>
+                    {badge.hasTooltip && (
+                      <span className="group relative inline-flex cursor-pointer text-muted-foreground transition-colors hover:text-foreground">
+                        <Info className="h-4 w-4" />
+                        <span className="pointer-events-none absolute left-1/2 bottom-full z-50 mb-2 w-72 -translate-x-1/2 rounded-lg bg-foreground px-4 py-3 text-[13px] leading-relaxed text-background opacity-0 shadow-lg transition-opacity duration-200 group-hover:pointer-events-auto group-hover:opacity-100">
+                          {badge.tooltip}
+                        </span>
                       </span>
-                      {badge.hasTooltip && (
-                        <Tooltip>
-                          <TooltipTrigger asChild>
-                            <button
-                              type="button"
-                              aria-label="More info about Performance Guaranteed"
-                              className="inline-flex cursor-help text-[hsl(var(--text-neutrals-400))] transition-colors hover:text-[hsl(var(--text-primary-600))]"
-                            >
-                              <Info className="h-3.5 w-3.5" />
-                            </button>
-                          </TooltipTrigger>
-                          <TooltipContent
-                            side="bottom"
-                            className="max-w-xs rounded-lg bg-foreground px-4 py-3 text-[13px] leading-relaxed text-[hsl(var(--text-neutrals-50))]"
-                          >
-                            {badge.tooltip}
-                          </TooltipContent>
-                        </Tooltip>
-                      )}
-                    </div>
-                  ))}
-                </div>
-              </TooltipProvider>
+                    )}
+                  </div>
+                ))}
+              </div>
 
-              {/* Benefits paragraph */}
-              <p className="body-base mx-auto max-w-xl lg:mx-0">
-                We help e-commerce and SaaS companies strategize (UX), design
-                (UI), and optimize conversions (CRO) using AI-powered audits and
-                validated prototypes.
-              </p>
             </div>
 
             {/* ── Right column: hero image ──────────────────────────── */}
-            <div className="flex justify-center lg:justify-end">
-              <div className="relative w-full max-w-md lg:max-w-none">
-                <Image
-                  src="/images/hero-consulting.png"
-                  alt="ProUX consulting — UX audit and conversion optimization"
-                  width={580}
-                  height={520}
-                  className="h-auto w-full rounded-2xl"
-                  priority
-                />
-              </div>
+            <div className="relative flex items-center justify-center mt-0 pb-4 lg:pb-0 lg:overflow-visible">
+              <Image
+                src="/images/consulting/hero-consulting.png"
+                alt="UX Audit Process — Findings, Hypotheses, Prototype Testing with Control vs Variant results"
+                width={1398}
+                height={938}
+                className="w-[88%] lg:w-full h-auto drop-shadow-2xl lg:scale-[1.12] lg:origin-center"
+                style={{ willChange: "filter" }}
+                priority
+              />
             </div>
           </div>
         </div>

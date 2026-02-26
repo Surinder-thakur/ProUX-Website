@@ -6,12 +6,14 @@ import "./globals.css";
 const fontSans = Inter({
   subsets: ["latin"],
   variable: "--font-sans",
+  display: "swap",
 });
 
 const fontDisplay = Inter({
   subsets: ["latin"],
   variable: "--font-display",
   weight: ["700", "800", "900"],
+  display: "swap",
 });
 
 export const viewport: Viewport = {
@@ -21,6 +23,7 @@ export const viewport: Viewport = {
 };
 
 export const metadata: Metadata = {
+  metadataBase: new URL("https://proux.design"),
   title: {
     default: "ProUX — AI-First UX Intelligence Platform",
     template: "%s | ProUX",
@@ -58,11 +61,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" suppressHydrationWarning>
-      {process.env.NODE_ENV === "development" && (
-        <head>
-          <script src="https://mcp.figma.com/mcp/html-to-design/capture.js" async></script>
-        </head>
-      )}
+      <head />
       <body className={`${fontSans.variable} ${fontDisplay.variable} font-sans antialiased`}>
         {children}
         <Toaster />
