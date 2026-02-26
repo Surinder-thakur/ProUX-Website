@@ -4,6 +4,7 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useState, useEffect } from "react";
 import { Menu, X } from "lucide-react";
+import { Tooltip, TooltipTrigger, TooltipContent, TooltipProvider } from "@/components/ui/tooltip";
 
 const navigation = [
   { label: "Product", href: "/" },
@@ -61,21 +62,21 @@ export function Header() {
   const [mobileOpen, setMobileOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const [hidden, setHidden] = useState(false);
-  const isProductPage = pathname === "/";
+  const shouldAutoHide = pathname === "/" || pathname === "/ux-consulting";
 
   useEffect(() => {
     const handleScroll = () => {
       const y = window.scrollY;
       setScrolled(y > 10);
 
-      // On product page, hide main nav after scrolling past one viewport
-      if (isProductPage) {
+      // On pages with secondary nav, hide main nav after scrolling past one viewport
+      if (shouldAutoHide) {
         setHidden(y > window.innerHeight);
       }
     };
     window.addEventListener("scroll", handleScroll, { passive: true });
     return () => window.removeEventListener("scroll", handleScroll);
-  }, [isProductPage]);
+  }, [shouldAutoHide]);
 
   return (
     <header
@@ -87,9 +88,18 @@ export function Header() {
     >
       <div className="flex items-center justify-between px-[24px] lg:px-[100px]">
         {/* Logo — far left */}
-        <Link href="/" className="flex-shrink-0">
-          <ProUXLogo className="h-[15px] w-auto sm:h-[18px]" />
-        </Link>
+        <TooltipProvider delayDuration={0}>
+          <Tooltip>
+            <TooltipTrigger asChild>
+              <Link href="/" className="flex-shrink-0">
+                <ProUXLogo className="h-[15px] w-auto sm:h-[18px]" />
+              </Link>
+            </TooltipTrigger>
+            <TooltipContent>
+              <p className="text-center text-[11px]">Invest in ProUX today,<br />save on costly fixes tomorrow.</p>
+            </TooltipContent>
+          </Tooltip>
+        </TooltipProvider>
 
         {/* Desktop Navigation — centered */}
         <nav className="hidden items-center gap-4 lg:flex absolute left-1/2 -translate-x-1/2">

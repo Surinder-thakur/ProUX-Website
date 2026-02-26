@@ -282,7 +282,7 @@ export default function ConsultingResults() {
               <button
                 type="submit"
                 disabled={isSubmitting}
-                className="w-full rounded-[14px] bg-primary px-14 py-[18px] text-[14px] font-semibold uppercase tracking-[1px] text-primary-foreground shadow-lg transition-all hover:brightness-110 hover:shadow-xl disabled:pointer-events-none disabled:opacity-60 md:w-auto"
+                className="btn-consulting-shine w-full rounded-[14px] bg-primary px-14 py-[18px] text-[14px] font-semibold uppercase tracking-[1px] text-primary-foreground shadow-lg transition-all hover:brightness-110 hover:shadow-xl disabled:pointer-events-none disabled:opacity-60 md:w-auto"
               >
                 {isSubmitting ? "Submitting..." : "Submit"}
               </button>

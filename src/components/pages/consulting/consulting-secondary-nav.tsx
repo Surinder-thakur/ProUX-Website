@@ -1,12 +1,10 @@
 "use client";
 
 import { useState, useEffect, useRef, useCallback } from "react";
-import Image from "next/image";
 import { cn } from "@/lib/utils";
 
 const navItems = [
   { label: "ROI Calculator", href: "#calculator" },
-  { label: "Pricing", href: "#pricing-section" },
   { label: "FAQ", href: "#faq" },
   { label: "Book Consultation", href: "#consultation" },
 ];
@@ -92,20 +90,16 @@ export default function ConsultingSecondaryNav() {
           : "-translate-y-4 opacity-0 pointer-events-none"
       )}
     >
-      {/* Logo - scrolls to top on click */}
+      {/* Logo icon - scrolls to top on click */}
       <button
         onClick={handleLogoClick}
         className="mr-2 md:mr-4 flex-shrink-0 cursor-pointer"
         aria-label="Scroll to top"
       >
-        <Image
-          src="/images/proux-logo.svg"
-          alt="ProUX"
-          width={80}
-          height={14}
-          className="h-3.5 w-auto md:h-4"
-          priority
-        />
+        <svg className="h-5 w-auto" fill="none" viewBox="0 0 34 22">
+          <path d="M22.3151 0C21.473 7.89874 15.5786 10.8088 10.9473 10.8088V21.6176C27.3674 21.6176 33.2618 7.06729 33.2618 0H22.3151Z" fill="#B55331" />
+          <path d="M10.9468 0H0V10.8088H10.9468V0Z" fill="#B55331" />
+        </svg>
       </button>
 
       {/* Nav links */}
@@ -118,11 +112,11 @@ export default function ConsultingSecondaryNav() {
             onClick={(e) => handleNavClick(e, item.href)}
             className={cn(
               "whitespace-nowrap rounded-full px-3 py-1.5 md:px-4 md:py-2",
-              "text-[11px] md:text-[14px] font-medium",
+              "text-[11px] md:text-[13px] font-medium",
               "transition-colors duration-200",
               isActive
-                ? "bg-[hsl(var(--bg-primary-100))] text-foreground"
-                : "text-muted-foreground hover:text-primary"
+                ? "bg-[#F0EEE4] text-[#1a2130]"
+                : "text-[#4A5568] hover:bg-[#F0EEE4] hover:text-[#1a2130]"
             )}
           >
             {item.label}

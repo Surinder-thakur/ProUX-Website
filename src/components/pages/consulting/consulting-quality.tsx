@@ -31,7 +31,7 @@ export default function ConsultingQuality() {
           </div>
 
           {/* Desktop: absolute-positioned to the left of the card */}
-          <div className="hidden md:block absolute top-1/2 -translate-y-1/2 -left-[85px]">
+          <div className="hidden md:block absolute top-12 -left-[85px]">
             <div className="relative h-[170px] w-[170px] shrink-0 overflow-hidden rounded-full border-[5px] border-primary">
               <Image
                 src="/images/surinder-profile.jpg"
@@ -76,12 +76,13 @@ export default function ConsultingQuality() {
 
             {/* ── Signature area ──────────────────────────────────────── */}
             <div className="mt-8">
-              <p
-                className="text-2xl opacity-60 mb-2"
-                style={{ fontFamily: "Georgia, 'Times New Roman', serif", fontStyle: "italic" }}
-              >
-                Surinder.T
-              </p>
+              <Image
+                src="/images/consulting/signature-surinder.png"
+                alt="Surinder.T"
+                width={641}
+                height={173}
+                className="h-[40px] w-auto object-contain opacity-60 mb-2"
+              />
               <p className="text-base font-bold text-foreground">
                 Surinder Thakur
               </p>
@@ -95,13 +96,13 @@ export default function ConsultingQuality() {
               {/* Certification badges */}
               <div className="mt-5 flex items-center gap-4">
                 {badges.map((badge) => (
-                  <div key={badge.alt} className="relative h-[80px] w-auto">
+                  <div key={badge.alt} className="relative h-[110px] w-auto">
                     <Image
                       src={badge.src}
                       alt={badge.alt}
-                      height={80}
-                      width={80}
-                      className="h-[80px] w-auto object-contain"
+                      height={110}
+                      width={110}
+                      className="h-[110px] w-auto object-contain"
                     />
                   </div>
                 ))}

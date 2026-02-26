@@ -394,7 +394,7 @@ function ResponsiveTooltip({
                   Feature details
                 </DrawerDescription>
                 <DrawerClose asChild>
-                  <button className="p-2 rounded-full transition-colors text-foreground">
+                  <button type="button" aria-label="Close" className="p-2 rounded-full transition-colors text-foreground">
                     <X className="size-5" />
                   </button>
                 </DrawerClose>

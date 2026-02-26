@@ -199,6 +199,7 @@ export default function FaqSection() {
         {/* ── Expand / Collapse toggle ── */}
         {faqs.length > 5 && (
           <button
+            type="button"
             onClick={() => setShowAll(!showAll)}
             className="mt-4 text-base font-bold text-primary uppercase tracking-[0.84px] hover:opacity-80 hover:underline transition-all"
           >
