@@ -3,18 +3,21 @@ import { Resend } from "resend";
 import { createClient } from "@supabase/supabase-js";
 
 /* -------------------------------------------------------------------------- */
-/*  Supabase server client (uses service-role or anon key server-side)         */
+/*  Lazy-initialized clients (avoids build-time env var errors on Vercel)      */
 /* -------------------------------------------------------------------------- */
 
-const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL!;
-const supabaseKey = process.env.SUPABASE_SERVICE_ROLE_KEY || process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!;
-const supabase = createClient(supabaseUrl, supabaseKey);
+function getSupabase() {
+  const url = process.env.NEXT_PUBLIC_SUPABASE_URL;
+  const key = process.env.SUPABASE_SERVICE_ROLE_KEY || process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY;
+  if (!url || !key) throw new Error("Supabase env vars not configured");
+  return createClient(url, key);
+}
 
-/* -------------------------------------------------------------------------- */
-/*  Resend client                                                              */
-/* -------------------------------------------------------------------------- */
-
-const resend = new Resend(process.env.RESEND_API_KEY);
+function getResend() {
+  const key = process.env.RESEND_API_KEY;
+  if (!key) throw new Error("RESEND_API_KEY not configured");
+  return new Resend(key);
+}
 
 /* -------------------------------------------------------------------------- */
 /*  POST handler                                                               */
@@ -34,6 +37,7 @@ export async function POST(req: NextRequest) {
     }
 
     // 1. Insert into Supabase
+    const supabase = getSupabase();
     const { error: dbError } = await supabase.from("enquiries").insert({
       name: email.trim(),
       email: email.trim(),
@@ -63,6 +67,8 @@ export async function POST(req: NextRequest) {
     } catch {
       // fallback stays "New Lead"
     }
+
+    const resend = getResend();
 
     try {
       await resend.emails.send({
