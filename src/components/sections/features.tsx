@@ -1,9 +1,15 @@
 "use client";
 
-import React, { useState, useRef } from "react";
+import React, { useState, useRef, useEffect, useCallback } from "react";
 import Image from "next/image";
 import { motion } from "motion/react";
 import { Check } from "lucide-react";
+import {
+  Tooltip,
+  TooltipTrigger,
+  TooltipContent,
+  TooltipProvider,
+} from "@/components/ui/tooltip";
 
 /* ── Types ──────────────────────────────────────────────────────────────── */
 
@@ -271,32 +277,172 @@ function FeatureCard({
 
 /* ── Layout Options ─────────────────────────────────────────────────────── */
 
-/* Option A: Sticky Card Stack — cards stack on top of each other while scrolling */
+/* ── Tooltip names for dot nav ──────────────────────────────────────────── */
+
+const featureTooltipNames = [
+  "Design Scanner",
+  "AI UX Specialists",
+  "UX Principles",
+  "Guidelines Library",
+  "Product Analysis",
+  "UX Insights",
+];
+
+/* Sticky Card Stack — all cards overlay in a single sticky grid container.
+   Scroll position drives which card is visible (opacity/scale via refs). */
 function StickyStackLayout({ features: items }: { features: Feature[] }) {
+  const STICKY_TOP = 80;
+  const SCROLL_PER_CARD = 500; // px of scroll distance per card transition
+
+  const [activeIndex, setActiveIndex] = useState(0);
+  const [dotsVisible, setDotsVisible] = useState(false);
+  const containerRef = useRef<HTMLDivElement>(null);
+  const cardRefs = useRef<(HTMLDivElement | null)[]>([]);
+
+  const setCardRef = useCallback(
+    (index: number) => (el: HTMLDivElement | null) => {
+      cardRefs.current[index] = el;
+    },
+    []
+  );
+
+  useEffect(() => {
+    const handleScroll = () => {
+      const container = containerRef.current;
+      if (!container) return;
+
+      const containerTop = container.getBoundingClientRect().top;
+      // How far we've scrolled past the container's top edge
+      const scrolledPast = -containerTop;
+      // Floating-point progress: 0 = first card, 1 = second card, etc.
+      const rawProgress = scrolledPast / SCROLL_PER_CARD;
+      const progress = Math.max(0, Math.min(items.length - 1, rawProgress));
+
+      // Active index (which dot is filled)
+      const newActive = Math.round(progress);
+      setActiveIndex(Math.max(0, Math.min(items.length - 1, newActive)));
+
+      // Show dots only while scrolling through the cards — hide once last card is settled
+      const maxScroll = (items.length - 1) * SCROLL_PER_CARD + 100;
+      setDotsVisible(scrolledPast > -100 && scrolledPast < maxScroll);
+
+      // Update each card's transform, opacity, and z-index
+      // Stacking effect: next card slides UP from below to cover the current card.
+      // Current card zooms out (shrinks) behind it as it gets covered.
+      for (let i = 0; i < items.length; i++) {
+        const card = cardRefs.current[i];
+        if (!card) continue;
+
+        const distance = i - progress; // positive = future, negative = past
+
+        if (distance <= -1) {
+          // Already covered — hidden behind the stack
+          card.style.opacity = "0";
+          card.style.transform = "scale(0.92) translateY(0)";
+          card.style.zIndex = "0";
+          card.style.pointerEvents = "none";
+        } else if (distance < 0) {
+          // Being covered — zoom out into background as next card slides over
+          const t = -distance; // 0→1 as card gets covered
+          const scale = 1 - t * 0.08; // 1.0 → 0.92
+          const opacity = 1 - t;       // 1.0 → 0.0
+          card.style.opacity = `${Math.max(0, opacity)}`;
+          card.style.transform = `scale(${scale}) translateY(0)`;
+          card.style.zIndex = `${i + 1}`;
+          card.style.pointerEvents = opacity > 0.3 ? "auto" : "none";
+        } else if (distance < 1) {
+          // Incoming card — slides up from below to cover the current card
+          const slideUp = distance; // 1→0 as card slides into place
+          card.style.opacity = "1";
+          card.style.transform = `scale(1) translateY(${slideUp * 100}%)`;
+          card.style.zIndex = `${items.length + i}`;
+          card.style.pointerEvents = distance < 0.5 ? "auto" : "none";
+        } else {
+          // Future card — waiting below, out of view
+          card.style.opacity = "1";
+          card.style.transform = "scale(1) translateY(100%)";
+          card.style.zIndex = `${items.length + i}`;
+          card.style.pointerEvents = "none";
+        }
+      }
+    };
+
+    window.addEventListener("scroll", handleScroll, { passive: true });
+    handleScroll();
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, [items.length]);
+
+  /* Click a dot → scroll so that card becomes active */
+  const scrollToCard = useCallback((index: number) => {
+    const container = containerRef.current;
+    if (!container) return;
+    const containerAbsTop = container.getBoundingClientRect().top + window.scrollY;
+    const targetScroll = containerAbsTop + index * SCROLL_PER_CARD;
+    window.scrollTo({ top: targetScroll, behavior: "smooth" });
+  }, []);
+
   return (
-    <div className="relative">
-      {items.map((feature, index) => (
-        <div
-          key={index}
-          className="sticky"
-          style={{ top: `${80 + index * 20}px` }}
-        >
-          <motion.div
-            initial={{ opacity: 0, y: 60 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, margin: "-50px" }}
-            transition={{ duration: 0.5 }}
-          >
-            <FeatureCard
-              feature={feature}
-              index={index}
-              className="w-full mb-6 shadow-[0_2px_8px_rgba(0,0,0,0.04)]"
-            />
-          </motion.div>
+    <div
+      ref={containerRef}
+      className="relative"
+      style={{
+        // Total height = scroll distance for all card transitions + one card's natural height
+        // The last card is visible at the bottom; all transitions happen above it.
+        height: `calc(${(items.length - 1) * SCROLL_PER_CARD}px + 100vh)`,
+      }}
+    >
+      {/* Dot navigation */}
+      <div className={`hidden lg:block fixed right-[calc(50%-582px)] z-50 transition-opacity duration-500 ${dotsVisible ? "opacity-100" : "opacity-0"}`}
+        style={{ top: "50%", transform: "translateY(-50%)" }}
+      >
+        <div className="flex flex-col items-center gap-[11px]">
+          <TooltipProvider delayDuration={0}>
+            {items.map((_, index) => (
+              <Tooltip key={index}>
+                <TooltipTrigger asChild>
+                  <button
+                    onClick={() => scrollToCard(index)}
+                    className={`w-[8px] h-[8px] rounded-full transition-all duration-300 outline-offset-[3px] ${
+                      index <= activeIndex
+                        ? "bg-[#6B7280]"
+                        : "bg-gray-300"
+                    } hover:outline hover:outline-2 hover:outline-[#B55331]`}
+                    aria-label={`Go to ${featureTooltipNames[index]}`}
+                  />
+                </TooltipTrigger>
+                <TooltipContent side="right" sideOffset={12}>
+                  <p className="text-[12px] font-medium">{featureTooltipNames[index]}</p>
+                </TooltipContent>
+              </Tooltip>
+            ))}
+          </TooltipProvider>
         </div>
-      ))}
-      {/* Extra space at bottom so last card can fully scroll into view */}
-      <div className="h-[40vh]" />
+      </div>
+
+      {/* Sticky card viewport — stays fixed while you scroll through the container */}
+      <div className="sticky overflow-hidden" style={{ top: `${STICKY_TOP}px` }}>
+        <div className="relative grid" style={{ gridTemplateColumns: "1fr", gridTemplateRows: "1fr" }}>
+          {items.map((feature, index) => (
+            <div
+              key={index}
+              ref={setCardRef(index)}
+              className="will-change-[transform,opacity] origin-center transition-none"
+              style={{
+                gridArea: "1 / 1",
+                opacity: index === 0 ? 1 : 0,
+                transform: index === 0 ? "scale(1)" : "scale(0.95)",
+                zIndex: index === 0 ? items.length : 0,
+              }}
+            >
+              <FeatureCard
+                feature={feature}
+                index={index}
+                className="w-full"
+              />
+            </div>
+          ))}
+        </div>
+      </div>
     </div>
   );
 }
@@ -331,7 +477,7 @@ export default function FeaturesSection() {
   return (
     <section
       id="features"
-      className="w-full max-w-[1100px] mx-auto px-4 lg:px-0 py-16 scroll-mt-[56px] md:scroll-mt-[24px]"
+      className="w-full max-w-[1100px] mx-auto px-4 lg:px-0 py-16 scroll-mt-[64px]"
     >
       {/* Section header */}
       <div className="flex flex-col items-center text-center mb-12 space-y-4">

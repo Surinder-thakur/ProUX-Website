@@ -5,7 +5,7 @@ export default function robots(): MetadataRoute.Robots {
     rules: {
       userAgent: "*",
       allow: "/",
-      disallow: ["/admin/", "/auth/", "/api/"],
+      disallow: ["/admin/", "/auth/", "/api/", "/training/"],
     },
     sitemap: "https://proux.design/sitemap.xml",
   };

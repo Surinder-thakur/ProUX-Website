@@ -25,32 +25,52 @@ export const viewport: Viewport = {
 export const metadata: Metadata = {
   metadataBase: new URL("https://proux.design"),
   title: {
-    default: "ProUX — AI-First UX Intelligence Platform",
+    default: "ProUX — Invest in ProUX today, save on costly fixes tomorrow.",
     template: "%s | ProUX",
   },
   description:
-    "Get AI-powered UX feedback, proven design principles, and expert-curated resources — all in one platform built by certified UX professionals.",
+    "AI-powered UX intelligence platform and expert consulting by NN/g certified professionals. Get UX audits, proven design principles, and data-backed strategies that drive measurable revenue impact.",
   keywords: [
     "UX consulting",
-    "UX training",
+    "UX audit",
     "user experience",
-    "design courses",
-    "UX tools",
-    "AI UX",
+    "AI UX tools",
+    "conversion rate optimization",
+    "UX strategy",
+    "UX intelligence platform",
   ],
+  authors: [{ name: "Surinder Thakur", url: "https://www.surinder.design" }],
+  creator: "ProUX",
+  publisher: "ProUX",
+  alternates: {
+    canonical: "https://proux.design",
+  },
   openGraph: {
     type: "website",
     locale: "en_US",
+    url: "https://proux.design",
     siteName: "ProUX",
-    title: "ProUX — AI-First UX Intelligence Platform",
+    title: "ProUX — Invest in ProUX today, save on costly fixes tomorrow.",
     description:
-      "Get AI-powered UX feedback, proven design principles, and expert-curated resources.",
+      "AI-powered UX intelligence platform and expert consulting. Get UX audits, proven design principles, and data-backed strategies.",
   },
   twitter: {
     card: "summary_large_image",
-    title: "ProUX — AI-First UX Intelligence Platform",
+    site: "@proux_design",
+    title: "ProUX — Invest in ProUX today, save on costly fixes tomorrow.",
     description:
-      "Get AI-powered UX feedback, proven design principles, and expert-curated resources.",
+      "AI-powered UX intelligence platform and expert consulting. Get UX audits, proven design principles, and data-backed strategies.",
+  },
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      "max-video-preview": -1,
+      "max-image-preview": "large",
+      "max-snippet": -1,
+    },
   },
 };
 

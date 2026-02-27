@@ -151,13 +151,7 @@ export default function ConsultingHero() {
 
               {/* Headline */}
               <h1
-                className="mb-4 font-black tracking-tight text-foreground"
-                style={{
-                  fontFamily: "var(--font-family-display)",
-                  fontSize: "clamp(2.25rem, 5vw, 3.5rem)",
-                  lineHeight: 1.15,
-                  letterSpacing: "var(--font-title-h1-tracking)",
-                }}
+                className="mb-4 text-3xl md:text-4xl lg:text-[56px] lg:leading-[64px] font-extrabold tracking-[-1.4px] text-foreground"
               >
                 Do Your Users Know
                 <br />

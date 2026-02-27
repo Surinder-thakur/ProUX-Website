@@ -160,7 +160,7 @@ export default function FaqSection() {
   return (
     <section
       id="faq"
-      className="w-full py-20 pb-24 px-4 flex flex-col items-center scroll-mt-[56px] md:scroll-mt-[24px] bg-[hsl(var(--sidebar))]"
+      className="w-full py-20 pb-24 px-4 flex flex-col items-center scroll-mt-[64px] bg-[hsl(var(--bg-primary-50))]"
     >
       <div className="flex flex-col gap-8 items-center w-full max-w-[800px]">
         {/* ── Header ── */}

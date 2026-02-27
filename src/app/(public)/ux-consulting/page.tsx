@@ -6,7 +6,6 @@ import ConsultingProcess from "@/components/pages/consulting/consulting-process"
 import ConsultingTestimonials from "@/components/pages/consulting/consulting-testimonials";
 import ConsultingQuality from "@/components/pages/consulting/consulting-quality";
 import ConsultingFaq from "@/components/pages/consulting/consulting-faq";
-import ResearchBasedArticles from "@/components/pages/consulting/research-articles";
 import ConsultingResults from "@/components/pages/consulting/consulting-results";
 
 /**
@@ -21,7 +20,6 @@ import ConsultingResults from "@/components/pages/consulting/consulting-results"
  *  6.  ConsultingTestimonials  — 3 text cards + 4 video testimonials
  *  7.  ConsultingQuality       — personal commitment card with photo + certifications
  *  8.  ConsultingFaq           — 5-item accordion
- *  9.  ResearchBasedArticles   — shared article cards section
  * 10.  ConsultingResults       — lead capture form → Supabase
  */
 const faqJsonLd = {
@@ -87,7 +85,6 @@ export default function UXConsultingPage() {
         <ConsultingTestimonials />
         <ConsultingQuality />
         <ConsultingFaq />
-        <ResearchBasedArticles />
         <ConsultingResults />
       </div>
     </>

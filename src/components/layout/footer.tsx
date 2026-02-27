@@ -201,7 +201,7 @@ export function Footer() {
   return (
     <footer
       className="w-full bg-card"
-      style={{ borderTop: "1px solid hsl(var(--sidebar-border))" }}
+      style={{ borderTop: "1px solid hsl(var(--border-primary-100))" }}
     >
       <div className="max-w-7xl mx-auto px-6 lg:px-8 py-12 md:py-20 flex flex-col gap-12">
         {/* ─────────────── MAIN LAYOUT ─────────────── */}
@@ -283,8 +283,7 @@ export function Footer() {
               <div className="flex flex-col gap-3">
                 <FooterNavLink href="/">Product Overview</FooterNavLink>
                 <FooterNavLink href="/ux-consulting">UX Consultancy</FooterNavLink>
-                <FooterNavLink href="/training">AI-First UX Training</FooterNavLink>
-                <FooterNavLink href="/free-articles">Free Articles</FooterNavLink>
+                {/* <FooterNavLink href="/training">AI-First UX Training</FooterNavLink> */}{/* Coming soon */}
               </div>
             </div>
 
@@ -305,13 +304,13 @@ export function Footer() {
         {/* ─────────────── BOTTOM BAR ─────────────── */}
         <div
           className="flex flex-col md:flex-row items-center justify-between gap-6 w-full pt-8"
-          style={{ borderTop: "1px solid hsl(var(--sidebar-border))" }}
+          style={{ borderTop: "1px solid hsl(var(--border-primary-100))" }}
         >
           <p className="text-[13px] font-normal text-muted-foreground text-center md:text-left">
             &copy; {new Date().getFullYear()} ProUX{" "}
-            <span className="hidden md:inline mx-2 text-[hsl(var(--sidebar-border))]">|</span>{" "}
+            <span className="hidden md:inline mx-2 text-[hsl(var(--border-primary-100))]">|</span>{" "}
             All Rights Reserved{" "}
-            <span className="hidden md:inline mx-2 text-[hsl(var(--sidebar-border))]">|</span>{" "}
+            <span className="hidden md:inline mx-2 text-[hsl(var(--border-primary-100))]">|</span>{" "}
             Managed by{" "}
             <a
               href="https://osumstudio.com"
