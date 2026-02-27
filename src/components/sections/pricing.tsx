@@ -376,7 +376,7 @@ function ResponsiveTooltip({
             }
             collisionPadding={16}
           >
-            <p className="font-normal leading-relaxed">{content}</p>
+            <p className="font-normal leading-snug">{content}</p>
           </TooltipContent>
         </Tooltip>
       </div>
@@ -428,7 +428,7 @@ function FeatureRow({
 
   return (
     <ResponsiveTooltip content={feature.tooltip}>
-      <div className="flex gap-3 items-start w-full hover:opacity-80 transition-opacity cursor-default">
+      <div className="flex gap-3 items-start w-full cursor-default">
         <CheckIcon />
         <div
           className="grow text-sm font-normal leading-5 tracking-[-0.084px]"
@@ -461,7 +461,7 @@ function CategoryLabel({
 }) {
   return (
     <p
-      className="text-sm font-medium leading-5 tracking-[-0.154px]"
+      className="text-sm font-bold leading-5 tracking-[-0.154px]"
       style={{
         color: isDark
           ? "hsl(var(--sidebar-border))"
@@ -673,11 +673,11 @@ const tiers: PricingTier[] = [
     bottomBadge: (
       <div
         className="flex flex-col gap-2 items-center px-0 py-3 w-[250px] mx-auto rounded-[calc(var(--radius)+6px)]"
-        style={{ backgroundColor: "hsl(var(--secondary))" }}
+        style={{ backgroundColor: "rgba(255,255,255,0.07)" }}
       >
         <UserGroupIcon />
         <p className="text-sm font-medium text-primary-foreground leading-5 tracking-[-0.154px]">
-          Limited to first 1,000 members
+          Limited to first <span className="font-bold">1,000</span> members
         </p>
       </div>
     ),
@@ -765,7 +765,7 @@ function PricingCard({
         style={{
           backgroundColor: isDark
             ? "#111620"
-            : "hsl(var(--sidebar))",
+            : "hsl(var(--bg-primary-100))",
           padding: isDark ? "24px 32px 32px" : "64px 32px 32px",
         }}
       >
@@ -807,12 +807,12 @@ function PricingCard({
 
           {/* Name */}
           <p
-            className="text-[24px] font-bold text-center w-full leading-[32px] tracking-[-0.24px]"
+            className="text-[24px] font-extrabold text-center w-full leading-[32px] tracking-[-0.24px]"
             style={{
               fontFamily: "var(--font-family-display)",
               color: isDark
                 ? "hsl(var(--sidebar))"
-                : "hsl(var(--foreground))",
+                : "#1A2130",
             }}
           >
             {tier.name}
@@ -821,7 +821,7 @@ function PricingCard({
           {/* Tagline */}
           <p
             className={`text-sm font-medium text-center w-full max-w-[263px] leading-5 tracking-[-0.154px] ${
-              isDark ? "text-primary-foreground" : "text-foreground"
+              isDark ? "text-primary-foreground" : "text-[#1A2130]"
             }`}
           >
             {tier.tagline}
@@ -829,8 +829,8 @@ function PricingCard({
 
           {/* Price */}
           <p
-            className={`text-[32px] font-bold text-center w-full leading-[40px] tracking-[-0.32px] ${
-              isDark ? "text-primary-foreground" : "text-foreground"
+            className={`text-[32px] font-extrabold text-center w-full leading-[40px] tracking-[-0.32px] ${
+              isDark ? "text-primary-foreground" : "text-[#1A2130]"
             }`}
             style={{ fontFamily: "var(--font-family-display)" }}
           >
@@ -839,8 +839,8 @@ function PricingCard({
 
           {/* Billing */}
           <p
-            className={`text-sm font-normal text-center w-full leading-5 tracking-[-0.084px] ${
-              isDark ? "text-primary-foreground" : "text-foreground"
+            className={`text-sm font-medium text-center w-full leading-5 tracking-[-0.084px] ${
+              isDark ? "text-primary-foreground" : "text-[#1A2130]"
             }`}
           >
             {tier.billing}
@@ -891,8 +891,8 @@ function PricingCard({
                 }
               />
               <p
-                className={`text-sm font-normal leading-5 tracking-[-0.084px] ${
-                  isDark ? "text-primary-foreground" : "text-foreground"
+                className={`text-sm font-medium leading-5 tracking-[-0.084px] ${
+                  isDark ? "text-primary-foreground" : "text-[#1A2130]"
                 }`}
               >
                 14-Day Money-Back Guarantee
@@ -962,7 +962,7 @@ export default function PricingSection() {
   return (
     <section
       id="pricing"
-      className="w-full py-16 md:py-20 scroll-mt-[56px] md:scroll-mt-[24px] bg-card"
+      className="w-full py-16 md:py-20 scroll-mt-[64px] bg-card"
     >
       <div className="container-default">
         {/* Section header */}

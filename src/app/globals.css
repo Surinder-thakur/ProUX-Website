@@ -23,7 +23,7 @@
     /* ── Primitive color scales (Figma Make) ──────────────── */
     /* Gold (primary) */
     --gold-50: 45 22% 96%;   /* #F8F7F4 */
-    --gold-100: 50 29% 92%;  /* #F0EEE4 */
+    --gold-100: 50 29% 92%;  /* #F0EEE3 — warm beige card bg */
     --gold-200: 49 26% 83%;  /* #DFDBC9 */
     --gold-300: 47 26% 68%;  /* #C3BA99 */
     --gold-500: 41 26% 53%;  /* #A69369 */

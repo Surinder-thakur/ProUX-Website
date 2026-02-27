@@ -144,14 +144,14 @@ const testimonialsRow2: Testimonial[] = [
 
 function TestimonialCard({ quote, author }: Testimonial) {
   return (
-    <div className="flex flex-col justify-between shrink-0 w-[326px] h-[200px] px-6 py-5 bg-[hsl(var(--sidebar))] rounded-[calc(var(--radius)+6px)]">
+    <div className="flex flex-col justify-between shrink-0 w-[326px] h-[200px] pl-6 pr-5 py-5 bg-[hsl(var(--bg-primary-100))] rounded-[14px]">
       <div className="flex flex-col gap-2 items-start w-full">
         <FiveStars />
-        <p className="text-sm font-medium text-foreground leading-5 tracking-[-0.154px]">
+        <p className="text-[14px] font-medium text-[#1b2232] leading-[22px]">
           {quote}
         </p>
       </div>
-      <p className="text-sm font-normal text-foreground leading-5 tracking-[-0.084px]">
+      <p className="text-[14px] font-normal text-[#1b2232] leading-[20px] tracking-[-0.084px]">
         {author}
       </p>
     </div>

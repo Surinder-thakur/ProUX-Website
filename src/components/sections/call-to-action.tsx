@@ -176,14 +176,14 @@ const stats: StatItem[] = [
 
 export default function CallToActionSection() {
   return (
-    <section className="w-full bg-foreground text-primary-foreground py-16 md:py-[64px]">
+    <section className="w-full bg-[#2B2B2B] text-white py-16 md:py-[64px]">
       <div className="flex flex-col items-center justify-center max-w-7xl mx-auto gap-10 md:gap-16 px-4 md:px-12">
         {/* Header */}
         <div className="flex flex-col gap-6 items-center text-center max-w-4xl">
-          <h2 className="text-[32px] md:text-[40px] font-extrabold text-primary-foreground leading-[1.2] tracking-tight">
+          <h2 className="text-[32px] md:text-[40px] font-extrabold text-white leading-[1.2] tracking-tight">
             Stop executing. Start leading with AI.
           </h2>
-          <p className="text-lg font-normal text-primary-foreground/90 leading-relaxed">
+          <p className="text-lg font-normal text-white/90 leading-relaxed">
             What Pro members achieve in their first 60 days.
           </p>
         </div>
@@ -193,7 +193,7 @@ export default function CallToActionSection() {
           {stats.map((stat, i) => (
             <div
               key={i}
-              className="flex flex-col gap-3 items-center text-center w-full max-w-[320px] text-primary-foreground"
+              className="flex flex-col gap-3 items-center text-center w-full max-w-[320px] text-white"
             >
               {stat.icon}
 
@@ -206,7 +206,7 @@ export default function CallToActionSection() {
                 </p>
               </div>
 
-              <p className="text-sm font-medium text-primary-foreground/60 leading-5 px-4 md:px-0">
+              <p className="text-sm font-medium text-white/60 leading-5 px-4 md:px-0">
                 {stat.description}
               </p>
             </div>
@@ -216,14 +216,14 @@ export default function CallToActionSection() {
         {/* CTA block */}
         <div className="flex flex-col gap-6 items-center w-full max-w-[464px] px-4">
           {/* Divider */}
-          <div className="h-px w-full bg-primary-foreground/15 mb-4" />
+          <div className="h-px w-full bg-white/15 mb-4" />
 
           {/* CTA copy */}
           <div className="flex flex-col gap-1 text-center">
-            <p className="text-2xl font-bold text-primary-foreground/[0.93] leading-[30px] tracking-tight">
+            <p className="text-2xl font-bold text-white/[0.93] leading-[30px] tracking-tight">
               Ready to lead with AI?
             </p>
-            <p className="text-lg font-normal text-primary-foreground/[0.93] leading-[30px]">
+            <p className="text-lg font-normal text-white/[0.93] leading-[30px]">
               Go Pro: $384/year (just $32/month). 5-day money-back guarantee.
             </p>
           </div>
@@ -233,7 +233,7 @@ export default function CallToActionSection() {
             href="https://app.proux.design/Auth"
             className="w-full py-4 flex items-center justify-center bg-primary rounded-[14px] shadow-md hover:shadow-lg hover:-translate-y-0.5 hover:opacity-90 transition-all duration-300 btn-shine"
           >
-            <span className="text-sm font-bold text-primary-foreground uppercase tracking-[0.84px]">
+            <span className="text-sm font-bold text-white uppercase tracking-[0.84px]">
               UPGRADE TO PRO
             </span>
           </Link>

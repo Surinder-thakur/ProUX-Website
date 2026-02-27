@@ -161,42 +161,24 @@ export default function StatsBar() {
   }, []);
 
   const barInner = (
-    <div className="bg-gradient-to-b from-[#f0ede5] via-[#f5f3ed] to-[#faf9f7] backdrop-blur-xl border-t border-[#dfdbc9] shadow-[0_-3px_16px_rgba(0,0,0,0.05)]">
-      <div className="px-[24px] lg:px-[100px] py-5 lg:py-5">
-        {/* Desktop: 4 items in a row */}
-        <div className="hidden lg:flex items-center justify-center">
+    <div className="relative w-full bg-white lg:bg-gradient-to-b lg:from-white/80 lg:to-white/95 lg:backdrop-blur-xl lg:supports-[backdrop-filter]:bg-white/60 border-t border-[#99825d]/30 lg:shadow-[0_-8px_30px_rgba(0,0,0,0.04)] lg:transition-colors lg:duration-300 after:hidden lg:after:block after:absolute after:inset-0 after:bg-gradient-to-b after:from-[#99825d]/10 after:to-white/20 after:pointer-events-none">
+      <div className="max-w-[1200px] mx-auto lg:px-[24px] py-[24px] px-[0px]">
+        <div className="grid grid-cols-2 gap-x-4 gap-y-6 lg:flex lg:flex-row lg:flex-nowrap lg:gap-x-0 lg:gap-y-0 items-start lg:items-center justify-between w-full">
           {valuePropItems.map((item, index) => (
-            <div key={item.line1} className="flex items-center">
+            <div key={item.line1} className="contents">
               {index > 0 && (
-                <div className="h-9 w-px mx-10 bg-[#e2e0da]" />
+                <div className="hidden lg:block h-10 w-px bg-gray-200 shrink-0 mx-6" />
               )}
-              <div className="flex items-center gap-3">
-                <div className="w-9 h-9 flex-shrink-0 flex items-center justify-center">
+              <div className="flex flex-col lg:flex-row items-center gap-3 lg:gap-3 shrink min-w-0 text-center lg:text-left">
+                <div className="w-10 h-10 lg:w-11 lg:h-11 shrink-0 flex items-center justify-center text-[#99825d] bg-[#99825d]/5 rounded-full lg:bg-transparent lg:rounded-none">
                   <item.icon className="w-full h-full" />
                 </div>
-                <span className="text-[12.5px] font-semibold text-[#1A2130] leading-tight tracking-wide">
+                <span className="text-[13px] font-bold text-[#1a2130] leading-tight tracking-wide max-w-full lg:max-w-none">
                   {item.line1}
-                  <br />
-                  {item.line2}
+                  <br className="hidden lg:block" />
+                  {" "}{item.line2}
                 </span>
               </div>
-            </div>
-          ))}
-        </div>
-
-        {/* Mobile / Tablet: 2x2 grid */}
-        <div className="grid grid-cols-2 gap-x-4 gap-y-6 lg:hidden">
-          {valuePropItems.map((item) => (
-            <div
-              key={item.line1}
-              className="flex flex-col sm:flex-row items-center gap-3 text-center sm:text-left"
-            >
-              <div className="w-10 h-10 flex-shrink-0 flex items-center justify-center text-[hsl(var(--text-primary-600))] bg-[hsl(var(--text-primary-600))]/5 rounded-full">
-                <item.icon className="w-6 h-6" />
-              </div>
-              <span className="text-[13px] font-bold text-foreground leading-tight tracking-wide">
-                {item.line1} {item.line2}
-              </span>
             </div>
           ))}
         </div>

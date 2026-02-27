@@ -234,7 +234,7 @@ export default function ConsultingProcess() {
       {/* ── Calculator Section ────────────────────────────────────────────── */}
       <div
         id="calculator"
-        className="relative z-10 w-full max-w-5xl mx-auto flex flex-col items-center gap-16 mt-20 scroll-mt-[120px]"
+        className="relative z-10 w-full max-w-5xl mx-auto flex flex-col items-center gap-16 mt-20 scroll-mt-[136px]"
       >
         <div className="flex flex-col items-center text-center gap-6">
           <h3 className="text-[28px] md:text-[32px] leading-[1.2] font-extrabold tracking-tight text-white">

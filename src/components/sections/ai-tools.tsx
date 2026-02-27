@@ -134,7 +134,7 @@ const shineKeyframes = `
 
 export default function AiToolsSection() {
   return (
-    <section className="w-full py-16 lg:py-24 bg-[hsl(var(--sidebar))]">
+    <section className="w-full py-16 lg:py-24 bg-[hsl(var(--bg-primary-50))]">
       <style dangerouslySetInnerHTML={{ __html: shineKeyframes }} />
 
       <div className="max-w-7xl mx-auto px-4 md:px-6 flex flex-col items-center text-center">

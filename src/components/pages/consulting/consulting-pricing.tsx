@@ -390,7 +390,7 @@ export default function ConsultingPricing() {
   return (
     <section
       id="pricing-section"
-      className="scroll-mt-[56px] bg-[#F8F7F4] py-[80px] lg:py-[120px]"
+      className="scroll-mt-[64px] bg-[#F8F7F4] py-[80px] lg:py-[120px]"
     >
       <div className="mx-auto max-w-[1200px] px-6">
         {/* Section Header */}

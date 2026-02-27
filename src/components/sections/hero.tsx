@@ -33,17 +33,13 @@ export default function HeroSection() {
           </p>
 
           {/* H1 */}
-          <h1 className="text-3xl md:text-4xl lg:text-[48px] leading-[1.2] font-black text-foreground tracking-tight mb-6">
-            <span className="block lg:whitespace-nowrap">
-              AI-First UX Intelligence Platform for
-            </span>
-            <span className="block mt-2 text-primary">
-              Every Stage of Design
-            </span>
+          <h1 className="text-3xl md:text-4xl lg:text-[56px] lg:leading-[64px] font-extrabold text-foreground tracking-[-1.4px] mb-6">
+            AI-First UX Intelligence Platform for<br />
+            <span className="text-primary">Every Stage of Design</span>
           </h1>
 
           {/* Subtitle */}
-          <p className="text-sm md:text-base lg:text-[18px] leading-[1.6] font-normal text-[hsl(var(--text-neutrals-800))] mx-auto max-w-2xl mb-8">
+          <p className="text-sm md:text-base lg:text-[18px] lg:leading-[24px] font-medium text-[#4f4f4f] mx-auto max-w-2xl mb-8">
             AI-powered UX intelligence for research, audits, and optimization
             grounded in 350+ expert guidelines &amp; insights.
           </p>
@@ -52,7 +48,7 @@ export default function HeroSection() {
           <div className="mb-10">
             <Link
               href="https://app.proux.design/Auth"
-              className="btn-shine inline-flex items-center justify-center bg-primary text-primary-foreground rounded-[12px] px-7 py-3.5 text-[14px] font-semibold uppercase tracking-wide shadow-lg transition-all hover:shadow-xl hover:brightness-110"
+              className="btn-shine inline-flex items-center justify-center bg-primary text-primary-foreground rounded-[12px] px-[28px] h-[56px] text-[14px] font-semibold uppercase tracking-[0.35px] shadow-lg transition-all hover:shadow-xl hover:brightness-110"
             >
               Get Started Free
             </Link>

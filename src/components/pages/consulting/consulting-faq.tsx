@@ -132,7 +132,7 @@ export default function ConsultingFaq() {
   return (
     <section
       id="faq"
-      className="w-full py-[80px] pb-[100px] px-4 flex flex-col items-center scroll-mt-[40px] bg-[hsl(var(--bg-primary-50))]"
+      className="w-full py-[80px] pb-[100px] px-4 flex flex-col items-center scroll-mt-[64px] bg-[hsl(var(--bg-primary-50))]"
     >
       <div className="flex flex-col gap-8 items-center w-full max-w-[800px]">
         {/* ── Header ── */}

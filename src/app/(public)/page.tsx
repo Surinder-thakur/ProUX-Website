@@ -16,7 +16,6 @@ import TestimonialsSection from "@/components/sections/testimonials";
 import PricingSection from "@/components/sections/pricing";
 import MoneyBackSection from "@/components/sections/money-back";
 import FaqSection from "@/components/sections/faq";
-import ArticlesPreviewSection from "@/components/sections/articles-preview";
 import AiToolsSection from "@/components/sections/ai-tools";
 
 export default function HomePage() {
@@ -32,7 +31,6 @@ export default function HomePage() {
       <ProductSecondaryNav />
       <MoneyBackSection />
       <FaqSection />
-      <ArticlesPreviewSection />
       <AiToolsSection />
       {/* <SocialProofCtaSection /> */}
     </>
