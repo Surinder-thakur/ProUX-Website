@@ -9,7 +9,7 @@ import { Tooltip, TooltipTrigger, TooltipContent, TooltipProvider } from "@/comp
 const navigation = [
   { label: "AI Product", href: "/" },
   { label: "UX Consulting", href: "/ux-consulting" },
-  // { label: "AI Design Training", href: "/training" }, // Coming soon
+  { label: "AI Design Training", href: "/training" },
 ];
 
 function ProUXLogo({ className }: { className?: string }) {

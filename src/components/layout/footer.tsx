@@ -283,7 +283,7 @@ export function Footer() {
               <div className="flex flex-col gap-3">
                 <FooterNavLink href="/">Product Overview</FooterNavLink>
                 <FooterNavLink href="/ux-consulting">UX Consultancy</FooterNavLink>
-                {/* <FooterNavLink href="/training">AI-First UX Training</FooterNavLink> */}{/* Coming soon */}
+                <FooterNavLink href="/training">AI-First UX Training</FooterNavLink>
               </div>
             </div>
 
