@@ -7,7 +7,7 @@ import { Menu, X } from "lucide-react";
 import { Tooltip, TooltipTrigger, TooltipContent, TooltipProvider } from "@/components/ui/tooltip";
 
 const navigation = [
-  { label: "AI Product", href: "/" },
+  { label: "AI UX Product", href: "/" },
   { label: "UX Consulting", href: "/ux-consulting" },
   { label: "AI Design Training", href: "/training" },
 ];
