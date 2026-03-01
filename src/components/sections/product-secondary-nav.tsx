@@ -87,6 +87,22 @@ export default function ProductSecondaryNav() {
           );
         })}
       </nav>
+
+      {/* Sticky bottom CTA bar — mobile */}
+      <div
+        className={`fixed bottom-0 left-0 right-0 z-[100] lg:hidden bg-white/95 backdrop-blur-xl border-t border-[#dfdbc9] shadow-[0_-4px_20px_rgba(0,0,0,0.08)] px-4 py-3 transition-all duration-500 ease-out ${
+          visible
+            ? "translate-y-0 opacity-100"
+            : "translate-y-full opacity-0 pointer-events-none"
+        }`}
+      >
+        <Link
+          href="https://app.proux.design/Auth"
+          className="btn-shine flex items-center justify-center w-full rounded-[12px] bg-primary h-[56px] text-[14px] font-bold uppercase tracking-[1px] text-white shadow-lg transition-all hover:brightness-110"
+        >
+          Start Free
+        </Link>
+      </div>
     </>
   );
 }

@@ -183,7 +183,7 @@ export default function MoneyBackSection() {
               className="px-10 md:px-12 h-[56px] flex items-center justify-center bg-primary rounded-[calc(var(--radius)+8px)] shadow-[0_6px_20px_rgba(181,83,49,0.25)] hover:shadow-[0_8px_25px_rgba(181,83,49,0.35)] hover:-translate-y-0.5 transition-all duration-300 mb-4"
             >
               <span className="text-sm md:text-base font-bold text-primary-foreground uppercase tracking-[0.84px]">
-                Start Your Risk-Free Trial
+                Start Free
               </span>
             </Link>
 
@@ -200,7 +200,7 @@ export default function MoneyBackSection() {
                 Go Pro for $384 today (~$32/mo).
               </p>
               <p className="text-sm md:text-base font-medium text-muted-foreground">
-                Join 1,000+ designers • 5-day refund guarantee
+                Join 1,000+ designers • 5-Day Money-Back Guarantee
               </p>
             </div>
           </div>

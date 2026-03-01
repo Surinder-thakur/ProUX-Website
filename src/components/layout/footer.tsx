@@ -312,14 +312,14 @@ export function Footer() {
             <span className="hidden md:inline mx-2 text-[hsl(var(--border-primary-100))]">|</span>{" "}
             All Rights Reserved{" "}
             <span className="hidden md:inline mx-2 text-[hsl(var(--border-primary-100))]">|</span>{" "}
-            Managed by{" "}
+            A product by{" "}
             <a
               href="https://osumstudio.com"
               target="_blank"
               rel="noopener noreferrer"
               className="font-bold text-muted-foreground transition-colors duration-300 hover:text-primary hover:underline whitespace-nowrap"
             >
-              Osum Studio Pvt. Ltd.
+              Osum Studio
             </a>
           </p>
 
