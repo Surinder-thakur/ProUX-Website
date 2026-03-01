@@ -3,7 +3,7 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useState, useEffect } from "react";
-import { Menu, X } from "lucide-react";
+// lucide-react icons removed — menu uses text-only toggle
 import { Tooltip, TooltipTrigger, TooltipContent, TooltipProvider } from "@/components/ui/tooltip";
 
 const navigation = [
@@ -78,20 +78,23 @@ export function Header() {
   }, [shouldAutoHide]);
 
   return (
+    <>
     <header
-      className={`fixed top-0 left-0 right-0 z-50 border-b border-[#dfdbc9] transition-all duration-300 ${
-        scrolled
-          ? "bg-white/95 backdrop-blur-md py-3.5"
-          : "bg-[#f8f7f4] py-4"
-      } ${hidden ? "-translate-y-full" : "translate-y-0"}`}
+      className={`fixed top-0 left-0 right-0 z-[110] pt-4 transition-all duration-300 ${
+        mobileOpen
+          ? "bg-[#f8f7f4]"
+          : scrolled
+            ? "bg-[#f8f7f4]/95 backdrop-blur-md"
+            : "bg-[#f8f7f4]"
+      } ${hidden && !mobileOpen ? "-translate-y-full" : "translate-y-0"}`}
     >
-      <div className="flex items-center justify-between px-[24px] lg:px-[100px]">
+      <div className="flex items-center justify-between px-[24px] lg:px-[100px] border-b border-[#dfdbc9] pb-3.5">
         {/* Logo — far left */}
         <TooltipProvider delayDuration={0}>
           <Tooltip>
             <TooltipTrigger asChild>
               <Link href="/" className="flex-shrink-0">
-                <ProUXLogo className="h-[15px] w-auto sm:h-[18px]" />
+                <ProUXLogo className="h-[17px] w-auto sm:h-[20px]" />
               </Link>
             </TooltipTrigger>
             <TooltipContent>
@@ -142,24 +145,24 @@ export function Header() {
           </Link>
         </div>
 
-        {/* Mobile Menu Button */}
+        {/* Mobile Menu Button — outline dark, fixed width to prevent size jump */}
         <button
-          className="p-2 lg:hidden"
+          className="lg:hidden inline-flex items-center justify-center w-[72px] rounded-[10px] border border-[#1A2130]/25 bg-transparent px-4 py-2 text-[11px] font-bold uppercase tracking-[1.5px] text-[#1A2130]"
           onClick={() => setMobileOpen(!mobileOpen)}
           aria-label="Toggle menu"
         >
-          {mobileOpen ? (
-            <X className="h-6 w-6 text-[#1A2130]" />
-          ) : (
-            <Menu className="h-6 w-6 text-[#1A2130]" />
-          )}
+          {mobileOpen ? "Close" : "Menu"}
         </button>
       </div>
 
-      {/* Mobile Menu Dropdown */}
-      {mobileOpen && (
-        <div className="lg:hidden border-t border-[#dfdbc9] bg-[#f8f7f4]">
-          <nav className="container-default flex flex-col gap-1 py-4">
+      {/* Mobile Menu Dropdown — always rendered, animated via max-height */}
+      <div
+        className={`lg:hidden overflow-hidden transition-all duration-300 ease-in-out ${
+          mobileOpen ? "max-h-[400px] opacity-100" : "max-h-0 opacity-0"
+        }`}
+      >
+        <div className="bg-[#f8f7f4]">
+          <nav className="flex flex-col gap-2 px-[24px] py-6">
             {navigation.map((item) => {
               const isActive =
                 item.href === "/"
@@ -170,7 +173,7 @@ export function Header() {
                   key={item.href}
                   href={item.href}
                   onClick={() => setMobileOpen(false)}
-                  className={`text-[13px] font-medium px-4 py-2.5 rounded-lg transition-colors ${
+                  className={`text-[15px] font-medium px-5 py-3.5 rounded-[10px] transition-colors ${
                     isActive
                       ? "bg-[#F0EEE4] text-[#1A2130]"
                       : "text-[#4A5568] hover:text-primary"
@@ -180,25 +183,36 @@ export function Header() {
                 </Link>
               );
             })}
-            <div className="mt-3 flex flex-col gap-2 border-t border-[#dfdbc9] pt-4">
+            <div className="mt-4 flex flex-col gap-3 border-t border-[#dfdbc9] pt-5">
               <Link
                 href="https://app.proux.design/Auth"
                 onClick={() => setMobileOpen(false)}
-                className="text-[13px] font-bold uppercase text-center rounded-[10px] px-4 py-2.5 text-[#1A2130] border border-[#dfdbc9] transition-colors hover:bg-[#F0EEE4]"
+                className="text-[14px] font-bold uppercase text-center rounded-[11px] px-5 py-3.5 text-[#1A2130] border border-[#dfdbc9] transition-colors hover:bg-[#F0EEE4]"
               >
                 Log In
               </Link>
               <Link
                 href="https://app.proux.design/Auth"
                 onClick={() => setMobileOpen(false)}
-                className="text-[13px] font-bold uppercase text-center rounded-[10px] px-4 py-2.5 bg-[#1a2130] text-white shadow-md transition-colors hover:bg-[#2F415F]"
+                className="btn-shine text-[14px] font-bold uppercase text-center rounded-[11px] px-5 py-3.5 bg-primary text-white shadow-md transition-colors hover:brightness-110"
               >
-                Start Free Trial
+                Get Started Free
               </Link>
             </div>
           </nav>
         </div>
-      )}
+      </div>
+
     </header>
+
+    {/* Backdrop overlay — blurs and darkens entire page behind the nav */}
+    <div
+      className={`lg:hidden fixed inset-0 z-[105] bg-black/60 backdrop-blur-sm transition-opacity duration-300 ${
+        mobileOpen ? "opacity-100" : "opacity-0 pointer-events-none"
+      }`}
+      onClick={() => setMobileOpen(false)}
+      aria-hidden="true"
+    />
+    </>
   );
 }

@@ -146,7 +146,7 @@ export default function MoneyBackSection() {
 
           {/* Title */}
           <h2
-            className="text-[28px] md:text-[40px] font-extrabold text-foreground mb-4"
+            className="text-[32px] md:text-[40px] font-extrabold text-foreground mb-4"
             style={{
               fontFamily: "var(--font-family-display)",
               lineHeight: 1.15,
@@ -157,9 +157,8 @@ export default function MoneyBackSection() {
           </h2>
 
           {/* Description */}
-          <p className="text-base md:text-lg font-normal text-muted-foreground max-w-[560px] mb-10 leading-relaxed">
-            If ProUX isn&apos;t a game-changer for your design workflow,
-            we&apos;ll refund every penny – no questions asked.
+          <p className="text-base md:text-lg font-normal text-muted-foreground max-w-[560px] mb-10 leading-relaxed px-2 md:px-0">
+            If ProUX isn&apos;t a game-changer for your design workflow, we&apos;ll refund every penny – no questions asked.
           </p>
 
           {/* Guarantee checkmarks */}
@@ -181,7 +180,7 @@ export default function MoneyBackSection() {
           <div className="flex flex-col items-center w-full">
             <Link
               href="https://app.proux.design/Auth"
-              className="px-10 md:px-12 py-4 md:py-5 flex items-center justify-center bg-primary rounded-[calc(var(--radius)+8px)] shadow-[0_6px_20px_rgba(181,83,49,0.25)] hover:shadow-[0_8px_25px_rgba(181,83,49,0.35)] hover:-translate-y-0.5 transition-all duration-300 mb-4"
+              className="px-10 md:px-12 h-[56px] flex items-center justify-center bg-primary rounded-[calc(var(--radius)+8px)] shadow-[0_6px_20px_rgba(181,83,49,0.25)] hover:shadow-[0_8px_25px_rgba(181,83,49,0.35)] hover:-translate-y-0.5 transition-all duration-300 mb-4"
             >
               <span className="text-sm md:text-base font-bold text-primary-foreground uppercase tracking-[0.84px]">
                 Start Your Risk-Free Trial

@@ -283,25 +283,16 @@ export default function ConsultingResults() {
                 {/* ── Left column: heading + trust + email ──────── */}
                 <div className="flex flex-col">
                   <h2
-                    className="font-extrabold tracking-tight text-foreground"
+                    className="text-[32px] md:text-[40px] font-extrabold tracking-tight text-foreground leading-[1.15]"
                     style={{
                       fontFamily: "var(--font-family-display)",
-                      fontSize: "clamp(1.75rem, 4vw, 40px)",
-                      lineHeight: 1.15,
                     }}
                   >
-                    Ready to Fix
-                    <br />
-                    What&apos;s Costing You Revenue?
+                    Ready to Fix What&apos;s Costing You Revenue?
                   </h2>
 
                   <p
-                    className="mt-5 text-[hsl(var(--text-neutrals-800))]"
-                    style={{
-                      fontFamily: "var(--font-family-base)",
-                      fontSize: "clamp(1rem, 1.8vw, 1.125rem)",
-                      lineHeight: 1.6,
-                    }}
+                    className="mt-5 text-base md:text-lg text-[hsl(var(--text-neutrals-800))] leading-relaxed"
                   >
                     I work with a limited number of
                     <br className="hidden md:block" />
@@ -475,7 +466,7 @@ export default function ConsultingResults() {
                       <button
                         type="submit"
                         disabled={isSubmitting}
-                        className="btn-consulting-shine w-full rounded-[14px] bg-primary px-14 py-3.5 text-[14px] font-semibold uppercase tracking-[1px] text-primary-foreground shadow-lg transition-all hover:brightness-110 hover:shadow-xl disabled:pointer-events-none disabled:opacity-60"
+                        className="btn-consulting-shine w-full rounded-[14px] bg-primary px-14 h-[56px] text-[14px] font-semibold uppercase tracking-[1px] text-primary-foreground shadow-lg transition-all hover:brightness-110 hover:shadow-xl disabled:pointer-events-none disabled:opacity-60"
                       >
                         {isSubmitting ? "Submitting..." : "Submit"}
                       </button>

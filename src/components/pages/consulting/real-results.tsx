@@ -54,10 +54,8 @@ export default function RealResults() {
     <section className="bg-[#F8F7F4] overflow-hidden pb-8 lg:pb-12">
       {/* Description text (moved from hero) */}
       <div className="container-default pt-8 lg:pt-12 pb-8">
-        <p className="text-lg md:text-xl leading-relaxed font-normal text-[rgb(113,128,150)] max-w-3xl text-center lg:text-left">
-          We help e-commerce and SaaS companies strategize (UX), design (UI),
-          and optimize conversions (CRO) using AI-powered audits and validated
-          prototypes.
+        <p className="text-lg md:text-xl leading-relaxed font-normal text-[rgb(113,128,150)] max-w-3xl text-center lg:text-left px-2 md:px-0">
+          We help e-commerce and SaaS companies strategize (UX), design (UI), and optimize conversions (CRO) using AI-powered audits and validated prototypes.
         </p>
       </div>
 

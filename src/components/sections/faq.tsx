@@ -166,20 +166,17 @@ export default function FaqSection() {
         {/* ── Header ── */}
         <div className="flex flex-col items-center gap-4 text-center">
           <h2
-            className="text-[32px] md:text-[40px] font-extrabold text-foreground"
+            className="text-[32px] md:text-[40px] font-extrabold text-foreground px-2 md:px-0"
             style={{
               fontFamily: "var(--font-family-display)",
               lineHeight: 1.15,
               letterSpacing: "-0.4px",
             }}
           >
-            Frequently Asked
-            <br />
-            Questions
+            Frequently Asked Questions
           </h2>
-          <p className="text-lg md:text-xl font-normal text-muted-foreground leading-relaxed">
-            Everything you need to know about ProUX, pricing, and getting
-            started.
+          <p className="text-lg md:text-xl font-normal text-muted-foreground leading-relaxed px-2 md:px-0">
+            Everything you need to know about ProUX, pricing, and getting started.
           </p>
         </div>
 

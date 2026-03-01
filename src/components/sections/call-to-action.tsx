@@ -180,7 +180,7 @@ export default function CallToActionSection() {
       <div className="flex flex-col items-center justify-center max-w-7xl mx-auto gap-10 md:gap-16 px-4 md:px-12">
         {/* Header */}
         <div className="flex flex-col gap-6 items-center text-center max-w-4xl">
-          <h2 className="text-[32px] md:text-[40px] font-extrabold text-white leading-[1.2] tracking-tight">
+          <h2 className="text-[32px] md:text-[40px] font-extrabold text-white leading-[1.2] tracking-tight px-4 md:px-0">
             Stop executing. Start leading with AI.
           </h2>
           <p className="text-lg font-normal text-white/90 leading-relaxed">
@@ -231,7 +231,7 @@ export default function CallToActionSection() {
           {/* CTA button */}
           <Link
             href="https://app.proux.design/Auth"
-            className="w-full py-4 flex items-center justify-center bg-primary rounded-[14px] shadow-md hover:shadow-lg hover:-translate-y-0.5 hover:opacity-90 transition-all duration-300 btn-shine"
+            className="w-full h-[56px] flex items-center justify-center bg-primary rounded-[14px] shadow-md hover:shadow-lg hover:-translate-y-0.5 hover:opacity-90 transition-all duration-300 btn-shine"
           >
             <span className="text-sm font-bold text-white uppercase tracking-[0.84px]">
               UPGRADE TO PRO
