@@ -224,7 +224,7 @@ export default function CallToActionSection() {
               Ready to lead with AI?
             </p>
             <p className="text-lg font-normal text-white/[0.93] leading-[30px]">
-              Go Pro: $384/year (just $32/month). 5-day money-back guarantee.
+              Go Pro: $384/year (just $32/month). 5-Day Money-Back Guarantee.
             </p>
           </div>
 

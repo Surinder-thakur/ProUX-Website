@@ -2,14 +2,30 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback } from "react";
 // lucide-react icons removed — menu uses text-only toggle
 import { Tooltip, TooltipTrigger, TooltipContent, TooltipProvider } from "@/components/ui/tooltip";
 
 const navigation = [
-  { label: "AI UX Product", href: "/" },
-  { label: "UX Consulting", href: "/ux-consulting" },
-  // { label: "AI Design Training", href: "/training" }, // Coming soon
+  {
+    label: "AI Product",
+    href: "/",
+    subItems: [
+      { label: "Features", href: "/#features" },
+      { label: "Pricing", href: "/#pricing" },
+      { label: "FAQ", href: "/#faq" },
+    ],
+  },
+  {
+    label: "UX Consulting",
+    href: "/ux-consulting",
+    subItems: [
+      { label: "ROI Calculator", href: "/ux-consulting#calculator" },
+      { label: "FAQ", href: "/ux-consulting#faq" },
+      { label: "Book Consultation", href: "/ux-consulting#consultation" },
+    ],
+  },
+  // { label: "AI Design Training", href: "/training", subItems: [] }, // Coming soon
 ];
 
 function ProUXLogo({ className }: { className?: string }) {
@@ -56,12 +72,42 @@ function ProUXLogo({ className }: { className?: string }) {
   );
 }
 
+function ChevronIcon({ open }: { open: boolean }) {
+  return (
+    <svg
+      className={`w-4 h-4 transition-transform duration-200 ${open ? "rotate-180" : ""}`}
+      fill="none"
+      viewBox="0 0 24 24"
+      stroke="currentColor"
+      strokeWidth={2}
+    >
+      <path strokeLinecap="round" strokeLinejoin="round" d="M19 9l-7 7-7-7" />
+    </svg>
+  );
+}
+
 export function Header() {
   const pathname = usePathname();
   const [mobileOpen, setMobileOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const [hidden, setHidden] = useState(false);
   const shouldAutoHide = pathname === "/" || pathname === "/ux-consulting";
+
+  // Determine which parent nav item is active (current page)
+  const getActiveParentHref = useCallback(() => {
+    for (const item of navigation) {
+      if (item.href === "/" && pathname === "/") return "/";
+      if (item.href !== "/" && pathname.startsWith(item.href)) return item.href;
+    }
+    return null;
+  }, [pathname]);
+
+  const [expandedItem, setExpandedItem] = useState<string | null>(getActiveParentHref);
+
+  // Update expanded state when pathname changes
+  useEffect(() => {
+    setExpandedItem(getActiveParentHref());
+  }, [pathname, getActiveParentHref]);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -141,7 +187,7 @@ export function Header() {
             href="https://app.proux.design/Auth"
             className="text-[14px] font-bold uppercase rounded-[11px] px-5 py-2.5 bg-[#1a2130] text-white shadow-md transition-colors hover:bg-[#2F415F]"
           >
-            Start Free Trial
+            Start Free
           </Link>
         </div>
 
@@ -158,29 +204,71 @@ export function Header() {
       {/* Mobile Menu Dropdown — always rendered, animated via max-height */}
       <div
         className={`lg:hidden overflow-hidden transition-all duration-300 ease-in-out ${
-          mobileOpen ? "max-h-[400px] opacity-100" : "max-h-0 opacity-0"
+          mobileOpen ? "max-h-[600px] opacity-100" : "max-h-0 opacity-0"
         }`}
       >
         <div className="bg-[#f8f7f4]">
-          <nav className="flex flex-col gap-2 px-[24px] py-6">
+          <nav className="flex flex-col gap-1 px-[24px] py-6">
             {navigation.map((item) => {
               const isActive =
                 item.href === "/"
                   ? pathname === "/"
                   : pathname.startsWith(item.href);
+              const isExpanded = expandedItem === item.href;
+              const hasSubItems = item.subItems && item.subItems.length > 0;
+
               return (
-                <Link
-                  key={item.href}
-                  href={item.href}
-                  onClick={() => setMobileOpen(false)}
-                  className={`text-[15px] font-medium px-5 py-3.5 rounded-[10px] transition-colors ${
-                    isActive
-                      ? "bg-[#F0EEE4] text-[#1A2130]"
-                      : "text-[#4A5568] hover:text-primary"
-                  }`}
-                >
-                  {item.label}
-                </Link>
+                <div key={item.href}>
+                  {/* Parent item row */}
+                  <div className="flex items-center">
+                    <Link
+                      href={item.href}
+                      onClick={() => setMobileOpen(false)}
+                      className={`flex-1 text-[15px] font-medium px-5 py-3.5 rounded-[10px] transition-colors ${
+                        isActive
+                          ? "bg-[#F0EEE4] text-[#1A2130]"
+                          : "text-[#4A5568] hover:text-primary"
+                      }`}
+                    >
+                      {item.label}
+                    </Link>
+                    {hasSubItems && (
+                      <button
+                        onClick={() =>
+                          setExpandedItem(isExpanded ? null : item.href)
+                        }
+                        className={`flex items-center justify-center w-10 h-10 rounded-[10px] transition-colors ${
+                          isActive ? "text-[#1A2130]" : "text-[#4A5568]"
+                        }`}
+                        aria-label={isExpanded ? "Collapse" : "Expand"}
+                      >
+                        <ChevronIcon open={isExpanded} />
+                      </button>
+                    )}
+                  </div>
+
+                  {/* Sub-items — collapsible */}
+                  {hasSubItems && (
+                    <div
+                      className={`overflow-hidden transition-all duration-200 ease-in-out ${
+                        isExpanded ? "max-h-[200px] opacity-100" : "max-h-0 opacity-0"
+                      }`}
+                    >
+                      <div className="flex flex-col gap-0.5 pl-6 pb-2">
+                        {item.subItems!.map((sub) => (
+                          <Link
+                            key={sub.href}
+                            href={sub.href}
+                            onClick={() => setMobileOpen(false)}
+                            className="text-[13px] font-medium px-5 py-2.5 rounded-[8px] text-[#4A5568] hover:text-primary hover:bg-[#F0EEE4]/50 transition-colors"
+                          >
+                            {sub.label}
+                          </Link>
+                        ))}
+                      </div>
+                    </div>
+                  )}
+                </div>
               );
             })}
             <div className="mt-4 flex flex-col gap-3 border-t border-[#dfdbc9] pt-5">
@@ -196,7 +284,7 @@ export function Header() {
                 onClick={() => setMobileOpen(false)}
                 className="btn-shine text-[14px] font-bold uppercase text-center rounded-[11px] px-5 py-3.5 bg-primary text-white shadow-md transition-colors hover:brightness-110"
               >
-                Get Started Free
+                Start Free
               </Link>
             </div>
           </nav>

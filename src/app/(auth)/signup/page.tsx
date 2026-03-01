@@ -226,7 +226,7 @@ export default function SignupPage() {
           className="w-full h-11 rounded-lg font-semibold"
           disabled={loading}
         >
-          {loading ? "Creating account..." : "Start Free Trial"}
+          {loading ? "Creating account..." : "Start Free"}
         </Button>
       </form>
 

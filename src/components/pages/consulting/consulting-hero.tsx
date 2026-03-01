@@ -151,7 +151,7 @@ export default function ConsultingHero() {
 
               {/* Headline */}
               <h1
-                className="mb-4 text-[32px] leading-[38px] md:text-4xl lg:text-[56px] lg:leading-[64px] font-extrabold tracking-[-1.4px] text-foreground px-2 md:px-0"
+                className="mb-4 text-[28px] leading-[34px] md:text-4xl lg:text-[48px] lg:leading-[56px] font-extrabold tracking-[-1.4px] text-foreground px-2 md:px-0"
               >
                 Do Your Users Know{" "}
                 <span className="text-primary whitespace-nowrap">What to Do Next?</span>

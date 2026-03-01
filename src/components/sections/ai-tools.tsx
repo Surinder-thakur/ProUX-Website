@@ -20,27 +20,27 @@ interface PromptTool {
 const promptTools: PromptTool[] = [
   {
     step: 1,
-    title: "Magic Wand",
+    title: "Optimize UX Prompts",
     description:
-      "Automatically transform rough prompts into expert-level queries that get you better AI responses.",
+      "Automatically transform rough design prompts into expert-level UX queries that surface better insights.",
     image: "/images/ai-magic-wand.png",
-    alt: "Magic Wand — prompt transformation tool",
+    alt: "Optimize UX Prompts — prompt transformation tool",
   },
   {
     step: 2,
-    title: "Compare LLM Models",
+    title: "Compare AI UX Analysis",
     description:
-      "Run the same prompt across different AI models and compare results side-by-side to find the best answer.",
+      "Run the same UX prompt across different AI models and compare design recommendations side-by-side.",
     image: "/images/ai-compare-llm.png",
-    alt: "Compare LLM Models — side-by-side AI comparison",
+    alt: "Compare AI UX Analysis — side-by-side model comparison",
   },
   {
     step: 3,
-    title: "Generate Consensus",
+    title: "Consensus on Design Decisions",
     description:
-      "Get responses from multiple AI models at once, then see a combined summary with the best insights from each.",
+      "Get UX recommendations from multiple AI models at once, then see a unified summary of the best design insights.",
     image: "/images/ai-consensus.png",
-    alt: "Generate Consensus — multi-model summary tool",
+    alt: "Consensus on Design Decisions — multi-model UX summary",
   },
 ];
 
@@ -145,7 +145,7 @@ export default function AiToolsSection() {
           viewport={{ once: true }}
           className="text-xs font-bold text-accent uppercase tracking-[0.84px] mb-4"
         >
-          Built-In AI Prompt Tools
+          Built-In AI UX Tools
         </motion.span>
 
         {/* ── Headline ── */}
@@ -161,9 +161,9 @@ export default function AiToolsSection() {
             letterSpacing: "-0.4px",
           }}
         >
-          Get Better Results from
+          Get Better UX Decisions from
           <br />
-          AI Tools
+          AI-Powered Tools
         </motion.h2>
 
         {/* ── Subhead ── */}
@@ -175,8 +175,8 @@ export default function AiToolsSection() {
           className="text-lg md:text-xl font-normal text-muted-foreground max-w-[790px] mb-10 leading-relaxed"
           style={{ letterSpacing: "-0.27px" }}
         >
-          Built-in tools to optimize your prompts, compare multiple AI models,
-          and generate the best possible outputs — all in one place.
+          Built-in tools to optimize your UX prompts, compare AI models&apos; design analysis,
+          and get consensus on design decisions — all in one place.
         </motion.p>
 
         {/* ── CTA Button ── */}
@@ -196,7 +196,7 @@ export default function AiToolsSection() {
               style={{ animation: "cta-button-shine 3s infinite linear" }}
             />
             <span className="relative z-10 flex items-center gap-2">
-              Get Started Free
+              Start Free
               <ArrowRight />
             </span>
           </Link>
