@@ -850,7 +850,7 @@ function PricingCard({
           {tier.buttonVariant === "filled" && (
             <Link
               href="https://app.proux.design/Auth"
-              className="h-12 w-full flex items-center justify-center bg-primary rounded-[calc(var(--radius)+8px)] shadow-md hover:shadow-lg hover:-translate-y-0.5 transition-all duration-300 btn-shine"
+              className="h-[56px] w-full flex items-center justify-center bg-primary rounded-[calc(var(--radius)+8px)] shadow-md hover:shadow-lg hover:-translate-y-0.5 transition-all duration-300 btn-shine"
             >
               <span className="text-sm font-bold text-primary-foreground uppercase tracking-[0.84px]">
                 {tier.buttonLabel}
@@ -861,7 +861,7 @@ function PricingCard({
           {tier.buttonVariant === "outline" && (
             <Link
               href="https://app.proux.design/Auth"
-              className="h-12 w-full flex items-center justify-center border-2 border-primary rounded-[calc(var(--radius)+8px)] bg-transparent hover:bg-primary shadow-sm hover:shadow-md transition-all duration-300 group"
+              className="h-[56px] w-full flex items-center justify-center border-2 border-primary rounded-[calc(var(--radius)+8px)] bg-transparent hover:bg-primary shadow-sm hover:shadow-md transition-all duration-300 group"
             >
               <span className="text-sm font-bold text-primary group-hover:text-primary-foreground uppercase tracking-[0.84px] transition-colors">
                 {tier.buttonLabel}
@@ -872,7 +872,7 @@ function PricingCard({
           {tier.buttonVariant === "outline-light" && (
             <Link
               href="https://app.proux.design/Auth"
-              className="h-12 w-full flex items-center justify-center border-2 border-primary-foreground rounded-[calc(var(--radius)+8px)] bg-transparent hover:bg-primary-foreground shadow-sm hover:shadow-md transition-all duration-300 group"
+              className="h-[56px] w-full flex items-center justify-center border-2 border-primary-foreground rounded-[calc(var(--radius)+8px)] bg-transparent hover:bg-primary-foreground shadow-sm hover:shadow-md transition-all duration-300 group"
             >
               <span className="text-sm font-bold text-primary-foreground group-hover:text-foreground uppercase tracking-[0.84px] transition-colors">
                 {tier.buttonLabel}
@@ -895,7 +895,7 @@ function PricingCard({
                   isDark ? "text-primary-foreground" : "text-[#1A2130]"
                 }`}
               >
-                14-Day Money-Back Guarantee
+                5-Day Money-Back Guarantee
               </p>
             </div>
           )}
@@ -966,13 +966,13 @@ export default function PricingSection() {
     >
       <div className="container-default">
         {/* Section header */}
-        <div className="flex flex-col items-center gap-4 text-center mb-12 px-4 max-w-[900px] mx-auto">
+        <div className="flex flex-col items-center gap-4 text-center mb-12 px-4 md:px-0 max-w-[900px] mx-auto">
           <h2 className="text-[32px] md:text-[40px] font-extrabold text-foreground leading-[1.15] tracking-tight">
-            Design with AI-Powered<br /> Confidence
+            Design with{" "}
+            <span className="whitespace-nowrap">AI-Powered</span> Confidence
           </h2>
           <p className="text-lg md:text-xl font-medium text-muted-foreground max-w-2xl leading-relaxed">
-            Stop guessing. Start shipping. Make brilliant design decisions with
-            350+ proven guidelines and AI tools — in minutes, not days.
+            Stop guessing. Start shipping. Make brilliant design decisions with 350+ proven guidelines and AI tools — in minutes, not days.
           </p>
         </div>
 

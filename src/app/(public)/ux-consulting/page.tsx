@@ -76,7 +76,7 @@ export default function UXConsultingPage() {
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(faqJsonLd) }}
       />
-      <div className="relative bg-[hsl(var(--bg-primary-50))]">
+      <div className="relative bg-[hsl(var(--bg-primary-50))] overflow-x-hidden">
         <ConsultingSecondaryNav />
         <ConsultingHero />
         <RealResults />

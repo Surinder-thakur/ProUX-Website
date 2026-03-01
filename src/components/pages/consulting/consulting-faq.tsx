@@ -138,7 +138,7 @@ export default function ConsultingFaq() {
         {/* ── Header ── */}
         <div className="flex flex-col items-center gap-4 text-center">
           <h2
-            className="text-[32px] md:text-[40px] font-extrabold text-foreground"
+            className="text-[32px] md:text-[40px] font-extrabold text-foreground px-4 md:px-0"
             style={{
               fontFamily: "var(--font-family-display)",
               lineHeight: 1.15,
@@ -147,7 +147,7 @@ export default function ConsultingFaq() {
           >
             Frequently Asked Questions
           </h2>
-          <p className="text-lg md:text-[22px] font-normal text-muted-foreground leading-relaxed">
+          <p className="text-lg md:text-[22px] font-normal text-muted-foreground leading-relaxed px-4 md:px-0">
             Details about our process, deliverables, and partnership model.
           </p>
         </div>

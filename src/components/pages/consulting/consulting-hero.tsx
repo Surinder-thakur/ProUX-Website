@@ -120,7 +120,7 @@ export default function ConsultingHero() {
 
       <section
         ref={sectionRef}
-        className="relative bg-[hsl(var(--bg-primary-50))] pt-32 pb-8 md:pb-12"
+        className="relative bg-[hsl(var(--bg-primary-50))] pt-28 pb-8 md:pb-12"
       >
         {/* ── Decorative parallax blobs (clipped to section) ─────────── */}
         <div className="pointer-events-none absolute inset-0 overflow-hidden" aria-hidden="true">
@@ -151,21 +151,15 @@ export default function ConsultingHero() {
 
               {/* Headline */}
               <h1
-                className="mb-4 text-3xl md:text-4xl lg:text-[56px] lg:leading-[64px] font-extrabold tracking-[-1.4px] text-foreground"
+                className="mb-4 text-[32px] leading-[38px] md:text-4xl lg:text-[56px] lg:leading-[64px] font-extrabold tracking-[-1.4px] text-foreground px-2 md:px-0"
               >
-                Do Your Users Know
-                <br />
-                <span className="text-primary">What to Do Next?</span>
+                Do Your Users Know{" "}
+                <span className="text-primary whitespace-nowrap">What to Do Next?</span>
               </h1>
 
               {/* Subheadline */}
               <p
-                className="mb-8 font-medium text-[hsl(var(--text-neutrals-800))]"
-                style={{
-                  fontFamily: "var(--font-family-base)",
-                  fontSize: "clamp(1.125rem, 2vw, var(--font-paragraph-xl-size))",
-                  lineHeight: 1.4,
-                }}
+                className="mb-8 text-lg md:text-xl font-medium text-[hsl(var(--text-neutrals-800))] leading-[1.4]"
               >
                 How much is this costing you?
               </p>
@@ -174,7 +168,7 @@ export default function ConsultingHero() {
               <div className="mb-8 flex flex-col items-center gap-4 sm:flex-row sm:items-center lg:justify-start">
                 <Link
                   href="#consultation"
-                  className="btn-consulting-shine inline-flex items-center justify-center rounded-[12px] bg-primary px-7 py-3.5 text-[14px] font-semibold uppercase tracking-wide text-primary-foreground shadow-lg transition-all hover:brightness-110 hover:shadow-xl"
+                  className="btn-consulting-shine inline-flex items-center justify-center rounded-[12px] bg-primary w-full max-w-[360px] md:w-auto md:px-[40px] h-[56px] text-[14px] font-semibold uppercase tracking-wide text-primary-foreground shadow-lg transition-all hover:brightness-110 hover:shadow-xl"
                 >
                   Book Strategy Call
                 </Link>

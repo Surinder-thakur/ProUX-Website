@@ -349,14 +349,13 @@ export default function ConsultingTestimonials() {
           </div>
 
           {/* Heading */}
-          <h2 className="text-[32px] md:text-[40px] font-bold text-foreground leading-[1.15] tracking-tight mb-4">
+          <h2 className="text-[32px] md:text-[40px] font-bold text-foreground leading-[1.15] tracking-tight mb-4 px-4 md:px-0">
             Trusted by Founders Worldwide
           </h2>
 
           {/* Subtitle */}
-          <p className="text-lg md:text-xl text-muted-foreground max-w-2xl leading-relaxed">
-            See how AI-First UX translated into measurable gains for SaaS &amp;
-            eCommerce teams.
+          <p className="text-lg md:text-xl text-muted-foreground max-w-2xl leading-relaxed px-4 md:px-0">
+            See how AI-First UX translated into measurable gains for SaaS &amp; eCommerce teams.
           </p>
         </div>
 
@@ -372,10 +371,8 @@ export default function ConsultingTestimonials() {
           {/* Video heading with floating hearts above */}
           <div className="flex flex-col items-center mb-10">
             <FloatingHearts />
-            <h3 className="text-2xl md:text-[32px] font-bold text-foreground text-center leading-[1.2] tracking-tight max-w-2xl">
-              Unscripted Clips From the People
-              <br className="hidden md:block" />
-              Who Signed the Checks
+            <h3 className="text-2xl md:text-[32px] font-bold text-foreground text-center leading-[1.2] tracking-tight max-w-2xl px-4 md:px-0">
+              Unscripted Clips From the People Who Signed the Checks
             </h3>
           </div>
 

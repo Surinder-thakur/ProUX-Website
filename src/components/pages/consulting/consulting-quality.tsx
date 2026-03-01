@@ -47,7 +47,7 @@ export default function ConsultingQuality() {
           <div className="md:pl-24">
             {/* Heading */}
             <h2
-              className="text-[32px] md:text-[36px] font-bold text-foreground leading-tight mb-6"
+              className="text-[32px] md:text-[40px] font-bold text-foreground leading-tight mb-6"
               style={{
                 fontFamily: "var(--font-family-display)",
                 letterSpacing: "-0.4px",

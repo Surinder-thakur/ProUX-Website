@@ -210,13 +210,12 @@ export default function TestimonialsSection() {
 
       <div className="flex flex-col items-center gap-12">
         {/* Section header */}
-        <div className="flex flex-col items-center gap-4 text-center px-4 max-w-[900px]">
+        <div className="flex flex-col items-center gap-4 text-center px-6 md:px-4 max-w-[900px]">
           <h2 className="text-[32px] md:text-[40px] font-extrabold text-foreground leading-[1.15] tracking-tight">
-            Trusted by 12,000+ <br /> Product Designers and UX Teams
+            Trusted by 12,000+ Product Designers and UX Teams
           </h2>
           <p className="text-lg md:text-xl font-medium text-muted-foreground max-w-2xl leading-relaxed">
-            See how designers ship faster, make confident decisions, and
-            advance their careers with ProUX.
+            See how designers ship faster, make confident decisions, and advance their careers with ProUX.
           </p>
         </div>
 

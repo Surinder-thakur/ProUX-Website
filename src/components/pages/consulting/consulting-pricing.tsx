@@ -241,7 +241,7 @@ function PricingCard({ card }: { card: PricingCardData }) {
         {/* CTA Button */}
         <Link
           href="#consultation"
-          className={`h-12 rounded-[14px] w-full group transition-all duration-300 shadow-sm hover:shadow-md mt-4 flex items-center justify-center relative ${
+          className={`h-[56px] rounded-[14px] w-full group transition-all duration-300 shadow-sm hover:shadow-md mt-4 flex items-center justify-center relative ${
             card.buttonStyle === "filled"
               ? "bg-[#b55331] hover:bg-[#a04a32] btn-consulting-shine"
               : ""
@@ -399,13 +399,12 @@ export default function ConsultingPricing() {
             Consulting Packages
           </span>
 
-          <h2 className="mb-4 font-extrabold tracking-tight text-[#1a2130] text-[32px] md:text-[40px] leading-[1.15]">
+          <h2 className="mb-4 font-extrabold tracking-tight text-[#1a2130] text-[32px] md:text-[40px] leading-[1.15] px-4 md:px-0">
             Transparent Pricing, Measurable Impact
           </h2>
 
-          <p className="text-[16px] leading-relaxed text-[#718096] max-w-xl mx-auto">
-            Choose the engagement that fits your stage. Every package includes
-            our performance guarantee.
+          <p className="text-[16px] leading-relaxed text-[#718096] max-w-xl mx-auto px-4 md:px-0">
+            Choose the engagement that fits your stage. Every package includes our performance guarantee.
           </p>
         </div>
 
