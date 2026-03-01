@@ -174,7 +174,7 @@ export default function LoginPage() {
         asChild
         className="w-full h-11 rounded-lg font-semibold"
       >
-        <Link href="/signup">Start Free Trial</Link>
+        <Link href="/signup">Start Free</Link>
       </Button>
 
       {/* DESIGNERS: Footer link */}

@@ -33,9 +33,9 @@ export default function HeroSection() {
           </p>
 
           {/* H1 */}
-          <h1 className="text-[32px] leading-[38px] md:text-4xl lg:text-[56px] lg:leading-[64px] font-extrabold text-foreground tracking-[-1.4px] mb-6 px-6 md:px-0">
-            AI-First UX Intelligence Platform{" "}
-            <span className="text-primary">for Every Stage of Design</span>
+          <h1 className="text-[28px] leading-[34px] md:text-4xl lg:text-[48px] lg:leading-[56px] font-extrabold text-foreground tracking-[-1.4px] mb-6 px-6 md:px-0 max-w-[960px] mx-auto">
+            Ship Better Designs in Half the Time
+            <span className="block text-primary">AI-Powered UX Intelligence</span>
           </h1>
 
           {/* Subtitle */}
@@ -49,8 +49,9 @@ export default function HeroSection() {
               href="https://app.proux.design/Auth"
               className="btn-shine inline-flex items-center justify-center bg-primary text-primary-foreground rounded-[12px] w-full max-w-[360px] md:w-auto md:px-[40px] h-[56px] md:h-[56px] text-[14px] font-semibold uppercase tracking-[0.35px] shadow-lg transition-all hover:shadow-xl hover:brightness-110"
             >
-              Get Started Free
+              Start Free
             </Link>
+            <p className="text-xs text-muted-foreground mt-2">No credit card required</p>
           </div>
 
           {/* Certifications row */}

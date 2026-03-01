@@ -97,7 +97,7 @@ export default function HowItWorks() {
               Ready to refine your product UX?
             </p>
             <p className="font-normal">
-              100% money back guaranteed if not satisfied with mapped journeys.
+              100% Money-Back Guarantee if not satisfied with mapped journeys.
             </p>
           </div>
           <Link

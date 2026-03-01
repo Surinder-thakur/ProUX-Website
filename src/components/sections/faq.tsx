@@ -57,7 +57,7 @@ const faqs: FaqEntry[] = [
   {
     question: "Can I try Pro before paying?",
     answer:
-      "Yes! All Pro features come with a 5-day money-back guarantee. Try everything risk-free. If ProUX doesn\u2019t transform your workflow, we\u2019ll refund you completely\u2014no forms, no questions asked. Plus, you keep all the work you created during the trial.",
+      "Yes! All Pro features come with a 5-Day Money-Back Guarantee. Try everything risk-free. If ProUX doesn\u2019t transform your workflow, we\u2019ll refund you completely\u2014no forms, no questions asked. Plus, you keep all the work you created during the trial.",
   },
   {
     question: "Can I use ProUX for my entire team?",

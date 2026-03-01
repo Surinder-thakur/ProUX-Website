@@ -27,11 +27,11 @@ export default function HomePage() {
       <FeaturesSection />
       <CallToActionSection />
       <TestimonialsSection />
+      <AiToolsSection />
       <PricingSection />
       <ProductSecondaryNav />
       <MoneyBackSection />
       <FaqSection />
-      <AiToolsSection />
       {/* <SocialProofCtaSection /> */}
     </>
   );
