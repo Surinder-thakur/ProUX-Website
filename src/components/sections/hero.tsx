@@ -34,7 +34,7 @@ export default function HeroSection() {
 
           {/* H1 */}
           <h1 className="text-[28px] leading-[34px] md:text-4xl lg:text-[48px] lg:leading-[56px] font-extrabold text-foreground tracking-[-1.4px] mb-6 px-6 md:px-0 max-w-[960px] mx-auto">
-            Ship Better Designs in Half the Time
+            Ship Better Designs in<br className="lg:hidden" /> Half the Time.
             <span className="block text-primary">AI-Powered UX Intelligence</span>
           </h1>
 
