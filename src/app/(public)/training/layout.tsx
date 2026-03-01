@@ -1,14 +1,9 @@
 import type { Metadata } from "next";
 
-/* =============================================================================
- * DESIGNERS: Training Page SEO Metadata
- * =============================================================================
- * Update title, description, and keywords for search engine optimization.
- * ========================================================================== */
 export const metadata: Metadata = {
-  title: "AI-First UX Training",
+  title: "AI Design Training | ProUX",
   description:
-    "The future of UX is AI-Native. Join the waitlist for ProUX's AI-First UX Training program. Get early access, a launch discount, and a free AI Tools for UX starter guide.",
+    "Master the future of UX design with hands-on, AI-first training courses. Learn from an NN/g certified instructor with 15+ years of experience.",
   keywords: [
     "UX training",
     "AI UX course",
@@ -17,11 +12,14 @@ export const metadata: Metadata = {
     "AI tools for UX",
     "UX professional training",
     "AI-native design",
+    "design systems course",
+    "UX strategy",
+    "accessibility training",
   ],
   openGraph: {
-    title: "AI-First UX Training | ProUX",
+    title: "AI Design Training | ProUX",
     description:
-      "The future of UX is AI-Native. Join 850+ designers on the waitlist for early access and exclusive launch discounts.",
+      "Master the future of UX design with hands-on, AI-first training courses. 5 courses, 50+ hours, NN/g certified instructor.",
   },
 };
 
