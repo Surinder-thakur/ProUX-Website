@@ -32,7 +32,12 @@ export default function ProductSecondaryNav() {
 
   useEffect(() => {
     const handleScroll = () => {
-      setVisible(window.scrollY > window.innerHeight);
+      const scrollY = window.scrollY;
+      const docHeight = document.documentElement.scrollHeight;
+      const winHeight = window.innerHeight;
+      const nearBottom = scrollY + winHeight > docHeight - 400;
+
+      setVisible(scrollY > winHeight && !nearBottom);
 
       // Determine active section
       const sections = ["features", "pricing", "faq"];
@@ -57,11 +62,11 @@ export default function ProductSecondaryNav() {
 
   return (
     <>
-      {/* Desktop floating pill nav */}
+      {/* Floating pill nav — mobile + desktop */}
       <nav
-        className="hidden md:flex fixed top-6 left-1/2 -translate-x-1/2 z-[100] items-center gap-1 bg-white/80 backdrop-blur-xl rounded-full px-4 md:px-8 py-3 shadow-2xl transition-all duration-300 animate-fade-in"
+        className="fixed top-6 left-1/2 -translate-x-1/2 z-[100] flex items-center gap-1 bg-white/80 backdrop-blur-xl border border-white/20 shadow-2xl shadow-black/5 rounded-full px-3 py-2 md:px-8 md:py-3 transition-all duration-300 animate-fade-in"
       >
-        <Link href="/" className="mr-4">
+        <Link href="/" className="mr-2 md:mr-4 flex-shrink-0">
           <ProUXMark className="h-5 w-auto" />
         </Link>
 
@@ -71,7 +76,7 @@ export default function ProductSecondaryNav() {
             <Link
               key={link.href}
               href={link.href}
-              className={`text-[13px] font-medium px-4 py-2 rounded-full transition-colors ${
+              className={`whitespace-nowrap text-[11px] md:text-[13px] font-medium px-3 py-1.5 md:px-4 md:py-2 rounded-full transition-colors ${
                 isActive
                   ? "bg-[#F0EEE4] text-[#1a2130]"
                   : "text-[#4A5568] hover:bg-[#F0EEE4] hover:text-[#1a2130]"
@@ -82,16 +87,6 @@ export default function ProductSecondaryNav() {
           );
         })}
       </nav>
-
-      {/* Mobile bottom CTA bar */}
-      <div className="md:hidden fixed bottom-0 left-0 right-0 z-[100] bg-white border-t border-[#dfdbc9] px-4 py-3 animate-fade-in">
-        <Link
-          href="https://app.proux.design/Auth"
-          className="block w-full text-center bg-[#B9573D] text-white rounded-[12px] px-6 py-3 font-semibold uppercase text-[14px] tracking-wide shadow-md"
-        >
-          Get Started Free
-        </Link>
-      </div>
     </>
   );
 }

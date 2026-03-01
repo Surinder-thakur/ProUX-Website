@@ -153,7 +153,7 @@ export default function ConsultingProcess() {
 
   return (
     <section
-      className="relative w-full bg-[#242424] text-white py-[120px] px-6 overflow-hidden flex flex-col items-center"
+      className="relative w-full bg-[#242424] text-white py-16 md:py-[120px] px-6 overflow-hidden flex flex-col items-center"
       aria-label="Service process overview"
     >
       {/* Background glow */}
@@ -171,25 +171,24 @@ export default function ConsultingProcess() {
 
       {/* ── Heading Group ────────────────────────────────────────────────── */}
       <div className="flex flex-col items-center text-center gap-6 max-w-4xl mx-auto w-full relative z-10 mb-20">
-        <h2 className="text-[32px] md:text-[40px] leading-[1.05] font-bold tracking-tight text-white">
+        <h2 className="text-[32px] md:text-[40px] leading-[1.05] font-bold tracking-tight text-white px-4 md:px-0">
           How We Turn Friction Into Revenue
         </h2>
-        <p className="text-lg md:text-xl leading-relaxed text-[#eaedf4] max-w-2xl font-light">
-          User research, strategy, prototyping, and validation, delivered
-          through a clear 4-week process.
+        <p className="text-lg md:text-xl leading-relaxed text-[#eaedf4] max-w-2xl font-light px-4 md:px-0">
+          User research, strategy, prototyping, and validation, delivered through a clear 4-week process.
         </p>
 
         {/* CTA buttons */}
         <div className="flex flex-wrap justify-center gap-4 mt-2">
           <Link
             href="#consultation"
-            className="btn-consulting-shine h-12 px-8 inline-flex items-center justify-center text-base font-semibold bg-[#B9573D] text-white rounded-[14px] shadow-lg hover:bg-[#a04a32] hover:shadow-xl hover:-translate-y-0.5 transition-all duration-300 uppercase tracking-wide"
+            className="btn-consulting-shine h-[56px] w-full max-w-[360px] md:w-auto md:max-w-none px-8 inline-flex items-center justify-center text-[14px] font-semibold bg-[#B9573D] text-white rounded-[14px] shadow-lg hover:bg-[#a04a32] hover:shadow-xl hover:-translate-y-0.5 transition-all duration-300 uppercase tracking-wide"
           >
             Book UX Consultation
           </Link>
           <Link
             href="#"
-            className="h-12 px-8 inline-flex items-center justify-center text-base font-semibold bg-transparent text-white border border-white/10 rounded-xl hover:bg-white/5 hover:border-white/20 transition-all duration-300 uppercase tracking-wide"
+            className="h-[56px] w-full max-w-[360px] md:w-auto md:max-w-none px-8 inline-flex items-center justify-center text-[14px] font-semibold bg-transparent text-white border border-white/10 rounded-[14px] hover:bg-white/5 hover:border-white/20 transition-all duration-300 uppercase tracking-wide"
           >
             View Sample
           </Link>
@@ -237,14 +236,12 @@ export default function ConsultingProcess() {
         className="relative z-10 w-full max-w-5xl mx-auto flex flex-col items-center gap-16 mt-20 scroll-mt-[136px]"
       >
         <div className="flex flex-col items-center text-center gap-6">
-          <h3 className="text-[28px] md:text-[32px] leading-[1.2] font-extrabold tracking-tight text-white">
-            Quantify the Results of
-            <br />
-            UX Consulting
+          <h3 className="text-[28px] md:text-[32px] leading-[1.2] font-extrabold tracking-tight text-white px-4 md:px-0">
+            Quantify the Results of<br />
+            <span className="whitespace-nowrap">UX Consulting</span>
           </h3>
-          <p className="text-[16px] leading-[24px] text-white/80 max-w-[580px] font-light">
-            Enhance your UX by identifying and resolving the top usability
-            issues, uncovering problems to elevate your user experience.
+          <p className="text-[16px] leading-[24px] text-white/80 max-w-[580px] font-light px-4 md:px-0">
+            Enhance your UX by identifying and resolving the top usability issues, uncovering problems to elevate your user experience.
           </p>
         </div>
 

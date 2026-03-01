@@ -214,8 +214,8 @@ export function Footer() {
 
             <div className="flex flex-col gap-4">
               <p className="text-base font-bold text-foreground leading-normal">
-                Invest in ProUX today, <br />
-                save on costly fixes tomorrow.
+                Invest in ProUX today,{" "}
+                <span className="md:block">save on costly fixes tomorrow.</span>
               </p>
               <p className="text-sm font-normal text-muted-foreground leading-relaxed">
                 Founded by{" "}
@@ -271,7 +271,8 @@ export function Footer() {
                 <div className="flex items-start gap-2 max-w-[240px] text-sm font-normal text-muted-foreground leading-relaxed">
                   <MapPinIcon />
                   <span>
-                    511, Zumurud Tower, Marina Dubai. United Arab Emirates.
+                    511, Zumurud Tower, Marina Dubai,{" "}
+                    <span className="whitespace-nowrap">United Arab Emirates</span>
                   </span>
                 </div>
               </div>
@@ -306,7 +307,7 @@ export function Footer() {
           className="flex flex-col md:flex-row items-center justify-between gap-6 w-full pt-8"
           style={{ borderTop: "1px solid hsl(var(--border-primary-100))" }}
         >
-          <p className="text-[13px] font-normal text-muted-foreground text-center md:text-left">
+          <p className="text-[13px] font-normal text-muted-foreground text-center md:text-left leading-relaxed">
             &copy; {new Date().getFullYear()} ProUX{" "}
             <span className="hidden md:inline mx-2 text-[hsl(var(--border-primary-100))]">|</span>{" "}
             All Rights Reserved{" "}
@@ -316,7 +317,7 @@ export function Footer() {
               href="https://osumstudio.com"
               target="_blank"
               rel="noopener noreferrer"
-              className="font-bold text-muted-foreground transition-colors duration-300 hover:text-primary hover:underline"
+              className="font-bold text-muted-foreground transition-colors duration-300 hover:text-primary hover:underline whitespace-nowrap"
             >
               Osum Studio Pvt. Ltd.
             </a>

@@ -33,22 +33,21 @@ export default function HeroSection() {
           </p>
 
           {/* H1 */}
-          <h1 className="text-3xl md:text-4xl lg:text-[56px] lg:leading-[64px] font-extrabold text-foreground tracking-[-1.4px] mb-6">
-            AI-First UX Intelligence Platform for<br />
-            <span className="text-primary">Every Stage of Design</span>
+          <h1 className="text-[32px] leading-[38px] md:text-4xl lg:text-[56px] lg:leading-[64px] font-extrabold text-foreground tracking-[-1.4px] mb-6 px-6 md:px-0">
+            AI-First UX Intelligence Platform{" "}
+            <span className="text-primary">for Every Stage of Design</span>
           </h1>
 
           {/* Subtitle */}
-          <p className="text-sm md:text-base lg:text-[18px] lg:leading-[24px] font-medium text-[#4f4f4f] mx-auto max-w-2xl mb-8">
-            AI-powered UX intelligence for research, audits, and optimization
-            grounded in 350+ expert guidelines &amp; insights.
+          <p className="text-sm md:text-base lg:text-[18px] lg:leading-[24px] font-medium text-[#4f4f4f] mx-auto max-w-2xl mb-8 px-6 md:px-0">
+            AI-powered UX intelligence for research, audits, and optimization grounded in 350+ expert guidelines &amp; insights.
           </p>
 
           {/* CTA button with shine */}
           <div className="mb-10">
             <Link
               href="https://app.proux.design/Auth"
-              className="btn-shine inline-flex items-center justify-center bg-primary text-primary-foreground rounded-[12px] px-[28px] h-[56px] text-[14px] font-semibold uppercase tracking-[0.35px] shadow-lg transition-all hover:shadow-xl hover:brightness-110"
+              className="btn-shine inline-flex items-center justify-center bg-primary text-primary-foreground rounded-[12px] w-full max-w-[360px] md:w-auto md:px-[40px] h-[56px] md:h-[56px] text-[14px] font-semibold uppercase tracking-[0.35px] shadow-lg transition-all hover:shadow-xl hover:brightness-110"
             >
               Get Started Free
             </Link>
@@ -90,11 +89,11 @@ export default function HeroSection() {
 
         {/* Trust stats */}
         <div className="mt-12 mx-auto">
-          <div className="flex flex-col sm:flex-row items-center justify-center gap-8 sm:gap-10">
+          <div className="flex flex-col sm:flex-row items-center justify-center gap-3 sm:gap-10">
             {trustStats.map((stat) => (
               <div
                 key={stat.labelLine1}
-                className="flex items-center gap-3 py-4 sm:py-0"
+                className="flex items-center gap-3 py-1.5 sm:py-0"
               >
                 <div className="relative leading-[40px]">
                   <span className="text-[36px] font-black text-foreground">
