@@ -1,4 +1,4 @@
-/* Stats bar — pure CSS sticky, no JS needed */
+/* Stats bar — CSS sticky on desktop, in-flow on mobile */
 
 /* ── Custom icons from Figma Make build ──────────────────────────────── */
 
@@ -142,7 +142,7 @@ const valuePropItems = [
 
 export default function StatsBar() {
   return (
-    <div className="sticky bottom-0 z-50">
+    <div className="lg:sticky lg:bottom-0 z-50">
       <div className="relative w-full bg-white lg:bg-gradient-to-b lg:from-white/80 lg:to-white/95 lg:backdrop-blur-xl lg:supports-[backdrop-filter]:bg-white/60 border-t border-[#99825d]/30 lg:shadow-[0_-8px_30px_rgba(0,0,0,0.04)] lg:transition-colors lg:duration-300 after:hidden lg:after:block after:absolute after:inset-0 after:bg-gradient-to-b after:from-[#99825d]/10 after:to-white/20 after:pointer-events-none">
         <div className="max-w-[1200px] mx-auto lg:px-[24px] py-[28px] px-[16px]">
           <div className="grid grid-cols-2 gap-x-6 gap-y-7 lg:flex lg:flex-row lg:flex-nowrap lg:gap-x-0 lg:gap-y-0 items-start lg:items-center justify-between w-full">
