@@ -25,7 +25,15 @@ const navigation = [
       { label: "Book Consultation", href: "/ux-consulting#consultation" },
     ],
   },
-  // { label: "AI Design Training", href: "/training", subItems: [] }, // Coming soon
+  {
+    label: "AI Design Training",
+    href: "/bootcamps",
+    subItems: [
+      { label: "AI Mastery + Design System", href: "/bootcamps/ai-mastery-design-system" },
+      { label: "AI Design-Code Workflow", href: "/bootcamps/ai-design-code-workflow" },
+      { label: "AI UX Strategic Thinking", href: "/bootcamps/ai-ux-strategic-thinking" },
+    ],
+  },
 ];
 
 function ProUXLogo({ className }: { className?: string }) {
