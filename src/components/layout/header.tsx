@@ -158,7 +158,7 @@ export function Header() {
         </TooltipProvider>
 
         {/* Desktop Navigation — centered */}
-        <nav className="hidden items-center gap-4 lg:flex absolute left-1/2 -translate-x-1/2">
+        <nav className="hidden items-center gap-4 lg:flex absolute left-1/2 -translate-x-1/2 whitespace-nowrap">
           {navigation.map((item) => {
             const isActive =
               item.href === "/"

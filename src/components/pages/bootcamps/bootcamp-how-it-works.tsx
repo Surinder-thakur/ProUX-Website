@@ -28,7 +28,7 @@ export default function BootcampHowItWorks() {
                 className="flex flex-col gap-3 items-center text-center w-full max-w-[260px]"
               >
                 {/* Icon */}
-                <Icon className="h-10 w-10 text-[#99825d]" strokeWidth={1.4} />
+                <Icon className="h-10 w-10 text-white" strokeWidth={1.4} />
 
                 {/* Title */}
                 <p className="text-[20px] md:text-[22px] font-bold leading-[28px] tracking-[-0.16px] text-white">
@@ -36,7 +36,7 @@ export default function BootcampHowItWorks() {
                 </p>
 
                 {/* Step label */}
-                <p className="text-[13px] font-semibold leading-[18px] tracking-[-0.1px] text-white/40">
+                <p className="text-[13px] font-semibold leading-[18px] tracking-[-0.1px] text-[#99825d]">
                   Step {String(step.step).padStart(2, "0")}
                 </p>
 
