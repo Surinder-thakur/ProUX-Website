@@ -8,7 +8,7 @@ const badges = [
 
 export default function BootcampInstructor() {
   return (
-    <section className="bg-[hsl(var(--bg-primary-50))] py-16 md:py-20">
+    <section aria-label="Course Instructor" className="bg-[hsl(var(--bg-primary-50))] py-16 md:py-20">
       <div className="mx-auto max-w-3xl px-4">
         {/* Card wrapper — relative so the profile image can be positioned */}
         <div className="relative bg-card rounded-[32px] shadow-sm p-8 md:p-12">

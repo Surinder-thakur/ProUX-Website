@@ -5,7 +5,7 @@ const STEP_ICONS = [LayoutGrid, CalendarCheck, GraduationCap, Rocket];
 
 export default function BootcampHowItWorks() {
   return (
-    <section className="bg-[#242424] py-[80px] md:py-[100px] text-white">
+    <section aria-label="How It Works" className="bg-[#242424] py-[80px] md:py-[100px] text-white">
       <div className="mx-auto max-w-[1200px] px-6 flex flex-col items-center">
         {/* Header */}
         <div className="flex flex-col gap-4 items-center text-center w-full mb-14">
@@ -55,6 +55,7 @@ export default function BootcampHowItWorks() {
             className="w-full"
             height="1"
             xmlns="http://www.w3.org/2000/svg"
+            aria-hidden="true"
           >
             <line
               x1="0"

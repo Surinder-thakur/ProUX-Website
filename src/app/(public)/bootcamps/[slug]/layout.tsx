@@ -17,9 +17,26 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     title: mod.title,
     description: mod.tagline,
     openGraph: {
-      title: `${mod.title} | ProUX Design Engineering Bootcamp`,
+      title: `${mod.title} | ProUX AI Design Bootcamp`,
       description: mod.tagline,
       url: `https://proux.design/bootcamps/${mod.slug}`,
+      type: "website",
+      images: [
+        {
+          url: mod.image,
+          width: 1200,
+          height: 630,
+          alt: mod.title,
+        },
+      ],
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: `${mod.title} | ProUX`,
+      description: mod.tagline,
+    },
+    alternates: {
+      canonical: `https://proux.design/bootcamps/${mod.slug}`,
     },
   };
 }

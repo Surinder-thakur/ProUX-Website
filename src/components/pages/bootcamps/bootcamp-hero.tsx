@@ -30,9 +30,17 @@ export default function BootcampHero() {
           </h1>
 
           {/* Subline */}
-          <p className="mb-6 text-[17px] md:text-lg font-medium text-muted-foreground leading-[1.55]">
+          <p className="mb-6 text-sm md:text-base lg:text-[18px] lg:leading-[24px] font-medium text-[#4f4f4f]">
             Become a modern AI product design engineer in 12 weeks.
           </p>
+
+          {/* CTA */}
+          <a
+            href="#modules"
+            className="btn-shine inline-flex items-center justify-center rounded-[12px] bg-primary h-[48px] px-8 text-[13px] font-semibold uppercase tracking-wide text-white shadow-md transition-all duration-300 hover:brightness-110 hover:shadow-lg hover:-translate-y-0.5 mb-8"
+          >
+            Start Learning
+          </a>
 
           {/* Social proof row */}
           <div className="flex flex-wrap items-center gap-3">
@@ -45,7 +53,7 @@ export default function BootcampHero() {
                 >
                   <Image
                     src={src}
-                    alt=""
+                    alt="Trained designer"
                     fill
                     sizes="30px"
                     className="object-cover"

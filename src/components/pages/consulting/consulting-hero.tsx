@@ -159,7 +159,7 @@ export default function ConsultingHero() {
 
               {/* Subheadline */}
               <p
-                className="mb-8 text-lg md:text-xl font-medium text-[hsl(var(--text-neutrals-800))] leading-[1.4]"
+                className="mb-8 text-sm md:text-base lg:text-[18px] lg:leading-[24px] font-medium text-[#4f4f4f]"
               >
                 How much is this costing you?
               </p>

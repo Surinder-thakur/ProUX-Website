@@ -45,13 +45,6 @@ function BootcampCard({ module: mod }: { module: BootcampModule }) {
         </div>
       </div>
 
-      {/* ── Click indicator — bottom-right, visible on hover ─────────── */}
-      <div className="absolute bottom-5 right-5 z-10 flex items-center justify-center w-9 h-9 rounded-full bg-primary text-white opacity-0 scale-75 transition-all duration-300 ease-out group-hover:opacity-100 group-hover:scale-100 shadow-[0_2px_10px_rgba(0,0,0,0.15)]">
-        <svg className="w-4 h-4 -rotate-45" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}>
-          <path strokeLinecap="round" strokeLinejoin="round" d="M4.5 12h15m0 0l-6-6m6 6l-6 6" />
-        </svg>
-      </div>
-
       {/* ── Content zone ───────────────────────────────────────────────── */}
       <div className="flex flex-col flex-1 px-5 pt-4 pb-5">
         {/* Title */}
@@ -79,8 +72,13 @@ function BootcampCard({ module: mod }: { module: BootcampModule }) {
               ${mod.priceUsd}
             </span>
           </div>
-          <span className="inline-block mt-1.5 px-2 py-[3px] rounded text-[10px] font-semibold uppercase tracking-wide text-primary bg-primary/[0.08]">
+          <span className="inline-block mt-1.5 px-2 py-[3px] rounded text-[10px] font-semibold uppercase tracking-wide text-[hsl(var(--gold-600))] bg-[hsl(var(--gold-500))]/[0.12]">
             Early Bird - Ends {mod.earlyBirdDeadline}
+          </span>
+
+          {/* CTA */}
+          <span className="flex items-center justify-center w-full mt-4 rounded-[12px] border-2 border-primary h-[48px] text-[13px] font-semibold uppercase tracking-wide text-primary transition-all duration-300 group-hover:bg-primary group-hover:text-white group-hover:shadow-md">
+            Explore This Program
           </span>
         </div>
       </div>
@@ -103,11 +101,11 @@ export default function BootcampModuleCards() {
         {/* Section heading */}
         <div className="mb-8 max-w-lg">
           <h2 className="text-[28px] md:text-[34px] font-extrabold text-foreground tracking-[-0.02em] leading-tight">
-            Live AI UX Bootcamps{" "}
+            AI Design Bootcamps{" "}
             <span className="relative inline-flex h-3 w-3 align-middle ml-1"><span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-emerald-400 opacity-75" /><span className="relative inline-flex h-3 w-3 rounded-full bg-emerald-500" /></span>
           </h2>
           <p className="text-[16px] text-muted-foreground mt-3">
-            Live classes. Small cohorts. Start with any bootcamp.
+            Hands-on training for working UX and product designers.
           </p>
         </div>
 
