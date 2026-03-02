@@ -12,13 +12,10 @@ export default function BootcampHowItWorks() {
           <p className="text-[12px] font-bold uppercase tracking-wider text-[#99825d]">
             How It Works
           </p>
-          <h2 className="font-extrabold text-[28px] md:text-[36px] leading-[34px] md:leading-[44px] tracking-[-0.4px] text-white max-w-[824px]">
-            Four Steps to Get Started
-          </h2>
-          <p className="text-[16px] md:text-[18px] leading-[24px] tracking-[-0.27px] text-[#B0B0B0] max-w-[480px] font-normal">
-            Pick a bootcamp, choose your time zone, and learn live with a
-            small cohort of designers.
-          </p>
+          <h3 className="font-bold text-[22px] md:text-[26px] leading-[28px] md:leading-[34px] tracking-[-0.3px] text-white max-w-[680px]">
+            Pick a bootcamp, choose your time zone,
+            and learn live with a small cohort of designers.
+          </h3>
         </div>
 
         {/* Steps — horizontal row on desktop */}
