@@ -27,7 +27,7 @@ const stats = [
 
 export default function BootcampStatsBar() {
   return (
-    <div className="sticky bottom-0 z-50">
+    <div className="lg:sticky lg:bottom-0 z-50">
       <section
         className="w-full bg-[#F8F7F4] border-y border-[#99825d]/20 shadow-[0_-4px_20px_rgba(0,0,0,0.05)]"
         aria-label="Program statistics"
