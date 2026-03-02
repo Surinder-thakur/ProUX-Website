@@ -27,7 +27,7 @@ export default function BootcampBundleBanner() {
                     <p className="text-xs text-white/40">{mod.classCount} classes, {mod.hoursLive} hours</p>
                   </div>
                   <span className="text-base font-extrabold text-white">
-                    ${mod.earlyBirdUsd}
+                    ${mod.pricingTiers.earlyBird.price}
                   </span>
                 </div>
               ))}

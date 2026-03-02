@@ -1,7 +1,7 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import type { BootcampModule } from "@/lib/data/bootcamps";
+import { getActiveTier, type BootcampModule } from "@/lib/data/bootcamps";
 
 export default function DetailStickyBar({
   module: mod,
@@ -9,10 +9,10 @@ export default function DetailStickyBar({
   module: BootcampModule;
 }) {
   const [visible, setVisible] = useState(false);
+  const tier = getActiveTier(mod);
 
   useEffect(() => {
     const handleScroll = () => {
-      // Show after scrolling past ~400px (hero area)
       setVisible(window.scrollY > 400);
     };
     window.addEventListener("scroll", handleScroll, { passive: true });
@@ -48,14 +48,16 @@ export default function DetailStickyBar({
           <div className="flex items-center gap-4">
             <div className="flex items-baseline gap-2">
               <span className="text-lg font-extrabold text-foreground">
-                ${mod.earlyBirdUsd}
+                ${tier.price}
               </span>
               <span className="text-sm text-muted-foreground line-through">
-                ${mod.priceUsd}
+                ${tier.fullPrice}
               </span>
-              <span className="text-[11px] font-semibold text-primary uppercase">
-                Early Bird
-              </span>
+              {tier.discount > 0 && (
+                <span className="text-[11px] font-bold text-emerald-600 uppercase">
+                  {tier.discount}% OFF
+                </span>
+              )}
             </div>
             <button className="btn-shine rounded-[10px] bg-primary px-5 h-[36px] text-[12px] font-semibold uppercase tracking-wide text-white shadow-sm transition-all hover:brightness-110">
               Enroll Now

@@ -3,6 +3,7 @@
 import Link from "next/link";
 import Image from "next/image";
 import { getAllBootcamps, type BootcampModule } from "@/lib/data/bootcamps";
+import { CardPricingDisplay } from "./bootcamp-pricing";
 
 /* ── Single Card ─────────────────────────────────────────────────────────── */
 
@@ -10,7 +11,7 @@ function BootcampCard({ module: mod }: { module: BootcampModule }) {
   return (
     <Link
       href={`/bootcamps/${mod.slug}`}
-      className="group relative flex flex-col rounded-[20px] bg-[hsl(var(--bg-primary-50))] border border-[#ece9d8] shadow-[0_1px_2px_rgba(0,0,0,0.03)] transition-all duration-300 ease-[cubic-bezier(0.23,1,0.32,1)] hover:bg-[#f3f1ec] hover:border-[#e0dbc8] hover:shadow-[0_8px_30px_rgba(0,0,0,0.06)] cursor-pointer"
+      className="group relative flex flex-col rounded-[20px] bg-[hsl(var(--bg-primary-50))] border border-[#ece9d8] shadow-[0_1px_2px_rgba(0,0,0,0.03)] transition-all duration-300 ease-[cubic-bezier(0.23,1,0.32,1)] hover:bg-[#FCFBF9] hover:border-[#dfdbc9] hover:shadow-[0_8px_30px_rgba(0,0,0,0.06)] cursor-pointer"
     >
       {/* ── Image zone with inset ──────────────────────────────────────── */}
       <div className="relative p-3">
@@ -58,23 +59,13 @@ function BootcampCard({ module: mod }: { module: BootcampModule }) {
         </p>
 
         {/* Metadata */}
-        <p className="text-[11px] uppercase tracking-[0.05em] text-muted-foreground/70 font-medium mt-4">
+        <p className="text-[11px] uppercase tracking-[0.05em] text-muted-foreground font-medium mt-4">
           4 Weeks &middot; Cohort-Based
         </p>
 
         {/* ── Pricing zone (pushed to bottom so cards align) ────── */}
         <div className="mt-auto pt-5">
-          <div className="flex items-baseline gap-2">
-            <span className="text-[24px] font-extrabold text-foreground leading-none">
-              ${mod.earlyBirdUsd}
-            </span>
-            <span className="text-[13px] text-muted-foreground line-through">
-              ${mod.priceUsd}
-            </span>
-          </div>
-          <span className="inline-block mt-1.5 px-2 py-[3px] rounded text-[10px] font-semibold uppercase tracking-wide text-[hsl(var(--gold-600))] bg-[hsl(var(--gold-500))]/[0.12]">
-            Early Bird - Ends {mod.earlyBirdDeadline}
-          </span>
+          <CardPricingDisplay module={mod} />
 
           {/* CTA */}
           <span className="flex items-center justify-center w-full mt-4 rounded-[12px] border-2 border-primary h-[48px] text-[13px] font-semibold uppercase tracking-wide text-primary transition-all duration-300 group-hover:bg-primary group-hover:text-white group-hover:shadow-md">
@@ -95,7 +86,7 @@ export default function BootcampModuleCards() {
     <section
       id="modules"
       aria-label="Bootcamps"
-      className="bg-[hsl(var(--bg-primary-50))] pt-8 pb-12 md:pb-16 scroll-mt-[80px]"
+      className="bg-[hsl(var(--bg-primary-50))] pt-0 pb-12 md:pb-16 scroll-mt-[80px]"
     >
       <div className="container-default">
         {/* Section heading */}

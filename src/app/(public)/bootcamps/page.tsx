@@ -18,13 +18,34 @@ function BootcampJsonLd() {
     courseWorkload: "PT4W",
     url: `https://proux.design/bootcamps/${mod.slug}`,
     image: mod.image,
-    offers: {
-      "@type": "Offer",
-      price: mod.earlyBirdUsd,
-      priceCurrency: "USD",
-      availability: "https://schema.org/InStock",
-      validFrom: "2026-01-01",
-    },
+    offers: [
+      {
+        "@type": "Offer",
+        name: "Early Access",
+        price: mod.pricingTiers.earlyBird.price,
+        priceCurrency: "USD",
+        availability: "https://schema.org/InStock",
+        validFrom: "2026-01-01",
+        validThrough: mod.pricingTiers.earlyBird.deadline,
+      },
+      {
+        "@type": "Offer",
+        name: "Standard",
+        price: mod.pricingTiers.standard.price,
+        priceCurrency: "USD",
+        availability: "https://schema.org/InStock",
+        validFrom: mod.pricingTiers.earlyBird.deadline,
+        validThrough: mod.pricingTiers.standard.deadline,
+      },
+      {
+        "@type": "Offer",
+        name: "Last Call",
+        price: mod.pricingTiers.lastCall.price,
+        priceCurrency: "USD",
+        availability: "https://schema.org/InStock",
+        validFrom: mod.pricingTiers.standard.deadline,
+      },
+    ],
   }));
 
   const jsonLd = {

@@ -3,7 +3,7 @@
 import Link from "next/link";
 import Image from "next/image";
 import { Badge } from "@/components/ui/badge";
-import { getAllBootcamps, type BootcampModule } from "@/lib/data/bootcamps";
+import { getAllBootcamps, getActiveTier, type BootcampModule } from "@/lib/data/bootcamps";
 
 export default function DetailOtherCourses({
   currentSlug,
@@ -18,7 +18,7 @@ export default function DetailOtherCourses({
         Explore More
       </p>
       <h2 className="text-[22px] md:text-[28px] font-extrabold tracking-[-0.6px] text-foreground mb-8">
-        Other Modules
+        Other Bootcamps
       </h2>
 
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
@@ -31,6 +31,8 @@ export default function DetailOtherCourses({
 }
 
 function CourseCard({ module: mod }: { module: BootcampModule }) {
+  const tier = getActiveTier(mod);
+
   return (
     <Link
       href={`/bootcamps/${mod.slug}`}
@@ -60,11 +62,16 @@ function CourseCard({ module: mod }: { module: BootcampModule }) {
         <div className="flex items-center justify-between">
           <div className="flex items-baseline gap-1.5">
             <span className="text-base font-extrabold text-foreground">
-              ${mod.earlyBirdUsd}
+              ${tier.price}
             </span>
             <span className="text-xs text-muted-foreground line-through">
-              ${mod.priceUsd}
+              ${tier.fullPrice}
             </span>
+            {tier.discount > 0 && (
+              <span className="text-[10px] font-bold text-emerald-600">
+                {tier.discount}% OFF
+              </span>
+            )}
           </div>
           <span className="text-xs font-semibold text-primary group-hover:underline">
             View Details

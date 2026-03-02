@@ -16,6 +16,7 @@ import {
   QUICK_FACTS,
   type BootcampModule,
 } from "@/lib/data/bootcamps";
+import { SidebarPricingDisplay, useActiveTier } from "@/components/pages/bootcamps/bootcamp-pricing";
 
 export default function DetailMobileBar({
   module: mod,
@@ -23,6 +24,7 @@ export default function DetailMobileBar({
   module: BootcampModule;
 }) {
   const [selectedTrack, setSelectedTrack] = useState<"A" | "B" | null>(null);
+  const tier = useActiveTier(mod);
 
   return (
     <div
@@ -33,15 +35,26 @@ export default function DetailMobileBar({
         <div>
           <div className="flex items-baseline gap-1.5">
             <p className="text-lg font-extrabold text-foreground">
-              ${mod.earlyBirdUsd}
+              ${tier.price}
             </p>
             <p className="text-xs text-muted-foreground line-through">
-              ${mod.priceUsd}
+              ${tier.fullPrice}
+            </p>
+            {tier.discount > 0 && (
+              <span className="text-[10px] font-bold text-emerald-600 uppercase">
+                {tier.discount}% OFF
+              </span>
+            )}
+          </div>
+          <div className="flex items-center gap-1">
+            <span className={`inline-block w-1.5 h-1.5 rounded-full ${
+              tier.dotColor === "emerald" ? "bg-emerald-500" :
+              tier.dotColor === "amber" ? "bg-amber-500" : "bg-red-500"
+            }`} />
+            <p className="text-[11px] font-semibold text-foreground">
+              {tier.label}
             </p>
           </div>
-          <p className="text-[11px] text-primary font-semibold uppercase">
-            Early Bird
-          </p>
         </div>
 
         <Drawer>
@@ -62,18 +75,8 @@ export default function DetailMobileBar({
             </DrawerHeader>
 
             <div className="px-4 pb-6 space-y-4 overflow-y-auto">
-              {/* Price */}
-              <div className="flex items-baseline gap-2">
-                <span className="text-2xl font-extrabold text-foreground">
-                  ${mod.earlyBirdUsd}
-                </span>
-                <span className="text-sm text-muted-foreground line-through">
-                  ${mod.priceUsd}
-                </span>
-                <span className="text-[11px] font-semibold text-primary uppercase">
-                  Early Bird
-                </span>
-              </div>
+              {/* Price with tier info */}
+              <SidebarPricingDisplay module={mod} />
 
               {/* Track Selector */}
               <div>
@@ -123,7 +126,7 @@ export default function DetailMobileBar({
                     : "bg-primary opacity-50 cursor-not-allowed"
                 }`}
               >
-                Enroll Now &mdash; ${mod.earlyBirdUsd}
+                Enroll Now &mdash; ${tier.price}
               </button>
 
               {/* Quick facts */}
@@ -156,7 +159,7 @@ export default function DetailMobileBar({
                   Save with the Full Bundle
                 </p>
                 <p className="text-xs text-muted-foreground mb-2">
-                  All 3 Modules &middot; 12 Classes &middot; 12 Hours
+                  All 3 Bootcamps &middot; 12 Classes &middot; 12 Hours
                 </p>
                 <div className="flex items-baseline gap-2">
                   <span className="text-lg font-extrabold text-foreground">

@@ -8,6 +8,7 @@ import {
   QUICK_FACTS,
   type BootcampModule,
 } from "@/lib/data/bootcamps";
+import { SidebarPricingDisplay, useActiveTier } from "@/components/pages/bootcamps/bootcamp-pricing";
 import BundlePopup from "./bundle-popup";
 
 export default function DetailSidebar({
@@ -16,52 +17,25 @@ export default function DetailSidebar({
   module: BootcampModule;
 }) {
   const [selectedTrack, setSelectedTrack] = useState<"A" | "B" | null>(null);
-  const [bundleMode, setBundleMode] = useState(false);
   const [bundlePopupOpen, setBundlePopupOpen] = useState(false);
-
-  const displayPrice = bundleMode ? BUNDLE_PRICE_USD : mod.earlyBirdUsd;
-  const displayOriginal = bundleMode ? BUNDLE_ORIGINAL_USD : mod.priceUsd;
+  const tier = useActiveTier(mod);
 
   return (
     <>
-      {/*
-        sticky: sticks to top when scrolling
-        top-28: offset from top (header height)
-        The parent grid uses items-start so this column doesn't stretch
-      */}
       <div className="sticky top-28 space-y-4">
         <div className="rounded-2xl border border-[#dfdbc9] bg-card p-5 space-y-5">
           {/* Bootcamp title */}
           <div>
             <p className="text-xs font-semibold uppercase tracking-wider text-primary mb-1">
-              {bundleMode ? "Full Bundle" : "Bootcamp"}
+              Bootcamp
             </p>
             <h3 className="text-base font-bold text-foreground tracking-[-0.2px]">
-              {bundleMode ? "All 3 Bootcamps" : mod.title}
+              {mod.title}
             </h3>
           </div>
 
-          {/* Price */}
-          <div>
-            <div className="flex items-baseline gap-2">
-              <span className="text-2xl font-extrabold text-foreground">
-                ${displayPrice}
-              </span>
-              <span className="text-sm text-muted-foreground line-through">
-                ${displayOriginal}
-              </span>
-              {!bundleMode && (
-                <span className="text-[11px] font-semibold text-primary uppercase">
-                  Early Bird
-                </span>
-              )}
-            </div>
-            {bundleMode && (
-              <p className="text-xs text-muted-foreground mt-1">
-                12 classes, 12 hours, every deliverable
-              </p>
-            )}
-          </div>
+          {/* Price with tier info */}
+          <SidebarPricingDisplay module={mod} />
 
           {/* Track Selector */}
           <div>
@@ -113,9 +87,7 @@ export default function DetailSidebar({
                 : "bg-primary opacity-50 cursor-not-allowed"
             }`}
           >
-            {bundleMode
-              ? `Enroll Full Bundle \u2014 $${BUNDLE_PRICE_USD}`
-              : `Enroll Now \u2014 $${mod.earlyBirdUsd}`}
+            Enroll Now &mdash; ${tier.price}
           </button>
 
           {/* Quick facts */}
@@ -143,26 +115,11 @@ export default function DetailSidebar({
 
         {/* Bundle upsell card — green tones, separate card */}
         <div className="rounded-2xl border border-emerald-200 bg-emerald-50 p-5">
-          <div className="flex items-center justify-between mb-2">
-            <p className="text-sm font-bold text-foreground">
-              Full Bundle
-            </p>
-            {/* Toggle */}
-            <button
-              onClick={() => setBundleMode(!bundleMode)}
-              className={`relative inline-flex h-5 w-9 shrink-0 cursor-pointer rounded-full transition-colors duration-200 ${
-                bundleMode ? "bg-emerald-500" : "bg-[#dfdbc9]"
-              }`}
-            >
-              <span
-                className={`inline-block h-4 w-4 rounded-full bg-white shadow-sm transform transition-transform duration-200 mt-0.5 ${
-                  bundleMode ? "translate-x-[18px]" : "translate-x-0.5"
-                }`}
-              />
-            </button>
-          </div>
+          <p className="text-sm font-bold text-foreground mb-2">
+            Save with the Full Bundle
+          </p>
           <p className="text-xs text-muted-foreground mb-2.5">
-            All 3 Modules &middot; 12 Classes &middot; 12 Hours
+            All 3 Bootcamps &middot; 12 Classes &middot; 12 Hours
           </p>
           <div className="flex items-baseline gap-2 mb-2.5">
             <span className="text-lg font-extrabold text-foreground">
@@ -179,7 +136,7 @@ export default function DetailSidebar({
             onClick={() => setBundlePopupOpen(true)}
             className="text-sm font-semibold text-emerald-600 hover:underline"
           >
-            View all modules
+            View all bootcamps
           </button>
         </div>
       </div>

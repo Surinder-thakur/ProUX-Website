@@ -1,6 +1,4 @@
-"use client";
-
-import { useState, useEffect, useRef } from "react";
+/* Stats bar — pure CSS sticky, no JS needed */
 
 /* ── Custom icons from Figma Make build ──────────────────────────────── */
 
@@ -143,64 +141,31 @@ const valuePropItems = [
 /* ── Component ────────────────────────────────────────────────────────── */
 
 export default function StatsBar() {
-  const inFlowRef = useRef<HTMLDivElement>(null);
-  const [showFixed, setShowFixed] = useState(true);
-
-  useEffect(() => {
-    const handleScroll = () => {
-      if (!inFlowRef.current) return;
-      const rect = inFlowRef.current.getBoundingClientRect();
-      // Hide fixed bar the instant the in-flow bar's bottom reaches viewport bottom.
-      // At that moment both bars are at the exact same visual position — no flash.
-      setShowFixed(rect.bottom > window.innerHeight);
-    };
-
-    window.addEventListener("scroll", handleScroll, { passive: true });
-    handleScroll();
-    return () => window.removeEventListener("scroll", handleScroll);
-  }, []);
-
-  const barInner = (
-    <div className="relative w-full bg-white lg:bg-gradient-to-b lg:from-white/80 lg:to-white/95 lg:backdrop-blur-xl lg:supports-[backdrop-filter]:bg-white/60 border-t border-[#99825d]/30 lg:shadow-[0_-8px_30px_rgba(0,0,0,0.04)] lg:transition-colors lg:duration-300 after:hidden lg:after:block after:absolute after:inset-0 after:bg-gradient-to-b after:from-[#99825d]/10 after:to-white/20 after:pointer-events-none">
-      <div className="max-w-[1200px] mx-auto lg:px-[24px] py-[28px] px-[16px]">
-        <div className="grid grid-cols-2 gap-x-6 gap-y-7 lg:flex lg:flex-row lg:flex-nowrap lg:gap-x-0 lg:gap-y-0 items-start lg:items-center justify-between w-full">
-          {valuePropItems.map((item, index) => (
-            <div key={item.line1} className="contents">
-              {index > 0 && (
-                <div className="hidden lg:block h-10 w-px bg-gray-200 shrink-0 mx-6" />
-              )}
-              <div className="flex flex-col lg:flex-row items-center gap-2.5 lg:gap-3 shrink min-w-0 text-center lg:text-left">
-                <div className="w-8 h-8 lg:w-11 lg:h-11 shrink-0 flex items-center justify-center text-[#99825d] bg-[#99825d]/5 rounded-full lg:bg-transparent lg:rounded-none">
-                  <item.icon className="w-full h-full" />
+  return (
+    <div className="sticky bottom-0 z-50">
+      <div className="relative w-full bg-white lg:bg-gradient-to-b lg:from-white/80 lg:to-white/95 lg:backdrop-blur-xl lg:supports-[backdrop-filter]:bg-white/60 border-t border-[#99825d]/30 lg:shadow-[0_-8px_30px_rgba(0,0,0,0.04)] lg:transition-colors lg:duration-300 after:hidden lg:after:block after:absolute after:inset-0 after:bg-gradient-to-b after:from-[#99825d]/10 after:to-white/20 after:pointer-events-none">
+        <div className="max-w-[1200px] mx-auto lg:px-[24px] py-[28px] px-[16px]">
+          <div className="grid grid-cols-2 gap-x-6 gap-y-7 lg:flex lg:flex-row lg:flex-nowrap lg:gap-x-0 lg:gap-y-0 items-start lg:items-center justify-between w-full">
+            {valuePropItems.map((item, index) => (
+              <div key={item.line1} className="contents">
+                {index > 0 && (
+                  <div className="hidden lg:block h-10 w-px bg-gray-200 shrink-0 mx-6" />
+                )}
+                <div className="flex flex-col lg:flex-row items-center gap-2.5 lg:gap-3 shrink min-w-0 text-center lg:text-left">
+                  <div className="w-8 h-8 lg:w-11 lg:h-11 shrink-0 flex items-center justify-center text-[#99825d] bg-[#99825d]/5 rounded-full lg:bg-transparent lg:rounded-none">
+                    <item.icon className="w-full h-full" />
+                  </div>
+                  <span className="text-[12px] lg:text-[13px] font-bold text-[#1a2130] leading-tight tracking-wide max-w-full lg:max-w-none">
+                    {item.line1}
+                    <br className="hidden lg:block" />
+                    {" "}{item.line2}
+                  </span>
                 </div>
-                <span className="text-[12px] lg:text-[13px] font-bold text-[#1a2130] leading-tight tracking-wide max-w-full lg:max-w-none">
-                  {item.line1}
-                  <br className="hidden lg:block" />
-                  {" "}{item.line2}
-                </span>
               </div>
-            </div>
-          ))}
+            ))}
+          </div>
         </div>
       </div>
     </div>
-  );
-
-  return (
-    <>
-      {/* Fixed bar at bottom — desktop only; hidden on mobile */}
-      <div
-        className={`hidden lg:block fixed bottom-0 left-0 right-0 z-50 ${
-          showFixed ? "" : "invisible pointer-events-none"
-        }`}
-      >
-        {barInner}
-      </div>
-
-      {/* In-flow bar — scrolls naturally with the page */}
-      <div ref={inFlowRef} className="relative z-40">
-        {barInner}
-      </div>
-    </>
   );
 }

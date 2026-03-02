@@ -31,22 +31,31 @@ export interface AudiencePersona {
   description: string;
 }
 
+export interface PricingTierData {
+  price: number;
+  priceInr: number;
+  deadline: string; // ISO date "2026-03-20T23:59:59"
+}
+
+export interface PricingTiers {
+  earlyBird: PricingTierData;
+  standard: PricingTierData;
+  lastCall: { price: number; priceInr: number }; // full price, no deadline (uses startDateISO)
+}
+
 export interface BootcampModule {
   slug: string;
   title: string;
   tagline: string;
   badge: string;
-  priceUsd: number;
-  earlyBirdUsd: number;
-  priceInr: number;
-  earlyBirdInr: number;
   classCount: number;
   hoursLive: number;
   story: string;
   gradient: string;
   image: string;
-  startDate: string;
-  earlyBirdDeadline: string;
+  startDate: string; // Display string e.g. "Apr 1"
+  startDateISO: string; // ISO date "2026-04-01"
+  pricingTiers: PricingTiers;
   walkAwayWith: string;
   idealFor: string;
   outcomes: LearningOutcome[];
@@ -56,12 +65,149 @@ export interface BootcampModule {
   faqs: FaqEntry[];
 }
 
-// Constants
+// ── Pricing Tier Utilities ──────────────────────────────────────────────
+
+export type TierName = "earlyBird" | "standard" | "lastCall" | "closed";
+
+export interface ActiveTier {
+  name: TierName;
+  label: string;
+  price: number;
+  priceInr: number;
+  fullPrice: number;
+  discount: number; // percentage off full price
+  deadline: Date | null;
+  dotColor: "emerald" | "amber" | "red";
+}
+
+export function getActiveTier(mod: BootcampModule): ActiveTier {
+  const now = new Date();
+  const { earlyBird, standard, lastCall } = mod.pricingTiers;
+  const fullPrice = lastCall.price;
+  const startDate = new Date(mod.startDateISO);
+
+  const earlyEnd = new Date(earlyBird.deadline);
+  if (now <= earlyEnd) {
+    return {
+      name: "earlyBird",
+      label: "Early Bird",
+      price: earlyBird.price,
+      priceInr: earlyBird.priceInr,
+      fullPrice,
+      discount: Math.round(((fullPrice - earlyBird.price) / fullPrice) * 100),
+      deadline: earlyEnd,
+      dotColor: "emerald",
+    };
+  }
+
+  const standardEnd = new Date(standard.deadline);
+  if (now <= standardEnd) {
+    return {
+      name: "standard",
+      label: "Standard Enrollment",
+      price: standard.price,
+      priceInr: standard.priceInr,
+      fullPrice,
+      discount: Math.round(((fullPrice - standard.price) / fullPrice) * 100),
+      deadline: standardEnd,
+      dotColor: "amber",
+    };
+  }
+
+  if (now <= startDate) {
+    return {
+      name: "lastCall",
+      label: "Last Call",
+      price: fullPrice,
+      priceInr: lastCall.priceInr,
+      fullPrice,
+      discount: 0,
+      deadline: startDate,
+      dotColor: "red",
+    };
+  }
+
+  return {
+    name: "closed",
+    label: "Enrollment Closed",
+    price: fullPrice,
+    priceInr: lastCall.priceInr,
+    fullPrice,
+    discount: 0,
+    deadline: null,
+    dotColor: "red",
+  };
+}
+
+export type TierStatus = "active" | "upcoming" | "ended";
+
+export interface TierInfo {
+  name: TierName;
+  label: string;
+  price: number;
+  discount: number;
+  dateRange: string; // e.g. "Ends Mar 20" or "Mar 21 – Mar 30"
+  status: TierStatus;
+}
+
+function formatShortDate(date: Date): string {
+  return date.toLocaleDateString("en-US", { month: "short", day: "numeric" });
+}
+
+function addDays(date: Date, days: number): Date {
+  const d = new Date(date);
+  d.setDate(d.getDate() + days);
+  return d;
+}
+
+export function getAllTiersInfo(mod: BootcampModule): TierInfo[] {
+  const now = new Date();
+  const { earlyBird, standard, lastCall } = mod.pricingTiers;
+  const fullPrice = lastCall.price;
+
+  const earlyEnd = new Date(earlyBird.deadline);
+  const standardEnd = new Date(standard.deadline);
+
+  const earlyStatus: TierStatus = now <= earlyEnd ? "active" : "ended";
+  const standardStatus: TierStatus =
+    now <= earlyEnd ? "upcoming" : now <= standardEnd ? "active" : "ended";
+  const lastCallStatus: TierStatus =
+    now <= standardEnd ? "upcoming" : "active";
+
+  return [
+    {
+      name: "earlyBird",
+      label: "Early Bird",
+      price: earlyBird.price,
+      discount: Math.round(((fullPrice - earlyBird.price) / fullPrice) * 100),
+      dateRange: `Ends ${formatShortDate(earlyEnd)}`,
+      status: earlyStatus,
+    },
+    {
+      name: "standard",
+      label: "Standard",
+      price: standard.price,
+      discount: Math.round(((fullPrice - standard.price) / fullPrice) * 100),
+      dateRange: `${formatShortDate(addDays(earlyEnd, 1))} \u2013 ${formatShortDate(standardEnd)}`,
+      status: standardStatus,
+    },
+    {
+      name: "lastCall",
+      label: "Last Call",
+      price: fullPrice,
+      discount: 0,
+      dateRange: "Final 72 hours",
+      status: lastCallStatus,
+    },
+  ];
+}
+
+// ── Constants ───────────────────────────────────────────────────────────
 
 export const BUNDLE_PRICE_USD = 699;
 export const BUNDLE_PRICE_INR = 57900;
-export const BUNDLE_ORIGINAL_USD = 947;
-export const BUNDLE_SAVINGS_USD = 248;
+export const BUNDLE_ORIGINAL_USD = 1185; // 3 x $395
+export const BUNDLE_SAVINGS_USD = 486; // 1185 - 699
 
 export const TRUST_STATS = [
   { value: "12", label: "Classes" },
@@ -114,7 +260,7 @@ export const QUICK_FACTS = [
   "Certificate of Completion",
 ];
 
-// Module Data
+// ── Module Data ─────────────────────────────────────────────────────────
 
 const modules: BootcampModule[] = [
   {
@@ -123,16 +269,17 @@ const modules: BootcampModule[] = [
     tagline:
       "Build a design system that AI tools actually understand.",
     badge: "Best for Getting Started",
-    priceUsd: 299,
-    earlyBirdUsd: 249,
-    priceInr: 24900,
-    earlyBirdInr: 20700,
     classCount: 4,
     hoursLive: 4,
     gradient: "from-[hsl(var(--gold-200))] to-[hsl(var(--gold-100))]",
     image: "https://images.unsplash.com/photo-1558655146-9f40138edfeb?w=800&h=500&fit=crop&q=80",
     startDate: "Apr 1",
-    earlyBirdDeadline: "Mar 20",
+    startDateISO: "2026-04-01",
+    pricingTiers: {
+      earlyBird: { price: 245, priceInr: 20300, deadline: "2026-03-12T23:59:59" },
+      standard: { price: 295, priceInr: 24500, deadline: "2026-03-28T23:59:59" },
+      lastCall: { price: 395, priceInr: 32800 },
+    },
     story:
       "You've been using ChatGPT for a year. You type vague prompts, get vague outputs, and conclude AI is overhyped. But you've seen others get stunning results. The difference isn't the AI, it's the human. This module makes you the human who gets stunning results.",
     walkAwayWith:
@@ -300,16 +447,17 @@ const modules: BootcampModule[] = [
     title: "AI Design-Code Workflow",
     tagline: "Ship your designs to production without a developer.",
     badge: "Design-to-Code",
-    priceUsd: 349,
-    earlyBirdUsd: 299,
-    priceInr: 28900,
-    earlyBirdInr: 24900,
     classCount: 4,
     hoursLive: 4,
     gradient: "from-[hsl(var(--brown-100))] to-[hsl(var(--gold-100))]",
     image: "https://images.unsplash.com/photo-1555066931-4365d14bab8c?w=800&h=500&fit=crop&q=80",
     startDate: "Apr 3",
-    earlyBirdDeadline: "Mar 20",
+    startDateISO: "2026-04-03",
+    pricingTiers: {
+      earlyBird: { price: 245, priceInr: 20300, deadline: "2026-03-14T23:59:59" },
+      standard: { price: 295, priceInr: 24500, deadline: "2026-03-30T23:59:59" },
+      lastCall: { price: 395, priceInr: 32800 },
+    },
     story:
       "You've designed beautiful interfaces that sit in Figma forever, waiting for a developer who never comes. Or worse, they ship something that looks nothing like your design. This module gives you the power to ship your own designs as real, deployed websites.",
     walkAwayWith:
@@ -481,16 +629,17 @@ const modules: BootcampModule[] = [
     tagline:
       "Validate every design decision from research to proof.",
     badge: "No Coding Skills Needed",
-    priceUsd: 299,
-    earlyBirdUsd: 249,
-    priceInr: 24900,
-    earlyBirdInr: 20700,
     classCount: 4,
     hoursLive: 4,
     gradient: "from-[hsl(var(--blue-100))] to-[hsl(var(--gold-100))]",
     image: "https://images.unsplash.com/photo-1531403009284-440f080d1e12?w=800&h=500&fit=crop&q=80",
     startDate: "May 6",
-    earlyBirdDeadline: "Mar 31",
+    startDateISO: "2026-05-06",
+    pricingTiers: {
+      earlyBird: { price: 245, priceInr: 20300, deadline: "2026-03-16T23:59:59" },
+      standard: { price: 295, priceInr: 24500, deadline: "2026-05-02T23:59:59" },
+      lastCall: { price: 395, priceInr: 32800 },
+    },
     story:
       "You've designed beautiful experiences, but when leadership asks 'how do you know this works?' you freeze. This module gives you the methodology to prove impact with evidence, not opinions. AI-powered research sprints, testable hypotheses, and validation cycles.",
     walkAwayWith:
@@ -658,7 +807,7 @@ const modules: BootcampModule[] = [
   },
 ];
 
-// Helpers
+// ── Helpers ─────────────────────────────────────────────────────────────
 
 export function getAllBootcamps(): BootcampModule[] {
   return modules;
