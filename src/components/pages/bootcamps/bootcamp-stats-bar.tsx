@@ -7,7 +7,7 @@ const stats = [
     caption: "Across three focused 4-week bootcamps.",
   },
   {
-    value: "12",
+    value: "18",
     label: "Hours of Training",
     caption: "Hands-on sessions, not passive lectures.",
   },

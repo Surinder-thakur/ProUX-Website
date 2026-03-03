@@ -54,7 +54,7 @@ function BootcampCard({ module: mod }: { module: BootcampModule }) {
         </h3>
 
         {/* Tagline */}
-        <p className="text-[13px] text-muted-foreground leading-relaxed mt-1.5 pr-2 line-clamp-2">
+        <p className="text-[13px] font-medium text-[#4f4f4f] leading-relaxed mt-1.5 pr-2 line-clamp-2">
           {mod.tagline}
         </p>
 
@@ -86,7 +86,7 @@ export default function BootcampModuleCards() {
     <section
       id="modules"
       aria-label="Bootcamps"
-      className="bg-[hsl(var(--bg-primary-50))] pt-0 pb-12 md:pb-16 scroll-mt-[80px]"
+      className="bg-[hsl(var(--bg-primary-50))] pt-0 pb-12 md:pb-16 scroll-mt-[96px]"
     >
       <div className="container-default">
         {/* Section heading */}

@@ -1,6 +1,5 @@
 "use client";
 
-import { useState } from "react";
 import { motion, AnimatePresence } from "motion/react";
 import {
   getAllBootcamps,
@@ -9,21 +8,19 @@ import {
   BUNDLE_SAVINGS_USD,
 } from "@/lib/data/bootcamps";
 
-function ChevronDown({ isOpen }: { isOpen: boolean }) {
+/* ── Green circle checkmark ──────────────────────────────────────────── */
+
+function Check() {
   return (
-    <svg
-      className={`w-4 h-4 shrink-0 transition-transform duration-200 ${
-        isOpen ? "rotate-180" : ""
-      }`}
-      fill="none"
-      viewBox="0 0 24 24"
-      stroke="currentColor"
-      strokeWidth={2}
-    >
-      <path strokeLinecap="round" strokeLinejoin="round" d="M19 9l-7 7-7-7" />
-    </svg>
+    <span className="shrink-0 w-4 h-4 rounded-full bg-emerald-600 inline-flex items-center justify-center">
+      <svg className="w-[9px] h-[9px] text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={3}>
+        <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
+      </svg>
+    </span>
   );
 }
+
+/* ── Bundle Popup ────────────────────────────────────────────────────── */
 
 export default function BundlePopup({
   open,
@@ -33,7 +30,9 @@ export default function BundlePopup({
   onClose: () => void;
 }) {
   const modules = getAllBootcamps();
-  const [expandedModule, setExpandedModule] = useState<number>(0);
+  const savingsPercent = Math.round(
+    (BUNDLE_SAVINGS_USD / BUNDLE_ORIGINAL_USD) * 100
+  );
 
   if (!open) return null;
 
@@ -46,144 +45,114 @@ export default function BundlePopup({
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
-            className="fixed inset-0 z-50 bg-black/60 backdrop-blur-sm"
+            className="fixed inset-0 z-[100] bg-black/70 backdrop-blur-md"
             onClick={onClose}
           />
 
+          {/* Close — floating, outside the card, top-right */}
+          <motion.button
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            onClick={onClose}
+            className="fixed z-[101] top-4 right-4 w-10 h-10 rounded-full bg-white/10 backdrop-blur-sm flex items-center justify-center text-white/70 hover:text-white hover:bg-white/20 transition-colors"
+            aria-label="Close"
+          >
+            <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+              <path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" />
+            </svg>
+          </motion.button>
+
           {/* Modal */}
           <motion.div
-            initial={{ opacity: 0, y: 40 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: 40 }}
-            transition={{ duration: 0.25, ease: "easeOut" }}
-            className="fixed inset-4 md:inset-auto md:top-1/2 md:left-1/2 md:-translate-x-1/2 md:-translate-y-1/2 z-50 md:w-full md:max-w-[680px] md:max-h-[85vh] bg-card rounded-2xl shadow-2xl border border-[#dfdbc9] overflow-hidden flex flex-col"
+            initial={{ opacity: 0, scale: 0.97 }}
+            animate={{ opacity: 1, scale: 1 }}
+            exit={{ opacity: 0, scale: 0.97 }}
+            transition={{ duration: 0.2, ease: "easeOut" }}
+            className="fixed inset-0 z-[100] m-auto max-w-[1060px] h-fit max-h-[calc(100vh-48px)] w-[calc(100%-48px)] rounded-2xl shadow-[0_25px_60px_rgba(0,0,0,0.3)] overflow-hidden flex flex-col"
           >
-            {/* Header */}
-            <div className="flex items-start justify-between p-5 md:p-6 border-b border-[#dfdbc9]">
-              <div>
-                <p className="text-xs font-semibold uppercase tracking-wider text-secondary mb-1">
-                  Full Bundle
-                </p>
-                <h2 className="text-xl md:text-2xl font-extrabold text-foreground tracking-[-0.5px]">
-                  All 3 Bootcamps
+            {/* ── Header ─────────────────────────────────────────── */}
+            <div className="bg-[#1a2130] px-7 py-5 flex items-center justify-between gap-8">
+              <div className="min-w-0">
+                <h2 className="text-[20px] font-extrabold text-white tracking-[-0.4px] leading-tight">
+                  The Complete AI Design Engineer Bundle
                 </h2>
-                <p className="text-sm text-muted-foreground mt-1">
-                  12 classes, 12 hours live, every deliverable included
+                <p className="text-[13px] text-white/45 mt-1">
+                  12 live classes &middot; 18 hours &middot; 3 certifications
                 </p>
               </div>
-              <button
-                onClick={onClose}
-                className="shrink-0 w-8 h-8 rounded-lg flex items-center justify-center text-muted-foreground hover:bg-[hsl(var(--gold-100))] transition-colors"
-              >
-                <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
-                  <path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" />
-                </svg>
-              </button>
-            </div>
 
-            {/* Scrollable content */}
-            <div className="flex-1 overflow-y-auto p-5 md:p-6 space-y-4">
-              {modules.map((mod, i) => (
-                <div
-                  key={mod.slug}
-                  className="rounded-xl border border-[#dfdbc9] overflow-hidden"
-                >
-                  {/* Bootcamp header */}
-                  <button
-                    onClick={() => setExpandedModule(expandedModule === i ? -1 : i)}
-                    className={`w-full flex items-center justify-between p-4 text-left transition-colors ${
-                      expandedModule === i ? "bg-card" : "bg-[hsl(var(--gold-100))]"
-                    }`}
-                  >
-                    <div className="flex items-center gap-3">
-                      <span className="flex items-center justify-center w-7 h-7 rounded-full bg-secondary text-white text-xs font-bold">
-                        {i + 1}
-                      </span>
-                      <div>
-                        <p className="text-[15px] font-bold text-foreground">
-                          {mod.title}
-                        </p>
-                        <p className="text-xs text-muted-foreground mt-0.5">
-                          {mod.classCount} classes &middot; {mod.hoursLive} hours
-                        </p>
-                      </div>
-                    </div>
-                    <ChevronDown isOpen={expandedModule === i} />
-                  </button>
-
-                  {/* Expanded content */}
-                  <AnimatePresence initial={false}>
-                    {expandedModule === i && (
-                      <motion.div
-                        initial={{ height: 0, opacity: 0 }}
-                        animate={{ height: "auto", opacity: 1 }}
-                        exit={{ height: 0, opacity: 0 }}
-                        transition={{ duration: 0.25, ease: "easeInOut" }}
-                        className="overflow-hidden"
-                      >
-                        <div className="px-4 pb-4 space-y-3">
-                          <p className="text-sm text-muted-foreground leading-relaxed">
-                            {mod.tagline}
-                          </p>
-
-                          {/* Curriculum summary */}
-                          <div className="space-y-1.5">
-                            {mod.curriculum.map((week) => (
-                              <div
-                                key={week.week}
-                                className="flex items-center gap-2 text-sm"
-                              >
-                                <span className="text-xs font-bold text-primary w-14 shrink-0">
-                                  Week {week.week}
-                                </span>
-                                <span className="text-muted-foreground">
-                                  {week.title}
-                                </span>
-                              </div>
-                            ))}
-                          </div>
-
-                          {/* Key deliverables */}
-                          <div className="pt-2">
-                            <p className="text-xs font-semibold uppercase tracking-wider text-foreground mb-1.5">
-                              Key Deliverables
-                            </p>
-                            <div className="space-y-1">
-                              {mod.deliverables.slice(0, 3).map((d, j) => (
-                                <div key={j} className="flex items-start gap-2">
-                                  <svg className="shrink-0 w-3.5 h-3.5 text-primary mt-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}>
-                                    <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
-                                  </svg>
-                                  <span className="text-xs text-muted-foreground">{d}</span>
-                                </div>
-                              ))}
-                            </div>
-                          </div>
-                        </div>
-                      </motion.div>
-                    )}
-                  </AnimatePresence>
-                </div>
-              ))}
-            </div>
-
-            {/* Footer with CTA */}
-            <div className="p-5 md:p-6 border-t border-[#dfdbc9] bg-[hsl(var(--gold-50))]">
-              <div className="flex items-center justify-between mb-4">
-                <div className="flex items-baseline gap-2">
-                  <span className="text-2xl font-extrabold text-foreground">
+              <div className="shrink-0 text-right">
+                <div className="flex items-baseline gap-2.5 justify-end">
+                  <span className="text-[30px] font-extrabold text-white leading-none tracking-[-0.5px]">
                     ${BUNDLE_PRICE_USD}
                   </span>
-                  <span className="text-sm text-muted-foreground line-through">
+                  <span className="text-[14px] text-white/25 line-through">
                     ${BUNDLE_ORIGINAL_USD}
                   </span>
                 </div>
-                <span className="text-sm font-semibold text-secondary">
-                  Save ${BUNDLE_SAVINGS_USD}
+                <span className="inline-flex items-center gap-1 mt-1.5 px-2.5 py-[3px] rounded-md bg-emerald-500/15 text-[11px] font-bold text-emerald-400 uppercase tracking-wide">
+                  Save {savingsPercent}% &mdash; ${BUNDLE_SAVINGS_USD}
                 </span>
               </div>
-              <button className="btn-shine w-full rounded-[12px] h-[48px] text-[13px] font-semibold uppercase tracking-wide text-white bg-primary shadow-lg transition-all hover:brightness-110 hover:shadow-xl">
-                Enroll Full Bundle
+            </div>
+
+            {/* ── 3 Module Cards ──────────────────────────────────── */}
+            <div className="bg-[#faf9f6] px-6 py-5">
+              <div className="grid grid-cols-3 gap-4">
+                {modules.map((mod, i) => (
+                  <div
+                    key={mod.slug}
+                    className="rounded-xl bg-white border border-[#e8e4d9] shadow-[0_1px_3px_rgba(0,0,0,0.04)] flex flex-col"
+                  >
+                    {/* Card header — fixed height so titles align across cards */}
+                    <div className="px-4 pt-4 pb-3 min-h-[88px] flex flex-col">
+                      <div className="flex items-center gap-2 mb-1.5">
+                        <span className="w-[22px] h-[22px] rounded-full bg-[#1a2130] text-white text-[10px] font-bold flex items-center justify-center shrink-0">
+                          {i + 1}
+                        </span>
+                        <span className="text-[10px] font-bold uppercase tracking-[0.12em] text-primary">
+                          Weeks {i * 4 + 1}&ndash;{(i + 1) * 4}
+                        </span>
+                      </div>
+                      <h3 className="text-[14px] font-bold text-foreground leading-snug flex-1">
+                        {mod.title}
+                      </h3>
+                      <p className="text-[11px] text-[#999] mt-1">
+                        {mod.classCount} classes &middot; {mod.hoursLive} hours live
+                      </p>
+                    </div>
+
+                    {/* Divider */}
+                    <div className="mx-4 border-t border-[#eeebe3]" />
+
+                    {/* Deliverables — aligned across all cards */}
+                    <div className="px-4 py-3 flex-1">
+                      <p className="text-[9px] font-bold uppercase tracking-[0.14em] text-[#aaa] mb-2.5">
+                        What You Ship
+                      </p>
+                      <div className="space-y-2">
+                        {mod.deliverables.slice(0, 3).map((d, j) => (
+                          <div key={j} className="flex items-center gap-2.5">
+                            <Check />
+                            <span className="text-[12px] text-foreground/75 leading-snug">{d}</span>
+                          </div>
+                        ))}
+                      </div>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+
+            {/* ── CTA Footer ─────────────────────────────────────── */}
+            <div className="bg-white border-t border-[#e8e4d9] px-7 py-4 flex items-center gap-6">
+              <p className="flex-1 text-[13px] text-[#555] leading-snug">
+                One enrollment. Three certifications. Everything you need to
+                design, build, and ship AI products yourself.
+              </p>
+              <button className="btn-shine shrink-0 rounded-[12px] h-[48px] px-9 text-[13px] font-semibold uppercase tracking-wide text-white bg-primary shadow-md transition-all hover:brightness-110 hover:shadow-xl">
+                Enroll Full Bundle &mdash; ${BUNDLE_PRICE_USD}
               </button>
             </div>
           </motion.div>

@@ -106,9 +106,9 @@ function TierInfoPopover({ tiers }: { tiers: TierInfo[] }) {
       {open && (
         <div
           ref={popoverRef}
-          className="absolute z-50 bottom-full left-1/2 -translate-x-1/2 mb-2 w-[280px] rounded-xl bg-white border border-[#e8e4d9] shadow-[0_8px_30px_rgba(0,0,0,0.08)] p-3.5"
+          className="absolute z-50 top-full left-1/2 -translate-x-1/2 mt-2 w-[280px] rounded-xl bg-white border border-[#e8e4d9] shadow-[0_8px_30px_rgba(0,0,0,0.08)] p-3.5"
         >
-          <div className="absolute -bottom-[6px] left-1/2 -translate-x-1/2 w-3 h-3 rotate-45 bg-white border-r border-b border-[#e8e4d9]" />
+          <div className="absolute -top-[6px] left-1/2 -translate-x-1/2 w-3 h-3 rotate-45 bg-white border-l border-t border-[#e8e4d9]" />
 
           <p className="text-[11px] font-semibold uppercase tracking-wider text-[#4A5568] mb-2.5">
             Price goes up the longer you wait

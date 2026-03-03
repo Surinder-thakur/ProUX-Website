@@ -20,7 +20,7 @@ export default function DetailOutcomes({
         {outcomes.map((outcome) => (
           <div key={outcome.number} className="flex gap-3">
             <svg
-              className="shrink-0 w-5 h-5 text-primary mt-0.5"
+              className="shrink-0 w-5 h-5 text-emerald-600 mt-0.5"
               fill="none"
               viewBox="0 0 24 24"
               stroke="currentColor"

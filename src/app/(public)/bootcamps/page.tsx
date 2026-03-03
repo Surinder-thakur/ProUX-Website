@@ -68,7 +68,7 @@ function BootcampJsonLd() {
     hasCourseInstance: courseInstances,
     aggregateRating: {
       "@type": "AggregateRating",
-      ratingValue: "4.5",
+      ratingValue: "4.98",
       ratingCount: "12000",
       bestRating: "5",
     },

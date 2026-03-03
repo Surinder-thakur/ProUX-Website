@@ -115,6 +115,8 @@ export default function DetailCurriculum({
 }) {
   const [openIndices, setOpenIndices] = useState<number[]>([0]);
 
+  const allOpen = openIndices.length === curriculum.length;
+
   const handleToggle = (index: number) => {
     setOpenIndices((prev) =>
       prev.includes(index)
@@ -123,14 +125,32 @@ export default function DetailCurriculum({
     );
   };
 
+  const handleToggleAll = () => {
+    if (allOpen) {
+      setOpenIndices([]);
+    } else {
+      setOpenIndices(curriculum.map((_, i) => i));
+    }
+  };
+
   return (
     <section className="py-10 md:py-14">
-      <p className="text-xs md:text-sm font-normal text-[hsl(var(--text-primary-600))] uppercase tracking-wider mb-3">
-        Curriculum
-      </p>
-      <h2 className="text-[22px] md:text-[28px] font-extrabold tracking-[-0.6px] text-foreground mb-8">
-        Weekly Breakdown
-      </h2>
+      <div className="flex items-end justify-between mb-8">
+        <div>
+          <p className="text-xs md:text-sm font-normal text-[hsl(var(--text-primary-600))] uppercase tracking-wider mb-3">
+            Curriculum
+          </p>
+          <h2 className="text-[22px] md:text-[28px] font-extrabold tracking-[-0.6px] text-foreground">
+            Weekly Breakdown
+          </h2>
+        </div>
+        <button
+          onClick={handleToggleAll}
+          className="text-[13px] font-semibold text-primary hover:text-primary/80 transition-colors"
+        >
+          {allOpen ? "Collapse All" : "Expand All"}
+        </button>
+      </div>
 
       <div className="flex flex-col gap-3">
         {curriculum.map((week, index) => (

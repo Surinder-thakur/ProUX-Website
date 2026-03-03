@@ -23,7 +23,8 @@ export default function DetailMobileBar({
 }: {
   module: BootcampModule;
 }) {
-  const [selectedTrack, setSelectedTrack] = useState<"A" | "B" | null>(null);
+  const [selectedTrack, setSelectedTrack] = useState<"A" | "B">("A");
+  const [bundleAdded, setBundleAdded] = useState(false);
   const tier = useActiveTier(mod);
 
   return (
@@ -96,7 +97,7 @@ export default function DetailMobileBar({
                       Track A
                     </p>
                     <p className="text-xs text-muted-foreground mt-0.5">
-                      India / Asia / Europe
+                      Mon &middot; 7:30 &ndash; 9:00 PM IST
                     </p>
                   </button>
                   <button
@@ -111,7 +112,7 @@ export default function DetailMobileBar({
                       Track B
                     </p>
                     <p className="text-xs text-muted-foreground mt-0.5">
-                      Americas
+                      Thu &middot; 2:30 &ndash; 4:00 PM IST
                     </p>
                   </button>
                 </div>
@@ -119,14 +120,11 @@ export default function DetailMobileBar({
 
               {/* Enroll CTA */}
               <button
-                disabled={!selectedTrack}
-                className={`btn-shine w-full rounded-[12px] h-[48px] text-[13px] font-semibold uppercase tracking-wide text-white shadow-md transition-all ${
-                  selectedTrack
-                    ? "bg-primary hover:brightness-110 hover:shadow-xl cursor-pointer"
-                    : "bg-primary opacity-50 cursor-not-allowed"
-                }`}
+                className="btn-shine w-full rounded-[12px] h-[48px] text-[13px] font-semibold uppercase tracking-wide text-white bg-primary shadow-md transition-all hover:brightness-110 hover:shadow-xl cursor-pointer"
               >
-                Enroll Now &mdash; ${tier.price}
+                {bundleAdded
+                  ? `Enroll Full Bundle — $${BUNDLE_PRICE_USD}`
+                  : `Enroll Now — $${tier.price}`}
               </button>
 
               {/* Quick facts */}
@@ -134,7 +132,7 @@ export default function DetailMobileBar({
                 {QUICK_FACTS.map((fact) => (
                   <div key={fact} className="flex items-center gap-2">
                     <svg
-                      className="shrink-0 w-3.5 h-3.5 text-primary"
+                      className="shrink-0 w-3.5 h-3.5 text-emerald-600"
                       fill="none"
                       viewBox="0 0 24 24"
                       stroke="currentColor"
@@ -153,14 +151,40 @@ export default function DetailMobileBar({
                 ))}
               </div>
 
-              {/* Bundle upsell — green tones */}
-              <div className="rounded-xl border border-emerald-200 bg-emerald-50 p-4">
-                <p className="text-sm font-bold text-foreground mb-1">
-                  Save with the Full Bundle
-                </p>
-                <p className="text-xs text-muted-foreground mb-2">
-                  All 3 Bootcamps &middot; 12 Classes &middot; 12 Hours
-                </p>
+              {/* Bundle upsell with toggle */}
+              <div className={`rounded-xl border p-4 transition-all ${
+                bundleAdded
+                  ? "border-emerald-300 bg-emerald-50"
+                  : "border-emerald-200 bg-emerald-50"
+              }`}>
+                <div className="flex items-start justify-between gap-3 mb-2">
+                  <div>
+                    <p className="text-sm font-bold text-foreground mb-1">
+                      {bundleAdded ? "Full Bundle Added" : "Save with the Full Bundle"}
+                    </p>
+                    <p className="text-xs text-muted-foreground">
+                      All 3 Bootcamps &middot; 12 Classes &middot; 18 Hours
+                    </p>
+                  </div>
+
+                  {/* Toggle switch */}
+                  <button
+                    onClick={() => setBundleAdded(!bundleAdded)}
+                    className={`relative shrink-0 inline-flex h-6 w-11 items-center rounded-full transition-colors ${
+                      bundleAdded ? "bg-emerald-500" : "bg-gray-300"
+                    }`}
+                    role="switch"
+                    aria-checked={bundleAdded}
+                    aria-label="Add full bundle"
+                  >
+                    <span
+                      className={`inline-block h-4 w-4 rounded-full bg-white shadow-sm transition-transform ${
+                        bundleAdded ? "translate-x-6" : "translate-x-1"
+                      }`}
+                    />
+                  </button>
+                </div>
+
                 <div className="flex items-baseline gap-2">
                   <span className="text-lg font-extrabold text-foreground">
                     ${BUNDLE_PRICE_USD}

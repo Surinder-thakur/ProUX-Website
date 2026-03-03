@@ -48,6 +48,9 @@ export interface BootcampModule {
   title: string;
   tagline: string;
   badge: string;
+  heroTag: string;
+  heroHeadline: string;
+  heroSubheadline: string;
   classCount: number;
   hoursLive: number;
   story: string;
@@ -242,7 +245,7 @@ export const HOW_IT_WORKS_STEPS = [
     step: 3,
     title: "Learn Weekly",
     description:
-      "1 class/week for 4 weeks. 60-min live sessions + 2-3 hours homework.",
+      "1 class/week for 4 weeks. 90-min live sessions + 2-3 hours homework.",
   },
   {
     step: 4,
@@ -253,24 +256,28 @@ export const HOW_IT_WORKS_STEPS = [
 ];
 
 export const QUICK_FACTS = [
-  "4 live classes, 60 min each",
-  "4 hours total instruction",
-  "Capped at 12 students per track",
-  "Rolling monthly enrollment",
+  "4 live classes, 90 min each",
+  "6 hours total instruction",
+  "12 students per track",
   "Certificate of Completion",
 ];
+
+export const BUNDLE_HOURS = 18;
 
 // ── Module Data ─────────────────────────────────────────────────────────
 
 const modules: BootcampModule[] = [
   {
     slug: "ai-mastery-design-system",
-    title: "AI Mastery + Design System",
+    title: "AI Prompt Engineering + Figma Design System",
     tagline:
       "Build a design system that AI tools actually understand.",
     badge: "Best for Getting Started",
+    heroTag: "No AI experience? That's exactly why you're here.",
+    heroHeadline: "AI Won't Replace You.\nA Designer Who Masters It Will.",
+    heroSubheadline: "4 live classes. One prompt framework. Stop experimenting. Start shipping.",
     classCount: 4,
-    hoursLive: 4,
+    hoursLive: 6,
     gradient: "from-[hsl(var(--gold-200))] to-[hsl(var(--gold-100))]",
     image: "https://images.unsplash.com/photo-1558655146-9f40138edfeb?w=800&h=500&fit=crop&q=80",
     startDate: "Apr 1",
@@ -291,7 +298,7 @@ const modules: BootcampModule[] = [
         number: "01",
         title: "Master the Prompt Framework",
         description:
-          "Learn our 5-part prompt structure (Role, Task, Context, Constraints, Format) that turns Claude from a toy into a strategic partner. Build multi-step prompt chains and negative prompts.",
+          "Learn our 5-part prompt structure (Role, Task, Context, Constraints, Format) that turns AI from a toy into a strategic partner. Build multi-step prompt chains and negative prompts.",
       },
       {
         number: "02",
@@ -301,9 +308,9 @@ const modules: BootcampModule[] = [
       },
       {
         number: "03",
-        title: "Create SKILL.md Files",
+        title: "Create Structured AI Skill Files",
         description:
-          "Encode your exact process, standards, and best practices into structured documents that teach AI your methodology. SKILL.md + Agent + Project = an AI that works like you.",
+          "Encode your process, standards, and best practices into structured documents so AI agents work the way you do — consistently and on-brand.",
       },
       {
         number: "04",
@@ -447,8 +454,11 @@ const modules: BootcampModule[] = [
     title: "AI Design-Code Workflow",
     tagline: "Ship your designs to production without a developer.",
     badge: "Design-to-Code",
+    heroTag: "Bridge the Gap — Design to Production",
+    heroHeadline: "Stop Handing Off.\nStart Shipping.",
+    heroSubheadline: "In 6 live hours, learn how to turn Figma designs into production-ready code using AI — no developer required.",
     classCount: 4,
-    hoursLive: 4,
+    hoursLive: 6,
     gradient: "from-[hsl(var(--brown-100))] to-[hsl(var(--gold-100))]",
     image: "https://images.unsplash.com/photo-1555066931-4365d14bab8c?w=800&h=500&fit=crop&q=80",
     startDate: "Apr 3",
@@ -629,8 +639,11 @@ const modules: BootcampModule[] = [
     tagline:
       "Validate every design decision from research to proof.",
     badge: "No Coding Skills Needed",
+    heroTag: "For Designers Who Think Strategically",
+    heroHeadline: "Stop Designing on Instinct.\nStart Proving Impact.",
+    heroSubheadline: "In 6 live hours, master AI-powered research sprints that turn gut feelings into validated design decisions.",
     classCount: 4,
-    hoursLive: 4,
+    hoursLive: 6,
     gradient: "from-[hsl(var(--blue-100))] to-[hsl(var(--gold-100))]",
     image: "https://images.unsplash.com/photo-1531403009284-440f080d1e12?w=800&h=500&fit=crop&q=80",
     startDate: "May 6",

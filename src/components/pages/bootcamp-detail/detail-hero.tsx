@@ -1,53 +1,67 @@
 "use client";
 
-import Link from "next/link";
-import { Badge } from "@/components/ui/badge";
+import Image from "next/image";
 import type { BootcampModule } from "@/lib/data/bootcamps";
 
 export default function DetailHero({ module: mod }: { module: BootcampModule }) {
+  // Split headline on \n for controlled line breaks
+  const headlineLines = mod.heroHeadline.split("\n");
+
   return (
-    <section className="bg-[hsl(var(--bg-primary-50))] pt-28 pb-8 md:pb-12">
-      <div className="container-default">
-        <div className="text-center lg:text-left max-w-2xl">
-          {/* Back link */}
-          <Link
-            href="/bootcamps"
-            className="inline-flex items-center gap-1 text-xs md:text-sm font-medium text-muted-foreground hover:text-primary transition-colors mb-6"
-          >
-            &larr; All Bootcamps
-          </Link>
+    <div className="relative min-h-screen flex flex-col justify-end">
+      {/* Background image */}
+      <Image
+        src="/images/bootcamp-hero.jpg"
+        alt=""
+        fill
+        priority
+        sizes="(max-width: 1024px) 100vw, 65vw"
+        className="object-cover -scale-x-100"
+      />
 
-          <div className="flex flex-col gap-3">
-            <Badge variant="secondary" className="self-start text-[11px]">
-              {mod.badge}
-            </Badge>
+      {/* Dark tint — softens saturated tones toward pastel/professional, WCAG AA on all zones */}
+      <div className="absolute inset-0" style={{ backgroundColor: "rgba(20, 10, 30, 0.3)" }} />
+      {/* Smooth dark gradient — concentrated on bottom-left where text sits */}
+      <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent" />
+      <div className="absolute inset-0 bg-gradient-to-r from-black/50 via-black/15 to-transparent" />
 
-            <h1 className="text-[28px] leading-[34px] md:text-4xl lg:text-[42px] lg:leading-[50px] font-extrabold tracking-[-1.2px] text-foreground">
-              {mod.title}
-            </h1>
+      {/* Content overlay */}
+      <div className="relative z-10 px-6 md:px-10 lg:px-12 pt-28 pb-12 md:pb-16">
+        {/* Tag — lowercase, understated */}
+        <p className="text-[13px] font-medium text-white/50 tracking-wide mb-5">
+          {mod.heroTag}
+        </p>
 
-            <p className="text-lg md:text-xl font-medium text-[hsl(var(--text-neutrals-800))] leading-[1.4]">
-              {mod.tagline}
-            </p>
+        {/* Headline — controlled line breaks, no orphans */}
+        <h1 className="font-black tracking-[-2px] text-white mb-6">
+          {headlineLines.map((line, i) => (
+            <span key={i} className="block text-[34px] leading-[1.08] md:text-[48px] lg:text-[56px]">
+              {line}
+            </span>
+          ))}
+        </h1>
 
-            {/* Metadata row */}
-            <div className="flex flex-wrap items-center gap-3 text-sm text-muted-foreground mt-1">
-              <span>{mod.classCount} Classes</span>
-              <span className="h-3 w-px bg-[#dfdbc9]" />
-              <span>{mod.hoursLive} Hours Live</span>
-              <span className="h-3 w-px bg-[#dfdbc9]" />
-              <span>Cohort Based</span>
-              <span className="h-3 w-px bg-[#dfdbc9]" />
-              <span>Rolling Monthly</span>
-            </div>
+        {/* Subheadline — balanced width */}
+        <p className="text-[16px] md:text-[18px] lg:text-[20px] font-normal text-white/75 leading-[1.55] mb-10 max-w-[480px]">
+          {mod.heroSubheadline}
+        </p>
 
-            {/* Story */}
-            <p className="text-sm md:text-base text-muted-foreground leading-relaxed mt-3">
-              {mod.story}
-            </p>
-          </div>
+        {/* Pills — subtle, spaced */}
+        <div className="flex flex-wrap items-center gap-2">
+          {[
+            `${mod.classCount} Live Classes`,
+            `${mod.hoursLive} Hours Total`,
+            `Starts ${mod.startDate}`,
+          ].map((pill) => (
+            <span
+              key={pill}
+              className="inline-flex items-center px-3 py-1.5 rounded-full bg-white/10 border border-white/15 text-[12px] font-medium text-white/80"
+            >
+              {pill}
+            </span>
+          ))}
         </div>
       </div>
-    </section>
+    </div>
   );
 }

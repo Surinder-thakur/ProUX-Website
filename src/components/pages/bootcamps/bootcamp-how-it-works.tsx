@@ -1,7 +1,55 @@
-import { LayoutGrid, CalendarCheck, GraduationCap, Rocket } from "lucide-react";
 import { HOW_IT_WORKS_STEPS } from "@/lib/data/bootcamps";
 
-const STEP_ICONS = [LayoutGrid, CalendarCheck, GraduationCap, Rocket];
+/* ── Custom Step Icons (from Figma) ─────────────────────────────────────── */
+
+function GridIcon({ className }: { className?: string }) {
+  return (
+    <svg className={className} viewBox="0 0 40 40" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+      <rect x="5" y="5" width="11.67" height="11.67" rx="1.67" />
+      <rect x="23.33" y="5" width="11.67" height="11.67" rx="1.67" />
+      <rect x="5" y="23.33" width="11.67" height="11.67" rx="1.67" />
+      <rect x="23.33" y="23.33" width="11.67" height="11.67" rx="1.67" />
+    </svg>
+  );
+}
+
+function TrackIcon({ className }: { className?: string }) {
+  return (
+    <svg className={className} viewBox="0 0 40 40" fill="none" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round">
+      <rect x="5" y="5" width="30.67" height="11.67" rx="1.67" strokeWidth="2" />
+      <rect x="5" y="23.33" width="11.67" height="11.67" rx="1.67" strokeWidth="2" />
+      <path d="M25 28.5L27.67 31.5L33 25.5" strokeWidth="2.33" />
+    </svg>
+  );
+}
+
+function LicenseIcon({ className }: { className?: string }) {
+  return (
+    <svg className={className} viewBox="0 0 40 40" fill="none" stroke="currentColor">
+      <path d="M4.167 20C4.167 12.536 4.167 8.804 6.486 6.485C8.804 4.167 12.536 4.167 20 4.167C27.464 4.167 31.196 4.167 33.515 6.485C35.834 8.804 35.834 12.536 35.834 20C35.834 27.464 35.834 31.196 33.515 33.515C31.196 35.833 27.464 35.833 20 35.833C12.536 35.833 8.804 35.833 6.486 33.515C4.167 31.196 4.167 27.464 4.167 20Z" strokeWidth="2" />
+      <path d="M4.167 15L35.834 15" strokeWidth="2" strokeLinejoin="round" />
+      <path d="M11.667 10H11.682" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round" />
+      <path d="M18.333 10H18.348" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round" />
+      <rect x="21" y="22" width="7" height="7" rx="1" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+    </svg>
+  );
+}
+
+function RocketIcon({ className }: { className?: string }) {
+  return (
+    <svg className={className} viewBox="0 0 32 32" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+      <path d="M7 15.876C15.454 0.119 25.981-0.063 30.188 1.816C32.067 6.023 31.885 16.55 16.128 25.004C15.964 24.065 15.056 21.604 12.728 19.276C10.4 16.948 7.939 16.039 7 15.876Z" />
+      <path d="M18.249 24.254C21.314 25.754 21.641 28.444 22.065 31.004C22.065 31.004 28.483 26.26 24.378 19.754" />
+      <path d="M7.75 13.882C6.25 10.818 3.56 10.491 1 10.067C1 10.067 5.744 3.649 12.25 7.754" />
+      <path d="M6.03 20.856C5.177 21.709 3.727 24.183 4.751 27.254C7.822 28.278 10.295 26.828 11.149 25.975" />
+      <circle cx="21.918" cy="10.088" r="2.917" />
+    </svg>
+  );
+}
+
+const STEP_ICONS = [GridIcon, TrackIcon, LicenseIcon, RocketIcon];
+
+/* ── Component ──────────────────────────────────────────────────────────── */
 
 export default function BootcampHowItWorks() {
   return (
@@ -28,7 +76,7 @@ export default function BootcampHowItWorks() {
                 className="flex flex-col gap-3 items-center text-center w-full max-w-[260px]"
               >
                 {/* Icon */}
-                <Icon className="h-10 w-10 text-white" strokeWidth={1.4} />
+                <Icon className="h-10 w-10 text-white" />
 
                 {/* Title */}
                 <p className="text-[20px] md:text-[22px] font-bold leading-[28px] tracking-[-0.16px] text-white">
@@ -65,6 +113,7 @@ export default function BootcampHowItWorks() {
               stroke="#333333"
               strokeOpacity="0.5"
               strokeWidth="1"
+              strokeDasharray="6 4"
             />
           </svg>
         </div>

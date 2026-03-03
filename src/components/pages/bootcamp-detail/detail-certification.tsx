@@ -28,8 +28,8 @@ export default function DetailCertification({
             <div className="absolute bottom-3 right-3 w-6 h-6 border-b-2 border-r-2 border-primary/30 rounded-br-sm" />
 
             {/* Badge icon */}
-            <div className="flex items-center justify-center w-14 h-14 rounded-full bg-primary/10 mx-auto mb-5">
-              <svg className="w-7 h-7 text-primary" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
+            <div className="flex items-center justify-center w-14 h-14 rounded-full bg-emerald-100 mx-auto mb-5">
+              <svg className="w-7 h-7 text-emerald-600" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
                 <path strokeLinecap="round" strokeLinejoin="round" d="M9 12l2 2 4-4M7.835 4.697a3.42 3.42 0 001.946-.806 3.42 3.42 0 014.438 0 3.42 3.42 0 001.946.806 3.42 3.42 0 013.138 3.138 3.42 3.42 0 00.806 1.946 3.42 3.42 0 010 4.438 3.42 3.42 0 00-.806 1.946 3.42 3.42 0 01-3.138 3.138 3.42 3.42 0 00-1.946.806 3.42 3.42 0 01-4.438 0 3.42 3.42 0 00-1.946-.806 3.42 3.42 0 01-3.138-3.138 3.42 3.42 0 00-.806-1.946 3.42 3.42 0 010-4.438 3.42 3.42 0 00.806-1.946 3.42 3.42 0 013.138-3.138z" />
               </svg>
             </div>
@@ -79,7 +79,7 @@ export default function DetailCertification({
         ].map((item) => (
           <div key={item.title} className="flex items-start gap-3">
             <svg
-              className="shrink-0 w-4 h-4 text-primary mt-0.5"
+              className="shrink-0 w-4 h-4 text-emerald-600 mt-0.5"
               fill="none"
               viewBox="0 0 24 24"
               stroke="currentColor"
