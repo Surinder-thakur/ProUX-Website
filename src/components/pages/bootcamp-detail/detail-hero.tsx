@@ -42,7 +42,7 @@ export default function DetailHero({ module: mod }: { module: BootcampModule }) 
         </h1>
 
         {/* Subheadline — balanced width */}
-        <p className="text-[16px] md:text-[18px] lg:text-[20px] font-normal text-white/75 leading-[1.55] mb-10 max-w-[480px]">
+        <p className="text-[16px] md:text-[18px] lg:text-[20px] font-normal text-white/75 leading-[1.55] mb-10 max-w-[560px]">
           {mod.heroSubheadline}
         </p>
 

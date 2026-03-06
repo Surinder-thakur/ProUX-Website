@@ -438,7 +438,7 @@ export default function ConsultingTestimonials({
   }, [handleScroll]);
 
   return (
-    <section className={contained ? "py-14 md:py-20" : "bg-[hsl(var(--bg-primary-50))] pt-[80px] pb-0"}>
+    <section className={contained ? "py-7 md:py-10" : "bg-[hsl(var(--bg-primary-50))] pt-[80px] pb-0"}>
       <div className={contained ? "" : "container-default"}>
         {/* ── Header ─────────────────────────────────────────────────── */}
         <div className={`flex flex-col mb-12 md:mb-16 ${

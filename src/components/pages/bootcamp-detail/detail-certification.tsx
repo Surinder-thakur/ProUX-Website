@@ -8,7 +8,7 @@ export default function DetailCertification({
   module: BootcampModule;
 }) {
   return (
-    <section className="py-14 md:py-20">
+    <section className="py-7 md:py-10">
       <h2 className="text-[26px] md:text-[32px] font-extrabold tracking-[-0.6px] text-foreground mb-3">
         Certificate of Completion
       </h2>

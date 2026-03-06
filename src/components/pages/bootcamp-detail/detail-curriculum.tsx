@@ -40,7 +40,7 @@ export default function DetailCurriculum({
   let partNum = 0;
 
   return (
-    <section className="py-14 md:py-20">
+    <section className="py-7 md:py-10">
       <div className="mb-10 md:mb-12">
         <p className="text-xs md:text-sm font-normal text-[hsl(var(--text-primary-600))] uppercase tracking-wider mb-3">
           Curriculum

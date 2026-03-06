@@ -59,7 +59,7 @@ export default function DetailContent({
           <DetailCertification module={mod} />
 
           {/* ── Instructor (contained for column layout) ───────── */}
-          <section className="py-14 md:py-20">
+          <section className="py-7 md:py-10">
             <div className="relative bg-card rounded-[24px] border border-[#e8e4d9] p-8 md:p-10">
               {/* Mobile: centered photo */}
               <div className="flex justify-center mb-8 md:hidden">
