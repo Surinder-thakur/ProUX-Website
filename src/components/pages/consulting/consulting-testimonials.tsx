@@ -1,8 +1,8 @@
 "use client";
 
 import { useState, useRef, useEffect, useCallback } from "react";
-import { motion } from "motion/react";
-import { Star, Volume2, VolumeX } from "lucide-react";
+import { motion, AnimatePresence } from "motion/react";
+import { Star, Volume2, VolumeX, X } from "lucide-react";
 import { cn } from "@/lib/utils";
 import Image from "next/image";
 import dynamic from "next/dynamic";
@@ -71,6 +71,46 @@ const textTestimonials: TextTestimonial[] = [
     author: "Avin Kline",
     role: "CEO, Lucyd",
     avatar: "/images/consulting/testimonials/avin-kline.png",
+  },
+  {
+    quote:
+      "The bootcamp completely <strong>transformed how I approach design systems.</strong> I went from struggling with Figma auto-layout to building production-ready components in under a week.",
+    badge: "Career switch",
+    author: "Maya Rodriguez",
+    role: "Product Designer, Stripe",
+    avatar: "/images/consulting/testimonials/avatar-1.png",
+  },
+  {
+    quote:
+      "Before this bootcamp I was a graphic designer with <strong>zero product experience.</strong> Now I'm leading the design for a Series A startup. The <strong>AI-first workflow</strong> alone was worth every penny.",
+    badge: "Landed dream role",
+    author: "James Okonkwo",
+    role: "Lead Designer, Fintech Startup",
+    avatar: "/images/consulting/testimonials/avatar-2.png",
+  },
+  {
+    quote:
+      "Surinder doesn't just teach design — he teaches you to <strong>think like an engineer.</strong> My developers actually enjoy working with my handoffs now. The bootcamp gave me a <strong>completely new skillset.</strong>",
+    badge: "10x faster handoffs",
+    author: "Priya Sharma",
+    role: "Senior UX Designer",
+    avatar: "/images/consulting/testimonials/avatar-3.png",
+  },
+  {
+    quote:
+      "I was skeptical about an online bootcamp, but the <strong>live sessions and real-world projects</strong> made all the difference. I shipped a full SaaS redesign as my capstone and <strong>got hired the next month.</strong>",
+    badge: "Hired in 30 days",
+    author: "Lucas Fernández",
+    role: "UI/UX Designer, Agency",
+    avatar: "/images/consulting/testimonials/avatar-1.png",
+  },
+  {
+    quote:
+      "The AI design tools module was a <strong>game-changer.</strong> I now prototype 3x faster and my conversion-focused designs have driven <strong>measurable revenue growth</strong> for every client since graduating.",
+    badge: "+3x output speed",
+    author: "Sarah Chen",
+    role: "Freelance Product Designer",
+    avatar: "/images/consulting/testimonials/avatar-2.png",
   },
 ];
 
@@ -196,11 +236,17 @@ function VideoTestimonialCard({
 
   const handleToggleMute = () => {
     const player = containerRef.current?.querySelector("mux-player") as
-      | (HTMLElement & { muted: boolean })
+      | (HTMLElement & { muted: boolean; play?: () => Promise<void>; paused?: boolean })
       | null;
     if (player) {
-      player.muted = !player.muted;
-      setIsMuted(player.muted);
+      const newMuted = !player.muted;
+      player.muted = newMuted;
+      setIsMuted(newMuted);
+      // Ensure the video is actually playing — browsers may block autoplay
+      // on heavy pages, so unmuting a paused video produces no sound
+      if (!newMuted && player.paused && player.play) {
+        player.play().catch(() => {});
+      }
     }
   };
 
@@ -298,11 +344,82 @@ const headerAvatars = [
   { src: "/images/consulting/testimonials/avatar-3.png", alt: "ProUX design client" },
 ];
 
+/* ── Testimonials Popup ────────────────────────────────────────────────── */
+
+function TestimonialsPopup({
+  open,
+  onClose,
+}: {
+  open: boolean;
+  onClose: () => void;
+}) {
+  if (!open) return null;
+
+  return (
+    <AnimatePresence>
+      {open && (
+        <>
+          {/* Backdrop */}
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            className="fixed inset-0 z-[120] bg-black/70 backdrop-blur-md"
+            onClick={onClose}
+          />
+
+          {/* Close button */}
+          <motion.button
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            onClick={onClose}
+            className="fixed z-[121] top-4 right-4 w-10 h-10 rounded-full bg-white/10 backdrop-blur-sm flex items-center justify-center text-white/70 hover:text-white hover:bg-white/20 transition-colors"
+            aria-label="Close"
+          >
+            <X className="w-5 h-5" />
+          </motion.button>
+
+          {/* Modal */}
+          <motion.div
+            initial={{ opacity: 0, scale: 0.97 }}
+            animate={{ opacity: 1, scale: 1 }}
+            exit={{ opacity: 0, scale: 0.97 }}
+            transition={{ duration: 0.2, ease: "easeOut" }}
+            className="fixed inset-0 z-[120] m-auto max-w-4xl h-fit max-h-[85vh] w-[calc(100%-48px)] rounded-2xl bg-[#faf9f6] shadow-[0_25px_60px_rgba(0,0,0,0.3)] overflow-hidden flex flex-col"
+          >
+            {/* Header */}
+            <div className="px-7 py-5 border-b border-[#e8e4d9]">
+              <h2 className="text-[20px] font-bold text-foreground tracking-[-0.4px]">
+                What Designers Are Saying
+              </h2>
+            </div>
+
+            {/* Body */}
+            <div className="overflow-y-auto p-6">
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
+                {textTestimonials.map((t) => (
+                  <TextTestimonialCard key={t.author} testimonial={t} />
+                ))}
+              </div>
+            </div>
+          </motion.div>
+        </>
+      )}
+    </AnimatePresence>
+  );
+}
+
 /* ── Main Component ────────────────────────────────────────────────────── */
 
-export default function ConsultingTestimonials() {
+export default function ConsultingTestimonials({
+  contained = false,
+}: {
+  contained?: boolean;
+}) {
   const scrollRef = useRef<HTMLDivElement>(null);
   const [activeVideoIndex, setActiveVideoIndex] = useState(0);
+  const [showAllTestimonials, setShowAllTestimonials] = useState(false);
 
   const handleScroll = useCallback(() => {
     const el = scrollRef.current;
@@ -321,10 +438,12 @@ export default function ConsultingTestimonials() {
   }, [handleScroll]);
 
   return (
-    <section className="bg-[hsl(var(--bg-primary-50))] pt-[80px] pb-0">
-      <div className="container-default">
+    <section className={contained ? "py-14 md:py-20" : "bg-[hsl(var(--bg-primary-50))] pt-[80px] pb-0"}>
+      <div className={contained ? "" : "container-default"}>
         {/* ── Header ─────────────────────────────────────────────────── */}
-        <div className="flex flex-col items-center text-center mb-12 md:mb-16">
+        <div className={`flex flex-col mb-12 md:mb-16 ${
+          contained ? "items-start" : "items-center text-center"
+        }`}>
           {/* Stacked avatars */}
           <div className="flex items-center -space-x-4 mb-4">
             {headerAvatars.map((avatar, i) => (
@@ -344,40 +463,85 @@ export default function ConsultingTestimonials() {
           <div className="flex items-center gap-2 mb-5">
             <Star className="h-4 w-4 fill-[#D3A70B] text-[#D3A70B]" />
             <span className="text-sm font-medium text-muted-foreground">
-              Rated 5 stars by 300+ clients
+              {contained
+                ? "4.98 across 12k+ designers trained"
+                : "Rated 5 stars by 300+ clients"}
             </span>
           </div>
 
           {/* Heading */}
-          <h2 className="text-[32px] md:text-[40px] font-bold text-foreground leading-[1.15] tracking-tight mb-4 px-4 md:px-0">
-            Trusted by Founders Worldwide
+          <h2 className={`font-bold text-foreground leading-[1.15] tracking-tight mb-4 px-4 md:px-0 ${
+            contained ? "text-[26px] md:text-[32px]" : "text-[32px] md:text-[40px]"
+          }`}>
+            {contained
+              ? <>Trusted by <strong>Designers</strong> Worldwide</>
+              : "Trusted by Founders Worldwide"}
           </h2>
 
           {/* Subtitle */}
-          <p className="text-lg md:text-xl text-muted-foreground max-w-2xl leading-relaxed px-4 md:px-0">
-            See how AI-First UX translated into measurable gains for SaaS &amp; eCommerce teams.
+          <p className={`text-muted-foreground leading-relaxed px-4 md:px-0 ${
+            contained ? "text-[15px] md:text-base max-w-xl" : "text-lg md:text-xl max-w-2xl"
+          }`}>
+            {contained
+              ? "Hear from designers who leveled up through our bootcamps."
+              : <>See how AI-First UX translated into measurable gains for SaaS &amp; eCommerce teams.</>}
           </p>
         </div>
 
         {/* ── Text Testimonials Grid ─────────────────────────────────── */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 items-start mb-16 md:mb-20">
-          {textTestimonials.map((t) => (
-            <TextTestimonialCard key={t.author} testimonial={t} />
-          ))}
-        </div>
+        {contained ? (
+          <div>
+            {/* True masonry via CSS columns — no row gaps */}
+            <div className="relative">
+              <div className="columns-1 md:columns-2 gap-6 [&>div]:mb-6 [&>div]:break-inside-avoid">
+                {textTestimonials.slice(0, 4).map((t) => (
+                  <TextTestimonialCard key={t.author} testimonial={t} />
+                ))}
+              </div>
+
+              {/* Gradient fade over the bottom cards */}
+              <div className="absolute bottom-0 inset-x-0 h-[55%] bg-gradient-to-t from-[#f8f7f4] via-[#f8f7f4]/80 to-transparent pointer-events-none" />
+
+              {/* "View more" button */}
+              <div className="absolute bottom-6 inset-x-0 flex justify-center">
+                <button
+                  onClick={() => setShowAllTestimonials(true)}
+                  className="rounded-[14px] border border-input bg-background shadow-sm px-6 py-2.5 text-[13px] font-semibold text-foreground hover:bg-accent hover:text-accent-foreground transition-colors"
+                >
+                  View more
+                </button>
+              </div>
+            </div>
+
+            <TestimonialsPopup
+              open={showAllTestimonials}
+              onClose={() => setShowAllTestimonials(false)}
+            />
+          </div>
+        ) : (
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 items-start mb-16 md:mb-20">
+            {textTestimonials.slice(0, 3).map((t) => (
+              <TextTestimonialCard key={t.author} testimonial={t} />
+            ))}
+          </div>
+        )}
 
         {/* ── Video Testimonials ─────────────────────────────────────── */}
-        <div className="pb-12 md:pb-16">
-          {/* Video heading with floating hearts above */}
-          <div className="flex flex-col items-center mb-10">
-            <FloatingHearts />
-            <h3 className="text-2xl md:text-[32px] font-bold text-foreground text-center leading-[1.2] tracking-tight max-w-2xl px-4 md:px-0">
+        <div className={contained ? "" : "pb-12 md:pb-16"}>
+          {/* Video heading (hearts only on full-width) */}
+          <div className={`flex flex-col mb-10 ${contained ? "items-start" : "items-center"}`}>
+            {!contained && <FloatingHearts />}
+            <h3 className={`font-bold text-foreground leading-[1.2] tracking-tight px-4 md:px-0 ${
+              contained ? "text-xl md:text-[26px] max-w-lg" : "text-2xl md:text-[32px] max-w-2xl text-center"
+            }`}>
               Unscripted Clips From the People Who Signed the Checks
             </h3>
           </div>
 
-          {/* Desktop: 4-column grid */}
-          <div className="hidden md:grid md:grid-cols-4 gap-5">
+          {/* Desktop grid */}
+          <div className={`hidden md:grid gap-5 ${
+            contained ? "md:grid-cols-2 lg:grid-cols-4" : "md:grid-cols-4"
+          }`}>
             {videoTestimonials.map((v) => (
               <VideoTestimonialCard key={v.name} testimonial={v} />
             ))}

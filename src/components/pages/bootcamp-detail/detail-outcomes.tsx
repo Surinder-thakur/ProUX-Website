@@ -9,10 +9,10 @@ export default function DetailOutcomes({
 }) {
   return (
     <section className="py-10 md:py-14">
-      <p className="text-xs md:text-sm font-normal text-[hsl(var(--text-primary-600))] uppercase tracking-wider mb-3">
+      <p className="text-xs md:text-sm font-normal text-[hsl(var(--text-primary-600))] uppercase tracking-wider mb-3 text-center">
         What You&apos;ll Learn
       </p>
-      <h2 className="text-[22px] md:text-[28px] font-extrabold tracking-[-0.6px] text-foreground mb-8">
+      <h2 className="text-[22px] md:text-[28px] font-extrabold tracking-[-0.6px] text-foreground mb-8 text-center">
         Learning Outcomes
       </h2>
 

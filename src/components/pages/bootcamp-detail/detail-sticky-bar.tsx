@@ -1,7 +1,8 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import { getActiveTier, type BootcampModule } from "@/lib/data/bootcamps";
+import Image from "next/image";
+import type { BootcampModule } from "@/lib/data/bootcamps";
 
 export default function DetailStickyBar({
   module: mod,
@@ -9,11 +10,10 @@ export default function DetailStickyBar({
   module: BootcampModule;
 }) {
   const [visible, setVisible] = useState(false);
-  const tier = getActiveTier(mod);
 
   useEffect(() => {
     const handleScroll = () => {
-      setVisible(window.scrollY > 400);
+      setVisible(window.scrollY > window.innerHeight);
     };
     window.addEventListener("scroll", handleScroll, { passive: true });
     return () => window.removeEventListener("scroll", handleScroll);
@@ -21,47 +21,65 @@ export default function DetailStickyBar({
 
   return (
     <div
-      className={`fixed top-0 inset-x-0 z-50 hidden lg:block border-b border-[#dfdbc9] bg-card/95 backdrop-blur-md transition-all duration-300 ${
+      className={`fixed top-0 inset-x-0 z-[100] hidden lg:block transition-all duration-300 ${
         visible
           ? "translate-y-0 opacity-100"
           : "-translate-y-full opacity-0 pointer-events-none"
       }`}
     >
-      <div className="container-default">
-        <div className="flex items-center justify-between h-14">
-          {/* Left: course info */}
-          <div className="flex items-center gap-4">
-            <p className="text-sm font-bold text-foreground truncate max-w-[300px]">
-              {mod.title}
-            </p>
-            <span className="h-4 w-px bg-[#dfdbc9]" />
-            <div className="flex items-center gap-2 text-xs text-muted-foreground">
-              <span>{mod.classCount} Classes</span>
-              <span className="h-3 w-px bg-[#dfdbc9]" />
-              <span>{mod.hoursLive} Hours</span>
-              <span className="h-3 w-px bg-[#dfdbc9]" />
-              <span>4 Weeks</span>
+      <div className="bg-[#f8f7f4]/95 backdrop-blur-md border-b border-[#e8e4d9]">
+        <div className="container-default">
+          <div className="flex items-center h-[72px] gap-6">
+            {/* Course thumbnail */}
+            <div className="relative h-[48px] w-[68px] shrink-0 rounded-[8px] overflow-hidden shadow-sm">
+              <Image
+                src={mod.image}
+                alt={mod.title}
+                fill
+                sizes="68px"
+                className="object-cover"
+              />
             </div>
-          </div>
 
-          {/* Right: price + CTA */}
-          <div className="flex items-center gap-4">
-            <div className="flex items-baseline gap-2">
-              <span className="text-lg font-extrabold text-foreground">
-                ${tier.price}
-              </span>
-              <span className="text-sm text-muted-foreground line-through">
-                ${tier.fullPrice}
-              </span>
-              {tier.discount > 0 && (
-                <span className="text-[11px] font-bold text-emerald-600 uppercase">
-                  {tier.discount}% OFF
-                </span>
-              )}
+            {/* Title + meta */}
+            <div className="min-w-0">
+              <p className="text-[14px] font-bold text-foreground truncate max-w-[400px] leading-tight">
+                {mod.title}
+              </p>
+              <div className="flex items-center gap-2.5 mt-1">
+                <span className="text-[12px] text-muted-foreground font-medium">{mod.classCount} Classes</span>
+                <span className="text-[12px] text-muted-foreground/40">&middot;</span>
+                <span className="text-[12px] text-muted-foreground font-medium">{mod.hoursLive} Hours</span>
+                <span className="text-[12px] text-muted-foreground/40">&middot;</span>
+                <span className="text-[12px] text-muted-foreground font-medium">4 Weeks</span>
+                <span className="text-[12px] text-muted-foreground/40">&middot;</span>
+                <span className="text-[12px] text-muted-foreground font-medium">Cohort-Based</span>
+              </div>
             </div>
-            <button className="btn-shine rounded-[10px] bg-primary px-5 h-[36px] text-[12px] font-semibold uppercase tracking-wide text-white shadow-sm transition-all hover:brightness-110">
-              Enroll Now
-            </button>
+
+            {/* Separator */}
+            <span className="h-8 w-px bg-[#dfdbc9] shrink-0" />
+
+            {/* Instructor */}
+            <div className="flex items-center gap-3 shrink-0">
+              <div className="relative h-[36px] w-[36px] shrink-0 overflow-hidden rounded-full border-[2px] border-primary/30">
+                <Image
+                  src="/images/surinder-profile.jpg"
+                  alt="Surinder Thakur"
+                  fill
+                  sizes="36px"
+                  className="object-cover"
+                />
+              </div>
+              <div>
+                <p className="text-[13px] font-semibold text-foreground leading-tight">
+                  Surinder Thakur
+                </p>
+                <p className="text-[11px] text-muted-foreground leading-tight">
+                  Instructor
+                </p>
+              </div>
+            </div>
           </div>
         </div>
       </div>

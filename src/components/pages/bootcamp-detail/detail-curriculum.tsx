@@ -2,164 +2,156 @@
 
 import { useState } from "react";
 import { motion, AnimatePresence } from "motion/react";
-import type { CurriculumWeek } from "@/lib/data/bootcamps";
+import type { CurriculumWeek, BootcampModule } from "@/lib/data/bootcamps";
 
-function ChevronDown({ isOpen }: { isOpen: boolean }) {
+function LiveBadge() {
   return (
-    <svg
-      className={`w-5 h-5 shrink-0 transition-transform duration-200 ${
-        isOpen ? "rotate-180" : ""
-      }`}
-      fill="none"
-      viewBox="0 0 24 24"
-      stroke="currentColor"
-      strokeWidth={2}
-    >
-      <path strokeLinecap="round" strokeLinejoin="round" d="M19 9l-7 7-7-7" />
-    </svg>
-  );
-}
-
-function WeekItem({
-  week,
-  isOpen,
-  onClick,
-}: {
-  week: CurriculumWeek;
-  isOpen: boolean;
-  onClick: () => void;
-}) {
-  return (
-    <div
-      className={`w-full cursor-pointer transition-all duration-200 overflow-hidden rounded-xl ${
-        isOpen ? "bg-card" : "bg-[hsl(var(--gold-100))]"
-      }`}
-      onClick={onClick}
-    >
-      <div className="px-5 py-4 flex gap-4 items-start w-full">
-        <div className="flex-1 flex flex-col">
-          <p className="text-[15px] md:text-base font-semibold text-foreground leading-7">
-            <span className="text-primary font-bold">
-              Week {week.week}
-            </span>
-            <span className="mx-2 text-[#dfdbc9]">/</span>
-            {week.title}
-          </p>
-
-          <AnimatePresence initial={false}>
-            {isOpen && (
-              <motion.div
-                initial={{ height: 0, opacity: 0 }}
-                animate={{ height: "auto", opacity: 1 }}
-                exit={{ height: 0, opacity: 0 }}
-                transition={{ duration: 0.3, ease: "easeInOut" }}
-                className="overflow-hidden"
-              >
-                <div className="pt-4 space-y-2">
-                  {week.parts.map((part, j) => (
-                    <div
-                      key={j}
-                      className="flex items-start justify-between gap-4 py-1"
-                    >
-                      <div className="flex items-start gap-2.5">
-                        <span className="shrink-0 mt-2 w-1.5 h-1.5 rounded-full bg-primary/40" />
-                        <span className="text-sm text-muted-foreground leading-relaxed">
-                          {part.title}
-                        </span>
-                      </div>
-                      <span className="shrink-0 text-xs text-muted-foreground/60 font-medium whitespace-nowrap mt-0.5">
-                        {part.duration}
-                      </span>
-                    </div>
-                  ))}
-
-                  {week.homework && (
-                    <div className="mt-3 pt-3 border-t border-[#dfdbc9]/60">
-                      <p className="text-xs font-semibold uppercase tracking-wider text-primary/70 mb-1">
-                        Homework
-                      </p>
-                      <p className="text-sm text-muted-foreground">
-                        {week.homework}
-                      </p>
-                    </div>
-                  )}
-
-                  {week.deliverable && (
-                    <div className="mt-3 pt-3 border-t border-[#dfdbc9]/60">
-                      <p className="text-xs font-semibold uppercase tracking-wider text-primary/70 mb-1">
-                        Deliverable
-                      </p>
-                      <p className="text-sm text-muted-foreground">
-                        {week.deliverable}
-                      </p>
-                    </div>
-                  )}
-                </div>
-              </motion.div>
-            )}
-          </AnimatePresence>
-        </div>
-
-        <div className="mt-1 text-muted-foreground">
-          <ChevronDown isOpen={isOpen} />
-        </div>
-      </div>
-    </div>
+    <span className="inline-flex items-center gap-1.5 shrink-0">
+      <span className="w-2 h-2 rounded-full bg-emerald-500" />
+      <span className="text-[12px] font-medium text-emerald-600">Live</span>
+    </span>
   );
 }
 
 export default function DetailCurriculum({
   curriculum,
+  mod,
 }: {
   curriculum: CurriculumWeek[];
+  mod: BootcampModule;
 }) {
-  const [openIndices, setOpenIndices] = useState<number[]>([0]);
+  const [openParts, setOpenParts] = useState<string[]>([]);
 
-  const allOpen = openIndices.length === curriculum.length;
+  const allPartKeys = curriculum.flatMap((week) =>
+    week.parts.map((_, j) => `${week.week}-${j}`)
+  );
+  const allOpen = allPartKeys.every((k) => openParts.includes(k));
 
-  const handleToggle = (index: number) => {
-    setOpenIndices((prev) =>
-      prev.includes(index)
-        ? prev.filter((i) => i !== index)
-        : [...prev, index]
+  const togglePart = (key: string) => {
+    setOpenParts((prev) =>
+      prev.includes(key) ? prev.filter((k) => k !== key) : [...prev, key]
     );
   };
 
-  const handleToggleAll = () => {
-    if (allOpen) {
-      setOpenIndices([]);
-    } else {
-      setOpenIndices(curriculum.map((_, i) => i));
-    }
+  const toggleAll = () => {
+    setOpenParts(allOpen ? [] : allPartKeys);
   };
 
+  let partNum = 0;
+
   return (
-    <section className="py-10 md:py-14">
-      <div className="flex items-end justify-between mb-8">
-        <div>
-          <p className="text-xs md:text-sm font-normal text-[hsl(var(--text-primary-600))] uppercase tracking-wider mb-3">
-            Curriculum
-          </p>
-          <h2 className="text-[22px] md:text-[28px] font-extrabold tracking-[-0.6px] text-foreground">
-            Weekly Breakdown
-          </h2>
-        </div>
-        <button
-          onClick={handleToggleAll}
-          className="text-[13px] font-semibold text-primary hover:text-primary/80 transition-colors"
-        >
-          {allOpen ? "Collapse All" : "Expand All"}
-        </button>
+    <section className="py-14 md:py-20">
+      <div className="mb-10 md:mb-12">
+        <p className="text-xs md:text-sm font-normal text-[hsl(var(--text-primary-600))] uppercase tracking-wider mb-3">
+          Curriculum
+        </p>
+        <h2 className="text-[26px] md:text-[32px] font-extrabold tracking-[-0.6px] text-foreground">
+          Bootcamp Agenda
+        </h2>
       </div>
 
-      <div className="flex flex-col gap-3">
-        {curriculum.map((week, index) => (
-          <WeekItem
-            key={week.week}
-            week={week}
-            isOpen={openIndices.includes(index)}
-            onClick={() => handleToggle(index)}
-          />
+      <div className="max-w-[800px] mx-auto">
+        {/* Schedule header */}
+        <div className="rounded-2xl bg-[hsl(var(--gold-100))] border border-[#ece7da] px-6 py-6 mb-8">
+          <div className="mb-5">
+            <p className="text-[11px] font-bold text-primary uppercase tracking-wider">
+              Bootcamp Schedule
+            </p>
+          </div>
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-5">
+            <div>
+              <p className="text-[11px] text-muted-foreground mb-1">Starts</p>
+              <p className="text-[18px] font-bold text-foreground tracking-tight leading-none">{mod.startDate}</p>
+            </div>
+            <div>
+              <p className="text-[11px] text-muted-foreground mb-1">Each class</p>
+              <p className="text-[18px] font-bold text-foreground tracking-tight leading-none">90 min</p>
+            </div>
+            <div>
+              <p className="text-[11px] text-muted-foreground mb-1">Cohort size</p>
+              <p className="text-[18px] font-bold text-foreground tracking-tight leading-none">12 max</p>
+            </div>
+            <div>
+              <p className="text-[11px] text-muted-foreground mb-1">Duration</p>
+              <p className="text-[18px] font-bold text-foreground tracking-tight leading-none">4 weeks</p>
+            </div>
+          </div>
+        </div>
+
+        {/* Week-by-week heading + expand all */}
+        <div className="flex items-center justify-between mb-5">
+          <h3 className="text-[15px] font-bold text-foreground tracking-[-0.2px]">
+            Week-by-Week Breakdown
+          </h3>
+          <button
+            onClick={toggleAll}
+            className="text-[13px] font-semibold text-primary hover:text-primary/80 transition-colors"
+          >
+            {allOpen ? "Collapse All" : "Expand All"}
+          </button>
+        </div>
+
+        {/* Weeks */}
+        {curriculum.map((week) => (
+          <div key={week.week} className="mb-10 last:mb-0">
+            <div className="flex items-center justify-between mb-4">
+              <h3 className="text-[17px] md:text-[18px] font-bold text-foreground tracking-[-0.3px]">
+                {week.title}
+              </h3>
+              <div className="flex items-center gap-3 shrink-0 ml-4">
+                <LiveBadge />
+                <span className="text-[13px] font-semibold text-foreground/70">
+                  Week {week.week}
+                </span>
+              </div>
+            </div>
+
+            <div className="rounded-2xl border border-[#ece7da] overflow-hidden divide-y divide-[#ece7da]">
+              {week.parts.map((part, j) => {
+                partNum++;
+                const num = String(partNum).padStart(2, "0");
+                const partKey = `${week.week}-${j}`;
+                const isOpen = openParts.includes(partKey);
+
+                return (
+                  <div
+                    key={j}
+                    className={`cursor-pointer transition-colors duration-150 ${
+                      isOpen ? "bg-white" : "bg-[#fdfbf7] hover:bg-[#f9f6ef]"
+                    }`}
+                    onClick={() => togglePart(partKey)}
+                  >
+                    <div className="flex items-center gap-4 px-5 py-4">
+                      <span className="text-[13px] font-medium text-muted-foreground/50 w-6 shrink-0 tabular-nums">
+                        {num}
+                      </span>
+                      <p className="text-[14px] font-semibold text-foreground flex-1">
+                        {part.title}
+                      </p>
+                    </div>
+
+                    <AnimatePresence initial={false}>
+                      {isOpen && (
+                        <motion.div
+                          initial={{ height: 0, opacity: 0 }}
+                          animate={{ height: "auto", opacity: 1 }}
+                          exit={{ height: 0, opacity: 0 }}
+                          transition={{ duration: 0.25, ease: "easeInOut" }}
+                          className="overflow-hidden"
+                        >
+                          <div className="px-5 pb-4 pl-[60px]">
+                            <p className="text-[13px] text-muted-foreground leading-relaxed">
+                              Deep-dive into {part.title.toLowerCase()}. Hands-on exercises and live demonstration with real-world examples.
+                            </p>
+                          </div>
+                        </motion.div>
+                      )}
+                    </AnimatePresence>
+                  </div>
+                );
+              })}
+            </div>
+          </div>
         ))}
       </div>
     </section>

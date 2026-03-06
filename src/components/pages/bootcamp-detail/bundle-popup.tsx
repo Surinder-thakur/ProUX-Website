@@ -45,7 +45,7 @@ export default function BundlePopup({
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
-            className="fixed inset-0 z-[100] bg-black/70 backdrop-blur-md"
+            className="fixed inset-0 z-[120] bg-black/70 backdrop-blur-md"
             onClick={onClose}
           />
 
@@ -55,7 +55,7 @@ export default function BundlePopup({
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             onClick={onClose}
-            className="fixed z-[101] top-4 right-4 w-10 h-10 rounded-full bg-white/10 backdrop-blur-sm flex items-center justify-center text-white/70 hover:text-white hover:bg-white/20 transition-colors"
+            className="fixed z-[121] top-4 right-4 w-10 h-10 rounded-full bg-white/10 backdrop-blur-sm flex items-center justify-center text-white/70 hover:text-white hover:bg-white/20 transition-colors"
             aria-label="Close"
           >
             <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
@@ -69,7 +69,7 @@ export default function BundlePopup({
             animate={{ opacity: 1, scale: 1 }}
             exit={{ opacity: 0, scale: 0.97 }}
             transition={{ duration: 0.2, ease: "easeOut" }}
-            className="fixed inset-0 z-[100] m-auto max-w-[1060px] h-fit max-h-[calc(100vh-48px)] w-[calc(100%-48px)] rounded-2xl shadow-[0_25px_60px_rgba(0,0,0,0.3)] overflow-hidden flex flex-col"
+            className="fixed inset-0 z-[120] m-auto max-w-[1060px] h-fit max-h-[calc(100vh-48px)] w-[calc(100%-48px)] rounded-2xl shadow-[0_25px_60px_rgba(0,0,0,0.3)] overflow-hidden flex flex-col"
           >
             {/* ── Header ─────────────────────────────────────────── */}
             <div className="bg-[#1a2130] px-7 py-5 flex items-center justify-between gap-8">

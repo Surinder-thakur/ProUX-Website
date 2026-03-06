@@ -99,7 +99,7 @@ export function Header() {
   const [mobileOpen, setMobileOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const [hidden, setHidden] = useState(false);
-  const shouldAutoHide = pathname === "/" || pathname === "/ux-consulting";
+  const shouldAutoHide = pathname === "/" || pathname === "/ux-consulting" || pathname.startsWith("/bootcamps/");
 
   // Determine which parent nav item is active (current page)
   const getActiveParentHref = useCallback(() => {

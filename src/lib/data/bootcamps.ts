@@ -322,21 +322,21 @@ const modules: BootcampModule[] = [
     audience: [
       {
         number: 1,
-        role: "Frustrated AI User",
+        role: "UX/Product Designer",
         description:
-          "Designers frustrated by mediocre AI outputs who want to level up.",
+          "You use AI daily but get inconsistent results. You want a repeatable prompt system, not random experiments.",
       },
       {
         number: 2,
-        role: "Design System Builder",
+        role: "Design System Creator",
         description:
-          "Anyone who wants a structured, AI-readable design system.",
+          "You want to build a structured Figma design system that AI tools like Claude Code and MCP can actually read and use.",
       },
       {
         number: 3,
-        role: "Design Engineer",
+        role: "Future AI Design Engineer",
         description:
-          "Design engineers building an AI-powered workflow from scratch.",
+          "You're a solid designer ready to add prompt engineering, custom agents, and AI workflows to your skillset.",
       },
     ],
     curriculum: [

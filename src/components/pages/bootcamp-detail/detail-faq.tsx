@@ -86,7 +86,7 @@ export default function DetailFaq({ faqs }: { faqs: FaqEntry[] }) {
   };
 
   return (
-    <section className="py-10 md:py-14">
+    <section className="py-14 md:py-20">
       <p className="text-xs md:text-sm font-normal text-[hsl(var(--text-primary-600))] uppercase tracking-wider mb-3">
         FAQ
       </p>

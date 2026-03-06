@@ -1,31 +1,55 @@
 /* ── Data ─────────────────────────────────────────────────────────────── */
 
-const stats = [
+const bundleStats = [
   {
     value: "12",
     label: "Live Classes",
-    caption: "Across three focused 4-week bootcamps.",
+    caption: "Three 4-week bootcamps",
   },
   {
     value: "18",
     label: "Hours of Training",
-    caption: "Hands-on sessions, not passive lectures.",
+    caption: "Hands-on, not passive",
   },
   {
     value: "12",
     label: "Students Per Cohort",
-    caption: "Small groups for personalized feedback.",
+    caption: "Personalized small groups",
   },
   {
     value: "2",
     label: "Time Zones",
-    caption: "US & EU friendly schedules available.",
+    caption: "US & EU friendly schedules",
+  },
+];
+
+const moduleStats = [
+  {
+    value: "4",
+    label: "Live Classes",
+    caption: "4 sessions across 4 weeks",
+  },
+  {
+    value: "6",
+    label: "Hours of Training",
+    caption: "Live demos & walkthroughs",
+  },
+  {
+    value: "12",
+    label: "Students Per Cohort",
+    caption: "Personalized small groups",
+  },
+  {
+    value: "2",
+    label: "Time Zones",
+    caption: "Mon IST · Thu Americas",
   },
 ];
 
 /* ── Component ────────────────────────────────────────────────────────── */
 
-export default function BootcampStatsBar() {
+export default function BootcampStatsBar({ variant = "bundle" }: { variant?: "bundle" | "module" }) {
+  const stats = variant === "module" ? moduleStats : bundleStats;
   return (
     <div className="lg:sticky lg:bottom-0 z-50">
       <section
@@ -46,7 +70,7 @@ export default function BootcampStatsBar() {
                   <span className="text-[11px] lg:text-sm font-bold text-[#99825d] uppercase tracking-wide whitespace-nowrap leading-tight">
                     {stat.label}
                   </span>
-                  <span className="hidden sm:block text-[11px] lg:text-xs text-[#4A5568] max-w-[180px] mt-0.5 line-clamp-2 leading-snug">
+                  <span className="hidden sm:block text-[11px] lg:text-xs text-[#4A5568] max-w-[180px] mt-0.5 line-clamp-2 leading-snug text-balance">
                     {stat.caption}
                   </span>
                 </div>
