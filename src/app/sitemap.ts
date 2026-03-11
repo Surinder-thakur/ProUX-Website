@@ -1,7 +1,15 @@
 import type { MetadataRoute } from "next";
+import { courses } from "@/lib/data/courses";
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const baseUrl = "https://proux.design";
+
+  const courseRoutes: MetadataRoute.Sitemap = courses.map((course) => ({
+    url: `${baseUrl}/training/${course.slug}`,
+    lastModified: new Date(),
+    changeFrequency: "monthly",
+    priority: 0.7,
+  }));
 
   return [
     {
@@ -16,13 +24,13 @@ export default function sitemap(): MetadataRoute.Sitemap {
       changeFrequency: "weekly",
       priority: 0.9,
     },
-    // Training page — coming soon
-    // {
-    //   url: `${baseUrl}/training`,
-    //   lastModified: new Date(),
-    //   changeFrequency: "monthly",
-    //   priority: 0.8,
-    // },
+    {
+      url: `${baseUrl}/training`,
+      lastModified: new Date(),
+      changeFrequency: "monthly",
+      priority: 0.8,
+    },
+    ...courseRoutes,
     {
       url: `${baseUrl}/free-articles`,
       lastModified: new Date(),
