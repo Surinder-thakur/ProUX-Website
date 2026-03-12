@@ -16,9 +16,9 @@ function CardContent({
 }) {
   return (
     <>
-      {/* ── Image zone with inset ──────────────────────────────────────── */}
-      <div className="relative p-3">
-        <div className="relative aspect-[4/3] overflow-hidden rounded-[14px]">
+      {/* ── Image zone — edge to edge ────────────────────────────────────── */}
+      <div className="relative">
+        <div className="relative aspect-[16/10] overflow-hidden rounded-t-[20px]">
           <Image
             src={mod.image}
             alt={mod.title}
@@ -29,8 +29,8 @@ function CardContent({
           {/* Soft bottom gradient */}
           <div className="absolute inset-0 bg-gradient-to-t from-black/25 via-transparent to-transparent" />
 
-          {/* Date badge — frosted glass, top-right */}
-          <span className="absolute top-3 right-3 flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-white/85 backdrop-blur-[12px] border border-white/30 shadow-[0_2px_8px_rgba(0,0,0,0.06)] text-[11px] font-semibold text-foreground">
+          {/* Date badge — frosted glass, bottom-left */}
+          <span className="absolute bottom-3 left-3 flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-white/85 backdrop-blur-[12px] border border-white/30 shadow-[0_2px_8px_rgba(0,0,0,0.06)] text-[11px] font-semibold text-foreground">
             <svg
               className="w-3 h-3 text-primary"
               fill="none"
@@ -44,7 +44,7 @@ function CardContent({
                 d="M6.75 3v2.25M17.25 3v2.25M3 18.75V7.5a2.25 2.25 0 012.25-2.25h13.5A2.25 2.25 0 0121 7.5v11.25m-18 0A2.25 2.25 0 005.25 21h13.5A2.25 2.25 0 0021 18.75m-18 0v-7.5A2.25 2.25 0 015.25 9h13.5A2.25 2.25 0 0121 11.25v7.5"
               />
             </svg>
-            {mod.startDate}, 2026
+            {mod.upcoming ? mod.startDate : `${mod.startDate}, 2026`}
           </span>
         </div>
       </div>
@@ -68,12 +68,20 @@ function CardContent({
 
         {/* ── Pricing zone (pushed to bottom so cards align) ────── */}
         <div className="mt-auto pt-5">
-          <CardPricingDisplay module={mod} />
+          {mod.upcoming ? (
+            <p className="text-[13px] font-medium text-muted-foreground">Upcoming Soon</p>
+          ) : (
+            <CardPricingDisplay module={mod} />
+          )}
 
           {/* CTA */}
           {isCurrent ? (
             <span className="flex items-center justify-center w-full mt-4 rounded-[12px] bg-primary h-[48px] text-[13px] font-semibold uppercase tracking-wide text-white shadow-md">
               Viewing this Program
+            </span>
+          ) : mod.upcoming ? (
+            <span className="flex items-center justify-center w-full mt-4 rounded-[12px] border-2 border-primary h-[48px] text-[13px] font-semibold uppercase tracking-wide text-primary transition-all duration-300 group-hover:bg-primary group-hover:text-white group-hover:shadow-md">
+              Register Interest
             </span>
           ) : (
             <span className="flex items-center justify-center w-full mt-4 rounded-[12px] border-2 border-primary h-[48px] text-[13px] font-semibold uppercase tracking-wide text-primary transition-all duration-300 group-hover:bg-primary group-hover:text-white group-hover:shadow-md">
@@ -102,6 +110,15 @@ function BootcampCard({
     return (
       <div className={`${sharedClasses} border-primary/30 ring-1 ring-primary/10`}>
         <CardContent mod={mod} isCurrent />
+      </div>
+    );
+  }
+
+  /* Upcoming bootcamps — no link to inner page */
+  if (mod.upcoming) {
+    return (
+      <div className={`${sharedClasses} border-[#ece9d8]`}>
+        <CardContent mod={mod} isCurrent={false} />
       </div>
     );
   }

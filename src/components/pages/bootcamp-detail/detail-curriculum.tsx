@@ -141,7 +141,7 @@ export default function DetailCurriculum({
                         >
                           <div className="px-5 pb-4 pl-[60px]">
                             <p className="text-[13px] text-muted-foreground leading-relaxed">
-                              Deep-dive into {part.title.toLowerCase()}. Hands-on exercises and live demonstration with real-world examples.
+                              {part.description || `Deep-dive into ${part.title.toLowerCase()}. Hands-on exercises and live demonstration with real-world examples.`}
                             </p>
                           </div>
                         </motion.div>

@@ -3,6 +3,7 @@
 export interface CurriculumPart {
   title: string;
   duration: string;
+  description?: string;
 }
 
 export interface CurriculumWeek {
@@ -58,6 +59,7 @@ export interface BootcampModule {
   image: string;
   startDate: string; // Display string e.g. "Apr 1"
   startDateISO: string; // ISO date "2026-04-01"
+  upcoming?: boolean;
   pricingTiers: PricingTiers;
   walkAwayWith: string;
   idealFor: string;
@@ -269,7 +271,7 @@ export const BUNDLE_HOURS = 18;
 const modules: BootcampModule[] = [
   {
     slug: "ai-mastery-design-system",
-    title: "AI Prompt Engineering + Figma Design System",
+    title: "AI Prompts & Design System Fundamentals",
     tagline:
       "Build a design system that AI tools actually understand.",
     badge: "Best for Getting Started",
@@ -279,7 +281,7 @@ const modules: BootcampModule[] = [
     classCount: 4,
     hoursLive: 6,
     gradient: "from-[hsl(var(--gold-200))] to-[hsl(var(--gold-100))]",
-    image: "https://images.unsplash.com/photo-1558655146-9f40138edfeb?w=800&h=500&fit=crop&q=80",
+    image: "/images/bc1.jpg",
     startDate: "Apr 1",
     startDateISO: "2026-04-01",
     pricingTiers: {
@@ -343,74 +345,84 @@ const modules: BootcampModule[] = [
       {
         week: 1,
         classNumber: 1,
-        title: "Prompt Structures & the Prompt Framework",
+        title: "Master AI as Your Design Superpower",
         parts: [
           {
-            title: "The Design Engineer Landscape + Why Claude",
-            duration: "20 min",
-          },
-          {
-            title:
-              "The Prompt Framework: Role, Task, Context, Constraints, Format",
-            duration: "40 min",
-          },
-          {
-            title: "Claude Projects: Persistent AI Workspaces",
+            title: "The AI Shift + Why Prompting Is a Design Skill",
             duration: "30 min",
+            description: "The tools changed. You\u2019ll see exactly what a well-structured prompt produces versus a vague one, and why the gap between the two is the biggest career advantage a designer can have right now.",
+          },
+          {
+            title: "The CRAFT Framework + Prompting Frameworks That Actually Work",
+            duration: "30 min",
+            description: "Context, Role, Artifact, Feel, Tech. One framework, every prompt you\u2019ll write for the rest of this bootcamp. You\u2019ll also learn a handful of specialist frameworks for scenarios where CRAFT isn\u2019t the best fit. By the end, you\u2019ll know exactly which tool to reach for and when.",
+          },
+          {
+            title: "Your AI Workspace: Claude Projects & Custom Agents",
+            duration: "30 min",
+            description: "Set up a Claude Project that remembers your design system rules across every session. Build two custom AI agents: one that generates tokens, one that audits them. Then test the full pipeline before you touch a single real token. You\u2019ll also learn a refinement technique that takes any AI output from 80% to 100%. Week 2 goes fast because you did this.",
           },
         ],
-        homework:
-          "Rebuild 3 past prompts using the framework. Set up Claude Project.",
       },
       {
         week: 2,
         classNumber: 2,
-        title: "Custom Agents & SKILL.md Files",
+        title: "Build Your Complete Token System",
         parts: [
           {
-            title: "Custom Agents: Building Your AI Workforce",
-            duration: "40 min",
+            title: "Color Tokens: From Brand Brief to Dark Mode",
+            duration: "30 min",
+            description: "Primitives, semantics, status colors, and a complete light-to-dark mapping with WCAG contrast baked into every prompt. Your agents generate, audit, and refine until the output is clean. This is where the system starts to feel real.",
           },
           {
-            title: "SKILL.md Files: Teaching AI Your Methodology",
-            duration: "35 min",
+            title: "Typography, Spacing & Shadows",
+            duration: "30 min",
+            description: "Your type scale, unified spacing system, and shadow tokens, all generated with the same pipeline. By the end of this class, you have four complete token categories and dark mode support ready for Figma.",
+          },
+          {
+            title: "From AI Output to Live Figma Variables",
+            duration: "30 min",
+            description: "Take your AI-generated tokens and bring them into Figma as native Variables. Color, typography, spacing, shadows, light mode, dark mode. Change one value and every token that references it updates instantly. That\u2019s the moment your design system comes alive.",
           },
         ],
-        homework: "Complete 4 custom agents + 2 SKILL.md files.",
       },
       {
         week: 3,
         classNumber: 3,
-        title: "AI Design System in Figma",
+        title: "Live Documentation & Governance",
         parts: [
           {
-            title: "Building an AI-Powered Design System",
-            duration: "40 min",
+            title: "Generate Live Documentation with Figma Make",
+            duration: "45 min",
+            description: "Publish your Variables, connect to Figma Make, and generate documentation for every token category. Update a token and the docs update automatically. No more stale Notion wikis or PDFs that are wrong by Tuesday.",
           },
           {
-            title: "Claude-Powered Design System Audit",
-            duration: "30 min",
+            title: "Governance, Changelogs & a System That Stays Alive",
+            duration: "45 min",
+            description: "The difference between a design system that thrives and one that dies in six months? One page of governance rules. Build contribution workflows, deprecation timelines, and changelogs. Your AI agents validate every change before it ships.",
           },
-          { title: "Token Architecture Workshop", duration: "20 min" },
         ],
-        homework:
-          "Complete Figma design system. Pass 10-point health checklist.",
       },
       {
         week: 4,
         classNumber: 4,
-        title: "Design System Polish, Showcase & Wrap",
+        title: "Components, Pages & a Ready-to-Use System",
         parts: [
           {
-            title:
-              "Advanced Design System Patterns: responsive tokens, dark mode",
+            title: "Generate Production Components with Figma Make",
             duration: "30 min",
+            description: "Describe a Button. Figma Make builds it using your Variables. Every variant, every state, every token binding. Then Card. Then Input. Each one faster than the last. Accessibility and dark mode come free because they\u2019re already in your tokens.",
           },
           {
-            title: "Lightning Showcase: every student presents",
-            duration: "40 min",
+            title: "Build a Real Page: Your System\u2019s Moment of Truth",
+            duration: "30 min",
+            description: "Compose your components into a complete Login Page. Light mode, dark mode, no manual overrides. If it works in both modes, your design system is ready. This is the moment everything clicks.",
           },
-          { title: "Module Wrap + Expert Feedback", duration: "20 min" },
+          {
+            title: "Developer Handover & Lightning Showcase",
+            duration: "30 min",
+            description: "Export your tokens as CSS, Tailwind, and TypeScript. Package the handover. Then present your system to the cohort: prompt library, custom agents, complete token architecture, production components, real pages, live documentation, and governance. Four weeks ago you wrote \u201Ccreate a color palette.\u201D Look at you now.",
+          },
         ],
       },
     ],
@@ -460,9 +472,10 @@ const modules: BootcampModule[] = [
     classCount: 4,
     hoursLive: 6,
     gradient: "from-[hsl(var(--brown-100))] to-[hsl(var(--gold-100))]",
-    image: "https://images.unsplash.com/photo-1555066931-4365d14bab8c?w=800&h=500&fit=crop&q=80",
-    startDate: "Apr 3",
+    image: "/images/bc2.jpg",
+    startDate: "Upcoming",
     startDateISO: "2026-04-03",
+    upcoming: true,
     pricingTiers: {
       earlyBird: { price: 245, priceInr: 20300, deadline: "2026-03-14T23:59:59" },
       standard: { price: 295, priceInr: 24500, deadline: "2026-03-30T23:59:59" },
@@ -645,9 +658,10 @@ const modules: BootcampModule[] = [
     classCount: 4,
     hoursLive: 6,
     gradient: "from-[hsl(var(--blue-100))] to-[hsl(var(--gold-100))]",
-    image: "https://images.unsplash.com/photo-1531403009284-440f080d1e12?w=800&h=500&fit=crop&q=80",
-    startDate: "May 6",
+    image: "/images/bc3.jpg",
+    startDate: "Upcoming",
     startDateISO: "2026-05-06",
+    upcoming: true,
     pricingTiers: {
       earlyBird: { price: 245, priceInr: 20300, deadline: "2026-03-16T23:59:59" },
       standard: { price: 295, priceInr: 24500, deadline: "2026-05-02T23:59:59" },
