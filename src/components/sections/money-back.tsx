@@ -2,6 +2,7 @@
 
 import React from "react";
 import Link from "next/link";
+import Image from "next/image";
 
 /* ── Checkmark Icon ────────────────────────────────────────────────────── */
 
@@ -27,79 +28,16 @@ function CheckIcon() {
   );
 }
 
-/* ── Gold Seal Badge ───────────────────────────────────────────────────── */
-
+/* ── Seal Badge — PNG from Figma, served at 1x from a 3x asset for retina */
 function SealBadge() {
-  const points = 24;
-  const outerR = 68;
-  const innerR = 58;
-  const cx = 70;
-  const cy = 70;
-
-  let d = "";
-  for (let i = 0; i < points * 2; i++) {
-    const angle = (Math.PI * i) / points - Math.PI / 2;
-    const r = i % 2 === 0 ? outerR : innerR;
-    const x = cx + r * Math.cos(angle);
-    const y = cy + r * Math.sin(angle);
-    d += (i === 0 ? "M" : "L") + x.toFixed(2) + "," + y.toFixed(2);
-  }
-  d += "Z";
-
   return (
-    <div className="relative w-[120px] h-[120px] md:w-[140px] md:h-[140px]">
-      <svg viewBox="0 0 140 140" fill="none" className="w-full h-full drop-shadow-lg">
-        <path
-          d={d}
-          fill="url(#seal_gold)"
-          stroke="url(#seal_rim)"
-          strokeWidth="1.5"
-        />
-        <circle
-          cx="70"
-          cy="70"
-          r="48"
-          fill="none"
-          stroke="rgba(255,255,255,0.35)"
-          strokeWidth="1.5"
-          strokeDasharray="3 3"
-        />
-        <text
-          x="70"
-          y="64"
-          textAnchor="middle"
-          fill="white"
-          fontSize="44"
-          fontWeight="800"
-          fontFamily="var(--font-family-display)"
-        >
-          5
-        </text>
-        <text
-          x="70"
-          y="82"
-          textAnchor="middle"
-          fill="rgba(255,255,255,0.9)"
-          fontSize="13"
-          fontWeight="700"
-          fontFamily="var(--font-family-base)"
-          letterSpacing="2.5"
-        >
-          DAYS
-        </text>
-        <defs>
-          <linearGradient id="seal_gold" x1="20" y1="10" x2="120" y2="130" gradientUnits="userSpaceOnUse">
-            <stop offset="0%" stopColor="#E8B94F" />
-            <stop offset="50%" stopColor="#D4930F" />
-            <stop offset="100%" stopColor="#B87D0A" />
-          </linearGradient>
-          <linearGradient id="seal_rim" x1="20" y1="10" x2="120" y2="130" gradientUnits="userSpaceOnUse">
-            <stop offset="0%" stopColor="#F0CC6B" />
-            <stop offset="100%" stopColor="#A06E08" />
-          </linearGradient>
-        </defs>
-      </svg>
-    </div>
+    <Image
+      src="/images/money-back-seal@3x.png"
+      alt="5 Days Money Back Guarantee"
+      width={860}
+      height={860}
+      className="w-[120px] h-[120px] md:w-[140px] md:h-[140px] object-contain"
+    />
   );
 }
 

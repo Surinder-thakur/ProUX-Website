@@ -25,7 +25,15 @@ const navigation = [
       { label: "Book Consultation", href: "/ux-consulting#consultation" },
     ],
   },
-  // { label: "AI Design Training", href: "/training", subItems: [] }, // Coming soon
+  {
+    label: "AI Design Training",
+    href: "/bootcamps",
+    subItems: [
+      { label: "AI Mastery + Design System", href: "/bootcamps/ai-mastery-design-system" },
+      { label: "AI Design-Code Workflow", href: "/bootcamps/ai-design-code-workflow" },
+      { label: "AI UX Strategic Thinking", href: "/bootcamps/ai-ux-strategic-thinking" },
+    ],
+  },
 ];
 
 function ProUXLogo({ className }: { className?: string }) {
@@ -91,7 +99,7 @@ export function Header() {
   const [mobileOpen, setMobileOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const [hidden, setHidden] = useState(false);
-  const shouldAutoHide = pathname === "/" || pathname === "/ux-consulting";
+  const shouldAutoHide = pathname === "/" || pathname === "/ux-consulting" || pathname.startsWith("/bootcamps/");
 
   // Determine which parent nav item is active (current page)
   const getActiveParentHref = useCallback(() => {
@@ -150,7 +158,7 @@ export function Header() {
         </TooltipProvider>
 
         {/* Desktop Navigation — centered */}
-        <nav className="hidden items-center gap-4 lg:flex absolute left-1/2 -translate-x-1/2">
+        <nav className="hidden items-center gap-4 lg:flex absolute left-1/2 -translate-x-1/2 whitespace-nowrap">
           {navigation.map((item) => {
             const isActive =
               item.href === "/"

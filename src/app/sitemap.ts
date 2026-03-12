@@ -16,13 +16,30 @@ export default function sitemap(): MetadataRoute.Sitemap {
       changeFrequency: "weekly",
       priority: 0.9,
     },
-    // Training page — coming soon
-    // {
-    //   url: `${baseUrl}/training`,
-    //   lastModified: new Date(),
-    //   changeFrequency: "monthly",
-    //   priority: 0.8,
-    // },
+    {
+      url: `${baseUrl}/bootcamps`,
+      lastModified: new Date(),
+      changeFrequency: "weekly",
+      priority: 0.8,
+    },
+    {
+      url: `${baseUrl}/bootcamps/ai-mastery-design-system`,
+      lastModified: new Date(),
+      changeFrequency: "monthly",
+      priority: 0.8,
+    },
+    {
+      url: `${baseUrl}/bootcamps/ai-design-code-workflow`,
+      lastModified: new Date(),
+      changeFrequency: "monthly",
+      priority: 0.8,
+    },
+    {
+      url: `${baseUrl}/bootcamps/ai-ux-strategic-thinking`,
+      lastModified: new Date(),
+      changeFrequency: "monthly",
+      priority: 0.8,
+    },
     {
       url: `${baseUrl}/free-articles`,
       lastModified: new Date(),
