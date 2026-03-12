@@ -19,7 +19,7 @@ export default function RazorpayButton({
 
     const script = document.createElement("script");
     script.src = "https://checkout.razorpay.com/v1/payment-button.js";
-    script.setAttribute("data-payment_button_id", "pl_SQNiAKFOkMKbPJ");
+    script.setAttribute("data-payment_button_id", "pl_SQNWPdh5L4Gf5w");
     script.async = true;
     form.appendChild(script);
 
