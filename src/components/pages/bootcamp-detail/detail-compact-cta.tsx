@@ -2,6 +2,7 @@
 
 import { useState, useEffect, useRef } from "react";
 import { motion } from "motion/react";
+import RazorpayButton from "./razorpay-button";
 import {
   QUICK_FACTS,
   BUNDLE_PRICE_USD,
@@ -282,11 +283,7 @@ export default function DetailCompactCta({
           </div>
 
           {/* ── CTA button ──────────────────────────────────────── */}
-          <button className="btn-shine w-full rounded-[14px] h-[50px] text-[13px] font-semibold uppercase tracking-wide text-white bg-primary shadow-md transition-all hover:brightness-110 hover:shadow-xl cursor-pointer">
-            {bundleAdded
-              ? `Enroll Full Bundle \u2014 $${BUNDLE_PRICE_USD}`
-              : `Enroll Now \u2014 $${tier.price}`}
-          </button>
+          <RazorpayButton label="Enroll Now" price={tier.price} />
 
           {/* ── Compact track selector ──────────────────────────── */}
           <div>

@@ -12,6 +12,7 @@ import {
 } from "@/lib/data/bootcamps";
 import { useActiveTier } from "@/components/pages/bootcamps/bootcamp-pricing";
 import BundlePopup from "./bundle-popup";
+import RazorpayButton from "./razorpay-button";
 
 /* ── Countdown ───────────────────────────────────────────────────────── */
 
@@ -413,11 +414,7 @@ export default function DetailSidebar({
           </div>
 
           {/* ── CTA ─────────────────────────────────────────────────── */}
-          <button className="btn-shine w-full rounded-[14px] h-[54px] text-[14px] font-semibold uppercase tracking-wide text-white bg-primary shadow-md transition-all hover:brightness-110 hover:shadow-xl cursor-pointer">
-            {bundleAdded
-              ? `Enroll Full Bundle — $${BUNDLE_PRICE_USD}`
-              : `Enroll Now — $${tier.price}`}
-          </button>
+          <RazorpayButton label="Enroll Now" price={tier.price} />
 
           {/* ── What You'll Learn ────────────────────────────────────── */}
           <div>

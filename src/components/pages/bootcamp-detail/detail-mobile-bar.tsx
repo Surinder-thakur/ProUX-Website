@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import RazorpayButton from "./razorpay-button";
 import {
   Drawer,
   DrawerContent,
@@ -60,7 +61,7 @@ export default function DetailMobileBar({
 
         <Drawer>
           <DrawerTrigger asChild>
-            <button className="btn-shine rounded-[12px] bg-primary px-6 h-[44px] text-[13px] font-semibold uppercase tracking-wide text-white shadow-md transition-all hover:brightness-110">
+            <button className="btn-shine rounded-[12px] bg-primary px-6 h-[44px] text-[13px] font-semibold uppercase tracking-wide text-white shadow-md transition-all hover:brightness-110 shrink-0">
               Enroll Now
             </button>
           </DrawerTrigger>
@@ -119,13 +120,7 @@ export default function DetailMobileBar({
               </div>
 
               {/* Enroll CTA */}
-              <button
-                className="btn-shine w-full rounded-[12px] h-[48px] text-[13px] font-semibold uppercase tracking-wide text-white bg-primary shadow-md transition-all hover:brightness-110 hover:shadow-xl cursor-pointer"
-              >
-                {bundleAdded
-                  ? `Enroll Full Bundle — $${BUNDLE_PRICE_USD}`
-                  : `Enroll Now — $${tier.price}`}
-              </button>
+              <RazorpayButton label="Enroll Now" price={tier.price} />
 
               {/* Quick facts */}
               <div className="space-y-2">
