@@ -14,6 +14,7 @@ import {
   BUNDLE_PRICE_USD,
   BUNDLE_ORIGINAL_USD,
   BUNDLE_SAVINGS_USD,
+  BUNDLE_RAZORPAY_ID,
   QUICK_FACTS,
   type BootcampModule,
 } from "@/lib/data/bootcamps";
@@ -98,7 +99,7 @@ export default function DetailMobileBar({
                       Track A
                     </p>
                     <p className="text-xs text-muted-foreground mt-0.5">
-                      Mon &middot; 7:30 &ndash; 9:00 PM IST
+                      {mod.trackA?.day ?? "Mon"} &middot; {mod.trackA?.time ?? "7:30 \u2013 9:00 PM IST"}
                     </p>
                   </button>
                   <button
@@ -113,14 +114,14 @@ export default function DetailMobileBar({
                       Track B
                     </p>
                     <p className="text-xs text-muted-foreground mt-0.5">
-                      Thu &middot; 2:30 &ndash; 4:00 PM IST
+                      {mod.trackB?.day ?? "Thu"} &middot; {mod.trackB?.time ?? "2:30 \u2013 4:00 PM IST"}
                     </p>
                   </button>
                 </div>
               </div>
 
               {/* Enroll CTA */}
-              <RazorpayButton label="Enroll Now" price={tier.price} />
+              <RazorpayButton label="Enroll Now" price={bundleAdded ? BUNDLE_PRICE_USD : tier.price} buttonId={bundleAdded ? BUNDLE_RAZORPAY_ID : tier.razorpayId!} />
 
               {/* Quick facts */}
               <div className="space-y-2">

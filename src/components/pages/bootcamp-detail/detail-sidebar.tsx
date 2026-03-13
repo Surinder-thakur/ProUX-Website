@@ -5,6 +5,7 @@ import {
   BUNDLE_PRICE_USD,
   BUNDLE_ORIGINAL_USD,
   BUNDLE_SAVINGS_USD,
+  BUNDLE_RAZORPAY_ID,
   getAllTiersInfo,
   type BootcampModule,
   type LearningOutcome,
@@ -406,7 +407,9 @@ export default function DetailSidebar({
                 >
                   <p className="text-[14px] font-bold text-foreground">Track {track}</p>
                   <p className="text-[13px] text-[#555] mt-0.5">
-                    {track === "A" ? "Mon \u00b7 7:30 \u2013 9:00 PM IST" : "Thu \u00b7 2:30 \u2013 4:00 PM IST"}
+                    {track === "A"
+                      ? `${mod.trackA?.day ?? "Mon"} \u00b7 ${mod.trackA?.time ?? "7:30 \u2013 9:00 PM IST"}`
+                      : `${mod.trackB?.day ?? "Thu"} \u00b7 ${mod.trackB?.time ?? "2:30 \u2013 4:00 PM IST"}`}
                   </p>
                 </button>
               ))}
@@ -414,7 +417,7 @@ export default function DetailSidebar({
           </div>
 
           {/* ── CTA ─────────────────────────────────────────────────── */}
-          <RazorpayButton label="Enroll Now" price={tier.price} />
+          <RazorpayButton label="Enroll Now" price={bundleAdded ? BUNDLE_PRICE_USD : tier.price} buttonId={bundleAdded ? BUNDLE_RAZORPAY_ID : tier.razorpayId!} />
 
           {/* ── What You'll Learn ────────────────────────────────────── */}
           <div>

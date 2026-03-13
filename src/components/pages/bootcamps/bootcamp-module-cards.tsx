@@ -1,9 +1,11 @@
 "use client";
 
+import { useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { getAllBootcamps, type BootcampModule } from "@/lib/data/bootcamps";
 import { CardPricingDisplay } from "./bootcamp-pricing";
+import BootcampInterestPopup from "./bootcamp-interest-popup";
 
 /* ── Card content (shared between Link and div wrappers) ───────────────── */
 
@@ -80,7 +82,7 @@ function CardContent({
               Viewing this Program
             </span>
           ) : mod.upcoming ? (
-            <span className="flex items-center justify-center w-full mt-4 rounded-[12px] border-2 border-primary h-[48px] text-[13px] font-semibold uppercase tracking-wide text-primary transition-all duration-300 group-hover:bg-primary group-hover:text-white group-hover:shadow-md">
+            <span className="flex items-center justify-center w-full mt-4 rounded-[12px] border-2 border-primary h-[48px] text-[13px] font-semibold uppercase tracking-wide text-primary transition-all duration-300 group-hover:bg-primary group-hover:text-white group-hover:shadow-md cursor-pointer">
               Register Interest
             </span>
           ) : (
@@ -90,6 +92,31 @@ function CardContent({
           )}
         </div>
       </div>
+    </>
+  );
+}
+
+/* ── Upcoming Card with popup ────────────────────────────────────────────── */
+
+function UpcomingBootcampCard({ module: mod }: { module: BootcampModule }) {
+  const [popupOpen, setPopupOpen] = useState(false);
+
+  const sharedClasses =
+    "group relative flex flex-col rounded-[20px] bg-[hsl(var(--bg-primary-50))] border shadow-[0_1px_2px_rgba(0,0,0,0.03)] transition-all duration-300 ease-[cubic-bezier(0.23,1,0.32,1)]";
+
+  return (
+    <>
+      <div
+        className={`${sharedClasses} border-[#ece9d8] cursor-pointer hover:bg-[#FCFBF9] hover:border-[#dfdbc9] hover:shadow-[0_8px_30px_rgba(0,0,0,0.06)]`}
+        onClick={() => setPopupOpen(true)}
+      >
+        <CardContent mod={mod} isCurrent={false} />
+      </div>
+      <BootcampInterestPopup
+        open={popupOpen}
+        onClose={() => setPopupOpen(false)}
+        bootcampTitle={mod.title}
+      />
     </>
   );
 }
@@ -114,13 +141,9 @@ function BootcampCard({
     );
   }
 
-  /* Upcoming bootcamps — no link to inner page */
+  /* Upcoming bootcamps — open interest popup */
   if (mod.upcoming) {
-    return (
-      <div className={`${sharedClasses} border-[#ece9d8]`}>
-        <CardContent mod={mod} isCurrent={false} />
-      </div>
-    );
+    return <UpcomingBootcampCard module={mod} />;
   }
 
   return (

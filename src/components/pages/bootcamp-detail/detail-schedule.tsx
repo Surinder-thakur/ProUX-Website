@@ -1,12 +1,14 @@
 "use client";
 
+import type { BootcampModule } from "@/lib/data/bootcamps";
+
 const STATS = [
   { value: "4", unit: "weeks", sub: "Course Duration" },
   { value: "12", unit: "max", sub: "Students Per Track" },
   { value: "Weekly", unit: "", sub: "Live Sessions" },
 ];
 
-export default function DetailSchedule() {
+export default function DetailSchedule({ module: mod }: { module: BootcampModule }) {
   return (
     <section className="py-10 md:py-14">
       <p className="text-xs md:text-sm font-normal text-[hsl(var(--text-primary-600))] uppercase tracking-wider mb-3 text-center">
@@ -49,7 +51,7 @@ export default function DetailSchedule() {
               A
             </span>
             <div>
-              <p className="text-[13px] font-semibold text-foreground">Monday &middot; 7:30 &ndash; 9:00 PM IST</p>
+              <p className="text-[13px] font-semibold text-foreground">{mod.trackA?.day ?? "Monday"} &middot; {mod.trackA?.time ?? "7:30 \u2013 9:00 PM IST"}</p>
               <p className="text-[11px] text-muted-foreground">Weekday Evenings</p>
             </div>
           </div>
@@ -58,7 +60,7 @@ export default function DetailSchedule() {
               B
             </span>
             <div>
-              <p className="text-[13px] font-semibold text-foreground">Thursday &middot; 2:30 &ndash; 4:00 PM IST</p>
+              <p className="text-[13px] font-semibold text-foreground">{mod.trackB?.day ?? "Thursday"} &middot; {mod.trackB?.time ?? "2:30 \u2013 4:00 PM IST"}</p>
               <p className="text-[11px] text-muted-foreground">Americas Evenings</p>
             </div>
           </div>
