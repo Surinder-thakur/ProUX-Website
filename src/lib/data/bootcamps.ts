@@ -36,12 +36,13 @@ export interface PricingTierData {
   price: number;
   priceInr: number;
   deadline: string; // ISO date "2026-03-20T23:59:59"
+  razorpayId?: string;
 }
 
 export interface PricingTiers {
   earlyBird: PricingTierData;
   standard: PricingTierData;
-  lastCall: { price: number; priceInr: number }; // full price, no deadline (uses startDateISO)
+  lastCall: { price: number; priceInr: number; razorpayId?: string }; // full price, no deadline (uses startDateISO)
 }
 
 export interface BootcampModule {
@@ -57,9 +58,12 @@ export interface BootcampModule {
   story: string;
   gradient: string;
   image: string;
+  certificateImage?: string;
   startDate: string; // Display string e.g. "Apr 1"
   startDateISO: string; // ISO date "2026-04-01"
   upcoming?: boolean;
+  trackA?: { day: string; time: string };
+  trackB?: { day: string; time: string };
   pricingTiers: PricingTiers;
   walkAwayWith: string;
   idealFor: string;
@@ -83,6 +87,7 @@ export interface ActiveTier {
   discount: number; // percentage off full price
   deadline: Date | null;
   dotColor: "emerald" | "amber" | "red";
+  razorpayId?: string;
 }
 
 export function getActiveTier(mod: BootcampModule): ActiveTier {
@@ -102,6 +107,7 @@ export function getActiveTier(mod: BootcampModule): ActiveTier {
       discount: Math.round(((fullPrice - earlyBird.price) / fullPrice) * 100),
       deadline: earlyEnd,
       dotColor: "emerald",
+      razorpayId: earlyBird.razorpayId,
     };
   }
 
@@ -116,6 +122,7 @@ export function getActiveTier(mod: BootcampModule): ActiveTier {
       discount: Math.round(((fullPrice - standard.price) / fullPrice) * 100),
       deadline: standardEnd,
       dotColor: "amber",
+      razorpayId: standard.razorpayId,
     };
   }
 
@@ -129,6 +136,7 @@ export function getActiveTier(mod: BootcampModule): ActiveTier {
       discount: 0,
       deadline: startDate,
       dotColor: "red",
+      razorpayId: lastCall.razorpayId,
     };
   }
 
@@ -141,6 +149,7 @@ export function getActiveTier(mod: BootcampModule): ActiveTier {
     discount: 0,
     deadline: null,
     dotColor: "red",
+    razorpayId: lastCall.razorpayId,
   };
 }
 
@@ -209,6 +218,7 @@ export function getAllTiersInfo(mod: BootcampModule): TierInfo[] {
 
 // ── Constants ───────────────────────────────────────────────────────────
 
+export const BUNDLE_RAZORPAY_ID = "pl_SQdL0RlDQ2qr31";
 export const BUNDLE_PRICE_USD = 699;
 export const BUNDLE_PRICE_INR = 57900;
 export const BUNDLE_ORIGINAL_USD = 1185; // 3 x $395
@@ -271,7 +281,7 @@ export const BUNDLE_HOURS = 18;
 const modules: BootcampModule[] = [
   {
     slug: "ai-mastery-design-system",
-    title: "AI Prompts & Design System Fundamentals",
+    title: "AI Prompts & Design System Foundations",
     tagline:
       "Build a design system that AI tools actually understand.",
     badge: "Best for Getting Started",
@@ -282,12 +292,15 @@ const modules: BootcampModule[] = [
     hoursLive: 6,
     gradient: "from-[hsl(var(--gold-200))] to-[hsl(var(--gold-100))]",
     image: "/images/bc1.jpg",
-    startDate: "Apr 1",
-    startDateISO: "2026-04-01",
+    certificateImage: "/images/certificate.jpg",
+    startDate: "Apr 6",
+    startDateISO: "2026-04-06",
+    trackA: { day: "Mon", time: "7:30 \u2013 9:00 PM IST" },
+    trackB: { day: "Thu", time: "2:30 \u2013 4:00 PM IST" },
     pricingTiers: {
-      earlyBird: { price: 245, priceInr: 20300, deadline: "2026-03-12T23:59:59" },
-      standard: { price: 295, priceInr: 24500, deadline: "2026-03-28T23:59:59" },
-      lastCall: { price: 395, priceInr: 32800 },
+      earlyBird: { price: 245, priceInr: 20300, deadline: "2026-03-23T23:59:59", razorpayId: "pl_SQNWPdh5L4Gf5w" },
+      standard: { price: 295, priceInr: 24500, deadline: "2026-04-02T23:59:59", razorpayId: "pl_SQczj7yp64OuZ0" },
+      lastCall: { price: 395, priceInr: 32800, razorpayId: "pl_SQd2e6AqkjdZon" },
     },
     story:
       "You've been using ChatGPT for a year. You type vague prompts, get vague outputs, and conclude AI is overhyped. But you've seen others get stunning results. The difference isn't the AI, it's the human. This module makes you the human who gets stunning results.",
@@ -473,13 +486,15 @@ const modules: BootcampModule[] = [
     hoursLive: 6,
     gradient: "from-[hsl(var(--brown-100))] to-[hsl(var(--gold-100))]",
     image: "/images/bc2.jpg",
-    startDate: "Upcoming",
-    startDateISO: "2026-04-03",
-    upcoming: true,
+    certificateImage: "/images/certificate-b2.jpg",
+    startDate: "Apr 13",
+    startDateISO: "2026-04-13",
+    trackA: { day: "Mon", time: "2:30 \u2013 4:00 PM IST" },
+    trackB: { day: "Thu", time: "7:30 \u2013 9:00 PM IST" },
     pricingTiers: {
-      earlyBird: { price: 245, priceInr: 20300, deadline: "2026-03-14T23:59:59" },
-      standard: { price: 295, priceInr: 24500, deadline: "2026-03-30T23:59:59" },
-      lastCall: { price: 395, priceInr: 32800 },
+      earlyBird: { price: 245, priceInr: 20300, deadline: "2026-03-30T23:59:59", razorpayId: "pl_SQdEczsOcM3m7L" },
+      standard: { price: 295, priceInr: 24500, deadline: "2026-04-09T23:59:59", razorpayId: "pl_SQd1WALX4aOBDS" },
+      lastCall: { price: 395, priceInr: 32800, razorpayId: "pl_SQd3mor0KhVh9O" },
     },
     story:
       "You've designed beautiful interfaces that sit in Figma forever, waiting for a developer who never comes. Or worse, they ship something that looks nothing like your design. This module gives you the power to ship your own designs as real, deployed websites.",
@@ -659,6 +674,7 @@ const modules: BootcampModule[] = [
     hoursLive: 6,
     gradient: "from-[hsl(var(--blue-100))] to-[hsl(var(--gold-100))]",
     image: "/images/bc3.jpg",
+    certificateImage: "/images/certificate-b3.jpg",
     startDate: "Upcoming",
     startDateISO: "2026-05-06",
     upcoming: true,

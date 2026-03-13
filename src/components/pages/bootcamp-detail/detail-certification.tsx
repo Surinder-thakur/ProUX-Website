@@ -21,7 +21,7 @@ export default function DetailCertification({
       {/* Certificate image in white box */}
       <div className="rounded-2xl border border-[#e8e4d9] bg-white p-6 md:p-10">
         <Image
-          src="/images/certificate.jpg"
+          src={mod.certificateImage || "/images/certificate.jpg"}
           alt={`${mod.title} — Certificate of Completion`}
           width={1400}
           height={900}

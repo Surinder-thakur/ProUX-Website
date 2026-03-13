@@ -8,6 +8,7 @@ import {
   BUNDLE_PRICE_USD,
   BUNDLE_ORIGINAL_USD,
   BUNDLE_SAVINGS_USD,
+  BUNDLE_RAZORPAY_ID,
   getAllTiersInfo,
   type BootcampModule,
   type TierInfo,
@@ -283,7 +284,7 @@ export default function DetailCompactCta({
           </div>
 
           {/* ── CTA button ──────────────────────────────────────── */}
-          <RazorpayButton label="Enroll Now" price={tier.price} />
+          <RazorpayButton label="Enroll Now" price={bundleAdded ? BUNDLE_PRICE_USD : tier.price} buttonId={bundleAdded ? BUNDLE_RAZORPAY_ID : tier.razorpayId!} />
 
           {/* ── Compact track selector ──────────────────────────── */}
           <div>
@@ -303,7 +304,9 @@ export default function DetailCompactCta({
                 >
                   <p className="text-[13px] font-bold text-foreground">Track {track}</p>
                   <p className="text-[11px] text-[#555] mt-0.5">
-                    {track === "A" ? "Mon \u00b7 7:30 PM" : "Thu \u00b7 2:30 PM"}
+                    {track === "A"
+                      ? `${mod.trackA?.day ?? "Mon"} \u00b7 ${mod.trackA?.time ?? "7:30 PM"}`
+                      : `${mod.trackB?.day ?? "Thu"} \u00b7 ${mod.trackB?.time ?? "2:30 PM"}`}
                   </p>
                 </button>
               ))}
