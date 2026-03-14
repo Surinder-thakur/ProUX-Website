@@ -6,7 +6,9 @@ import {
   BUNDLE_PRICE_USD,
   BUNDLE_ORIGINAL_USD,
   BUNDLE_SAVINGS_USD,
+  BUNDLE_RAZORPAY_ID,
 } from "@/lib/data/bootcamps";
+import RazorpayButton from "./razorpay-button";
 
 /* ── Green circle checkmark ──────────────────────────────────────────── */
 
@@ -99,7 +101,7 @@ export default function BundlePopup({
 
             {/* ── 3 Module Cards ──────────────────────────────────── */}
             <div className="bg-[#faf9f6] px-6 py-5">
-              <div className="grid grid-cols-3 gap-4">
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
                 {modules.map((mod, i) => (
                   <div
                     key={mod.slug}
@@ -151,9 +153,9 @@ export default function BundlePopup({
                 One enrollment. Three certifications. Everything you need to
                 design, build, and ship AI products yourself.
               </p>
-              <button className="btn-shine shrink-0 rounded-[12px] h-[48px] px-9 text-[13px] font-semibold uppercase tracking-wide text-white bg-primary shadow-md transition-all hover:brightness-110 hover:shadow-xl">
-                Enroll Full Bundle &mdash; ${BUNDLE_PRICE_USD}
-              </button>
+              <div className="shrink-0 w-[280px]">
+                <RazorpayButton label="Enroll Full Bundle" price={BUNDLE_PRICE_USD} buttonId={BUNDLE_RAZORPAY_ID} />
+              </div>
             </div>
           </motion.div>
         </>

@@ -45,25 +45,29 @@ export default function DetailSchedule({ module: mod }: { module: BootcampModule
         </div>
 
         {/* Track times */}
-        <div className="border-t border-[#dfdbc9] grid grid-cols-2 divide-x divide-[#dfdbc9]">
+        <div className={`border-t border-[#dfdbc9] grid ${mod.trackB ? "grid-cols-2 divide-x divide-[#dfdbc9]" : "grid-cols-1"}`}>
           <div className="flex items-center gap-3 px-5 py-3.5">
-            <span className="shrink-0 flex items-center justify-center w-7 h-7 rounded-full bg-primary/10 text-[11px] font-bold text-primary">
-              A
-            </span>
+            {mod.trackB && (
+              <span className="shrink-0 flex items-center justify-center w-7 h-7 rounded-full bg-primary/10 text-[11px] font-bold text-primary">
+                A
+              </span>
+            )}
             <div>
-              <p className="text-[13px] font-semibold text-foreground">{mod.trackA?.day ?? "Monday"} &middot; {mod.trackA?.time ?? "7:30 \u2013 9:00 PM IST"}</p>
-              <p className="text-[11px] text-muted-foreground">Weekday Evenings</p>
+              <p className="text-[13px] font-semibold text-foreground">{mod.trackA?.day ?? "Monday"} &middot; {mod.trackA?.time ?? "8:00 \u2013 9:30 PM IST"}</p>
+              <p className="text-[11px] text-muted-foreground">{mod.trackB ? "Weekday Evenings" : `Starts ${mod.startDate}, 2026`}</p>
             </div>
           </div>
-          <div className="flex items-center gap-3 px-5 py-3.5">
-            <span className="shrink-0 flex items-center justify-center w-7 h-7 rounded-full bg-primary/10 text-[11px] font-bold text-primary">
-              B
-            </span>
-            <div>
-              <p className="text-[13px] font-semibold text-foreground">{mod.trackB?.day ?? "Wednesday"} &middot; {mod.trackB?.time ?? "8:00 \u2013 9:30 PM IST"}</p>
-              <p className="text-[11px] text-muted-foreground">Americas Evenings</p>
+          {mod.trackB && (
+            <div className="flex items-center gap-3 px-5 py-3.5">
+              <span className="shrink-0 flex items-center justify-center w-7 h-7 rounded-full bg-primary/10 text-[11px] font-bold text-primary">
+                B
+              </span>
+              <div>
+                <p className="text-[13px] font-semibold text-foreground">{mod.trackB.day} &middot; {mod.trackB.time}</p>
+                <p className="text-[11px] text-muted-foreground">Americas Evenings</p>
+              </div>
             </div>
-          </div>
+          )}
         </div>
       </div>
     </section>

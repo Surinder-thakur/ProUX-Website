@@ -12,7 +12,7 @@ export default function DetailHero({ module: mod }: { module: BootcampModule }) 
       {/* Background image */}
       <Image
         src="/images/bootcamp-hero.jpg"
-        alt=""
+        alt="UX designers collaborating in a live AI design bootcamp session"
         fill
         priority
         sizes="(max-width: 1024px) 100vw, 65vw"

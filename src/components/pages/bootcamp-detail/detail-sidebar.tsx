@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useEffect, useRef, useCallback } from "react";
+import Image from "next/image";
 import {
   BUNDLE_PRICE_USD,
   BUNDLE_ORIGINAL_USD,
@@ -205,7 +206,7 @@ function TestimonialCarousel() {
         {t.quote}
       </p>
       <div className="flex items-center gap-3">
-        <img src={t.avatar} alt={t.author} className="w-9 h-9 rounded-full object-cover" />
+        <Image src={t.avatar} alt={t.author} width={36} height={36} className="w-9 h-9 rounded-full object-cover" />
         <div>
           <p className="text-[13px] font-bold text-foreground leading-tight">{t.author}</p>
           <p className="text-[12px] text-[#555]">{t.role}</p>
@@ -321,9 +322,11 @@ export default function DetailSidebar({
 
           {/* ── Instructor — editorial, trust-first ──────────────────── */}
           <div className="flex items-center gap-4">
-            <img
+            <Image
               src="/images/surinder-profile.jpg"
               alt="Surinder Thakur"
+              width={56}
+              height={56}
               className="w-[56px] h-[56px] rounded-full object-cover border-[3px] border-primary/25"
             />
             <div>
@@ -456,7 +459,12 @@ export default function DetailSidebar({
           </div>
 
           {/* ── Testimonial carousel ─────────────────────────────────── */}
-          <TestimonialCarousel />
+          <div>
+            <p className="text-[12px] font-bold uppercase tracking-widest text-[#888] mb-3">
+              What Clients Say About Your Instructor
+            </p>
+            <TestimonialCarousel />
+          </div>
         </div>
       </div>
 

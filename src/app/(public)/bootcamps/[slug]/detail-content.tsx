@@ -13,7 +13,7 @@ import DetailMobileBar from "@/components/pages/bootcamp-detail/detail-mobile-ba
 import DetailStickyBar from "@/components/pages/bootcamp-detail/detail-sticky-bar";
 import BootcampModuleCards from "@/components/pages/bootcamps/bootcamp-module-cards";
 import BootcampStatsBar from "@/components/pages/bootcamps/bootcamp-stats-bar";
-import ConsultingTestimonials from "@/components/pages/consulting/consulting-testimonials";
+import BootcampTestimonials from "@/components/pages/bootcamp-detail/bootcamp-testimonials";
 
 const badges = [
   { src: "/images/badge-nng.png", alt: "NN/g Certification Badge" },
@@ -146,7 +146,7 @@ export default function DetailContent({
           <DetailFaq faqs={mod.faqs} />
 
           {/* ── Text + Video testimonials (contained in left column) ── */}
-          <ConsultingTestimonials contained />
+          <BootcampTestimonials slug={mod.slug} />
         </div>
 
         {/* ── Right column — compact sticky CTA (desktop only) ─────── */}
