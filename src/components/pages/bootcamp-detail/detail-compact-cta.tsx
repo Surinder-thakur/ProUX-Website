@@ -170,7 +170,6 @@ export default function DetailCompactCta({
 }: {
   module: BootcampModule;
 }) {
-  const [selectedTrack, setSelectedTrack] = useState<"A" | "B">("A");
   const [bundleAdded, setBundleAdded] = useState(false);
   const [bundlePopupOpen, setBundlePopupOpen] = useState(false);
   const [hasAppeared, setHasAppeared] = useState(false);
@@ -271,47 +270,30 @@ export default function DetailCompactCta({
               </div>
             )}
 
-            <p className="text-[12px] text-[#555] mt-2">
-              {bundleAdded
-                ? `All 3 Bootcamps \u00b7 12 Classes \u00b7 18 Hours`
-                : `Cohort starts ${mod.startDate}, 2026`}
-            </p>
             {bundleAdded && (
-              <p className="text-[12px] text-[#555] mt-1">
-                Cohort starts {mod.startDate}, 2026
+              <p className="text-[12px] text-[#555] mt-2">
+                All 3 Bootcamps &middot; 12 Classes &middot; 18 Hours
               </p>
             )}
           </div>
 
-          {/* ── CTA button ──────────────────────────────────────── */}
-          <RazorpayButton label="Enroll Now" price={bundleAdded ? BUNDLE_PRICE_USD : tier.price} buttonId={bundleAdded ? BUNDLE_RAZORPAY_ID : tier.razorpayId!} />
-
-          {/* ── Compact track selector ──────────────────────────── */}
-          <div>
-            <p className="text-[11px] font-bold uppercase tracking-widest text-[#888] mb-2.5">
-              Choose Your Track
-            </p>
-            <div className="grid grid-cols-2 gap-2">
-              {(["A", "B"] as const).map((track) => (
-                <button
-                  key={track}
-                  onClick={() => setSelectedTrack(track)}
-                  className={`rounded-lg border px-3 py-2.5 text-left transition-all ${
-                    selectedTrack === track
-                      ? "border-primary/40 bg-primary/5 ring-1 ring-primary/30"
-                      : "border-[#dfdbc9] hover:border-[#b8b0a0]"
-                  }`}
-                >
-                  <p className="text-[13px] font-bold text-foreground">Track {track}</p>
-                  <p className="text-[11px] text-[#555] mt-0.5">
-                    {track === "A"
-                      ? `${mod.trackA?.day ?? "Mon"} \u00b7 ${mod.trackA?.time ?? "7:30 PM"}`
-                      : `${mod.trackB?.day ?? "Thu"} \u00b7 ${mod.trackB?.time ?? "2:30 PM"}`}
-                  </p>
-                </button>
-              ))}
+          {/* ── Schedule ──────────────────────────────────────────── */}
+          <div className="flex items-center gap-2.5 rounded-lg border border-[#dfdbc9] px-3 py-2.5">
+            <svg className="w-4 h-4 text-primary shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
+              <path strokeLinecap="round" strokeLinejoin="round" d="M6.75 3v2.25M17.25 3v2.25M3 18.75V7.5a2.25 2.25 0 012.25-2.25h13.5A2.25 2.25 0 0121 7.5v11.25m-18 0A2.25 2.25 0 005.25 21h13.5A2.25 2.25 0 0021 18.75m-18 0v-7.5A2.25 2.25 0 015.25 9h13.5A2.25 2.25 0 0121 11.25v7.5" />
+            </svg>
+            <div>
+              <p className="text-[13px] font-semibold text-foreground">
+                Starts {mod.startDate}, 2026
+              </p>
+              <p className="text-[11px] text-[#555]">
+                {mod.trackA?.day ?? "Mondays"} &middot; {mod.trackA?.time ?? "8:00 \u2013 9:30 PM IST"}
+              </p>
             </div>
           </div>
+
+          {/* ── CTA button ──────────────────────────────────────── */}
+          <RazorpayButton label="Enroll Now" price={bundleAdded ? BUNDLE_PRICE_USD : tier.price} buttonId={bundleAdded ? BUNDLE_RAZORPAY_ID : tier.razorpayId!} />
 
           {/* ── Bootcamp Includes ────────────────────────────────── */}
           <div>
