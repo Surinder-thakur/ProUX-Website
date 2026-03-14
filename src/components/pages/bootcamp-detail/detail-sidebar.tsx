@@ -280,7 +280,6 @@ export default function DetailSidebar({
 }: {
   module: BootcampModule;
 }) {
-  const [selectedTrack, setSelectedTrack] = useState<"A" | "B">("A");
   const [bundleAdded, setBundleAdded] = useState(false);
   const [bundlePopupOpen, setBundlePopupOpen] = useState(false);
   const tier = useActiveTier(mod);
@@ -386,33 +385,20 @@ export default function DetailSidebar({
               </div>
             )}
 
-            <p className="text-[13px] text-[#555] mt-2">
-              Cohort starts {mod.startDate}, 2026
-            </p>
           </div>
 
-          {/* ── Track Selector ───────────────────────────────────────── */}
-          <div>
-            <p className="text-[14px] font-semibold text-foreground mb-3">Choose Your Track</p>
-            <div className="grid grid-cols-2 gap-2.5">
-              {(["A", "B"] as const).map((track) => (
-                <button
-                  key={track}
-                  onClick={() => setSelectedTrack(track)}
-                  className={`rounded-xl border px-4 py-3.5 text-left transition-all ${
-                    selectedTrack === track
-                      ? "border-primary/40 bg-primary/5 ring-1 ring-primary/30"
-                      : "border-[#dfdbc9] hover:border-[#b8b0a0]"
-                  }`}
-                >
-                  <p className="text-[14px] font-bold text-foreground">Track {track}</p>
-                  <p className="text-[13px] text-[#555] mt-0.5">
-                    {track === "A"
-                      ? `${mod.trackA?.day ?? "Mon"} \u00b7 ${mod.trackA?.time ?? "7:30 \u2013 9:00 PM IST"}`
-                      : `${mod.trackB?.day ?? "Thu"} \u00b7 ${mod.trackB?.time ?? "2:30 \u2013 4:00 PM IST"}`}
-                  </p>
-                </button>
-              ))}
+          {/* ── Schedule ───────────────────────────────────────────── */}
+          <div className="flex items-center gap-3 rounded-xl border border-[#dfdbc9] px-4 py-3">
+            <svg className="w-5 h-5 text-primary shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
+              <path strokeLinecap="round" strokeLinejoin="round" d="M6.75 3v2.25M17.25 3v2.25M3 18.75V7.5a2.25 2.25 0 012.25-2.25h13.5A2.25 2.25 0 0121 7.5v11.25m-18 0A2.25 2.25 0 005.25 21h13.5A2.25 2.25 0 0021 18.75m-18 0v-7.5A2.25 2.25 0 015.25 9h13.5A2.25 2.25 0 0121 11.25v7.5" />
+            </svg>
+            <div>
+              <p className="text-[14px] font-semibold text-foreground">
+                Starts {mod.startDate}, 2026
+              </p>
+              <p className="text-[13px] text-[#555]">
+                {mod.trackA?.day ?? "Mondays"} &middot; {mod.trackA?.time ?? "8:00 \u2013 9:30 PM IST"}
+              </p>
             </div>
           </div>
 

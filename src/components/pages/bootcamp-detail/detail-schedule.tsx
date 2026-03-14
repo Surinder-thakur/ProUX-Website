@@ -60,7 +60,7 @@ export default function DetailSchedule({ module: mod }: { module: BootcampModule
               B
             </span>
             <div>
-              <p className="text-[13px] font-semibold text-foreground">{mod.trackB?.day ?? "Thursday"} &middot; {mod.trackB?.time ?? "2:30 \u2013 4:00 PM IST"}</p>
+              <p className="text-[13px] font-semibold text-foreground">{mod.trackB?.day ?? "Wednesday"} &middot; {mod.trackB?.time ?? "8:00 \u2013 9:30 PM IST"}</p>
               <p className="text-[11px] text-muted-foreground">Americas Evenings</p>
             </div>
           </div>

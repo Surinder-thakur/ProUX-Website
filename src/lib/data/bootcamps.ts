@@ -281,9 +281,9 @@ export const BUNDLE_HOURS = 18;
 const modules: BootcampModule[] = [
   {
     slug: "ai-mastery-design-system",
-    title: "AI Prompts & Design System Foundations",
+    title: "AI Prompt & Design System Fundamentals",
     tagline:
-      "Build a design system that AI tools actually understand.",
+      "Master prompt frameworks. Build a production-ready design system in Figma. A single source of truth that every developer, every AI tool, and every team member can understand.",
     badge: "Best for Getting Started",
     heroTag: "No AI experience? That's exactly why you're here.",
     heroHeadline: "AI Won't Replace You.\nA Designer Who Masters It Will.",
@@ -295,8 +295,7 @@ const modules: BootcampModule[] = [
     certificateImage: "/images/certificate.jpg",
     startDate: "Apr 6",
     startDateISO: "2026-04-06",
-    trackA: { day: "Mon", time: "7:30 \u2013 9:00 PM IST" },
-    trackB: { day: "Thu", time: "2:30 \u2013 4:00 PM IST" },
+    trackA: { day: "Mondays", time: "8:00 \u2013 9:30 PM IST" },
     pricingTiers: {
       earlyBird: { price: 245, priceInr: 20300, deadline: "2026-03-23T23:59:59", razorpayId: "pl_SQNWPdh5L4Gf5w" },
       standard: { price: 295, priceInr: 24500, deadline: "2026-04-02T23:59:59", razorpayId: "pl_SQczj7yp64OuZ0" },
@@ -311,27 +310,27 @@ const modules: BootcampModule[] = [
     outcomes: [
       {
         number: "01",
-        title: "Master the Prompt Framework",
+        title: "Master AI Prompting for Design",
         description:
-          "Learn our 5-part prompt structure (Role, Task, Context, Constraints, Format) that turns AI from a toy into a strategic partner. Build multi-step prompt chains and negative prompts.",
+          "Learn CRAFT, the one framework behind every prompt in this bootcamp. Then go deeper with specialist frameworks for research, critique, and iteration. By the end of Week 1, you\u2019re not guessing what to type into AI. You know exactly how to structure a prompt and refine the output until it\u2019s production-ready.",
       },
       {
         number: "02",
-        title: "Build Custom AI Agents",
+        title: "Build a Complete Token System with AI",
         description:
-          "Create pre-configured Claude personas like a UX Research Analyst or a Design Critic, each with specific expertise and methodology. Chain agents for end-to-end workflows.",
+          "Generate color palettes, type scales, spacing systems, and shadow tokens, all with WCAG contrast and full dark mode support baked in from the start. Your AI agents do the heavy lifting. You make the design decisions.",
       },
       {
         number: "03",
-        title: "Create Structured AI Skill Files",
+        title: "Bring Tokens into Figma as Live Variables",
         description:
-          "Encode your process, standards, and best practices into structured documents so AI agents work the way you do — consistently and on-brand.",
+          "Take everything AI generated and import it into Figma as native Variables with a single workflow. Then connect to Figma Make to generate live documentation that updates itself. Change a token, the docs follow. No more stale handoff files.",
       },
       {
         number: "04",
-        title: "Build an AI-Readable Figma Design System",
+        title: "Generate Production Components and Ship",
         description:
-          "Structure design tokens, Auto Layout components, and naming conventions so Claude Code, MCP, and any AI tool can read your components directly.",
+          "Describe a component. Figma Make builds it using your Variables. Button, Card, Input, each one faster than the last. Assemble them into a real page, test light and dark mode, and hand the whole system off with tokens exported as CSS, Tailwind, and TypeScript.",
       },
     ],
     audience: [
@@ -358,7 +357,7 @@ const modules: BootcampModule[] = [
       {
         week: 1,
         classNumber: 1,
-        title: "Master AI as Your Design Superpower",
+        title: "Master AI as a Design Skill",
         parts: [
           {
             title: "The AI Shift + Why Prompting Is a Design Skill",
@@ -366,14 +365,14 @@ const modules: BootcampModule[] = [
             description: "The tools changed. You\u2019ll see exactly what a well-structured prompt produces versus a vague one, and why the gap between the two is the biggest career advantage a designer can have right now.",
           },
           {
-            title: "The CRAFT Framework + Prompting Frameworks That Actually Work",
+            title: "The CRAFT Framework + Prompting Frameworks That Work",
             duration: "30 min",
-            description: "Context, Role, Artifact, Feel, Tech. One framework, every prompt you\u2019ll write for the rest of this bootcamp. You\u2019ll also learn a handful of specialist frameworks for scenarios where CRAFT isn\u2019t the best fit. By the end, you\u2019ll know exactly which tool to reach for and when.",
+            description: "Context, Role, Artifact, Feel, Tech. One framework for every prompt you\u2019ll write in this bootcamp. You\u2019ll also learn when CRAFT isn\u2019t the best fit and which specialist frameworks to reach for instead.",
           },
           {
             title: "Your AI Workspace: Claude Projects & Custom Agents",
             duration: "30 min",
-            description: "Set up a Claude Project that remembers your design system rules across every session. Build two custom AI agents: one that generates tokens, one that audits them. Then test the full pipeline before you touch a single real token. You\u2019ll also learn a refinement technique that takes any AI output from 80% to 100%. Week 2 goes fast because you did this.",
+            description: "Set up a Claude Project that remembers your design system rules across every conversation. Build custom agents tailored to your workflow and learn a refinement technique that turns rough AI output into production-ready results. Week 2 goes fast because you did this.",
           },
         ],
       },
@@ -390,12 +389,12 @@ const modules: BootcampModule[] = [
           {
             title: "Typography, Spacing & Shadows",
             duration: "30 min",
-            description: "Your type scale, unified spacing system, and shadow tokens, all generated with the same pipeline. By the end of this class, you have four complete token categories and dark mode support ready for Figma.",
+            description: "Your type scale, unified spacing system, and shadow tokens, all generated with the same pipeline. By the end of this class you have four complete token categories and dark mode support ready for Figma.",
           },
           {
             title: "From AI Output to Live Figma Variables",
             duration: "30 min",
-            description: "Take your AI-generated tokens and bring them into Figma as native Variables. Color, typography, spacing, shadows, light mode, dark mode. Change one value and every token that references it updates instantly. That\u2019s the moment your design system comes alive.",
+            description: "Take your AI-generated tokens and bring them into Figma as native Variables with a single import workflow. Color, typography, spacing, shadows, light mode and dark mode. Change one value and every token that references it updates instantly.",
           },
         ],
       },
@@ -407,12 +406,12 @@ const modules: BootcampModule[] = [
           {
             title: "Generate Live Documentation with Figma Make",
             duration: "45 min",
-            description: "Publish your Variables, connect to Figma Make, and generate documentation for every token category. Update a token and the docs update automatically. No more stale Notion wikis or PDFs that are wrong by Tuesday.",
+            description: "Publish your Variables, connect to Figma Make, and generate documentation for every token category. Update a token and the docs update automatically. No more stale wikis or PDFs that are wrong by Tuesday.",
           },
           {
             title: "Governance, Changelogs & a System That Stays Alive",
             duration: "45 min",
-            description: "The difference between a design system that thrives and one that dies in six months? One page of governance rules. Build contribution workflows, deprecation timelines, and changelogs. Your AI agents validate every change before it ships.",
+            description: "The difference between a design system that thrives and one that dies in six months? One page of governance rules. Build contribution workflows, deprecation timelines, and changelogs that your AI agents validate before anything ships.",
           },
         ],
       },
@@ -429,55 +428,65 @@ const modules: BootcampModule[] = [
           {
             title: "Build a Real Page: Your System\u2019s Moment of Truth",
             duration: "30 min",
-            description: "Compose your components into a complete Login Page. Light mode, dark mode, no manual overrides. If it works in both modes, your design system is ready. This is the moment everything clicks.",
+            description: "Compose your components into a complete web page. Light mode, dark mode, no manual overrides. If it works in both modes, your design system is production-ready. This is the moment everything clicks.",
           },
           {
-            title: "Developer Handover & Lightning Showcase",
+            title: "Developer Handover & Showcase",
             duration: "30 min",
-            description: "Export your tokens as CSS, Tailwind, and TypeScript. Package the handover. Then present your system to the cohort: prompt library, custom agents, complete token architecture, production components, real pages, live documentation, and governance. Four weeks ago you wrote \u201Ccreate a color palette.\u201D Look at you now.",
+            description: "Tokens exported as CSS, Tailwind, and TypeScript. A complete handover package: prompt library, custom agents, full token architecture, production components, real pages, and live documentation. A single source of truth that every developer and AI tool can read. Four weeks ago it started with \u201Ccreate a color palette.\u201D Now it\u2019s a system built to scale.",
           },
         ],
       },
     ],
     deliverables: [
-      "Prompt Portfolio (prompts, chains, negative prompts)",
-      "4 Custom Claude Agents",
-      "2+ SKILL.md Files",
-      "AI-Readable Figma Design System + Audit Report",
-      "Design System Readiness Report (10-point score)",
+      "CRAFT Prompt Framework + Custom AI Agents",
+      "Complete Token System (color, type, spacing, shadows + dark mode)",
+      "Production Figma Design System with Live Variables",
+      "Live Documentation via Figma Make",
+      "Production Components + Developer Handover (CSS, Tailwind, TypeScript)",
     ],
     faqs: [
       {
-        question: "Do I need to take all 3 modules?",
+        question: "Do I need any coding or technical experience?",
         answer:
-          "No. Each module is standalone. All three together are a career transformation, but each works independently.",
+          "Not at all. This bootcamp runs entirely inside Figma and Claude. No terminal, no code editor, no command line. If you\u2019ve designed in Figma before, you\u2019re ready.",
       },
       {
-        question: "What tools do I need?",
+        question: "What tools do I need before starting?",
         answer:
-          "A Claude Pro account and Figma. That's it, no coding required for this module.",
+          "A Figma account and a Claude Pro subscription. That\u2019s it. We cover everything else in Session 01.",
       },
       {
-        question: "What's the class size?",
+        question: "Do I need to know about design systems already?",
         answer:
-          "Cohorts are capped at 12 students per track. Every student presents and gets feedback.",
+          "No. We start from first principles. Whether you\u2019ve never built a design system or you\u2019ve maintained one for years, the AI-first approach we teach is different from anything you\u2019ve done before.",
       },
       {
-        question: "What time zone options are available?",
+        question: "What\u2019s the class size and format?",
         answer:
-          "Two parallel tracks: Track A for India/Asia/Europe evenings, Track B for Americas evenings. Choose at enrollment.",
+          "Capped at 12 students. Sessions run every Monday at 8:00 PM IST, starting April 6th. Each session is 90 to 120 minutes, live and interactive. You build alongside the group, present your work, and get real-time feedback. This is not a webinar.",
       },
       {
-        question: "What if I miss a class?",
+        question: "What if I miss a live session?",
         answer:
-          "All classes are recorded and shared within 24 hours. You can catch up asynchronously, but live attendance is strongly recommended for the interactive exercises.",
+          "Sessions are not recorded, but you\u2019ll receive the full session materials, presentation decks, and detailed content documents after every class. These cover everything discussed and are designed for you to follow along on your own. That said, live attendance is where the real learning happens.",
+      },
+      {
+        question: "What will I actually walk away with?",
+        answer:
+          "A complete, working design system that you built yourself from scratch using AI. Not a template. Not a starter file. Something you understand inside and out because you made every decision along the way.",
+      },
+      {
+        question: "Do I need to take Bootcamp 2 after this?",
+        answer:
+          "No. Bootcamp 1 is fully standalone. Your design system is complete and handover-ready by the end of Week 4. Bootcamp 2 starts Wednesday, April 8th if you want to take that system into code and ship a live product, but it\u2019s entirely optional.",
       },
     ],
   },
   {
     slug: "ai-design-code-workflow",
-    title: "AI Design-Code Workflow",
-    tagline: "Ship your designs to production without a developer.",
+    title: "AI Design Engineer: From Code to Shipping",
+    tagline: "Get comfortable with code so you can design, build, and ship real products. Deploy a real application in 4 weeks.",
     badge: "Design-to-Code",
     heroTag: "Bridge the Gap — Design to Production",
     heroHeadline: "Stop Handing Off.\nStart Shipping.",
@@ -487,13 +496,12 @@ const modules: BootcampModule[] = [
     gradient: "from-[hsl(var(--brown-100))] to-[hsl(var(--gold-100))]",
     image: "/images/bc2.jpg",
     certificateImage: "/images/certificate-b2.jpg",
-    startDate: "Apr 13",
-    startDateISO: "2026-04-13",
-    trackA: { day: "Mon", time: "2:30 \u2013 4:00 PM IST" },
-    trackB: { day: "Thu", time: "7:30 \u2013 9:00 PM IST" },
+    startDate: "Apr 8",
+    startDateISO: "2026-04-08",
+    trackA: { day: "Wednesdays", time: "8:00 \u2013 9:30 PM IST" },
     pricingTiers: {
-      earlyBird: { price: 245, priceInr: 20300, deadline: "2026-03-30T23:59:59", razorpayId: "pl_SQdEczsOcM3m7L" },
-      standard: { price: 295, priceInr: 24500, deadline: "2026-04-09T23:59:59", razorpayId: "pl_SQd1WALX4aOBDS" },
+      earlyBird: { price: 245, priceInr: 20300, deadline: "2026-03-25T23:59:59", razorpayId: "pl_SQdEczsOcM3m7L" },
+      standard: { price: 295, priceInr: 24500, deadline: "2026-04-04T23:59:59", razorpayId: "pl_SQd1WALX4aOBDS" },
       lastCall: { price: 395, priceInr: 32800, razorpayId: "pl_SQd3mor0KhVh9O" },
     },
     story:
@@ -505,27 +513,27 @@ const modules: BootcampModule[] = [
     outcomes: [
       {
         number: "01",
-        title: "Set Up Your Dev Environment",
+        title: "Write Code Through a Designer\u2019s Eyes",
         description:
-          "GitHub, Claude Code, VS Code, Cursor: the complete stack. Scaffold a Next.js + Tailwind + shadcn/ui project with a single AI instruction.",
+          "Frames are divs. Auto-layout is flexbox. Fill and hug are width rules. You already know more code than you think. Start with HTML and CSS, map every concept back to Figma, and use your prompting skills from Bootcamp 1 to generate accurate code on your first try.",
       },
       {
         number: "02",
-        title: "Master the Figma-to-Code Workflow",
+        title: "Think and Build in React Components",
         description:
-          "The Describe-Build-Read-Refine loop. Drag Figma screenshots into Claude Code, describe design intent, get working code, refine with precise feedback.",
+          "Learn why components exist in code the same way they exist in Figma: one source, every instance updates. Build your first React components from your own designs, pass data into them, and use AI to generate and refine entire interfaces from a prompt.",
       },
       {
         number: "03",
-        title: "Build Real Interfaces with Tailwind + shadcn/ui",
+        title: "Connect Your Design System to Production Code",
         description:
-          "CSS mental models for designers. Claude Code for scaffolding, Cursor for refinement. The iteration rhythm: Figma to Claude Code to Browser to Cursor, repeat.",
+          "Your Figma Variables become real code. Customize Tailwind to match your tokens, then use Claude Code and Figma MCP to run the workflow real teams use: design to code to browser, with the gap between the two completely gone.",
       },
       {
         number: "04",
-        title: "Deploy, Configure CLAUDE.md + MCP, and Merge Your Design System",
+        title: "Deploy a Live Application",
         description:
-          "Deploy on Vercel. Write CLAUDE.md for project memory. Connect Figma via MCP. Merge design tokens into Tailwind config. Achieve design-code parity.",
+          "Scaffold a real project with Next.js and ShadCN. Build your first live web page using everything from the past three weeks: React components, Tailwind tokens, and your Bootcamp 1 design system. Deploy to Vercel and share the link. Four weeks ago you\u2019d never written code. Now you have a live URL.",
       },
     ],
     audience: [
@@ -552,112 +560,133 @@ const modules: BootcampModule[] = [
       {
         week: 1,
         classNumber: 5,
-        title: "Setup: GitHub, Claude Code & Your First Build",
+        title: "Your First Lines of Code",
         parts: [
-          { title: "Your Development Environment", duration: "20 min" },
           {
-            title: "Claude Code: Your AI Engineering Partner",
+            title: "Environment Setup: Cursor, GitHub & Your First Commit",
             duration: "30 min",
+            description: "Install Cursor, create your GitHub repo, and push your first commit, all in one session. By the end you have a working development environment and the confidence to navigate it on your own.",
           },
           {
-            title: "Figma-to-Code: The Core Workflow",
-            duration: "40 min",
+            title: "HTML & CSS Through a Designer\u2019s Eyes",
+            duration: "30 min",
+            description: "Frames are divs. Auto-layout is flexbox. Fill and hug are width rules. You already know more code than you think. Write a real page layout from scratch, then use DevTools to see how every site you\u2019ve admired is built the same way.",
+          },
+          {
+            title: "AI-Assisted Coding: Bootcamp 1 Meets Code",
+            duration: "30 min",
+            description: "Your prompting skills work in code too, but the rules are different. Learn how coding prompts differ from design prompts, and use CRAFT inside Cursor to generate accurate code on your first try. This is where \u201Cdesigner who can prompt\u201D becomes \u201Cdesigner who can build.\u201D",
           },
         ],
-        homework:
-          "Build your portfolio landing page. Push to GitHub.",
       },
       {
         week: 2,
         classNumber: 6,
-        title: "Cursor + Tailwind + shadcn/ui",
+        title: "Think in Components",
         parts: [
           {
-            title: "CSS Mental Models for Designers",
-            duration: "20 min",
+            title: "Why Components Exist (And Why Copy-Pasting Doesn\u2019t)",
+            duration: "30 min",
+            description: "One nav bar. Twelve pages. Then the logo changes. Components solve this the same way Figma components do: one source, every instance updates. Same concept you already know, new syntax.",
           },
           {
-            title: "Cursor: The AI Code Editor for Designers",
-            duration: "20 min",
+            title: "JSX, Props & Your First React Component",
+            duration: "30 min",
+            description: "JSX is HTML inside JavaScript. Props are overrides on a Figma instance. Build your first React component from a Figma design, pass data into it, and watch it render. You\u2019ll also get a gentle intro to TypeScript, just enough to understand why types matter and how they keep components accessible and predictable.",
           },
           {
-            title: "Component Building with shadcn/ui",
-            duration: "35 min",
+            title: "Dynamic Interfaces: Lists, Conditions & AI Generation",
+            duration: "30 min",
+            description: "Render a list from real data. Show and hide elements based on state. Then use Cursor to generate and refine entire components from a prompt. By the end of this class you\u2019re not hand-coding every line. You\u2019re directing AI to build what you describe, using the same UI primitives production teams rely on.",
           },
         ],
-        homework: "Build 2+ full pages. Push to GitHub.",
       },
       {
         week: 3,
         classNumber: 7,
-        title: "Deployment, CLAUDE.md, MCP & Design System Merge",
+        title: "Design Tokens Meet Production Code",
         parts: [
-          { title: "Deploying to Vercel", duration: "15 min" },
           {
-            title: "CLAUDE.md: Project Memory",
-            duration: "25 min",
+            title: "From Hard-Coded CSS to Design Tokens",
+            duration: "30 min",
+            description: "Hard-coded colors drift. Hard-coded spacing breaks. The token fundamentals you built in Bootcamp 1 fix both. One definition, used everywhere. See how your Figma Variables map directly to code, creating a shared language between design and development.",
           },
           {
-            title: "MCP + Design System Merge",
-            duration: "50 min",
+            title: "Tailwind CSS: Your Tokens in Production",
+            duration: "30 min",
+            description: "Style directly in your markup. No separate stylesheets, no naming wars. Customize Tailwind\u2019s config to match your design system tokens, build responsive layouts with mobile-first breakpoints, and write accessible, utility-first CSS the way modern teams ship.",
+          },
+          {
+            title: "Claude Code, Figma MCP & the Round-Trip Workflow",
+            duration: "30 min",
+            description: "Meet Claude Code, AI in your terminal. Connect it to your Figma file with MCP, and run the workflow real teams use: Figma design to Claude Code to styled component to review in browser. The gap between design and code disappears.",
           },
         ],
-        homework:
-          "Complete design system merge. Deploy final version.",
       },
       {
         week: 4,
         classNumber: 8,
-        title: "Responsive Design, Dark Mode & Production Polish",
+        title: "Build & Ship",
         parts: [
           {
-            title: "Responsive Design for Designers",
-            duration: "35 min",
-          },
-          {
-            title: "Dark Mode & Visual Polish",
+            title: "Next.js + ShadCN: Scaffold a Real Application",
             duration: "30 min",
+            description: "Scaffold a Next.js project from scratch. Install ShadCN, the production-ready UI primitives you\u2019ve been building toward since Week 2. Set up pages, routing, and project structure. This isn\u2019t a tutorial. It\u2019s the foundation for the application you\u2019re about to deploy.",
           },
           {
-            title: "Code Literacy, Debugging & Final Deploy",
-            duration: "25 min",
+            title: "Build Your First Live Web Page",
+            duration: "30 min",
+            description: "A personal portfolio or a single-page SaaS landing page. You pick. Your design, your rules. React components, Tailwind tokens, ShadCN primitives, and your Bootcamp 1 design system all working together. Cursor and Claude Code side by side, shipping faster than you thought possible.",
+          },
+          {
+            title: "Deploy to Vercel & Lightning Showcase",
+            duration: "30 min",
+            description: "From local project to live URL in under ten minutes. Deploy to Vercel and share the link. Four weeks ago you\u2019d never written a line of code. Now you have a deployed application, a GitHub repo, and a workflow that didn\u2019t exist a month ago. You\u2019re a designer who ships.",
           },
         ],
-        deliverable:
-          "Live URL + GitHub repo + CLAUDE.md + merged design system.",
       },
     ],
     deliverables: [
-      "Deployed Portfolio Website (live Vercel URL)",
-      "GitHub Repository + CLAUDE.md Configuration",
-      "Merged Design System (Figma to Code via MCP)",
-      "Responsive + Dark Mode Production Build",
+      "Deployed Web Application (live Vercel URL)",
+      "GitHub Repository with React + Tailwind + ShadCN",
+      "Design System Tokens Integrated in Tailwind Config",
+      "Claude Code + Figma MCP Round-Trip Workflow",
     ],
     faqs: [
       {
-        question: "Do I need coding experience?",
+        question: "Do I need to complete Bootcamp 1 first?",
         answer:
-          "No. This module is designed for designers with zero coding experience. You'll use AI tools to write and manage code. The module teaches you the workflow, not programming.",
+          "Strongly recommended. Bootcamp 2 builds directly on the prompting skills and design system you create in Bootcamp 1. If you already have strong prompt engineering fundamentals and a token-based design system in Figma, you can start here, but most students benefit from doing both in order.",
       },
       {
-        question: "What if I only take this module standalone?",
+        question: "I\u2019ve never written a line of code. Can I still do this?",
         answer:
-          "A free Starter Pack is included: a 15-min video covering the essentials from Module 1 so you can hit the ground running.",
+          "That\u2019s exactly who this bootcamp is for. Session 01 starts with installing your code editor and pushing your first commit. Session 02 maps Figma concepts you already know to their code equivalents. You\u2019re not starting from zero. You\u2019re starting from Figma.",
       },
       {
         question: "What tools do I need?",
         answer:
-          "Claude Pro account, Figma, Node.js, GitHub account, VS Code, and Cursor. We provide setup guides for everything.",
+          "Cursor (free), a GitHub account (free), and a Vercel account (free). We set up everything together in Session 01. If you completed Bootcamp 1, you already have Claude and Figma ready.",
       },
       {
-        question: "What's the class size?",
+        question: "What\u2019s the class size and format?",
         answer:
-          "Cohorts are capped at 12 students per track. Every student presents and gets feedback.",
+          "Capped at 12 students. Sessions run every Wednesday at 8:00 PM IST, starting April 8th. Each session is 90 to 120 minutes, live and interactive. You write real code during class, share your screen, and get feedback on your work. This is hands-on from day one.",
       },
       {
-        question: "What time zone options are available?",
+        question: "What if I miss a live session?",
         answer:
-          "Two parallel tracks: Track A for India/Asia/Europe evenings, Track B for Americas evenings. Choose at enrollment.",
+          "Sessions are not recorded, but you\u2019ll receive the full session materials, presentation decks, and detailed content documents after every class. These cover all the code, concepts, and steps discussed. However, this bootcamp is especially hands-on, so live attendance matters even more here.",
+      },
+      {
+        question: "Will I actually ship something live?",
+        answer:
+          "Yes. By Session 12, your project is deployed to a real URL that anyone can visit. You pick what you build, a portfolio site or a landing page, and you ship it yourself. Not a demo. A real, live product.",
+      },
+      {
+        question: "Do I need to know React, Tailwind, or Next.js before starting?",
+        answer:
+          "No. We teach each one at the exact moment you need it. React in Week 2, Tailwind in Week 3, Next.js in Week 4. Every tool is introduced through a designer\u2019s lens, not a developer bootcamp curriculum.",
       },
     ],
   },
