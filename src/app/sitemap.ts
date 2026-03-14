@@ -23,13 +23,13 @@ export default function sitemap(): MetadataRoute.Sitemap {
       priority: 0.8,
     },
     {
-      url: `${baseUrl}/bootcamps/ai-mastery-design-system`,
+      url: `${baseUrl}/bootcamps/ai-prompts-design-system-foundations`,
       lastModified: new Date(),
       changeFrequency: "monthly",
       priority: 0.8,
     },
     {
-      url: `${baseUrl}/bootcamps/ai-design-code-workflow`,
+      url: `${baseUrl}/bootcamps/ai-design-engineer-code-to-shipping`,
       lastModified: new Date(),
       changeFrequency: "monthly",
       priority: 0.8,

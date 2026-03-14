@@ -363,8 +363,8 @@ const BC2_TESTIMONIALS: BootcampTestimonial[] = [
 /* ── Testimonial map by slug ───────────────────────────────────────────── */
 
 const TESTIMONIALS_BY_SLUG: Record<string, BootcampTestimonial[]> = {
-  "ai-mastery-design-system": BC1_TESTIMONIALS,
-  "ai-design-code-workflow": BC2_TESTIMONIALS,
+  "ai-prompts-design-system-foundations": BC1_TESTIMONIALS,
+  "ai-design-engineer-code-to-shipping": BC2_TESTIMONIALS,
 };
 
 /* ── Initials Avatar ───────────────────────────────────────────────────── */
