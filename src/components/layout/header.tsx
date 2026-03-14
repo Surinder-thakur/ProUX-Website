@@ -29,8 +29,8 @@ const navigation = [
     label: "AI Design Training",
     href: "/bootcamps",
     subItems: [
-      { label: "AI Mastery + Design System", href: "/bootcamps/ai-mastery-design-system" },
-      { label: "AI Design-Code Workflow", href: "/bootcamps/ai-design-code-workflow" },
+      { label: "AI Prompts & Design System Foundations", href: "/bootcamps/ai-prompts-design-system-foundations" },
+      { label: "AI Design Engineer: Code to Shipping", href: "/bootcamps/ai-design-engineer-code-to-shipping" },
       { label: "AI UX Strategic Thinking", href: "/bootcamps/ai-ux-strategic-thinking" },
     ],
   },

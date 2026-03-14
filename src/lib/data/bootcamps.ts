@@ -58,6 +58,7 @@ export interface BootcampModule {
   story: string;
   gradient: string;
   image: string;
+  heroImage?: string;
   certificateImage?: string;
   startDate: string; // Display string e.g. "Apr 1"
   startDateISO: string; // ISO date "2026-04-01"
@@ -280,7 +281,7 @@ export const BUNDLE_HOURS = 18;
 
 const modules: BootcampModule[] = [
   {
-    slug: "ai-mastery-design-system",
+    slug: "ai-prompts-design-system-foundations",
     title: "AI Prompts & Design System Foundations",
     tagline:
       "Master prompt frameworks. Build a production-ready design system in Figma. A single source of truth that every developer, every AI tool, and every team member can understand.",
@@ -292,6 +293,7 @@ const modules: BootcampModule[] = [
     hoursLive: 6,
     gradient: "from-[hsl(var(--gold-200))] to-[hsl(var(--gold-100))]",
     image: "/images/bc1.jpg",
+    heroImage: "/images/bc1-hero.png",
     certificateImage: "/images/certificate.jpg",
     startDate: "Apr 6",
     startDateISO: "2026-04-06",
@@ -484,7 +486,7 @@ const modules: BootcampModule[] = [
     ],
   },
   {
-    slug: "ai-design-code-workflow",
+    slug: "ai-design-engineer-code-to-shipping",
     title: "AI Design Engineer: From Code to Shipping",
     tagline: "Get comfortable with code so you can design, build, and ship real products. Deploy a real application in 4 weeks.",
     badge: "Design-to-Code",
@@ -495,6 +497,7 @@ const modules: BootcampModule[] = [
     hoursLive: 6,
     gradient: "from-[hsl(var(--brown-100))] to-[hsl(var(--gold-100))]",
     image: "/images/bc2.jpg",
+    heroImage: "/images/bc2-hero.png",
     certificateImage: "/images/certificate-b2.jpg",
     startDate: "Apr 8",
     startDateISO: "2026-04-08",

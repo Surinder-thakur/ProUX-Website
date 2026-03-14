@@ -1,4 +1,5 @@
 import type { Metadata, Viewport } from "next";
+import Script from "next/script";
 import { Inter } from "next/font/google";
 import { Toaster } from "@/components/ui/toaster";
 import "./globals.css";
@@ -83,6 +84,18 @@ export default function RootLayout({
     <html lang="en" suppressHydrationWarning>
       <head>
         <script src="https://mcp.figma.com/mcp/html-to-design/capture.js" async />
+        <Script
+          src="https://www.googletagmanager.com/gtag/js?id=G-90B43DV3LV"
+          strategy="afterInteractive"
+        />
+        <Script id="ga4-init" strategy="afterInteractive">
+          {`
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
+            gtag('config', 'G-90B43DV3LV');
+          `}
+        </Script>
       </head>
       <body className={`${fontSans.variable} ${fontDisplay.variable} font-sans antialiased`}>
         {children}
