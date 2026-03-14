@@ -14,7 +14,7 @@ export default function DetailAudience({
           <h2 className="text-[26px] md:text-[32px] font-extrabold tracking-[-0.6px] text-foreground mb-3">
             Who should join this bootcamp
           </h2>
-          <p className="text-[15px] md:text-[16px] text-muted-foreground mx-auto leading-relaxed whitespace-nowrap">
+          <p className="text-[15px] md:text-[16px] text-muted-foreground mx-auto leading-relaxed max-w-md">
             No AI experience needed. Just a design background and the will to build.
           </p>
         </div>

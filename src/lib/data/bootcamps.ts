@@ -281,7 +281,7 @@ export const BUNDLE_HOURS = 18;
 const modules: BootcampModule[] = [
   {
     slug: "ai-mastery-design-system",
-    title: "AI Prompt & Design System Fundamentals",
+    title: "AI Prompts & Design System Foundations",
     tagline:
       "Master prompt frameworks. Build a production-ready design system in Figma. A single source of truth that every developer, every AI tool, and every team member can understand.",
     badge: "Best for Getting Started",
