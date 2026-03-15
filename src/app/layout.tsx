@@ -62,6 +62,9 @@ export const metadata: Metadata = {
     description:
       "AI-powered UX intelligence platform and expert consulting. Get UX audits, proven design principles, and data-backed strategies.",
   },
+  icons: {
+    icon: "/icon.svg",
+  },
   robots: {
     index: true,
     follow: true,
