@@ -169,12 +169,10 @@ export default function BootcampModuleCards({
 }) {
   const allModules = getAllBootcamps();
 
-  // When currentSlug is set, show all bootcamps with current first
+  // Always keep original 1, 2, 3 order
   let modules: BootcampModule[];
   if (currentSlug) {
-    const current = allModules.find((m) => m.slug === currentSlug);
-    const others = allModules.filter((m) => m.slug !== currentSlug);
-    modules = current ? [current, ...others] : allModules;
+    modules = allModules;
   } else if (excludeSlug) {
     modules = allModules.filter((m) => m.slug !== excludeSlug);
   } else {

@@ -12,7 +12,7 @@ export default function DetailHero({ module: mod }: { module: BootcampModule }) 
 
   return (
     <div
-      className="relative min-h-screen flex flex-col justify-end overflow-hidden"
+      className="relative min-h-[70vh] md:min-h-screen flex flex-col justify-end overflow-hidden"
       style={{ backgroundColor: BG }}
     >
       {/* ── Subtle radial glow — depth ── */}
@@ -50,7 +50,7 @@ export default function DetailHero({ module: mod }: { module: BootcampModule }) 
           unoptimized
           className="
             w-full h-auto
-            opacity-[0.15] md:opacity-[0.15] lg:opacity-[0.12] xl:opacity-[0.18]
+            opacity-[0.50] md:opacity-[0.15] lg:opacity-[0.12] xl:opacity-[0.18]
           "
         />
 
@@ -105,17 +105,17 @@ export default function DetailHero({ module: mod }: { module: BootcampModule }) 
           Layered on top of the image for each breakpoint
          ══════════════════════════════════════════════════════ */}
 
-      {/* Mobile: image visible at 10% but needs strong text protection */}
+      {/* Mobile: image at 50% — lighter overlays, more image visible */}
       <div
         className="absolute inset-0 md:hidden"
         style={{
-          background: `linear-gradient(to right, rgba(${BG_RGB},0.97) 0%, rgba(${BG_RGB},0.90) 40%, rgba(${BG_RGB},0.70) 70%, rgba(${BG_RGB},0.50) 100%)`,
+          background: `linear-gradient(to right, rgba(${BG_RGB},0.88) 0%, rgba(${BG_RGB},0.65) 30%, rgba(${BG_RGB},0.30) 60%, rgba(${BG_RGB},0.10) 100%)`,
         }}
       />
       <div
         className="absolute inset-0 md:hidden"
         style={{
-          background: `linear-gradient(to top, rgba(${BG_RGB},0.95) 0%, rgba(${BG_RGB},0.80) 35%, transparent 65%)`,
+          background: `linear-gradient(to top, rgba(${BG_RGB},0.85) 0%, rgba(${BG_RGB},0.50) 25%, transparent 55%)`,
         }}
       />
 
@@ -167,15 +167,15 @@ export default function DetailHero({ module: mod }: { module: BootcampModule }) 
           {mod.heroTag}
         </p>
 
-        <h1 className="font-black tracking-[-2px] text-white mb-6">
+        <h1 className="font-bold md:font-black tracking-[-1px] md:tracking-[-2px] text-white mb-4 md:mb-6">
           {headlineLines.map((line, i) => (
-            <span key={i} className="block text-[34px] leading-[1.08] md:text-[48px] lg:text-[56px]">
+            <span key={i} className="block text-[22px] leading-[1.15] md:text-[42px] lg:text-[48px]">
               {line}
             </span>
           ))}
         </h1>
 
-        <p className="text-[16px] md:text-[18px] lg:text-[20px] font-normal text-white/75 leading-[1.55] mb-10 max-w-[560px]">
+        <p className="text-[14px] md:text-[17px] lg:text-[19px] font-normal text-white/75 leading-[1.55] mb-6 md:mb-10 max-w-[560px]">
           {mod.heroSubheadline}
         </p>
 
@@ -194,11 +194,22 @@ export default function DetailHero({ module: mod }: { module: BootcampModule }) 
           ))}
         </div>
 
-        <div className="mt-12 pt-8 border-t border-white/10">
+        {/* Mobile CTA — visible only on mobile */}
+        <button
+          className="btn-shine md:hidden mt-6 w-full rounded-[12px] bg-primary h-[48px] text-[13px] font-semibold uppercase tracking-wide text-white shadow-md transition-all hover:brightness-110"
+          onClick={() => {
+            const trigger = document.querySelector<HTMLButtonElement>('[data-mobile-enroll]');
+            if (trigger) trigger.click();
+          }}
+        >
+          Reserve Your Spot
+        </button>
+
+        <div className="hidden md:block mt-12 pt-8 border-t border-white/10">
           <p className="text-[11px] font-medium text-white/35 uppercase tracking-[0.15em] mb-5">
             Top companies upskill their teams with our bootcamps
           </p>
-          <div className="flex flex-wrap items-center gap-x-8 gap-y-3">
+          <div className="flex items-center gap-x-8 gap-y-3 flex-wrap">
             {[
               { src: "/images/logos/ibm.svg", alt: "IBM" },
               { src: "/images/logos/ebay.svg", alt: "eBay" },

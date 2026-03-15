@@ -492,7 +492,7 @@ const modules: BootcampModule[] = [
     badge: "Design-to-Code",
     heroTag: "Bridge the Gap — Design to Production",
     heroHeadline: "Stop Handing Off.\nStart Shipping.",
-    heroSubheadline: "In 6 live hours, learn how to turn Figma designs into production-ready code using AI — no developer required.",
+    heroSubheadline: "Design in Figma, ship in code, iterate between both. 6 live hours to master the two-way workflow with AI.",
     classCount: 4,
     hoursLive: 6,
     gradient: "from-[hsl(var(--brown-100))] to-[hsl(var(--gold-100))]",
@@ -544,19 +544,19 @@ const modules: BootcampModule[] = [
         number: 1,
         role: "Bottlenecked Designer",
         description:
-          "Designers tired of waiting for developers to ship their work.",
+          "You've designed beautiful interfaces that sit in Figma forever, waiting on developers. Learn to ship your own work as real, deployed websites.",
       },
       {
         number: 2,
         role: "Full-Stack Freelancer",
         description:
-          "Freelancers who want to deliver code, not just mockups.",
+          "You want to deliver design and code in one package. Double your value by shipping complete projects, not just mockups.",
       },
       {
         number: 3,
-        role: "Independent Shipper",
+        role: "Design-to-Engineer Career Switcher",
         description:
-          "Design engineers who want to ship independently without a dev team.",
+          "You're a senior UI/UX designer ready to evolve into a design engineer. This bootcamp is your bridge from pixels to production.",
       },
     ],
     curriculum: [

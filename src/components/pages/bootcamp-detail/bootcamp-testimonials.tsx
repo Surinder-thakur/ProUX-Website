@@ -674,7 +674,7 @@ export default function BootcampTestimonials({
   return (
     <section className="py-7 md:py-10">
       {/* ── Header ─────────────────────────────────────────────────── */}
-      <div className="flex flex-col items-start mb-12 md:mb-16">
+      <div className="flex flex-col items-start mb-6 md:mb-16">
         {/* Stacked avatars */}
         <div className="flex items-center -space-x-1.5 mb-4">
           {VIDEO_AVATARS.map((src, i) => (
@@ -717,16 +717,18 @@ export default function BootcampTestimonials({
       <div>
         <div className="relative">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-            {testimonials.slice(0, 4).map((t) => (
-              <TestimonialCard key={t.author} testimonial={t} />
+            {testimonials.slice(0, 4).map((t, i) => (
+              <div key={t.author} className={i === 3 ? "hidden md:block" : ""}>
+                <TestimonialCard testimonial={t} />
+              </div>
             ))}
           </div>
 
-          {/* Gradient fade */}
-          <div className="absolute bottom-0 inset-x-0 h-[55%] bg-gradient-to-t from-[#f8f7f4] via-[#f8f7f4]/80 to-transparent pointer-events-none" />
+          {/* Gradient fade — mobile: gentle fade on 3rd card; desktop: covers bottom half */}
+          <div className="absolute bottom-0 inset-x-0 h-[28%] md:h-[55%] bg-gradient-to-t from-[#f8f7f4] via-[#f8f7f4]/60 to-transparent pointer-events-none" />
 
           {/* View more */}
-          <div className="absolute bottom-6 inset-x-0 flex justify-center">
+          <div className="absolute bottom-2 md:bottom-6 inset-x-0 flex justify-center">
             <button
               onClick={() => setShowAll(true)}
               className="rounded-[14px] border border-input bg-background shadow-sm px-6 py-2.5 text-[13px] font-semibold text-foreground hover:bg-accent hover:text-accent-foreground transition-colors"
@@ -753,10 +755,10 @@ export default function BootcampTestimonials({
 
         <div
           ref={scrollRef}
-          className="flex gap-4 overflow-x-auto snap-x snap-mandatory scroll-smooth pb-2 -mx-4 px-4 md:mx-0 md:px-0 md:grid md:grid-cols-4 md:gap-5 md:overflow-visible md:snap-none md:pb-0 [scrollbar-width:none] [-ms-overflow-style:none] [&::-webkit-scrollbar]:hidden"
+          className="flex gap-3 overflow-x-auto snap-x snap-mandatory scroll-smooth pb-2 px-3 md:mx-0 md:px-0 md:grid md:grid-cols-4 md:gap-5 md:overflow-visible md:snap-none md:pb-0 [scrollbar-width:none] [-ms-overflow-style:none] [&::-webkit-scrollbar]:hidden"
         >
           {videoTestimonials.map((v) => (
-            <div key={v.name} className="w-[75vw] flex-shrink-0 snap-start md:w-auto">
+            <div key={v.name} className="w-[52vw] flex-shrink-0 snap-start md:w-auto">
               <VideoTestimonialCard
                 testimonial={v}
                 isActive={activeVideo === v.name}

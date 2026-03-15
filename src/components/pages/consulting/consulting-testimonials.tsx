@@ -552,12 +552,12 @@ export default function ConsultingTestimonials({
 
           <div
             ref={scrollRef}
-            className={`flex gap-4 overflow-x-auto snap-x snap-mandatory scroll-smooth pb-2 -mx-4 px-4 md:mx-0 md:px-0 md:grid md:gap-5 md:overflow-visible md:snap-none md:pb-0 [scrollbar-width:none] [-ms-overflow-style:none] [&::-webkit-scrollbar]:hidden ${
+            className={`flex gap-3 overflow-x-auto snap-x snap-mandatory scroll-smooth pb-2 px-3 md:mx-0 md:px-0 md:grid md:gap-5 md:overflow-visible md:snap-none md:pb-0 [scrollbar-width:none] [-ms-overflow-style:none] [&::-webkit-scrollbar]:hidden ${
               contained ? "md:grid-cols-2 lg:grid-cols-4" : "md:grid-cols-4"
             }`}
           >
             {videoTestimonials.map((v) => (
-              <div key={v.name} className="w-[75vw] flex-shrink-0 snap-start md:w-auto">
+              <div key={v.name} className="w-[52vw] flex-shrink-0 snap-start md:w-auto">
                 <VideoTestimonialCard
                   testimonial={v}
                   isActive={activeVideo === v.name}

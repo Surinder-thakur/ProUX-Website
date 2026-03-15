@@ -18,8 +18,8 @@ export default function DetailCertification({
         and a growing network of designers.
       </p>
 
-      {/* Certificate image in white box */}
-      <div className="rounded-2xl border border-[#e8e4d9] bg-white p-6 md:p-10">
+      {/* Certificate image — full width on mobile, white box on desktop */}
+      <div className="rounded-2xl border border-[#e8e4d9] shadow-[0_2px_12px_rgba(0,0,0,0.06)] md:bg-white md:p-10 overflow-hidden">
         <Image
           src={mod.certificateImage || "/images/certificate-v2.jpg"}
           alt={`${mod.title} — Certificate of Completion`}

@@ -1,4 +1,4 @@
-import { notFound } from "next/navigation";
+import { notFound, redirect } from "next/navigation";
 import {
   getBootcampBySlug,
   getAllBootcampSlugs,
@@ -19,6 +19,10 @@ export default async function BootcampDetailPage({ params }: Props) {
 
   if (!mod) {
     notFound();
+  }
+
+  if (mod.upcoming) {
+    redirect("/bootcamps");
   }
 
   return <DetailContent module={mod} />;

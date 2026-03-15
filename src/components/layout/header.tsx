@@ -5,6 +5,7 @@ import { usePathname } from "next/navigation";
 import { useState, useEffect, useCallback } from "react";
 // lucide-react icons removed — menu uses text-only toggle
 import { Tooltip, TooltipTrigger, TooltipContent, TooltipProvider } from "@/components/ui/tooltip";
+import BootcampInterestPopup from "@/components/pages/bootcamps/bootcamp-interest-popup";
 
 const navigation = [
   {
@@ -31,7 +32,7 @@ const navigation = [
     subItems: [
       { label: "AI Prompts & Design System Foundations", href: "/bootcamps/ai-prompts-design-system-foundations" },
       { label: "AI Design Engineer: Code to Shipping", href: "/bootcamps/ai-design-engineer-code-to-shipping" },
-      { label: "AI UX Strategic Thinking", href: "/bootcamps/ai-ux-strategic-thinking" },
+      { label: "AI UX Strategic Thinking", href: "/bootcamps/ai-ux-strategic-thinking", upcoming: true },
     ],
   },
 ];
@@ -111,6 +112,7 @@ export function Header() {
   }, [pathname]);
 
   const [expandedItem, setExpandedItem] = useState<string | null>(getActiveParentHref);
+  const [interestPopupOpen, setInterestPopupOpen] = useState(false);
 
   // Update expanded state when pathname changes
   useEffect(() => {
@@ -263,16 +265,30 @@ export function Header() {
                       }`}
                     >
                       <div className="flex flex-col gap-0.5 pl-6 pb-2">
-                        {item.subItems!.map((sub) => (
-                          <Link
-                            key={sub.href}
-                            href={sub.href}
-                            onClick={() => setMobileOpen(false)}
-                            className="text-[13px] font-medium px-5 py-2.5 rounded-[8px] text-[#4A5568] hover:text-primary hover:bg-[#F0EEE4]/50 transition-colors"
-                          >
-                            {sub.label}
-                          </Link>
-                        ))}
+                        {item.subItems!.map((sub) =>
+                          (sub as { upcoming?: boolean }).upcoming ? (
+                            <button
+                              key={sub.href}
+                              onClick={() => {
+                                setMobileOpen(false);
+                                setInterestPopupOpen(true);
+                              }}
+                              className="text-left text-[13px] font-medium px-5 py-2.5 rounded-[8px] text-[#4A5568] hover:text-primary hover:bg-[#F0EEE4]/50 transition-colors"
+                            >
+                              {sub.label}
+                              <span className="ml-1.5 text-[10px] font-bold text-primary/60 uppercase">Soon</span>
+                            </button>
+                          ) : (
+                            <Link
+                              key={sub.href}
+                              href={sub.href}
+                              onClick={() => setMobileOpen(false)}
+                              className="text-[13px] font-medium px-5 py-2.5 rounded-[8px] text-[#4A5568] hover:text-primary hover:bg-[#F0EEE4]/50 transition-colors"
+                            >
+                              {sub.label}
+                            </Link>
+                          )
+                        )}
                       </div>
                     </div>
                   )}
@@ -308,6 +324,13 @@ export function Header() {
       }`}
       onClick={() => setMobileOpen(false)}
       aria-hidden="true"
+    />
+
+    {/* Interest popup for upcoming bootcamp */}
+    <BootcampInterestPopup
+      open={interestPopupOpen}
+      onClose={() => setInterestPopupOpen(false)}
+      bootcampTitle="AI UX Strategic Thinking"
     />
     </>
   );
