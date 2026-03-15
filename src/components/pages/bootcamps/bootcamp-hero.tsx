@@ -3,11 +3,11 @@
 import Image from "next/image";
 
 const AVATARS = [
-  "https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=80&h=80&fit=crop&crop=face&q=80",
-  "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=80&h=80&fit=crop&crop=face&q=80",
-  "https://images.unsplash.com/photo-1573497019940-1c28c88b4f3e?w=80&h=80&fit=crop&crop=face&q=80",
-  "https://images.unsplash.com/photo-1531123897727-8f129e1688ce?w=80&h=80&fit=crop&crop=face&q=80",
-  "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=80&h=80&fit=crop&crop=face&q=80",
+  "/images/avatars/video-avatar-3.png",
+  "/images/avatars/video-avatar-1.png",
+  "/images/avatars/video-avatar-2.png",
+  "/images/avatars/avatar-4.jpg",
+  "/images/avatars/avatar-5.jpg",
 ];
 
 export default function BootcampHero() {
@@ -49,7 +49,7 @@ export default function BootcampHero() {
           {/* Trust signals right */}
           <div className="flex flex-wrap items-center gap-4">
             {/* Avatar stack */}
-            <div className="flex -space-x-3">
+            <div className="flex -space-x-1.5">
               {AVATARS.map((src, i) => (
                 <div
                   key={i}

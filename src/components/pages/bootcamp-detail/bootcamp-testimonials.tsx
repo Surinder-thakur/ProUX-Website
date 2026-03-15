@@ -1,8 +1,16 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useRef, useCallback, useEffect } from "react";
 import { motion, AnimatePresence } from "motion/react";
-import { Star, X } from "lucide-react";
+import { Star, X, Volume2, VolumeX } from "lucide-react";
+import { cn } from "@/lib/utils";
+import Image from "next/image";
+
+const VIDEO_AVATARS = [
+  "/images/avatars/video-avatar-1.png",
+  "/images/avatars/video-avatar-2.png",
+  "/images/avatars/video-avatar-3.png",
+];
 
 /* ── Types ──────────────────────────────────────────────────────────────── */
 
@@ -360,6 +368,153 @@ const BC2_TESTIMONIALS: BootcampTestimonial[] = [
   },
 ];
 
+/* ── Video Testimonial Types & Data ─────────────────────────────────── */
+
+interface VideoTestimonial {
+  name: string;
+  role: string;
+  company: string;
+  src: string;
+  zoom?: boolean;
+}
+
+const videoTestimonials: VideoTestimonial[] = [
+  {
+    name: "Phulvinder Singh",
+    role: "Design Lead",
+    company: "Ikokas Technologies",
+    src: "/videos/testimonials/phulvinder-singh.mp4",
+  },
+  {
+    name: "Ritul Chatterjee",
+    role: "Sr. UI/UX Designer",
+    company: "Grazitti Interactive",
+    src: "/videos/testimonials/ritul-chatterjee.mp4",
+  },
+  {
+    name: "Ashish Khurana",
+    role: "Sr. UI/UX Designer",
+    company: "India",
+    src: "/videos/testimonials/ashish-khurana.mp4",
+    zoom: true,
+  },
+  {
+    name: "Sherin Biju",
+    role: "Sr. UI/UX Designer",
+    company: "India",
+    src: "/videos/testimonials/sherin-biju.mp4",
+  },
+];
+
+/* ── Video Testimonial Card ────────────────────────────────────────────── */
+
+function VideoTestimonialCard({
+  testimonial,
+  isActive,
+  onActivate,
+}: {
+  testimonial: VideoTestimonial;
+  isActive: boolean;
+  onActivate: () => void;
+}) {
+  const videoRef = useRef<HTMLVideoElement>(null);
+  const isMuted = !isActive;
+
+  useEffect(() => {
+    const video = videoRef.current;
+    if (!video) return;
+    video.muted = !isActive;
+  }, [isActive]);
+
+  const handleClick = () => {
+    if (isActive) {
+      // clicking the active (unmuted) video mutes it
+      onActivate(); // parent will clear activeVideo
+    } else {
+      onActivate();
+      const video = videoRef.current;
+      if (video && video.paused) {
+        video.play().catch(() => {});
+      }
+    }
+  };
+
+  return (
+    <div
+      className="relative flex-shrink-0 snap-start rounded-[24px] overflow-hidden cursor-pointer group bg-neutral-900"
+      style={{ aspectRatio: "9/16" }}
+      onClick={handleClick}
+    >
+      <video
+        ref={videoRef}
+        src={testimonial.src}
+        autoPlay
+        muted
+        loop
+        playsInline
+        preload="auto"
+        className={cn(
+          "absolute inset-0 w-full h-full object-cover",
+          testimonial.zoom && "scale-[1.35]"
+        )}
+      />
+
+      <div
+        className={cn(
+          "absolute top-4 right-4 z-20 transition-opacity duration-300",
+          isMuted ? "opacity-0 group-hover:opacity-100" : "opacity-100"
+        )}
+      >
+        <div className="flex h-9 w-9 items-center justify-center rounded-full bg-black/50 backdrop-blur-sm">
+          {isMuted ? (
+            <VolumeX className="h-4 w-4 text-white" />
+          ) : (
+            <Volume2 className="h-4 w-4 text-white" />
+          )}
+        </div>
+      </div>
+
+      <div className="absolute inset-x-0 bottom-0 h-1/2 bg-gradient-to-t from-black/80 via-black/40 to-transparent z-[5] pointer-events-none" />
+
+      <div className="absolute inset-x-0 bottom-0 z-10 p-5 pointer-events-none">
+        <p className="text-base font-bold text-white leading-tight">
+          {testimonial.name}
+        </p>
+        <p className="text-sm text-white/80 mt-0.5">
+          {testimonial.role}
+        </p>
+        <p className="text-xs text-white/60 mt-1">{testimonial.company}</p>
+      </div>
+    </div>
+  );
+}
+
+/* ── Scroll Indicators (dots) ──────────────────────────────────────────── */
+
+function ScrollDots({
+  count,
+  activeIndex,
+}: {
+  count: number;
+  activeIndex: number;
+}) {
+  return (
+    <div className="flex items-center justify-center gap-2 md:hidden mt-4">
+      {Array.from({ length: count }).map((_, i) => (
+        <div
+          key={i}
+          className={cn(
+            "h-2 w-2 rounded-full transition-colors duration-200",
+            i === activeIndex
+              ? "bg-foreground"
+              : "bg-[hsl(var(--border-primary-200))]"
+          )}
+        />
+      ))}
+    </div>
+  );
+}
+
 /* ── Testimonial map by slug ───────────────────────────────────────────── */
 
 const TESTIMONIALS_BY_SLUG: Record<string, BootcampTestimonial[]> = {
@@ -496,21 +651,46 @@ export default function BootcampTestimonials({
 }) {
   const [showAll, setShowAll] = useState(false);
   const testimonials = TESTIMONIALS_BY_SLUG[slug] ?? BC1_TESTIMONIALS;
+  const scrollRef = useRef<HTMLDivElement>(null);
+  const [activeVideoIndex, setActiveVideoIndex] = useState(0);
+  const [activeVideo, setActiveVideo] = useState<string | null>(null);
+
+  const handleScroll = useCallback(() => {
+    const el = scrollRef.current;
+    if (!el) return;
+    const scrollLeft = el.scrollLeft;
+    const cardWidth = el.scrollWidth / videoTestimonials.length;
+    const index = Math.round(scrollLeft / cardWidth);
+    setActiveVideoIndex(Math.min(index, videoTestimonials.length - 1));
+  }, []);
+
+  useEffect(() => {
+    const el = scrollRef.current;
+    if (!el) return;
+    el.addEventListener("scroll", handleScroll, { passive: true });
+    return () => el.removeEventListener("scroll", handleScroll);
+  }, [handleScroll]);
 
   return (
     <section className="py-7 md:py-10">
       {/* ── Header ─────────────────────────────────────────────────── */}
       <div className="flex flex-col items-start mb-12 md:mb-16">
-        {/* Stacked initials avatars */}
-        <div className="flex items-center -space-x-3 mb-4">
-          {testimonials.slice(0, 3).map((t, i) => (
-            <span
-              key={t.author}
-              className={`inline-flex items-center justify-center w-10 h-10 rounded-full text-[13px] font-bold border-2 border-[#f8f7f4] ${t.color}`}
+        {/* Stacked avatars */}
+        <div className="flex items-center -space-x-1.5 mb-4">
+          {VIDEO_AVATARS.map((src, i) => (
+            <div
+              key={i}
+              className="relative w-10 h-10 rounded-full border-2 border-[#f8f7f4] overflow-hidden"
               style={{ zIndex: 3 - i }}
             >
-              {t.initials}
-            </span>
+              <Image
+                src={src}
+                alt="Bootcamp graduate"
+                fill
+                sizes="40px"
+                className="object-cover"
+              />
+            </div>
           ))}
         </div>
 
@@ -560,6 +740,34 @@ export default function BootcampTestimonials({
           open={showAll}
           onClose={() => setShowAll(false)}
           testimonials={testimonials}
+        />
+      </div>
+
+      {/* ── Video Testimonials ─────────────────────────────────────── */}
+      <div className="mt-12 md:mt-16">
+        <div className="flex flex-col items-start mb-10">
+          <h3 className="text-xl md:text-[26px] font-bold text-foreground leading-[1.2] tracking-tight max-w-lg">
+            Hear It Straight From Our Bootcamp Graduates
+          </h3>
+        </div>
+
+        <div
+          ref={scrollRef}
+          className="flex gap-4 overflow-x-auto snap-x snap-mandatory scroll-smooth pb-2 -mx-4 px-4 md:mx-0 md:px-0 md:grid md:grid-cols-4 md:gap-5 md:overflow-visible md:snap-none md:pb-0 [scrollbar-width:none] [-ms-overflow-style:none] [&::-webkit-scrollbar]:hidden"
+        >
+          {videoTestimonials.map((v) => (
+            <div key={v.name} className="w-[75vw] flex-shrink-0 snap-start md:w-auto">
+              <VideoTestimonialCard
+                testimonial={v}
+                isActive={activeVideo === v.name}
+                onActivate={() => setActiveVideo(activeVideo === v.name ? null : v.name)}
+              />
+            </div>
+          ))}
+        </div>
+        <ScrollDots
+          count={videoTestimonials.length}
+          activeIndex={activeVideoIndex}
         />
       </div>
     </section>
