@@ -228,23 +228,34 @@ function TextTestimonialCard({ testimonial }: { testimonial: TextTestimonial }) 
 
 function VideoTestimonialCard({
   testimonial,
+  isActive,
+  onActivate,
 }: {
   testimonial: VideoTestimonial;
+  isActive: boolean;
+  onActivate: () => void;
 }) {
-  const [isMuted, setIsMuted] = useState(true);
   const containerRef = useRef<HTMLDivElement>(null);
+  const isMuted = !isActive;
 
-  const handleToggleMute = () => {
+  useEffect(() => {
     const player = containerRef.current?.querySelector("mux-player") as
-      | (HTMLElement & { muted: boolean; play?: () => Promise<void>; paused?: boolean })
+      | (HTMLElement & { muted: boolean })
       | null;
     if (player) {
-      const newMuted = !player.muted;
-      player.muted = newMuted;
-      setIsMuted(newMuted);
-      // Ensure the video is actually playing — browsers may block autoplay
-      // on heavy pages, so unmuting a paused video produces no sound
-      if (!newMuted && player.paused && player.play) {
+      player.muted = !isActive;
+    }
+  }, [isActive]);
+
+  const handleClick = () => {
+    if (isActive) {
+      onActivate();
+    } else {
+      onActivate();
+      const player = containerRef.current?.querySelector("mux-player") as
+        | (HTMLElement & { paused?: boolean; play?: () => Promise<void> })
+        | null;
+      if (player && player.paused && player.play) {
         player.play().catch(() => {});
       }
     }
@@ -255,7 +266,7 @@ function VideoTestimonialCard({
       ref={containerRef}
       className="relative flex-shrink-0 snap-start rounded-[24px] overflow-hidden cursor-pointer group bg-neutral-900"
       style={{ aspectRatio: "267/422" }}
-      onClick={handleToggleMute}
+      onClick={handleClick}
     >
       {/* Mux Video Player — always playing muted by default */}
       <MuxPlayer
@@ -420,6 +431,7 @@ export default function ConsultingTestimonials({
   const scrollRef = useRef<HTMLDivElement>(null);
   const [activeVideoIndex, setActiveVideoIndex] = useState(0);
   const [showAllTestimonials, setShowAllTestimonials] = useState(false);
+  const [activeVideo, setActiveVideo] = useState<string | null>(null);
 
   const handleScroll = useCallback(() => {
     const el = scrollRef.current;
@@ -538,32 +550,26 @@ export default function ConsultingTestimonials({
             </h3>
           </div>
 
-          {/* Desktop grid */}
-          <div className={`hidden md:grid gap-5 ${
-            contained ? "md:grid-cols-2 lg:grid-cols-4" : "md:grid-cols-4"
-          }`}>
+          <div
+            ref={scrollRef}
+            className={`flex gap-4 overflow-x-auto snap-x snap-mandatory scroll-smooth pb-2 -mx-4 px-4 md:mx-0 md:px-0 md:grid md:gap-5 md:overflow-visible md:snap-none md:pb-0 [scrollbar-width:none] [-ms-overflow-style:none] [&::-webkit-scrollbar]:hidden ${
+              contained ? "md:grid-cols-2 lg:grid-cols-4" : "md:grid-cols-4"
+            }`}
+          >
             {videoTestimonials.map((v) => (
-              <VideoTestimonialCard key={v.name} testimonial={v} />
+              <div key={v.name} className="w-[75vw] flex-shrink-0 snap-start md:w-auto">
+                <VideoTestimonialCard
+                  testimonial={v}
+                  isActive={activeVideo === v.name}
+                  onActivate={() => setActiveVideo(activeVideo === v.name ? null : v.name)}
+                />
+              </div>
             ))}
           </div>
-
-          {/* Mobile: horizontal scroll with snap */}
-          <div className="md:hidden">
-            <div
-              ref={scrollRef}
-              className="flex gap-4 overflow-x-auto snap-x snap-mandatory scroll-smooth pb-2 -mx-4 px-4 [scrollbar-width:none] [-ms-overflow-style:none] [&::-webkit-scrollbar]:hidden"
-            >
-              {videoTestimonials.map((v) => (
-                <div key={v.name} className="w-[75vw] flex-shrink-0">
-                  <VideoTestimonialCard testimonial={v} />
-                </div>
-              ))}
-            </div>
-            <ScrollDots
-              count={videoTestimonials.length}
-              activeIndex={activeVideoIndex}
-            />
-          </div>
+          <ScrollDots
+            count={videoTestimonials.length}
+            activeIndex={activeVideoIndex}
+          />
         </div>
       </div>
     </section>
