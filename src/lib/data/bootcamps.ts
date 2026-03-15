@@ -706,6 +706,7 @@ const modules: BootcampModule[] = [
     hoursLive: 6,
     gradient: "from-[hsl(var(--blue-100))] to-[hsl(var(--gold-100))]",
     image: "/images/bc3.jpg",
+    heroImage: "/images/bootcamps/bc-3-header.png",
     certificateImage: "/images/certificate-b3.jpg",
     startDate: "Upcoming",
     startDateISO: "2026-05-06",

@@ -17,9 +17,9 @@ const bundleStats = [
     caption: "Personalized small groups",
   },
   {
-    value: "2",
-    label: "Time Zones",
-    caption: "US & EU friendly schedules",
+    value: "Live",
+    label: "Sessions",
+    caption: "Evenings, worldwide",
   },
 ];
 
@@ -40,9 +40,9 @@ const moduleStats = [
     caption: "Personalized small groups",
   },
   {
-    value: "2",
-    label: "Time Zones",
-    caption: "Mon IST · Thu Americas",
+    value: "Live",
+    label: "Sessions",
+    caption: "Evenings, worldwide",
   },
 ];
 
