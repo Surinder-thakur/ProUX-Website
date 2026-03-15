@@ -185,8 +185,8 @@ export function Footer() {
 
   useEffect(() => {
     const handleScroll = () => {
-      const isMobile = window.innerWidth < 768;
-      const pastViewport = window.scrollY > window.innerHeight;
+      const isMobile = window.innerWidth < 1024;
+      const pastViewport = window.scrollY > window.innerHeight * 0.6;
       setBottomCTAVisible(isMobile && pastViewport);
     };
 
@@ -351,7 +351,7 @@ export function Footer() {
         rel="noopener noreferrer"
         className={`fixed right-6 z-50 flex h-14 w-14 items-center justify-center rounded-full bg-[#25D366] text-white shadow-lg transition-all hover:scale-110 ${
           bottomCTAVisible ? "bottom-[100px]" : "bottom-6"
-        } md:bottom-6`}
+        } lg:bottom-6`}
         aria-label="Chat on WhatsApp"
       >
         <svg className="h-7 w-7" fill="currentColor" viewBox="0 0 24 24">

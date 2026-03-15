@@ -81,7 +81,7 @@ export default function DetailCurriculum({
         {/* Week-by-week heading + expand all */}
         <div className="flex items-center justify-between mb-5">
           <h3 className="text-[15px] font-bold text-foreground tracking-[-0.2px]">
-            Week-by-Week Breakdown
+            Weekly Breakdown
           </h3>
           <button
             onClick={toggleAll}
