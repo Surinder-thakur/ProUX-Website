@@ -12,7 +12,7 @@ export default function DetailHero({ module: mod }: { module: BootcampModule }) 
 
   return (
     <div
-      className="relative min-h-[70vh] md:min-h-screen flex flex-col justify-end overflow-hidden"
+      className="relative min-h-[84vh] md:min-h-screen flex flex-col justify-end overflow-hidden"
       style={{ backgroundColor: BG }}
     >
       {/* ── Subtle radial glow — depth ── */}
@@ -169,7 +169,7 @@ export default function DetailHero({ module: mod }: { module: BootcampModule }) 
 
         <h1 className="font-extrabold md:font-black tracking-[-1.5px] md:tracking-[-2px] text-white mb-4 md:mb-6">
           {headlineLines.map((line, i) => (
-            <span key={i} className="block text-[26px] leading-[1.12] md:text-[42px] lg:text-[48px]">
+            <span key={i} className="block text-[30px] leading-[1.12] md:text-[42px] lg:text-[48px]">
               {line}
             </span>
           ))}
