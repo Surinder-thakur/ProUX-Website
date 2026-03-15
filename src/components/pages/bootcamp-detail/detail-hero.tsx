@@ -167,9 +167,9 @@ export default function DetailHero({ module: mod }: { module: BootcampModule }) 
           {mod.heroTag}
         </p>
 
-        <h1 className="font-bold md:font-black tracking-[-1px] md:tracking-[-2px] text-white mb-4 md:mb-6">
+        <h1 className="font-extrabold md:font-black tracking-[-1.5px] md:tracking-[-2px] text-white mb-4 md:mb-6">
           {headlineLines.map((line, i) => (
-            <span key={i} className="block text-[22px] leading-[1.15] md:text-[42px] lg:text-[48px]">
+            <span key={i} className="block text-[26px] leading-[1.12] md:text-[42px] lg:text-[48px]">
               {line}
             </span>
           ))}
