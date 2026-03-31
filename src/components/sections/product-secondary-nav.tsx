@@ -5,7 +5,7 @@ import { useState, useEffect } from "react";
 
 const navLinks = [
   { label: "Features", href: "#features" },
-  { label: "Pricing", href: "#pricing" },
+  { label: "Testimonials", href: "#testimonials" },
   { label: "FAQ", href: "#faq" },
 ];
 
@@ -40,7 +40,7 @@ export default function ProductSecondaryNav() {
       setVisible(scrollY > winHeight && !nearBottom);
 
       // Determine active section
-      const sections = ["features", "pricing", "faq"];
+      const sections = ["features", "testimonials", "faq"];
       let current = "";
       for (const id of sections) {
         const el = document.getElementById(id);

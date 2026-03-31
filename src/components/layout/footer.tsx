@@ -282,9 +282,10 @@ export function Footer() {
             <div className="flex flex-col gap-4">
               <ColumnHeading>Navigation</ColumnHeading>
               <div className="flex flex-col gap-3">
-                <FooterNavLink href="/">Product Overview</FooterNavLink>
-                <FooterNavLink href="/ux-consulting">UX Consultancy</FooterNavLink>
-                <FooterNavLink href="/bootcamps">AI Design Training</FooterNavLink>
+                <FooterNavLink href="/">ProUX Platform</FooterNavLink>
+                <FooterNavLink href="/pricing">Pricing</FooterNavLink>
+                <FooterNavLink href="/workshops">AI Design Workshops</FooterNavLink>
+                <FooterNavLink href="/ux-consulting">UX Consulting</FooterNavLink>
               </div>
             </div>
 
@@ -292,8 +293,8 @@ export function Footer() {
             <div className="flex flex-col gap-4">
               <ColumnHeading>Company</ColumnHeading>
               <div className="flex flex-col gap-3">
-                <FooterNavLink href="https://www.surinder.design" external>About Founder</FooterNavLink>
-                <FooterNavLink href="/#pricing">ProUX Pricing</FooterNavLink>
+                <FooterNavLink href="https://www.surinder.design" external>About Surinder</FooterNavLink>
+                <FooterNavLink href="/bootcamps">AI Design Training</FooterNavLink>
                 <FooterNavLink href="/#faq">FAQ</FooterNavLink>
                 <FooterNavLink href="https://app.proux.design/Auth" external>Sign In</FooterNavLink>
                 <FooterNavLink href="https://app.proux.design/Auth" external>Register</FooterNavLink>

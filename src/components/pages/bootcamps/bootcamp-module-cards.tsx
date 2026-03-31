@@ -126,9 +126,11 @@ function UpcomingBootcampCard({ module: mod }: { module: BootcampModule }) {
 function BootcampCard({
   module: mod,
   isCurrent = false,
+  variant = "bootcamp",
 }: {
   module: BootcampModule;
   isCurrent?: boolean;
+  variant?: "bootcamp" | "workshop";
 }) {
   const sharedClasses =
     "group relative flex flex-col rounded-[20px] bg-[hsl(var(--bg-primary-50))] border shadow-[0_1px_2px_rgba(0,0,0,0.03)] transition-all duration-300 ease-[cubic-bezier(0.23,1,0.32,1)]";
@@ -148,7 +150,7 @@ function BootcampCard({
 
   return (
     <Link
-      href={`/bootcamps/${mod.slug}`}
+      href={`/${variant === "workshop" ? "workshops" : "bootcamps"}/${mod.slug}`}
       className={`${sharedClasses} border-[#ece9d8] hover:bg-[#FCFBF9] hover:border-[#dfdbc9] hover:shadow-[0_8px_30px_rgba(0,0,0,0.06)] cursor-pointer`}
     >
       <CardContent mod={mod} isCurrent={false} />
@@ -162,10 +164,12 @@ export default function BootcampModuleCards({
   contained = false,
   excludeSlug,
   currentSlug,
+  variant = "bootcamp",
 }: {
   contained?: boolean;
   excludeSlug?: string;
   currentSlug?: string;
+  variant?: "bootcamp" | "workshop";
 }) {
   const allModules = getAllBootcamps();
 
@@ -192,16 +196,19 @@ export default function BootcampModuleCards({
     >
       <div className="container-default">
         {/* Section heading */}
-        <div className={`mb-8 ${!contained && !hasCurrentSlug ? "text-center" : ""}`}>
+        <div className={`mb-8 ${!contained && !hasCurrentSlug && variant !== "workshop" ? "text-center" : ""}`}>
           <h2 className={`font-extrabold text-foreground tracking-[-0.02em] leading-tight ${
             contained || hasCurrentSlug ? "text-[24px] md:text-[28px]" : "text-[28px] md:text-[34px]"
           }`}>
-            {hasCurrentSlug ? "Explore All Bootcamps" : contained ? "Explore Other Bootcamps" : "AI Design Bootcamps"}{" "}
+            {variant === "workshop"
+              ? (hasCurrentSlug ? "Explore All Workshops" : contained ? "Explore Other Workshops" : "AI Design Workshops")
+              : (hasCurrentSlug ? "Explore All Bootcamps" : contained ? "Explore Other Bootcamps" : "AI Design Bootcamps")
+            }{" "}
             <span className="relative inline-flex h-3 w-3 align-middle ml-1"><span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-emerald-400 opacity-75" /><span className="relative inline-flex h-3 w-3 rounded-full bg-emerald-500" /></span>
           </h2>
           <p className={`text-muted-foreground mt-3 ${contained || hasCurrentSlug ? "text-[14px]" : "text-[16px]"}`}>
             {contained || hasCurrentSlug
-              ? "Each bootcamp is fully standalone \u2014 start with one anytime."
+              ? (variant === "workshop" ? "Each workshop is fully standalone \u2014 start with one anytime." : "Each bootcamp is fully standalone \u2014 start with one anytime.")
               : "Hands-on training for working UX and product designers."}
           </p>
         </div>
@@ -215,12 +222,13 @@ export default function BootcampModuleCards({
               key={mod.slug}
               module={mod}
               isCurrent={hasCurrentSlug && mod.slug === currentSlug}
+              variant={variant}
             />
           ))}
         </div>
 
-        {/* Single-bootcamp note — only on full-width variant */}
-        {!contained && !hasCurrentSlug && (
+        {/* Single-bootcamp note — only on full-width bootcamp variant */}
+        {!contained && !hasCurrentSlug && variant !== "workshop" && (
           <p className="text-center text-[14px] text-muted-foreground mt-8">
             Not ready for all three? Each bootcamp is fully standalone — start with one anytime.
           </p>

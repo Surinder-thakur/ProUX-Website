@@ -278,8 +278,10 @@ function OutcomeAccordion({ outcomes }: { outcomes: LearningOutcome[] }) {
 
 export default function DetailSidebar({
   module: mod,
+  label = "Live Bootcamp",
 }: {
   module: BootcampModule;
+  label?: string;
 }) {
   const [bundleAdded, setBundleAdded] = useState(false);
   const [bundlePopupOpen, setBundlePopupOpen] = useState(false);
@@ -348,7 +350,7 @@ export default function DetailSidebar({
 
           {/* ── Title + tagline ──────────────────────────────────────── */}
           <div>
-            <p className="text-[11px] font-bold uppercase tracking-[0.15em] text-primary mb-2">Live Bootcamp</p>
+            <p className="text-[11px] font-bold uppercase tracking-[0.15em] text-primary mb-2">{label}</p>
             <h3 className="text-[20px] font-extrabold text-foreground tracking-[-0.4px] leading-tight mb-2">
               {mod.title}
             </h3>

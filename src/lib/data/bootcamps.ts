@@ -282,26 +282,26 @@ export const BUNDLE_HOURS = 18;
 const modules: BootcampModule[] = [
   {
     slug: "ai-prompts-design-system-foundations",
-    title: "AI Prompts & Design System Foundations",
+    title: "AI Prompting for Designers",
     tagline:
-      "Master prompt frameworks. Build a production-ready design system in Figma. A single source of truth that every developer, every AI tool, and every team member can understand.",
+      "You already use AI. This workshop makes it actually work for you.",
     badge: "Best for Getting Started",
     heroTag: "No AI experience? That's exactly why you're here.",
     heroHeadline: "AI Won't Replace You.\nA Designer Who Masters It Will.",
-    heroSubheadline: "4 live classes. One prompt framework. Stop experimenting. Start shipping.",
+    heroSubheadline: "You already use AI. This workshop makes it actually work for you.",
     classCount: 4,
     hoursLive: 6,
     gradient: "from-[hsl(var(--gold-200))] to-[hsl(var(--gold-100))]",
     image: "/images/bc1.jpg",
     heroImage: "/images/bc1-hero.png",
     certificateImage: "/images/certificate-v2.jpg",
-    startDate: "Apr 6",
-    startDateISO: "2026-04-06",
-    trackA: { day: "Mondays", time: "8:00 \u2013 9:30 PM IST" },
+    startDate: "Apr 20",
+    startDateISO: "2026-04-20",
+    trackA: { day: "Mondays", time: "8:00 \u2013 10:00 PM IST" },
     pricingTiers: {
-      earlyBird: { price: 245, priceInr: 20300, deadline: "2026-03-23T23:59:59", razorpayId: "pl_SQNWPdh5L4Gf5w" },
-      standard: { price: 295, priceInr: 24500, deadline: "2026-04-02T23:59:59", razorpayId: "pl_SQczj7yp64OuZ0" },
-      lastCall: { price: 395, priceInr: 32800, razorpayId: "pl_SQd2e6AqkjdZon" },
+      earlyBird: { price: 79, priceInr: 6500, deadline: "2026-04-06T23:59:59", razorpayId: "pl_SQNWPdh5L4Gf5w" },
+      standard: { price: 99, priceInr: 8200, deadline: "2026-04-16T23:59:59", razorpayId: "pl_SQczj7yp64OuZ0" },
+      lastCall: { price: 129, priceInr: 10700, razorpayId: "pl_SQd2e6AqkjdZon" },
     },
     story:
       "You've been using ChatGPT for a year. You type vague prompts, get vague outputs, and conclude AI is overhyped. But you've seen others get stunning results. The difference isn't the AI, it's the human. This module makes you the human who gets stunning results.",
@@ -312,27 +312,21 @@ const modules: BootcampModule[] = [
     outcomes: [
       {
         number: "01",
-        title: "Master AI Prompting for Design",
+        title: "Structure Prompts That Give You Usable Output",
         description:
-          "Learn CRAFT, the one framework behind every prompt in this bootcamp. Then go deeper with specialist frameworks for research, critique, and iteration. By the end of Week 1, you\u2019re not guessing what to type into AI. You know exactly how to structure a prompt and refine the output until it\u2019s production-ready.",
+          "Learn the two modes of working with AI and a core framework that turns any design task into a clear, structured prompt. No more guessing. No more \u201Cthat\u2019s not what I meant.\u201D",
       },
       {
         number: "02",
-        title: "Build a Complete Token System with AI",
+        title: "Pick the Right Framework for the Right Task",
         description:
-          "Generate color palettes, type scales, spacing systems, and shadow tokens, all with WCAG contrast and full dark mode support baked in from the start. Your AI agents do the heavy lifting. You make the design decisions.",
+          "Research, design systems, UI generation, and critique each need a different prompt approach. You will learn when to use which, how to chain them together, and how to get AI feedback on your actual designs.",
       },
       {
         number: "03",
-        title: "Bring Tokens into Figma as Live Variables",
+        title: "Build Your Own AI Design Assistant",
         description:
-          "Take everything AI generated and import it into Figma as native Variables with a single workflow. Then connect to Figma Make to generate live documentation that updates itself. Change a token, the docs follow. No more stale handoff files.",
-      },
-      {
-        number: "04",
-        title: "Generate Production Components and Ship",
-        description:
-          "Describe a component. Figma Make builds it using your Variables. Button, Card, Input, each one faster than the last. Assemble them into a real page, test light and dark mode, and hand the whole system off with tokens exported as CSS, Tailwind, and TypeScript.",
+          "Set up Claude with Projects, Skills, and .md configuration files. Save your frameworks, load your brand documents, and walk out with a workspace you can open and use tomorrow morning.",
       },
     ],
     audience: [
@@ -359,83 +353,48 @@ const modules: BootcampModule[] = [
       {
         week: 1,
         classNumber: 1,
-        title: "Master AI as a Design Skill",
+        title: "The AI Shift: Why Prompting Is Now a Design Skill",
         parts: [
           {
-            title: "The AI Shift + Why Prompting Is a Design Skill",
-            duration: "30 min",
-            description: "The tools changed. You\u2019ll see exactly what a well-structured prompt produces versus a vague one, and why the gap between the two is the biggest career advantage a designer can have right now.",
-          },
-          {
-            title: "The CRAFT Framework + Prompting Frameworks That Work",
-            duration: "30 min",
-            description: "Context, Role, Artifact, Feel, Tech. One framework for every prompt you\u2019ll write in this bootcamp. You\u2019ll also learn when CRAFT isn\u2019t the best fit and which specialist frameworks to reach for instead.",
-          },
-          {
-            title: "Your AI Workspace: Claude Projects & Custom Agents",
-            duration: "30 min",
-            description: "Set up a Claude Project that remembers your design system rules across every conversation. Build custom agents tailored to your workflow and learn a refinement technique that turns rough AI output into production-ready results. Week 2 goes fast because you did this.",
+            title: "The AI Shift: Why Prompting Is Now a Design Skill",
+            duration: "90 min",
+            description: "Most designers use AI like a search engine. Type something vague, hope for the best. This module shows you why structured prompting changes everything, with a live demo that makes the difference obvious.",
           },
         ],
       },
       {
         week: 2,
         classNumber: 2,
-        title: "Build Your Complete Token System",
+        title: "Anatomy of an Effective Prompt",
         parts: [
           {
-            title: "Color Tokens: From Brand Brief to Dark Mode",
-            duration: "30 min",
-            description: "Primitives, semantics, status colors, and a complete light-to-dark mapping with WCAG contrast baked into every prompt. Your agents generate, audit, and refine until the output is clean. This is where the system starts to feel real.",
-          },
-          {
-            title: "Typography, Spacing & Shadows",
-            duration: "30 min",
-            description: "Your type scale, unified spacing system, and shadow tokens, all generated with the same pipeline. By the end of this class you have four complete token categories and dark mode support ready for Figma.",
-          },
-          {
-            title: "From AI Output to Live Figma Variables",
-            duration: "30 min",
-            description: "Take your AI-generated tokens and bring them into Figma as native Variables with a single import workflow. Color, typography, spacing, shadows, light mode and dark mode. Change one value and every token that references it updates instantly.",
+            title: "Anatomy of an Effective Prompt",
+            duration: "90 min",
+            description: "There are two ways to work with AI. One gives you a complete output from a single prompt. The other refines it through conversation. You will learn the core framework behind both, practice fixing broken prompts live, and know exactly what to do when the output is close but not right.",
           },
         ],
       },
       {
         week: 3,
         classNumber: 3,
-        title: "Live Documentation & Governance",
+        title: "From Single Prompts to Complete Workflows",
         parts: [
           {
-            title: "Generate Live Documentation with Figma Make",
-            duration: "45 min",
-            description: "Publish your Variables, connect to Figma Make, and generate documentation for every token category. Update a token and the docs update automatically. No more stale wikis or PDFs that are wrong by Tuesday.",
-          },
-          {
-            title: "Governance, Changelogs & a System That Stays Alive",
-            duration: "45 min",
-            description: "The difference between a design system that thrives and one that dies in six months? One page of governance rules. Build contribution workflows, deprecation timelines, and changelogs that your AI agents validate before anything ships.",
+            title: "From Single Prompts to Complete Workflows",
+            duration: "90 min",
+            description: "One prompt structure does not fit all. Research needs a different approach than building tokens or generating UI. You will learn task-specific frameworks, chain multiple prompts into end-to-end workflows, and use screenshots to get AI feedback on your actual designs.",
           },
         ],
       },
       {
         week: 4,
         classNumber: 4,
-        title: "Components, Pages & a Ready-to-Use System",
+        title: "Build Your AI Design Workspace",
         parts: [
           {
-            title: "Generate Production Components with Figma Make",
-            duration: "30 min",
-            description: "Describe a Button. Figma Make builds it using your Variables. Every variant, every state, every token binding. Then Card. Then Input. Each one faster than the last. Accessibility and dark mode come free because they\u2019re already in your tokens.",
-          },
-          {
-            title: "Build a Real Page: Your System\u2019s Moment of Truth",
-            duration: "30 min",
-            description: "Compose your components into a complete web page. Light mode, dark mode, no manual overrides. If it works in both modes, your design system is production-ready. This is the moment everything clicks.",
-          },
-          {
-            title: "Developer Handover & Showcase",
-            duration: "30 min",
-            description: "Tokens exported as CSS, Tailwind, and TypeScript. A complete handover package: prompt library, custom agents, full token architecture, production components, real pages, and live documentation. A single source of truth that every developer and AI tool can read. Four weeks ago it started with \u201Ccreate a color palette.\u201D Now it\u2019s a system built to scale.",
+            title: "Build Your AI Design Workspace",
+            duration: "90 min",
+            description: "Set up a personal AI design assistant using Claude Projects, Skills, and .md configuration files. Save your prompt templates, load your brand documents, and configure custom instructions so Claude works the way you work. You walk out with a working setup, not just notes.",
           },
         ],
       },
@@ -466,7 +425,7 @@ const modules: BootcampModule[] = [
       {
         question: "What\u2019s the class size and format?",
         answer:
-          "Capped at 12 students. Sessions run every Monday at 8:00 PM IST, starting April 6th. Each session is 90 to 120 minutes, live and interactive. You build alongside the group, present your work, and get real-time feedback. This is not a webinar.",
+          "Capped at 12 students. Sessions run every Monday at 8:00 PM IST, starting April 20th. Each session is 90 to 120 minutes, live and interactive. You build alongside the group, present your work, and get real-time feedback. This is not a webinar.",
       },
       {
         question: "What if I miss a live session?",
@@ -487,6 +446,7 @@ const modules: BootcampModule[] = [
   },
   {
     slug: "ai-design-engineer-code-to-shipping",
+    upcoming: true,
     title: "AI Design Engineer: From Code to Shipping",
     tagline: "Get comfortable with code so you can design, build, and ship real products. Deploy a real application in 4 weeks.",
     badge: "Design-to-Code",
@@ -499,7 +459,7 @@ const modules: BootcampModule[] = [
     image: "/images/bc2.jpg",
     heroImage: "/images/bc2-hero.png",
     certificateImage: "/images/certificate-b2-v2.jpg",
-    startDate: "Apr 8",
+    startDate: "Upcoming",
     startDateISO: "2026-04-08",
     trackA: { day: "Wednesdays", time: "8:00 \u2013 9:30 PM IST" },
     pricingTiers: {
