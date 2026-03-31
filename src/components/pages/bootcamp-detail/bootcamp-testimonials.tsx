@@ -399,10 +399,10 @@ const videoTestimonials: VideoTestimonial[] = [
     zoom: true,
   },
   {
-    name: "Sherin Biju",
+    name: "Priyanka Gill",
     role: "Sr. UI/UX Designer",
     company: "India",
-    src: "/videos/testimonials/sherin-biju.mp4",
+    src: "/videos/testimonials/priyanka-gill.mp4",
   },
 ];
 
