@@ -24,8 +24,10 @@ import { SidebarPricingDisplay, useActiveTier } from "@/components/pages/bootcam
 
 export default function DetailMobileBar({
   module: mod,
+  variant = "bootcamp",
 }: {
   module: BootcampModule;
+  variant?: "bootcamp" | "workshop";
 }) {
   const [bundleAdded, setBundleAdded] = useState(false);
   const [visible, setVisible] = useState(false);
@@ -38,13 +40,18 @@ export default function DetailMobileBar({
   }, []);
 
   useEffect(() => {
+    if (variant === "workshop") {
+      // Workshop: show immediately for impulse purchase
+      setVisible(true);
+      return;
+    }
     const onScroll = () => {
       setVisible(window.scrollY > 300);
     };
     onScroll();
     window.addEventListener("scroll", onScroll, { passive: true });
     return () => window.removeEventListener("scroll", onScroll);
-  }, []);
+  }, [variant]);
 
   if (!mounted) return null;
 
@@ -171,7 +178,8 @@ export default function DetailMobileBar({
               ))}
             </div>
 
-            {/* Bundle upsell with toggle */}
+            {/* Bundle upsell with toggle (bootcamp only) */}
+            {variant !== "workshop" && (
             <div className={`rounded-xl border p-4 transition-all ${
               bundleAdded
                 ? "border-emerald-300 bg-emerald-50"
@@ -217,6 +225,7 @@ export default function DetailMobileBar({
                 </span>
               </div>
             </div>
+            )}
           </div>
         </DrawerContent>
       </Drawer>

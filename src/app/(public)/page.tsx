@@ -13,7 +13,7 @@ import ProductSecondaryNav from "@/components/sections/product-secondary-nav";
 import CallToActionSection from "@/components/sections/call-to-action";
 // import SocialProofCtaSection from "@/components/sections/social-proof-cta";
 import TestimonialsSection from "@/components/sections/testimonials";
-import PricingSection from "@/components/sections/pricing";
+// import PricingSection from "@/components/sections/pricing";
 import MoneyBackSection from "@/components/sections/money-back";
 import FaqSection from "@/components/sections/faq";
 import AiToolsSection from "@/components/sections/ai-tools";
@@ -28,7 +28,7 @@ export default function HomePage() {
       <CallToActionSection />
       <TestimonialsSection />
       <AiToolsSection />
-      <PricingSection />
+      {/* <PricingSection /> */}
       <ProductSecondaryNav />
       <MoneyBackSection />
       <FaqSection />
