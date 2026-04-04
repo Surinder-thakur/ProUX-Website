@@ -11,16 +11,11 @@ interface NavItem {
   href: string;
 }
 
-// Left-side navigation items (exploration/discovery)
-const leftNavigation: NavItem[] = [
-  { label: "Features", href: "/#features" },
+// Center navigation items
+const centerNavigation: NavItem[] = [
+  { label: "Platform", href: "/" },
   { label: "Consulting", href: "/ux-consulting" },
   { label: "Story", href: "/story" },
-];
-
-// Right-side navigation item (decision/action, alongside auth buttons)
-const rightNavigation: NavItem[] = [
-  { label: "Pricing", href: "/pricing" },
 ];
 
 function ProUXLogo({ className }: { className?: string }) {
@@ -75,7 +70,10 @@ export function Header() {
   const [hidden, setHidden] = useState(false);
   const shouldAutoHide = pathname === "/" || pathname === "/ux-consulting" || pathname.startsWith("/bootcamps/") || pathname.startsWith("/workshops");
 
-  const allNavItems = [...leftNavigation, ...rightNavigation];
+  const mobileNavItems: NavItem[] = [
+    ...centerNavigation,
+    { label: "Pricing", href: "/pricing" },
+  ];
 
   useEffect(() => {
     const handleScroll = () => {
@@ -91,7 +89,7 @@ export function Header() {
   }, [shouldAutoHide]);
 
   const isItemActive = (item: NavItem) => {
-    if (item.href === "/#features" && pathname === "/") return false; // anchor link, not a page
+    if (item.href === "/" && pathname === "/") return true;
     if (item.href !== "/" && item.href !== "#" && !item.href.startsWith("/#") && pathname.startsWith(item.href)) return true;
     return false;
   };
@@ -109,47 +107,22 @@ export function Header() {
     >
       <div className="flex items-center justify-between px-[24px] lg:px-[100px] border-b border-[#dfdbc9] pb-3.5">
         {/* Logo — far left */}
-        <div className="flex items-center gap-6">
-          <TooltipProvider delayDuration={0}>
-            <Tooltip>
-              <TooltipTrigger asChild>
-                <Link href="/" className="flex-shrink-0">
-                  <ProUXLogo className="h-[17px] w-auto sm:h-[20px]" />
-                </Link>
-              </TooltipTrigger>
-              <TooltipContent>
-                <p className="text-center text-[11px]">Invest in ProUX today,<br />save on costly fixes tomorrow.</p>
-              </TooltipContent>
-            </Tooltip>
-          </TooltipProvider>
+        <TooltipProvider delayDuration={0}>
+          <Tooltip>
+            <TooltipTrigger asChild>
+              <Link href="/" className="flex-shrink-0">
+                <ProUXLogo className="h-[17px] w-auto sm:h-[20px]" />
+              </Link>
+            </TooltipTrigger>
+            <TooltipContent>
+              <p className="text-center text-[11px]">Invest in ProUX today,<br />save on costly fixes tomorrow.</p>
+            </TooltipContent>
+          </Tooltip>
+        </TooltipProvider>
 
-          {/* Desktop Left Navigation — Features, Consulting, Story */}
-          <nav className="hidden items-center gap-1 lg:flex whitespace-nowrap">
-            {leftNavigation.map((item) => {
-              const isActive = isItemActive(item);
-              return (
-                <Link
-                  key={item.href}
-                  href={item.href}
-                  className={`group relative text-[14px] font-medium px-3.5 py-2 rounded-lg transition-colors ${
-                    isActive
-                      ? "bg-[#F0EEE4] text-[#1A2130]"
-                      : "text-[#4A5568] hover:text-[#B55331]"
-                  }`}
-                >
-                  {item.label}
-                  {!isActive && (
-                    <span className="absolute top-1/2 right-[3px] -translate-y-1/2 h-[5px] w-[5px] rounded-full bg-[#B55331] opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
-                  )}
-                </Link>
-              );
-            })}
-          </nav>
-        </div>
-
-        {/* Desktop Right Side — Pricing + Auth Buttons */}
-        <div className="hidden items-center gap-2.5 lg:flex">
-          {rightNavigation.map((item) => {
+        {/* Desktop Center Navigation — Platform, Consulting, Story */}
+        <nav className="hidden items-center gap-4 lg:flex absolute left-1/2 -translate-x-1/2 whitespace-nowrap">
+          {centerNavigation.map((item) => {
             const isActive = isItemActive(item);
             return (
               <Link
@@ -168,6 +141,23 @@ export function Header() {
               </Link>
             );
           })}
+        </nav>
+
+        {/* Desktop Right Side — Pricing + Auth Buttons */}
+        <div className="hidden items-center gap-2.5 lg:flex">
+          <Link
+            href="/pricing"
+            className={`group relative text-[14px] font-medium px-3.5 py-2 rounded-lg transition-colors ${
+              pathname === "/pricing"
+                ? "bg-[#F0EEE4] text-[#1A2130]"
+                : "text-[#4A5568] hover:text-[#B55331]"
+            }`}
+          >
+            Pricing
+            {pathname !== "/pricing" && (
+              <span className="absolute top-1/2 right-[3px] -translate-y-1/2 h-[5px] w-[5px] rounded-full bg-[#B55331] opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
+            )}
+          </Link>
           <Link
             href="https://app.proux.design/Auth"
             className="text-[14px] font-bold uppercase rounded-[11px] px-5 py-2.5 text-[#1A2130] transition-colors hover:bg-[#F0EEE4]"
@@ -200,8 +190,8 @@ export function Header() {
       >
         <div className="bg-[#f8f7f4]">
           <nav className="flex flex-col gap-1 px-[24px] py-6">
-            {/* All nav items in order: Features, Consulting, Story, Pricing */}
-            {allNavItems.map((item) => {
+            {/* All nav items in order: Platform, Consulting, Story, Pricing */}
+            {mobileNavItems.map((item) => {
               const isActive = isItemActive(item);
               return (
                 <Link
