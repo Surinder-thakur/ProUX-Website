@@ -98,31 +98,6 @@ function InstagramIcon() {
 }
 
 
-function EmailIcon() {
-  return (
-    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.75" strokeLinecap="round" strokeLinejoin="round" className="shrink-0">
-      <rect x="2" y="4" width="20" height="16" rx="2" />
-      <path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7" />
-    </svg>
-  );
-}
-
-function PhoneIcon() {
-  return (
-    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.75" strokeLinecap="round" strokeLinejoin="round" className="shrink-0">
-      <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z" />
-    </svg>
-  );
-}
-
-function MapPinIcon() {
-  return (
-    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.75" strokeLinecap="round" strokeLinejoin="round" className="shrink-0 mt-[2px]">
-      <path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z" />
-      <circle cx="12" cy="10" r="3" />
-    </svg>
-  );
-}
 
 /* ══════════════════════════════════════════════════════════════════════════
    PROUX LOGO
@@ -242,50 +217,24 @@ export function Footer() {
             </div>
           </div>
 
-          {/* ── Right Columns Grid ── */}
-          <div className="grid grid-cols-1 sm:grid-cols-3 gap-8 lg:gap-12 lg:w-[60%]">
-            {/* ── Column 1: Contact & Address ── */}
-            <div className="flex flex-col gap-8">
-              <div className="flex flex-col gap-4">
-                <ColumnHeading>Contact</ColumnHeading>
-                <div className="flex flex-col gap-3">
-                  <a
-                    href="mailto:hey@proux.design"
-                    className="flex items-center gap-2 text-base font-bold text-primary transition-colors duration-300 hover:underline"
-                  >
-                    <EmailIcon />
-                    hey@proux.design
-                  </a>
-                  <a
-                    href="tel:+919878977771"
-                    className="flex items-center gap-2 text-sm font-medium text-foreground transition-colors duration-300 hover:text-primary"
-                  >
-                    <PhoneIcon />
-                    +91 98789 77771
-                  </a>
-                </div>
-              </div>
-
+          {/* ── Right Columns Grid — 4 columns ── */}
+          <div className="grid grid-cols-2 sm:grid-cols-4 gap-8 lg:gap-12 lg:w-[65%]">
+            {/* ── Column 1: Product ── */}
+            <div className="flex flex-col gap-4">
+              <ColumnHeading>Product</ColumnHeading>
               <div className="flex flex-col gap-3">
-                <ColumnHeading>Middle East</ColumnHeading>
-                <div className="flex items-start gap-2 max-w-[240px] text-sm font-normal text-muted-foreground leading-relaxed">
-                  <MapPinIcon />
-                  <span>
-                    511, Zumurud Tower, Marina Dubai,{" "}
-                    <span className="whitespace-nowrap">United Arab Emirates</span>
-                  </span>
-                </div>
+                <FooterNavLink href="/">Platform</FooterNavLink>
+                <FooterNavLink href="/pricing">Pricing</FooterNavLink>
+                <FooterNavLink href="https://app.proux.design/Auth" external>Start Free</FooterNavLink>
               </div>
             </div>
 
-            {/* ── Column 2: Navigation ── */}
+            {/* ── Column 2: Services ── */}
             <div className="flex flex-col gap-4">
-              <ColumnHeading>Navigation</ColumnHeading>
+              <ColumnHeading>Services</ColumnHeading>
               <div className="flex flex-col gap-3">
-                <FooterNavLink href="/">ProUX Platform</FooterNavLink>
-                <FooterNavLink href="/pricing">Pricing</FooterNavLink>
-                <FooterNavLink href="/workshops">AI Design Workshops</FooterNavLink>
-                <FooterNavLink href="/ux-consulting">UX Consulting</FooterNavLink>
+                <FooterNavLink href="/ux-consulting">Consulting</FooterNavLink>
+                <FooterNavLink href="/#faq">FAQ</FooterNavLink>
               </div>
             </div>
 
@@ -293,11 +242,23 @@ export function Footer() {
             <div className="flex flex-col gap-4">
               <ColumnHeading>Company</ColumnHeading>
               <div className="flex flex-col gap-3">
-                <FooterNavLink href="https://www.surinder.design" external>About Surinder</FooterNavLink>
-                <FooterNavLink href="/bootcamps">AI Design Training</FooterNavLink>
-                <FooterNavLink href="/#faq">FAQ</FooterNavLink>
-                <FooterNavLink href="https://app.proux.design/Auth" external>Sign In</FooterNavLink>
-                <FooterNavLink href="https://app.proux.design/Auth" external>Register</FooterNavLink>
+                <FooterNavLink href="/story">Story</FooterNavLink>
+                <FooterNavLink href="https://www.surinder.design" external>Surinder.design</FooterNavLink>
+                <a
+                  href="mailto:hey@proux.design"
+                  className="block text-sm font-medium text-foreground transition-all duration-300 hover:text-primary hover:translate-x-1"
+                >
+                  Contact
+                </a>
+              </div>
+            </div>
+
+            {/* ── Column 4: Legal ── */}
+            <div className="flex flex-col gap-4">
+              <ColumnHeading>Legal</ColumnHeading>
+              <div className="flex flex-col gap-3">
+                <FooterNavLink href="https://app.proux.design/privacy&policy" external>Privacy Policy</FooterNavLink>
+                <FooterNavLink href="https://app.proux.design/term&condition" external>Terms &amp; Conditions</FooterNavLink>
               </div>
             </div>
           </div>
@@ -305,41 +266,25 @@ export function Footer() {
 
         {/* ─────────────── BOTTOM BAR ─────────────── */}
         <div
-          className="flex flex-col md:flex-row items-center justify-between gap-6 w-full pt-8"
+          className="flex flex-col md:flex-row items-center justify-between gap-4 w-full pt-8"
           style={{ borderTop: "1px solid hsl(var(--border-primary-100))" }}
         >
           <p className="text-[13px] font-normal text-muted-foreground text-center md:text-left leading-relaxed">
-            &copy; {new Date().getFullYear()} ProUX{" "}
-            <span className="hidden md:inline mx-2 text-[hsl(var(--border-primary-100))]">|</span>{" "}
-            All Rights Reserved{" "}
-            <span className="hidden md:inline mx-2 text-[hsl(var(--border-primary-100))]">|</span>{" "}
-            A product by{" "}
-            <a
-              href="https://osumstudio.com"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="font-bold text-muted-foreground transition-colors duration-300 hover:text-primary hover:underline whitespace-nowrap"
-            >
-              Osum Studio
-            </a>
+            &copy; {new Date().getFullYear()} ProUX. All Rights Reserved.
           </p>
-
-          <div className="flex gap-6">
+          <div className="flex flex-col sm:flex-row items-center gap-3 text-[13px] text-muted-foreground">
             <a
-              href="https://app.proux.design/privacy&policy"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="text-[13px] font-medium text-muted-foreground transition-colors duration-300 hover:text-primary"
+              href="mailto:hey@proux.design"
+              className="font-medium transition-colors duration-300 hover:text-primary"
             >
-              Privacy Policy
+              hey@proux.design
             </a>
+            <span className="hidden sm:inline text-[hsl(var(--border-primary-100))]">|</span>
             <a
-              href="https://app.proux.design/term&condition"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="text-[13px] font-medium text-muted-foreground transition-colors duration-300 hover:text-primary"
+              href="tel:+919878977771"
+              className="font-medium transition-colors duration-300 hover:text-primary"
             >
-              Terms &amp; Conditions
+              +91 98789 77771
             </a>
           </div>
         </div>

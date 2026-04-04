@@ -2,6 +2,10 @@
 @tailwind components;
 @tailwind utilities;
 
+html {
+  scroll-behavior: smooth;
+}
+
 /* =============================================================================
  * DESIGN SYSTEM TOKENS — ProUX (Figma Make source of truth)
  * =============================================================================
