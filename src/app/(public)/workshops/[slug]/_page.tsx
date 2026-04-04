@@ -1,3 +1,4 @@
+// HIDDEN: Workshop detail pages temporarily disabled. Re-enable by removing underscore prefix. Date: 2026-04-04
 import { notFound, redirect } from "next/navigation";
 import {
   getBootcampBySlug,

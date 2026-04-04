@@ -1,13 +1,18 @@
+// HIDDEN: Workshop pages temporarily disabled. Re-enable by removing underscore prefix. Date: 2026-04-04
+import type { Metadata } from "next";
 import BootcampHero from "@/components/pages/bootcamps/bootcamp-hero";
-import BootcampStatsBar from "@/components/pages/bootcamps/bootcamp-stats-bar";
 import BootcampModuleCards from "@/components/pages/bootcamps/bootcamp-module-cards";
-import BootcampHowItWorks from "@/components/pages/bootcamps/bootcamp-how-it-works";
-import BootcampInstructor from "@/components/pages/bootcamps/bootcamp-instructor";
 import { getAllBootcamps } from "@/lib/data/bootcamps";
+
+export const metadata: Metadata = {
+  title: "AI Design Workshops — ProUX",
+  description:
+    "Live, cohort-based AI design workshops taught by Surinder Thakur. Master AI prompting, design systems, and shipping real products.",
+};
 
 /* ── JSON-LD Structured Data ────────────────────────────────────────────── */
 
-function BootcampJsonLd() {
+function WorkshopJsonLd() {
   const bootcamps = getAllBootcamps();
 
   const courseInstances = bootcamps.map((mod) => ({
@@ -16,7 +21,7 @@ function BootcampJsonLd() {
     description: mod.tagline,
     courseMode: "Online",
     courseWorkload: "PT4W",
-    url: `https://proux.design/bootcamps/${mod.slug}`,
+    url: `https://proux.design/workshops/${mod.slug}`,
     image: mod.image,
     offers: [
       {
@@ -51,9 +56,9 @@ function BootcampJsonLd() {
   const jsonLd = {
     "@context": "https://schema.org",
     "@type": "Course",
-    name: "AI Design Engineering Bootcamp",
+    name: "AI Design Workshops",
     description:
-      "Master AI-powered design workflows in 4 weeks. Prompt mastery, design systems, Figma-to-code, and UX strategic thinking. Live cohort-based classes capped at 12 students.",
+      "Master AI-powered design workflows in live workshops. Prompt mastery, design systems, Figma-to-code, and UX strategic thinking. Cohort-based classes capped at 12 students.",
     provider: {
       "@type": "Organization",
       name: "ProUX",
@@ -84,15 +89,12 @@ function BootcampJsonLd() {
 
 /* ── Page ────────────────────────────────────────────────────────────────── */
 
-export default function BootcampsPage() {
+export default function WorkshopsPage() {
   return (
     <div className="bg-[hsl(var(--bg-primary-50))]">
-      <BootcampJsonLd />
+      <WorkshopJsonLd />
       <BootcampHero />
-      <BootcampModuleCards />
-      <BootcampStatsBar />
-      <BootcampHowItWorks />
-      <BootcampInstructor />
+      <BootcampModuleCards variant="workshop" />
     </div>
   );
 }

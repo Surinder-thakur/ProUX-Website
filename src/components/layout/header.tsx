@@ -2,50 +2,25 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { useState, useEffect, useCallback } from "react";
+import { useState, useEffect } from "react";
 // lucide-react icons removed — menu uses text-only toggle
 import { Tooltip, TooltipTrigger, TooltipContent, TooltipProvider } from "@/components/ui/tooltip";
-import BootcampInterestPopup from "@/components/pages/bootcamps/bootcamp-interest-popup";
-
-interface NavSubItem {
-  label: string;
-  href: string;
-  upcoming?: boolean;
-  registerInterest?: boolean;
-  external?: boolean;
-}
 
 interface NavItem {
   label: string;
   href: string;
-  subItems?: NavSubItem[];
-  isDropdown?: boolean;
 }
 
-const navigation: NavItem[] = [
-  {
-    label: "ProUX Platform",
-    href: "/",
-  },
-  {
-    label: "Pricing",
-    href: "/pricing",
-  },
-  {
-    label: "AI Design Workshops",
-    href: "/workshops",
-  },
-  {
-    label: "About",
-    href: "#",
-    isDropdown: true,
-    subItems: [
-      { label: "Our Story", href: "/story" },
-      { label: "UX Consulting", href: "/ux-consulting" },
-      // { label: "AI Design Training", href: "/bootcamps", registerInterest: true },
-      { label: "Insights", href: "#", upcoming: true },
-    ],
-  },
+// Left-side navigation items (exploration/discovery)
+const leftNavigation: NavItem[] = [
+  { label: "Features", href: "/#features" },
+  { label: "Consulting", href: "/ux-consulting" },
+  { label: "Story", href: "/story" },
+];
+
+// Right-side navigation item (decision/action, alongside auth buttons)
+const rightNavigation: NavItem[] = [
+  { label: "Pricing", href: "/pricing" },
 ];
 
 function ProUXLogo({ className }: { className?: string }) {
@@ -92,72 +67,21 @@ function ProUXLogo({ className }: { className?: string }) {
   );
 }
 
-function ChevronIcon({ open }: { open: boolean }) {
-  return (
-    <svg
-      className={`w-4 h-4 transition-transform duration-200 ${open ? "rotate-180" : ""}`}
-      fill="none"
-      viewBox="0 0 24 24"
-      stroke="currentColor"
-      strokeWidth={2}
-    >
-      <path strokeLinecap="round" strokeLinejoin="round" d="M19 9l-7 7-7-7" />
-    </svg>
-  );
-}
 
 export function Header() {
   const pathname = usePathname();
   const [mobileOpen, setMobileOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const [hidden, setHidden] = useState(false);
-  const [desktopDropdown, setDesktopDropdown] = useState<string | null>(null);
   const shouldAutoHide = pathname === "/" || pathname === "/ux-consulting" || pathname.startsWith("/bootcamps/") || pathname.startsWith("/workshops");
 
-  // Determine which parent nav item is active (current page)
-  const getActiveParentHref = useCallback(() => {
-    for (const item of navigation) {
-      if (item.href === "/" && pathname === "/") return "/";
-      if (item.href !== "/" && item.href !== "#" && pathname.startsWith(item.href)) return item.href;
-      // Check sub-items for dropdown parents
-      if (item.isDropdown && item.subItems) {
-        for (const sub of item.subItems) {
-          if (sub.href !== "#" && !sub.external && pathname.startsWith(sub.href)) return item.label;
-        }
-      }
-    }
-    return null;
-  }, [pathname]);
-
-  const [expandedItem, setExpandedItem] = useState<string | null>(null);
-  const [interestPopupOpen, setInterestPopupOpen] = useState(false);
-
-  // Update expanded state when pathname changes
-  useEffect(() => {
-    const active = getActiveParentHref();
-    // For mobile, expand the About dropdown if a sub-page is active
-    const aboutItem = navigation.find((n) => n.isDropdown);
-    if (aboutItem && active === aboutItem.label) {
-      setExpandedItem(aboutItem.label);
-    } else {
-      setExpandedItem(null);
-    }
-  }, [pathname, getActiveParentHref]);
-
-  // Close desktop dropdown when clicking outside
-  useEffect(() => {
-    if (!desktopDropdown) return;
-    const handleClick = () => setDesktopDropdown(null);
-    document.addEventListener("click", handleClick);
-    return () => document.removeEventListener("click", handleClick);
-  }, [desktopDropdown]);
+  const allNavItems = [...leftNavigation, ...rightNavigation];
 
   useEffect(() => {
     const handleScroll = () => {
       const y = window.scrollY;
       setScrolled(y > 10);
 
-      // On pages with secondary nav, hide main nav after scrolling past one viewport
       if (shouldAutoHide) {
         setHidden(y > window.innerHeight);
       }
@@ -167,11 +91,8 @@ export function Header() {
   }, [shouldAutoHide]);
 
   const isItemActive = (item: NavItem) => {
-    if (item.href === "/" && pathname === "/") return true;
-    if (item.href !== "/" && item.href !== "#" && pathname.startsWith(item.href)) return true;
-    if (item.isDropdown && item.subItems) {
-      return item.subItems.some((sub) => sub.href !== "#" && !sub.external && pathname.startsWith(sub.href));
-    }
+    if (item.href === "/#features" && pathname === "/") return false; // anchor link, not a page
+    if (item.href !== "/" && item.href !== "#" && !item.href.startsWith("/#") && pathname.startsWith(item.href)) return true;
     return false;
   };
 
@@ -188,117 +109,48 @@ export function Header() {
     >
       <div className="flex items-center justify-between px-[24px] lg:px-[100px] border-b border-[#dfdbc9] pb-3.5">
         {/* Logo — far left */}
-        <TooltipProvider delayDuration={0}>
-          <Tooltip>
-            <TooltipTrigger asChild>
-              <Link href="/" className="flex-shrink-0">
-                <ProUXLogo className="h-[17px] w-auto sm:h-[20px]" />
-              </Link>
-            </TooltipTrigger>
-            <TooltipContent>
-              <p className="text-center text-[11px]">Invest in ProUX today,<br />save on costly fixes tomorrow.</p>
-            </TooltipContent>
-          </Tooltip>
-        </TooltipProvider>
+        <div className="flex items-center gap-6">
+          <TooltipProvider delayDuration={0}>
+            <Tooltip>
+              <TooltipTrigger asChild>
+                <Link href="/" className="flex-shrink-0">
+                  <ProUXLogo className="h-[17px] w-auto sm:h-[20px]" />
+                </Link>
+              </TooltipTrigger>
+              <TooltipContent>
+                <p className="text-center text-[11px]">Invest in ProUX today,<br />save on costly fixes tomorrow.</p>
+              </TooltipContent>
+            </Tooltip>
+          </TooltipProvider>
 
-        {/* Desktop Navigation — centered */}
-        <nav className="hidden items-center gap-4 lg:flex absolute left-1/2 -translate-x-1/2 whitespace-nowrap">
-          {navigation.map((item) => {
-            const isActive = isItemActive(item);
-
-            // Dropdown item (About)
-            if (item.isDropdown) {
+          {/* Desktop Left Navigation — Features, Consulting, Story */}
+          <nav className="hidden items-center gap-1 lg:flex whitespace-nowrap">
+            {leftNavigation.map((item) => {
+              const isActive = isItemActive(item);
               return (
-                <div key={item.label} className="relative">
-                  <button
-                    onClick={(e) => {
-                      e.stopPropagation();
-                      setDesktopDropdown(desktopDropdown === item.label ? null : item.label);
-                    }}
-                    className={`group relative text-[14px] font-medium px-3.5 py-2 rounded-lg transition-colors inline-flex items-center gap-1.5 ${
-                      isActive || desktopDropdown === item.label
-                        ? "bg-[#F0EEE4] text-[#1A2130]"
-                        : "text-[#4A5568] hover:text-[#B55331]"
-                    }`}
-                  >
-                    {item.label}
-                    <ChevronIcon open={desktopDropdown === item.label} />
-                  </button>
-
-                  {/* Desktop dropdown panel */}
-                  <div
-                    className={`absolute top-full left-0 mt-2 w-[220px] bg-white rounded-xl shadow-lg border border-[#dfdbc9] overflow-hidden transition-all duration-200 ${
-                      desktopDropdown === item.label
-                        ? "opacity-100 translate-y-0 pointer-events-auto"
-                        : "opacity-0 -translate-y-1 pointer-events-none"
-                    }`}
-                    onClick={(e) => e.stopPropagation()}
-                  >
-                    <div className="py-2">
-                      {item.subItems!.map((sub) => {
-                        if (sub.upcoming) {
-                          return (
-                            <span
-                              key={sub.label}
-                              className="flex items-center px-4 py-2.5 text-[13px] font-medium text-[#4A5568]/50 cursor-default"
-                            >
-                              {sub.label}
-                              <span className="ml-1.5 text-[10px] font-bold text-primary/50 uppercase">Soon</span>
-                            </span>
-                          );
-                        }
-                        if (sub.registerInterest) {
-                          return (
-                            <button
-                              key={sub.label}
-                              onClick={() => {
-                                setDesktopDropdown(null);
-                                setInterestPopupOpen(true);
-                              }}
-                              className="w-full text-left px-4 py-2.5 text-[13px] font-medium text-[#4A5568] hover:text-[#B55331] hover:bg-[#F0EEE4]/50 transition-colors"
-                            >
-                              {sub.label}
-                              <span className="ml-1.5 text-[10px] font-bold text-primary/60 uppercase">Register Interest</span>
-                            </button>
-                          );
-                        }
-                        if (sub.external) {
-                          return (
-                            <a
-                              key={sub.label}
-                              href={sub.href}
-                              target="_blank"
-                              rel="noopener noreferrer"
-                              onClick={() => setDesktopDropdown(null)}
-                              className="block px-4 py-2.5 text-[13px] font-medium text-[#4A5568] hover:text-[#B55331] hover:bg-[#F0EEE4]/50 transition-colors"
-                            >
-                              {sub.label}
-                            </a>
-                          );
-                        }
-                        const isSubActive = pathname.startsWith(sub.href);
-                        return (
-                          <Link
-                            key={sub.label}
-                            href={sub.href}
-                            onClick={() => setDesktopDropdown(null)}
-                            className={`block px-4 py-2.5 text-[13px] font-medium transition-colors ${
-                              isSubActive
-                                ? "text-[#1A2130] bg-[#F0EEE4]/70"
-                                : "text-[#4A5568] hover:text-[#B55331] hover:bg-[#F0EEE4]/50"
-                            }`}
-                          >
-                            {sub.label}
-                          </Link>
-                        );
-                      })}
-                    </div>
-                  </div>
-                </div>
+                <Link
+                  key={item.href}
+                  href={item.href}
+                  className={`group relative text-[14px] font-medium px-3.5 py-2 rounded-lg transition-colors ${
+                    isActive
+                      ? "bg-[#F0EEE4] text-[#1A2130]"
+                      : "text-[#4A5568] hover:text-[#B55331]"
+                  }`}
+                >
+                  {item.label}
+                  {!isActive && (
+                    <span className="absolute top-1/2 right-[3px] -translate-y-1/2 h-[5px] w-[5px] rounded-full bg-[#B55331] opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
+                  )}
+                </Link>
               );
-            }
+            })}
+          </nav>
+        </div>
 
-            // Regular nav item
+        {/* Desktop Right Side — Pricing + Auth Buttons */}
+        <div className="hidden items-center gap-2.5 lg:flex">
+          {rightNavigation.map((item) => {
+            const isActive = isItemActive(item);
             return (
               <Link
                 key={item.href}
@@ -316,10 +168,6 @@ export function Header() {
               </Link>
             );
           })}
-        </nav>
-
-        {/* Desktop CTA Buttons — far right */}
-        <div className="hidden items-center gap-2.5 lg:flex">
           <Link
             href="https://app.proux.design/Auth"
             className="text-[14px] font-bold uppercase rounded-[11px] px-5 py-2.5 text-[#1A2130] transition-colors hover:bg-[#F0EEE4]"
@@ -334,7 +182,7 @@ export function Header() {
           </Link>
         </div>
 
-        {/* Mobile Menu Button — outline dark, fixed width to prevent size jump */}
+        {/* Mobile Menu Button */}
         <button
           className="lg:hidden inline-flex items-center justify-center w-[72px] rounded-[10px] border border-[#1A2130]/25 bg-transparent px-4 py-2 text-[11px] font-bold uppercase tracking-[1.5px] text-[#1A2130]"
           onClick={() => setMobileOpen(!mobileOpen)}
@@ -344,7 +192,7 @@ export function Header() {
         </button>
       </div>
 
-      {/* Mobile Menu Dropdown — always rendered, animated via max-height */}
+      {/* Mobile Menu Dropdown */}
       <div
         className={`lg:hidden overflow-hidden transition-all duration-300 ease-in-out ${
           mobileOpen ? "max-h-[700px] opacity-100" : "max-h-0 opacity-0"
@@ -352,106 +200,22 @@ export function Header() {
       >
         <div className="bg-[#f8f7f4]">
           <nav className="flex flex-col gap-1 px-[24px] py-6">
-            {navigation.map((item) => {
+            {/* All nav items in order: Features, Consulting, Story, Pricing */}
+            {allNavItems.map((item) => {
               const isActive = isItemActive(item);
-              const isExpanded = expandedItem === item.label;
-              const hasSubItems = item.subItems && item.subItems.length > 0;
-
               return (
-                <div key={item.label}>
-                  {/* Parent item row */}
-                  <div className="flex items-center">
-                    {item.isDropdown ? (
-                      <button
-                        onClick={() => setExpandedItem(isExpanded ? null : item.label)}
-                        className={`flex-1 text-left text-[15px] font-medium px-5 py-3.5 rounded-[10px] transition-colors flex items-center justify-between ${
-                          isActive
-                            ? "bg-[#F0EEE4] text-[#1A2130]"
-                            : "text-[#4A5568] hover:text-primary"
-                        }`}
-                      >
-                        {item.label}
-                        <ChevronIcon open={isExpanded} />
-                      </button>
-                    ) : (
-                      <Link
-                        href={item.href}
-                        onClick={() => setMobileOpen(false)}
-                        className={`flex-1 text-[15px] font-medium px-5 py-3.5 rounded-[10px] transition-colors ${
-                          isActive
-                            ? "bg-[#F0EEE4] text-[#1A2130]"
-                            : "text-[#4A5568] hover:text-primary"
-                        }`}
-                      >
-                        {item.label}
-                      </Link>
-                    )}
-                  </div>
-
-                  {/* Sub-items — collapsible */}
-                  {hasSubItems && (
-                    <div
-                      className={`overflow-hidden transition-all duration-200 ease-in-out ${
-                        isExpanded ? "max-h-[300px] opacity-100" : "max-h-0 opacity-0"
-                      }`}
-                    >
-                      <div className="flex flex-col gap-0.5 pl-6 pb-2">
-                        {item.subItems!.map((sub) => {
-                          if (sub.upcoming) {
-                            return (
-                              <span
-                                key={sub.label}
-                                className="text-left text-[13px] font-medium px-5 py-2.5 rounded-[8px] text-[#4A5568]/50"
-                              >
-                                {sub.label}
-                                <span className="ml-1.5 text-[10px] font-bold text-primary/50 uppercase">Soon</span>
-                              </span>
-                            );
-                          }
-                          if (sub.registerInterest) {
-                            return (
-                              <button
-                                key={sub.label}
-                                onClick={() => {
-                                  setMobileOpen(false);
-                                  setInterestPopupOpen(true);
-                                }}
-                                className="text-left text-[13px] font-medium px-5 py-2.5 rounded-[8px] text-[#4A5568] hover:text-primary hover:bg-[#F0EEE4]/50 transition-colors"
-                              >
-                                {sub.label}
-                                <span className="ml-1.5 text-[10px] font-bold text-primary/60 uppercase">Register Interest</span>
-                              </button>
-                            );
-                          }
-                          if (sub.external) {
-                            return (
-                              <a
-                                key={sub.label}
-                                href={sub.href}
-                                target="_blank"
-                                rel="noopener noreferrer"
-                                onClick={() => setMobileOpen(false)}
-                                className="text-[13px] font-medium px-5 py-2.5 rounded-[8px] text-[#4A5568] hover:text-primary hover:bg-[#F0EEE4]/50 transition-colors"
-                              >
-                                {sub.label}
-                              </a>
-                            );
-                          }
-                          return (
-                            <Link
-                              key={sub.label}
-                              href={sub.href}
-                              onClick={() => setMobileOpen(false)}
-                              className="text-[13px] font-medium px-5 py-2.5 rounded-[8px] text-[#4A5568] hover:text-primary hover:bg-[#F0EEE4]/50 transition-colors"
-                            >
-                              {sub.label}
-                            </Link>
-                          );
-                        })}
-                      </div>
-                    </div>
-                  )}
-                </div>
+                <Link
+                  key={item.href}
+                  href={item.href}
+                  onClick={() => setMobileOpen(false)}
+                  className={`flex-1 text-[15px] font-medium px-5 py-3.5 rounded-[10px] transition-colors ${
+                    isActive
+                      ? "bg-[#F0EEE4] text-[#1A2130]"
+                      : "text-[#4A5568] hover:text-primary"
+                  }`}
+                >
+                  {item.label}
+                </Link>
               );
             })}
             <div className="mt-4 flex flex-col gap-3 border-t border-[#dfdbc9] pt-5">
@@ -476,20 +240,13 @@ export function Header() {
 
     </header>
 
-    {/* Backdrop overlay — blurs and darkens entire page behind the nav */}
+    {/* Backdrop overlay */}
     <div
       className={`lg:hidden fixed inset-0 z-[105] bg-black/60 backdrop-blur-sm transition-opacity duration-300 ${
         mobileOpen ? "opacity-100" : "opacity-0 pointer-events-none"
       }`}
       onClick={() => setMobileOpen(false)}
       aria-hidden="true"
-    />
-
-    {/* Interest popup for register interest */}
-    <BootcampInterestPopup
-      open={interestPopupOpen}
-      onClose={() => setInterestPopupOpen(false)}
-      bootcampTitle="AI Design Training"
     />
     </>
   );
