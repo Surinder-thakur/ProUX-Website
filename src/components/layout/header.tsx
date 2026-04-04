@@ -14,6 +14,7 @@ interface NavItem {
 // Center navigation items
 const centerNavigation: NavItem[] = [
   { label: "Platform", href: "/" },
+  { label: "Pricing", href: "/pricing" },
   { label: "Consulting", href: "/ux-consulting" },
   { label: "Story", href: "/story" },
 ];
@@ -70,10 +71,7 @@ export function Header() {
   const [hidden, setHidden] = useState(false);
   const shouldAutoHide = pathname === "/" || pathname === "/ux-consulting" || pathname.startsWith("/bootcamps/") || pathname.startsWith("/workshops");
 
-  const mobileNavItems: NavItem[] = [
-    ...centerNavigation,
-    { label: "Pricing", href: "/pricing" },
-  ];
+  const mobileNavItems = centerNavigation;
 
   useEffect(() => {
     const handleScroll = () => {
@@ -143,21 +141,8 @@ export function Header() {
           })}
         </nav>
 
-        {/* Desktop Right Side — Pricing + Auth Buttons */}
+        {/* Desktop Right Side — Auth Buttons */}
         <div className="hidden items-center gap-2.5 lg:flex">
-          <Link
-            href="/pricing"
-            className={`group relative text-[14px] font-medium px-3.5 py-2 rounded-lg transition-colors ${
-              pathname === "/pricing"
-                ? "bg-[#F0EEE4] text-[#1A2130]"
-                : "text-[#4A5568] hover:text-[#B55331]"
-            }`}
-          >
-            Pricing
-            {pathname !== "/pricing" && (
-              <span className="absolute top-1/2 right-[3px] -translate-y-1/2 h-[5px] w-[5px] rounded-full bg-[#B55331] opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
-            )}
-          </Link>
           <Link
             href="https://app.proux.design/Auth"
             className="text-[14px] font-bold uppercase rounded-[11px] px-5 py-2.5 text-[#1A2130] transition-colors hover:bg-[#F0EEE4]"
