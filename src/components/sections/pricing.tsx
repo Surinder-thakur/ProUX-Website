@@ -759,18 +759,17 @@ function PricingCard({
   const isDark = tier.isDark ?? false;
 
   /* Grid row template — every card uses the same rows so content aligns
-     Row 1: top badge     (24px)
-     Row 2: icon          (56px)
-     Row 3: name          (32px)
-     Row 4: tagline       (48px)
-     Row 5: toggle        (40px)
-     Row 6: price area    (110px)
-     Row 7: CTA button    (56px)
-     Row 8: guarantee     (28px)
-     Row 9: divider       (1px via border)
-     Row 10+: features    (auto)
+     Row 1: icon          (56px)
+     Row 2: name          (auto)
+     Row 3: tagline       (48px)
+     Row 4: toggle/badge  (40px)
+     Row 5: price area    (110px)
+     Row 6: CTA button    (56px)
+     Row 7: guarantee     (28px)
+     Row 8: divider       (1px via border)
+     Row 9+: features     (auto)
   */
-  const gridRows = "24px 56px auto 48px 40px 110px 56px 28px";
+  const gridRows = "56px auto 48px 40px 110px 56px 28px";
 
   return (
     <CardThemeContext.Provider
@@ -797,19 +796,7 @@ function PricingCard({
             borderBottom: `1px solid ${isDark ? "#2f415f" : "#dfdbc9"}`,
           }}
         >
-          {/* Row 1: Top badge */}
-          {isDark ? (
-            <div className="flex gap-1.5 items-center justify-center w-full">
-              <AwardIcon />
-              <p className="text-sm font-medium text-primary-foreground leading-5 tracking-[-0.154px]">
-                Pay once. Own it forever.
-              </p>
-            </div>
-          ) : (
-            <div />
-          )}
-
-          {/* Row 2: Icon */}
+          {/* Row 1: Icon */}
           <div className="inline-grid leading-[0] place-items-start relative">
             <div
               className="[grid-area:1/1] size-14 rounded-[calc(var(--radius)+10px)]"
@@ -821,7 +808,7 @@ function PricingCard({
             <div className="[grid-area:1/1] ml-3 mt-3">{tier.icon}</div>
           </div>
 
-          {/* Row 3: Name */}
+          {/* Row 2: Name */}
           <p
             className="text-[24px] font-extrabold text-center w-full leading-[32px] tracking-[-0.24px]"
             style={{
@@ -832,7 +819,7 @@ function PricingCard({
             {tier.name}
           </p>
 
-          {/* Row 4: Tagline */}
+          {/* Row 3: Tagline */}
           <p
             className={`text-sm font-medium text-center w-full max-w-[263px] leading-5 tracking-[-0.154px] ${
               isDark ? "text-primary-foreground" : "text-[#1A2130]"
@@ -841,7 +828,7 @@ function PricingCard({
             {tier.tagline}
           </p>
 
-          {/* Row 5: Toggle */}
+          {/* Row 4: Toggle / "Pay once" badge */}
           {tier.hasToggle ? (
             <div className="flex items-center bg-[#e8e4d9] rounded-full p-1 w-fit">
               <button
@@ -865,11 +852,18 @@ function PricingCard({
                 Yearly
               </button>
             </div>
+          ) : isDark ? (
+            <div className="flex gap-1.5 items-center justify-center w-full">
+              <AwardIcon />
+              <p className="text-sm font-medium text-primary-foreground leading-5 tracking-[-0.154px]">
+                Pay once. Own it forever.
+              </p>
+            </div>
           ) : (
             <div />
           )}
 
-          {/* Row 6: Price area */}
+          {/* Row 5: Price area */}
           <div className="flex flex-col items-center justify-center w-full">
             {tier.hasToggle ? (
               <>
@@ -915,7 +909,7 @@ function PricingCard({
             )}
           </div>
 
-          {/* Row 7: CTA Button */}
+          {/* Row 6: CTA Button */}
           <div className="w-full">
             {tier.buttonVariant === "filled" && (
               <Link
@@ -949,7 +943,7 @@ function PricingCard({
             )}
           </div>
 
-          {/* Row 8: Guarantee */}
+          {/* Row 7: Guarantee */}
           {tier.showGuarantee ? (
             <div className="flex gap-2 items-center">
               <ShieldIcon
@@ -968,18 +962,18 @@ function PricingCard({
         <div className="flex md:hidden flex-col gap-4 items-center w-full pb-6"
           style={{ borderBottom: `1px solid ${isDark ? "#2f415f" : "#dfdbc9"}` }}
         >
-          {isDark && (
-            <div className="flex gap-1.5 items-center justify-center w-full">
-              <AwardIcon />
-              <p className="text-sm font-medium text-primary-foreground leading-5">Pay once. Own it forever.</p>
-            </div>
-          )}
           <div className="inline-grid leading-[0] place-items-start relative">
             <div className="[grid-area:1/1] size-14 rounded-[calc(var(--radius)+10px)]" style={{ backgroundColor: "hsl(var(--sidebar-border))", opacity: isDark ? 0.1 : 0.4 }} />
             <div className="[grid-area:1/1] ml-3 mt-3">{tier.icon}</div>
           </div>
           <p className="text-[24px] font-extrabold text-center w-full leading-[32px] tracking-[-0.24px]" style={{ fontFamily: "var(--font-family-display)", color: isDark ? "hsl(var(--sidebar))" : "#1A2130" }}>{tier.name}</p>
           <p className={`text-sm font-medium text-center w-full max-w-[263px] leading-5 ${isDark ? "text-primary-foreground" : "text-[#1A2130]"}`}>{tier.tagline}</p>
+          {isDark && (
+            <div className="flex gap-1.5 items-center justify-center w-full">
+              <AwardIcon />
+              <p className="text-sm font-medium text-primary-foreground leading-5">Pay once. Own it forever.</p>
+            </div>
+          )}
           {tier.hasToggle && (
             <div className="flex items-center bg-[#e8e4d9] rounded-full p-1 w-fit">
               <button onClick={() => setIsYearly(false)} className={`text-[13px] font-semibold px-4 py-1.5 rounded-full transition-all duration-200 ${!isYearly ? "bg-white text-[#1A2130] shadow-sm" : "text-[#4A5568]"}`}>Monthly</button>
