@@ -660,13 +660,13 @@ const tiers: PricingTier[] = [
     ],
   },
 
-  /* ── Lifetime ($699) ── */
+  /* ── Lifetime ($299) ── */
   {
     icon: <LifetimeIcon />,
     name: "Lifetime Access",
     tagline:
       "Pay once. Get lifetime access to everything. Including all future updates.",
-    price: "$699",
+    price: "$299",
     billing: "One-time payment",
     buttonLabel: "Claim Lifetime",
     buttonVariant: "outline-light",
@@ -674,12 +674,17 @@ const tiers: PricingTier[] = [
     showGuarantee: true,
     bottomBadge: (
       <div
-        className="flex flex-col gap-2 items-center px-0 py-3 w-[250px] mx-auto rounded-[calc(var(--radius)+6px)]"
+        className="flex flex-col gap-3 items-center px-4 py-3 w-full max-w-[280px] mx-auto rounded-[calc(var(--radius)+6px)]"
         style={{ backgroundColor: "rgba(255,255,255,0.07)" }}
       >
-        <UserGroupIcon />
-        <p className="text-sm font-medium text-primary-foreground leading-5 tracking-[-0.154px]">
-          Limited to first <span className="font-bold">1,000</span> members
+        <div className="flex items-center gap-2">
+          <UserGroupIcon />
+          <p className="text-sm font-medium text-primary-foreground leading-5 tracking-[-0.154px]">
+            Limited to first <span className="font-bold">1,000</span> members
+          </p>
+        </div>
+        <p className="text-xs font-medium text-primary-foreground/70 leading-4 text-center">
+          Pay once. Save $100+ over 3 years vs annual.
         </p>
       </div>
     ),
@@ -764,20 +769,20 @@ function PricingCard({
     >
       <div
         ref={containerRef}
-        className={`flex flex-col gap-8 items-start w-full max-w-none md:max-w-[326px] relative rounded-[calc(var(--radius)+6px)] ${order}`}
+        className={`flex flex-col items-start w-full max-w-none md:max-w-[326px] relative rounded-[calc(var(--radius)+6px)] ${order}`}
         style={{
           backgroundColor: isDark
             ? "#111620"
             : "hsl(var(--bg-primary-100))",
-          padding: isDark ? "24px 32px 32px" : "64px 32px 32px",
+          padding: "32px 32px 32px",
         }}
       >
         {/* Badge (MOST POPULAR) */}
         {tier.badge}
 
-        {/* ── Header area ── */}
+        {/* ── Header area — fixed height so buttons align across all cards ── */}
         <div
-          className="flex flex-col gap-4 items-center w-full pb-6 relative min-h-[440px]"
+          className="flex flex-col gap-4 items-center w-full pb-6 relative md:h-[420px]"
           style={{
             borderBottom: `1px solid ${
               isDark
@@ -787,13 +792,16 @@ function PricingCard({
           }}
         >
           {/* "Pay once" badge for Lifetime */}
-          {isDark && (
+          {isDark ? (
             <div className="flex gap-1.5 items-center justify-center w-full">
               <AwardIcon />
               <p className="text-sm font-medium text-primary-foreground leading-5 tracking-[-0.154px]">
                 Pay once. Own it forever.
               </p>
             </div>
+          ) : (
+            /* Invisible spacer so all cards start icon at same height */
+            <div className="h-5" />
           )}
 
           {/* Icon */}
@@ -821,17 +829,17 @@ function PricingCard({
             {tier.name}
           </p>
 
-          {/* Tagline */}
+          {/* Tagline — fixed height to align across cards */}
           <p
-            className={`text-sm font-medium text-center w-full max-w-[263px] leading-5 tracking-[-0.154px] ${
+            className={`text-sm font-medium text-center w-full max-w-[263px] leading-5 tracking-[-0.154px] h-[40px] ${
               isDark ? "text-primary-foreground" : "text-[#1A2130]"
             }`}
           >
             {tier.tagline}
           </p>
 
-          {/* Toggle (Pro card only) */}
-          {tier.hasToggle && (
+          {/* Toggle or spacer — always same height reserved */}
+          {tier.hasToggle ? (
             <div className="flex items-center bg-[#e8e4d9] rounded-full p-1 w-fit">
               <button
                 onClick={() => setIsYearly(false)}
@@ -854,117 +862,119 @@ function PricingCard({
                 Yearly
               </button>
             </div>
+          ) : (
+            /* Spacer matching toggle height */
+            <div className="h-[36px]" />
           )}
 
-          {/* Price */}
-          {tier.hasToggle ? (
-            <div className="flex flex-col items-center gap-1 w-full h-[120px] justify-center">
-              {/* Strikethrough price */}
-              <p className="text-[18px] font-medium text-[#8a8a8a] line-through leading-6">
-                {isYearly ? "$120/yr" : "$15/mo"}
-              </p>
-              {/* Active price */}
-              <p
-                className="text-[32px] font-extrabold text-center w-full leading-[40px] tracking-[-0.32px] text-[#1A2130]"
-                style={{ fontFamily: "var(--font-family-display)" }}
-              >
-                {isYearly ? "$99.99/yr" : "$9.99/mo"}
-              </p>
-              {/* Monthly equivalent — always rendered to reserve space, invisible when monthly */}
-              <p className={`text-sm font-medium leading-5 ${isYearly ? "text-muted-foreground" : "invisible"}`}>
-                That&apos;s just $8.33/mo
-              </p>
-              {/* Savings badge */}
-              <div className="flex items-center gap-1.5 mt-1 bg-[#e6ebdc] rounded-full border border-[#47ab19] px-3 py-1">
-                <span className="h-1.5 w-1.5 rounded-full bg-[#47ab19] flex-shrink-0" />
-                <span className="text-xs font-semibold text-[#47ab19]">
-                  {isYearly
-                    ? "Best Value — Save $20 more vs monthly"
-                    : "Launch Offer — Save 33%"}
-                </span>
-              </div>
-            </div>
-          ) : (
-            <div className="flex flex-col items-center gap-4 w-full h-[120px] justify-center">
-              <p
-                className={`text-[32px] font-extrabold text-center w-full leading-[40px] tracking-[-0.32px] ${
-                  isDark ? "text-primary-foreground" : "text-[#1A2130]"
-                }`}
-                style={{ fontFamily: "var(--font-family-display)" }}
-              >
-                {tier.price}
-              </p>
-
-              {/* Billing */}
-              {tier.billing && (
+          {/* Price area — fixed height, content centered, no layout shift */}
+          <div className="flex flex-col items-center justify-center w-full h-[100px]">
+            {tier.hasToggle ? (
+              <>
+                <p className="text-[16px] font-medium text-[#8a8a8a] line-through leading-5">
+                  {isYearly ? "$120/yr" : "$15/mo"}
+                </p>
                 <p
-                  className={`text-sm font-medium text-center w-full leading-5 tracking-[-0.084px] ${
+                  className="text-[32px] font-extrabold text-center w-full leading-[40px] tracking-[-0.32px] text-[#1A2130]"
+                  style={{ fontFamily: "var(--font-family-display)" }}
+                >
+                  {isYearly ? "$99.99/yr" : "$9.99/mo"}
+                </p>
+                <p className={`text-[13px] font-medium leading-5 ${isYearly ? "text-muted-foreground" : "invisible"}`}>
+                  Just $8.33/mo
+                </p>
+                <div className="flex items-center gap-1.5 bg-[#e6ebdc] rounded-full border border-[#47ab19] px-3 py-1">
+                  <span className="h-1.5 w-1.5 rounded-full bg-[#47ab19] flex-shrink-0" />
+                  <span className="text-xs font-semibold text-[#47ab19] whitespace-nowrap">
+                    {isYearly ? "Save 17% vs monthly" : "Launch Offer — 33% off"}
+                  </span>
+                </div>
+              </>
+            ) : (
+              <>
+                <p
+                  className={`text-[32px] font-extrabold text-center w-full leading-[40px] tracking-[-0.32px] ${
+                    isDark ? "text-primary-foreground" : "text-[#1A2130]"
+                  }`}
+                  style={{ fontFamily: "var(--font-family-display)" }}
+                >
+                  {tier.price}
+                </p>
+                {tier.billing && (
+                  <p
+                    className={`text-sm font-medium text-center w-full leading-5 tracking-[-0.084px] mt-1 ${
+                      isDark ? "text-primary-foreground" : "text-[#1A2130]"
+                    }`}
+                  >
+                    {tier.billing}
+                  </p>
+                )}
+              </>
+            )}
+          </div>
+
+          {/* CTA Button — pushed to bottom of fixed header via mt-auto */}
+          <div className="flex flex-col gap-3 items-center w-full mt-auto">
+            {tier.buttonVariant === "filled" && (
+              <Link
+                href="https://app.proux.design/Auth"
+                className="h-[56px] w-full flex items-center justify-center bg-primary rounded-[calc(var(--radius)+8px)] shadow-md hover:shadow-lg hover:-translate-y-0.5 transition-all duration-300 btn-shine"
+              >
+                <span className="text-sm font-bold text-primary-foreground uppercase tracking-[0.84px]">
+                  {tier.buttonLabel}
+                </span>
+              </Link>
+            )}
+
+            {tier.buttonVariant === "outline" && (
+              <Link
+                href="https://app.proux.design/Auth"
+                className="h-[56px] w-full flex items-center justify-center border-2 border-primary rounded-[calc(var(--radius)+8px)] bg-transparent hover:bg-primary shadow-sm hover:shadow-md transition-all duration-300 group"
+              >
+                <span className="text-sm font-bold text-primary group-hover:text-primary-foreground uppercase tracking-[0.84px] transition-colors">
+                  {tier.buttonLabel}
+                </span>
+              </Link>
+            )}
+
+            {tier.buttonVariant === "outline-light" && (
+              <Link
+                href="https://app.proux.design/Auth"
+                className="h-[56px] w-full flex items-center justify-center border-2 border-primary-foreground rounded-[calc(var(--radius)+8px)] bg-transparent hover:bg-primary-foreground shadow-sm hover:shadow-md transition-all duration-300 group"
+              >
+                <span className="text-sm font-bold text-primary-foreground group-hover:text-foreground uppercase tracking-[0.84px] transition-colors">
+                  {tier.buttonLabel}
+                </span>
+              </Link>
+            )}
+
+            {/* Money-back guarantee — always reserve space */}
+            {tier.showGuarantee ? (
+              <div className="flex gap-2 items-center h-[24px]">
+                <ShieldIcon
+                  color={
+                    isDark
+                      ? "hsl(var(--sidebar-border))"
+                      : "hsl(var(--annotation-green-600))"
+                  }
+                />
+                <p
+                  className={`text-sm font-medium leading-5 tracking-[-0.084px] ${
                     isDark ? "text-primary-foreground" : "text-[#1A2130]"
                   }`}
                 >
-                  {tier.billing}
+                  5-Day Money-Back Guarantee
                 </p>
-              )}
-            </div>
-          )}
-
-          {/* CTA Button */}
-          {tier.buttonVariant === "filled" && (
-            <Link
-              href="https://app.proux.design/Auth"
-              className="h-[56px] w-full flex items-center justify-center bg-primary rounded-[calc(var(--radius)+8px)] shadow-md hover:shadow-lg hover:-translate-y-0.5 transition-all duration-300 btn-shine"
-            >
-              <span className="text-sm font-bold text-primary-foreground uppercase tracking-[0.84px]">
-                {tier.buttonLabel}
-              </span>
-            </Link>
-          )}
-
-          {tier.buttonVariant === "outline" && (
-            <Link
-              href="https://app.proux.design/Auth"
-              className="h-[56px] w-full flex items-center justify-center border-2 border-primary rounded-[calc(var(--radius)+8px)] bg-transparent hover:bg-primary shadow-sm hover:shadow-md transition-all duration-300 group"
-            >
-              <span className="text-sm font-bold text-primary group-hover:text-primary-foreground uppercase tracking-[0.84px] transition-colors">
-                {tier.buttonLabel}
-              </span>
-            </Link>
-          )}
-
-          {tier.buttonVariant === "outline-light" && (
-            <Link
-              href="https://app.proux.design/Auth"
-              className="h-[56px] w-full flex items-center justify-center border-2 border-primary-foreground rounded-[calc(var(--radius)+8px)] bg-transparent hover:bg-primary-foreground shadow-sm hover:shadow-md transition-all duration-300 group"
-            >
-              <span className="text-sm font-bold text-primary-foreground group-hover:text-foreground uppercase tracking-[0.84px] transition-colors">
-                {tier.buttonLabel}
-              </span>
-            </Link>
-          )}
-
-          {/* Money-back guarantee */}
-          {tier.showGuarantee && (
-            <div className="flex gap-2 items-center">
-              <ShieldIcon
-                color={
-                  isDark
-                    ? "hsl(var(--sidebar-border))"
-                    : "hsl(var(--annotation-green-600))"
-                }
-              />
-              <p
-                className={`text-sm font-medium leading-5 tracking-[-0.084px] ${
-                  isDark ? "text-primary-foreground" : "text-[#1A2130]"
-                }`}
-              >
-                5-Day Money-Back Guarantee
-              </p>
-            </div>
-          )}
+              </div>
+            ) : (
+              /* Invisible spacer to match guarantee height */
+              <div className="h-[24px]" />
+            )}
+          </div>
         </div>
 
         {/* ── Feature list ── */}
-        <div className="flex flex-col gap-4 w-full">
+        <div className="flex flex-col gap-4 w-full pt-8">
           {tier.features.map((group, gi) => (
             <React.Fragment key={gi}>
               <CategoryLabel label={group.category} isDark={isDark} />
