@@ -47,6 +47,7 @@ interface PricingTier {
   showGuarantee?: boolean;
   bottomBadge?: React.ReactNode;
   isDark?: boolean;
+  hasToggle?: boolean;
 }
 
 /* ══════════════════════════════════════════════════════════════════════════
@@ -550,17 +551,18 @@ const tiers: PricingTier[] = [
     ],
   },
 
-  /* ── Pro ($32/mo) ── */
+  /* ── Pro (with monthly/yearly toggle) ── */
   {
     icon: <ProIcon />,
     name: "Pro",
     tagline:
       "For designers who want to master AI and ship world\u2011class products fast.",
-    price: "$32/mo",
-    billing: "$384 billed once per year",
+    price: "$9.99/mo",
+    billing: "",
     buttonLabel: "Upgrade to Pro",
     buttonVariant: "filled",
     showGuarantee: true,
+    hasToggle: true,
     badge: (
       <div
         className="absolute flex gap-1.5 items-center justify-center px-4 py-[5px] left-1/2 -translate-x-1/2 top-[-17px] whitespace-nowrap"
@@ -752,6 +754,7 @@ function PricingCard({
   order: string;
 }) {
   const [expanded, setExpanded] = useState(false);
+  const [isYearly, setIsYearly] = useState(false);
   const containerRef = useRef<HTMLDivElement>(null);
   const isDark = tier.isDark ?? false;
 
@@ -827,24 +830,85 @@ function PricingCard({
             {tier.tagline}
           </p>
 
-          {/* Price */}
-          <p
-            className={`text-[32px] font-extrabold text-center w-full leading-[40px] tracking-[-0.32px] ${
-              isDark ? "text-primary-foreground" : "text-[#1A2130]"
-            }`}
-            style={{ fontFamily: "var(--font-family-display)" }}
-          >
-            {tier.price}
-          </p>
+          {/* Toggle (Pro card only) */}
+          {tier.hasToggle && (
+            <div className="flex items-center bg-[#e8e4d9] rounded-full p-1 w-fit">
+              <button
+                onClick={() => setIsYearly(false)}
+                className={`text-[13px] font-semibold px-4 py-1.5 rounded-full transition-all duration-200 ${
+                  !isYearly
+                    ? "bg-white text-[#1A2130] shadow-sm"
+                    : "text-[#4A5568] hover:text-[#1A2130]"
+                }`}
+              >
+                Monthly
+              </button>
+              <button
+                onClick={() => setIsYearly(true)}
+                className={`text-[13px] font-semibold px-4 py-1.5 rounded-full transition-all duration-200 ${
+                  isYearly
+                    ? "bg-white text-[#1A2130] shadow-sm"
+                    : "text-[#4A5568] hover:text-[#1A2130]"
+                }`}
+              >
+                Yearly
+              </button>
+            </div>
+          )}
 
-          {/* Billing */}
-          <p
-            className={`text-sm font-medium text-center w-full leading-5 tracking-[-0.084px] ${
-              isDark ? "text-primary-foreground" : "text-[#1A2130]"
-            }`}
-          >
-            {tier.billing}
-          </p>
+          {/* Price */}
+          {tier.hasToggle ? (
+            <div className="flex flex-col items-center gap-1 w-full">
+              {/* Strikethrough price */}
+              <p className="text-[18px] font-medium text-[#8a8a8a] line-through leading-6">
+                {isYearly ? "$120/yr" : "$15/mo"}
+              </p>
+              {/* Active price */}
+              <p
+                className="text-[32px] font-extrabold text-center w-full leading-[40px] tracking-[-0.32px] text-[#1A2130]"
+                style={{ fontFamily: "var(--font-family-display)" }}
+              >
+                {isYearly ? "$99.99/yr" : "$9.99/mo"}
+              </p>
+              {/* Monthly equivalent (yearly only) */}
+              {isYearly && (
+                <p className="text-sm font-medium text-muted-foreground leading-5">
+                  That&apos;s just $8.33/mo
+                </p>
+              )}
+              {/* Savings badge */}
+              <div className="flex items-center gap-1.5 mt-1 bg-[#e6ebdc] rounded-full border border-[#47ab19] px-3 py-1">
+                <span className="h-1.5 w-1.5 rounded-full bg-[#47ab19] flex-shrink-0" />
+                <span className="text-xs font-semibold text-[#47ab19]">
+                  {isYearly
+                    ? "Best Value — Save $20 more vs monthly"
+                    : "Launch Offer — Save 33%"}
+                </span>
+              </div>
+            </div>
+          ) : (
+            <>
+              <p
+                className={`text-[32px] font-extrabold text-center w-full leading-[40px] tracking-[-0.32px] ${
+                  isDark ? "text-primary-foreground" : "text-[#1A2130]"
+                }`}
+                style={{ fontFamily: "var(--font-family-display)" }}
+              >
+                {tier.price}
+              </p>
+
+              {/* Billing */}
+              {tier.billing && (
+                <p
+                  className={`text-sm font-medium text-center w-full leading-5 tracking-[-0.084px] ${
+                    isDark ? "text-primary-foreground" : "text-[#1A2130]"
+                  }`}
+                >
+                  {tier.billing}
+                </p>
+              )}
+            </>
+          )}
 
           {/* CTA Button */}
           {tier.buttonVariant === "filled" && (
