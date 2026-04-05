@@ -49,7 +49,7 @@ export default function HeroSection() {
               href="https://app.proux.design/Auth"
               className="btn-shine inline-flex items-center justify-center bg-primary text-primary-foreground rounded-[12px] w-full max-w-[360px] md:w-auto md:px-[40px] h-[56px] md:h-[56px] text-[14px] font-semibold uppercase tracking-[0.35px] shadow-lg transition-all hover:shadow-xl hover:brightness-110"
             >
-              Start Free
+              Try ProUX Free
             </Link>
             <p className="text-xs text-muted-foreground mt-2">No credit card required</p>
           </div>
