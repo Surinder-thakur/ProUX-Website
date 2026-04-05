@@ -674,17 +674,12 @@ const tiers: PricingTier[] = [
     showGuarantee: true,
     bottomBadge: (
       <div
-        className="flex flex-col gap-3 items-center px-4 py-3 w-full max-w-[280px] mx-auto rounded-[calc(var(--radius)+6px)]"
+        className="flex flex-col gap-2 items-center px-0 py-3 w-[250px] mx-auto rounded-[calc(var(--radius)+6px)]"
         style={{ backgroundColor: "rgba(255,255,255,0.07)" }}
       >
-        <div className="flex items-center gap-2">
-          <UserGroupIcon />
-          <p className="text-sm font-medium text-primary-foreground leading-5 tracking-[-0.154px]">
-            Limited to first <span className="font-bold">1,000</span> members
-          </p>
-        </div>
-        <p className="text-xs font-medium text-primary-foreground/70 leading-4 text-center">
-          Pay once. Save $100+ over 3 years vs annual.
+        <UserGroupIcon />
+        <p className="text-sm font-medium text-primary-foreground leading-5 tracking-[-0.154px]">
+          Limited to first <span className="font-bold">1,000</span> members
         </p>
       </div>
     ),
@@ -763,13 +758,27 @@ function PricingCard({
   const containerRef = useRef<HTMLDivElement>(null);
   const isDark = tier.isDark ?? false;
 
+  /* Grid row template — every card uses the same rows so content aligns
+     Row 1: top badge     (24px)
+     Row 2: icon          (56px)
+     Row 3: name          (32px)
+     Row 4: tagline       (48px)
+     Row 5: toggle        (40px)
+     Row 6: price area    (110px)
+     Row 7: CTA button    (56px)
+     Row 8: guarantee     (28px)
+     Row 9: divider       (1px via border)
+     Row 10+: features    (auto)
+  */
+  const gridRows = "24px 56px auto 48px 40px 110px 56px 28px";
+
   return (
     <CardThemeContext.Provider
       value={{ isDark, containerRef }}
     >
       <div
         ref={containerRef}
-        className={`flex flex-col items-start w-full max-w-none md:max-w-[326px] relative rounded-[calc(var(--radius)+6px)] ${order}`}
+        className={`w-full max-w-none md:max-w-[326px] relative rounded-[calc(var(--radius)+6px)] ${order}`}
         style={{
           backgroundColor: isDark
             ? "#111620"
@@ -777,21 +786,18 @@ function PricingCard({
           padding: "32px 32px 32px",
         }}
       >
-        {/* Badge (MOST POPULAR) */}
+        {/* Badge (MOST POPULAR) — positioned above card */}
         {tier.badge}
 
-        {/* ── Header area — fixed height so buttons align across all cards ── */}
+        {/* ── Grid header — every row is a fixed height ── */}
         <div
-          className="flex flex-col gap-4 items-center w-full pb-6 relative md:h-[420px]"
+          className="hidden md:grid items-center justify-items-center w-full gap-y-3 pb-6"
           style={{
-            borderBottom: `1px solid ${
-              isDark
-                ? "#2f415f"
-                : "#dfdbc9"
-            }`,
+            gridTemplateRows: gridRows,
+            borderBottom: `1px solid ${isDark ? "#2f415f" : "#dfdbc9"}`,
           }}
         >
-          {/* "Pay once" badge for Lifetime */}
+          {/* Row 1: Top badge */}
           {isDark ? (
             <div className="flex gap-1.5 items-center justify-center w-full">
               <AwardIcon />
@@ -800,11 +806,10 @@ function PricingCard({
               </p>
             </div>
           ) : (
-            /* Invisible spacer so all cards start icon at same height */
-            <div className="h-5" />
+            <div />
           )}
 
-          {/* Icon */}
+          {/* Row 2: Icon */}
           <div className="inline-grid leading-[0] place-items-start relative">
             <div
               className="[grid-area:1/1] size-14 rounded-[calc(var(--radius)+10px)]"
@@ -816,29 +821,27 @@ function PricingCard({
             <div className="[grid-area:1/1] ml-3 mt-3">{tier.icon}</div>
           </div>
 
-          {/* Name */}
+          {/* Row 3: Name */}
           <p
             className="text-[24px] font-extrabold text-center w-full leading-[32px] tracking-[-0.24px]"
             style={{
               fontFamily: "var(--font-family-display)",
-              color: isDark
-                ? "hsl(var(--sidebar))"
-                : "#1A2130",
+              color: isDark ? "hsl(var(--sidebar))" : "#1A2130",
             }}
           >
             {tier.name}
           </p>
 
-          {/* Tagline — fixed height to align across cards */}
+          {/* Row 4: Tagline */}
           <p
-            className={`text-sm font-medium text-center w-full max-w-[263px] leading-5 tracking-[-0.154px] h-[40px] ${
+            className={`text-sm font-medium text-center w-full max-w-[263px] leading-5 tracking-[-0.154px] ${
               isDark ? "text-primary-foreground" : "text-[#1A2130]"
             }`}
           >
             {tier.tagline}
           </p>
 
-          {/* Toggle or spacer — always same height reserved */}
+          {/* Row 5: Toggle */}
           {tier.hasToggle ? (
             <div className="flex items-center bg-[#e8e4d9] rounded-full p-1 w-fit">
               <button
@@ -863,12 +866,11 @@ function PricingCard({
               </button>
             </div>
           ) : (
-            /* Spacer matching toggle height */
-            <div className="h-[36px]" />
+            <div />
           )}
 
-          {/* Price area — fixed height, content centered, no layout shift */}
-          <div className="flex flex-col items-center justify-center w-full h-[100px]">
+          {/* Row 6: Price area */}
+          <div className="flex flex-col items-center justify-center w-full">
             {tier.hasToggle ? (
               <>
                 <p className="text-[16px] font-medium text-[#8a8a8a] line-through leading-5">
@@ -913,8 +915,8 @@ function PricingCard({
             )}
           </div>
 
-          {/* CTA Button — pushed to bottom of fixed header via mt-auto */}
-          <div className="flex flex-col gap-3 items-center w-full mt-auto">
+          {/* Row 7: CTA Button */}
+          <div className="w-full">
             {tier.buttonVariant === "filled" && (
               <Link
                 href="https://app.proux.design/Auth"
@@ -925,7 +927,6 @@ function PricingCard({
                 </span>
               </Link>
             )}
-
             {tier.buttonVariant === "outline" && (
               <Link
                 href="https://app.proux.design/Auth"
@@ -936,7 +937,6 @@ function PricingCard({
                 </span>
               </Link>
             )}
-
             {tier.buttonVariant === "outline-light" && (
               <Link
                 href="https://app.proux.design/Auth"
@@ -947,30 +947,70 @@ function PricingCard({
                 </span>
               </Link>
             )}
-
-            {/* Money-back guarantee — always reserve space */}
-            {tier.showGuarantee ? (
-              <div className="flex gap-2 items-center h-[24px]">
-                <ShieldIcon
-                  color={
-                    isDark
-                      ? "hsl(var(--sidebar-border))"
-                      : "hsl(var(--annotation-green-600))"
-                  }
-                />
-                <p
-                  className={`text-sm font-medium leading-5 tracking-[-0.084px] ${
-                    isDark ? "text-primary-foreground" : "text-[#1A2130]"
-                  }`}
-                >
-                  5-Day Money-Back Guarantee
-                </p>
-              </div>
-            ) : (
-              /* Invisible spacer to match guarantee height */
-              <div className="h-[24px]" />
-            )}
           </div>
+
+          {/* Row 8: Guarantee */}
+          {tier.showGuarantee ? (
+            <div className="flex gap-2 items-center">
+              <ShieldIcon
+                color={isDark ? "hsl(var(--sidebar-border))" : "hsl(var(--annotation-green-600))"}
+              />
+              <p className={`text-sm font-medium leading-5 tracking-[-0.084px] ${isDark ? "text-primary-foreground" : "text-[#1A2130]"}`}>
+                5-Day Money-Back Guarantee
+              </p>
+            </div>
+          ) : (
+            <div />
+          )}
+        </div>
+
+        {/* ── Mobile header (flex, no alignment needed) ── */}
+        <div className="flex md:hidden flex-col gap-4 items-center w-full pb-6"
+          style={{ borderBottom: `1px solid ${isDark ? "#2f415f" : "#dfdbc9"}` }}
+        >
+          {isDark && (
+            <div className="flex gap-1.5 items-center justify-center w-full">
+              <AwardIcon />
+              <p className="text-sm font-medium text-primary-foreground leading-5">Pay once. Own it forever.</p>
+            </div>
+          )}
+          <div className="inline-grid leading-[0] place-items-start relative">
+            <div className="[grid-area:1/1] size-14 rounded-[calc(var(--radius)+10px)]" style={{ backgroundColor: "hsl(var(--sidebar-border))", opacity: isDark ? 0.1 : 0.4 }} />
+            <div className="[grid-area:1/1] ml-3 mt-3">{tier.icon}</div>
+          </div>
+          <p className="text-[24px] font-extrabold text-center w-full leading-[32px] tracking-[-0.24px]" style={{ fontFamily: "var(--font-family-display)", color: isDark ? "hsl(var(--sidebar))" : "#1A2130" }}>{tier.name}</p>
+          <p className={`text-sm font-medium text-center w-full max-w-[263px] leading-5 ${isDark ? "text-primary-foreground" : "text-[#1A2130]"}`}>{tier.tagline}</p>
+          {tier.hasToggle && (
+            <div className="flex items-center bg-[#e8e4d9] rounded-full p-1 w-fit">
+              <button onClick={() => setIsYearly(false)} className={`text-[13px] font-semibold px-4 py-1.5 rounded-full transition-all duration-200 ${!isYearly ? "bg-white text-[#1A2130] shadow-sm" : "text-[#4A5568]"}`}>Monthly</button>
+              <button onClick={() => setIsYearly(true)} className={`text-[13px] font-semibold px-4 py-1.5 rounded-full transition-all duration-200 ${isYearly ? "bg-white text-[#1A2130] shadow-sm" : "text-[#4A5568]"}`}>Yearly</button>
+            </div>
+          )}
+          {tier.hasToggle ? (
+            <div className="flex flex-col items-center gap-1 w-full">
+              <p className="text-[16px] font-medium text-[#8a8a8a] line-through">{isYearly ? "$120/yr" : "$15/mo"}</p>
+              <p className="text-[32px] font-extrabold text-center text-[#1A2130]" style={{ fontFamily: "var(--font-family-display)" }}>{isYearly ? "$99.99/yr" : "$9.99/mo"}</p>
+              {isYearly && <p className="text-[13px] font-medium text-muted-foreground">Just $8.33/mo</p>}
+              <div className="flex items-center gap-1.5 bg-[#e6ebdc] rounded-full border border-[#47ab19] px-3 py-1">
+                <span className="h-1.5 w-1.5 rounded-full bg-[#47ab19]" />
+                <span className="text-xs font-semibold text-[#47ab19]">{isYearly ? "Save 17% vs monthly" : "Launch Offer — 33% off"}</span>
+              </div>
+            </div>
+          ) : (
+            <>
+              <p className={`text-[32px] font-extrabold text-center w-full ${isDark ? "text-primary-foreground" : "text-[#1A2130]"}`} style={{ fontFamily: "var(--font-family-display)" }}>{tier.price}</p>
+              {tier.billing && <p className={`text-sm font-medium text-center ${isDark ? "text-primary-foreground" : "text-[#1A2130]"}`}>{tier.billing}</p>}
+            </>
+          )}
+          {tier.buttonVariant === "filled" && <Link href="https://app.proux.design/Auth" className="h-[56px] w-full flex items-center justify-center bg-primary rounded-[calc(var(--radius)+8px)] shadow-md btn-shine"><span className="text-sm font-bold text-primary-foreground uppercase tracking-[0.84px]">{tier.buttonLabel}</span></Link>}
+          {tier.buttonVariant === "outline" && <Link href="https://app.proux.design/Auth" className="h-[56px] w-full flex items-center justify-center border-2 border-primary rounded-[calc(var(--radius)+8px)] group"><span className="text-sm font-bold text-primary group-hover:text-primary-foreground uppercase tracking-[0.84px]">{tier.buttonLabel}</span></Link>}
+          {tier.buttonVariant === "outline-light" && <Link href="https://app.proux.design/Auth" className="h-[56px] w-full flex items-center justify-center border-2 border-primary-foreground rounded-[calc(var(--radius)+8px)] group"><span className="text-sm font-bold text-primary-foreground group-hover:text-foreground uppercase tracking-[0.84px]">{tier.buttonLabel}</span></Link>}
+          {tier.showGuarantee && (
+            <div className="flex gap-2 items-center">
+              <ShieldIcon color={isDark ? "hsl(var(--sidebar-border))" : "hsl(var(--annotation-green-600))"} />
+              <p className={`text-sm font-medium ${isDark ? "text-primary-foreground" : "text-[#1A2130]"}`}>5-Day Money-Back Guarantee</p>
+            </div>
+          )}
         </div>
 
         {/* ── Feature list ── */}
