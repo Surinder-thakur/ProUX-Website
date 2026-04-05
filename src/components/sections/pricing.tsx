@@ -777,7 +777,7 @@ function PricingCard({
 
         {/* ── Header area ── */}
         <div
-          className="flex flex-col gap-4 items-center w-full pb-6 relative min-h-[380px]"
+          className="flex flex-col gap-4 items-center w-full pb-6 relative min-h-[440px]"
           style={{
             borderBottom: `1px solid ${
               isDark
@@ -858,7 +858,7 @@ function PricingCard({
 
           {/* Price */}
           {tier.hasToggle ? (
-            <div className="flex flex-col items-center gap-1 w-full">
+            <div className="flex flex-col items-center gap-1 w-full h-[120px] justify-center">
               {/* Strikethrough price */}
               <p className="text-[18px] font-medium text-[#8a8a8a] line-through leading-6">
                 {isYearly ? "$120/yr" : "$15/mo"}
@@ -870,12 +870,10 @@ function PricingCard({
               >
                 {isYearly ? "$99.99/yr" : "$9.99/mo"}
               </p>
-              {/* Monthly equivalent (yearly only) */}
-              {isYearly && (
-                <p className="text-sm font-medium text-muted-foreground leading-5">
-                  That&apos;s just $8.33/mo
-                </p>
-              )}
+              {/* Monthly equivalent — always rendered to reserve space, invisible when monthly */}
+              <p className={`text-sm font-medium leading-5 ${isYearly ? "text-muted-foreground" : "invisible"}`}>
+                That&apos;s just $8.33/mo
+              </p>
               {/* Savings badge */}
               <div className="flex items-center gap-1.5 mt-1 bg-[#e6ebdc] rounded-full border border-[#47ab19] px-3 py-1">
                 <span className="h-1.5 w-1.5 rounded-full bg-[#47ab19] flex-shrink-0" />
@@ -887,7 +885,7 @@ function PricingCard({
               </div>
             </div>
           ) : (
-            <>
+            <div className="flex flex-col items-center gap-4 w-full h-[120px] justify-center">
               <p
                 className={`text-[32px] font-extrabold text-center w-full leading-[40px] tracking-[-0.32px] ${
                   isDark ? "text-primary-foreground" : "text-[#1A2130]"
@@ -907,7 +905,7 @@ function PricingCard({
                   {tier.billing}
                 </p>
               )}
-            </>
+            </div>
           )}
 
           {/* CTA Button */}
