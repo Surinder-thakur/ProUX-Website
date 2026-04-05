@@ -1027,7 +1027,7 @@ function PricingCard({
 
         {/* ── Expandable features (Pro card) ── */}
         {tier.expandableFeatures && (
-          <div className="flex flex-col gap-4 w-full">
+          <div className="flex flex-col gap-4 w-full mt-4">
             <div
               className="flex gap-1 items-center cursor-pointer hover:opacity-80 transition-opacity"
               onClick={() => setExpanded(!expanded)}
@@ -1060,7 +1060,7 @@ function PricingCard({
         )}
 
         {/* ── Bottom badge (Lifetime) ── */}
-        {tier.bottomBadge}
+        {tier.bottomBadge && <div className="mt-6 w-full">{tier.bottomBadge}</div>}
       </div>
     </CardThemeContext.Provider>
   );
