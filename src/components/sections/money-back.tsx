@@ -135,7 +135,7 @@ export default function MoneyBackSection() {
 
             <div className="flex flex-col gap-1 items-center text-center">
               <p className="text-base md:text-[17px] font-bold text-foreground leading-snug">
-                Go Pro for $890 today (~$74.17/mo).
+                Go Pro for $890 today (~$74/mo).
               </p>
               <p className="text-sm md:text-base font-medium text-muted-foreground">
                 Join 1,000+ designers • 5-Day Money-Back Guarantee

@@ -719,7 +719,7 @@ function PricingCard({
             {tier.hasToggle ? (
               <>
                 <p className="text-[16px] font-medium text-[#8a8a8a] line-through leading-5">
-                  {isYearly ? "$1,188/yr" : "$149/mo"}
+                  {isYearly ? "$1,788/yr" : "$149/mo"}
                 </p>
                 <p
                   className="text-[32px] font-extrabold text-center w-full leading-[40px] tracking-[-0.32px] text-[#1A2130]"
@@ -728,12 +728,12 @@ function PricingCard({
                   {isYearly ? "$890/yr" : "$99/mo"}
                 </p>
                 <p className={`text-[13px] font-medium leading-5 ${isYearly ? "text-muted-foreground" : "invisible"}`}>
-                  Just $74.17/mo
+                  Just $74/mo
                 </p>
                 <div className="flex items-center gap-1.5 bg-[#e6ebdc] rounded-full border border-[#47ab19] px-3 py-1">
                   <span className="h-1.5 w-1.5 rounded-full bg-[#47ab19] flex-shrink-0" />
                   <span className="text-xs font-semibold text-[#47ab19] whitespace-nowrap">
-                    {isYearly ? "Save 25%" : "Save 33%"}
+                    {isYearly ? "Save 50%" : "Save 33%"}
                   </span>
                 </div>
               </>
@@ -833,12 +833,12 @@ function PricingCard({
           )}
           {tier.hasToggle ? (
             <div className="flex flex-col items-center gap-1 w-full">
-              <p className="text-[16px] font-medium text-[#8a8a8a] line-through">{isYearly ? "$1,188/yr" : "$149/mo"}</p>
+              <p className="text-[16px] font-medium text-[#8a8a8a] line-through">{isYearly ? "$1,788/yr" : "$149/mo"}</p>
               <p className="text-[32px] font-extrabold text-center text-[#1A2130]" style={{ fontFamily: "var(--font-family-display)" }}>{isYearly ? "$890/yr" : "$99/mo"}</p>
-              {isYearly && <p className="text-[13px] font-medium text-muted-foreground">Just $74.17/mo</p>}
+              {isYearly && <p className="text-[13px] font-medium text-muted-foreground">Just $74/mo</p>}
               <div className="flex items-center gap-1.5 bg-[#e6ebdc] rounded-full border border-[#47ab19] px-3 py-1">
                 <span className="h-1.5 w-1.5 rounded-full bg-[#47ab19]" />
-                <span className="text-xs font-semibold text-[#47ab19]">{isYearly ? "Save 25%" : "Save 33%"}</span>
+                <span className="text-xs font-semibold text-[#47ab19]">{isYearly ? "Save 50%" : "Save 33%"}</span>
               </div>
             </div>
           ) : (

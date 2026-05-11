@@ -72,7 +72,7 @@ const faqs: FaqEntry[] = [
   {
     question: "Can I pay monthly instead of annually?",
     answer:
-      "Yes. Pro is available as both monthly ($99/month) and yearly ($890/year, which works out to $74.17/month) plans. The yearly plan saves you 25% compared to paying monthly.",
+      "Yes. Pro is available as both monthly ($99/month) and yearly ($890/year, which works out to $74/month) plans. The yearly plan saves you 50% compared to paying monthly.",
   },
   {
     question: "What payment methods do you accept?",

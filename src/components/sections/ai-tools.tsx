@@ -236,7 +236,7 @@ export default function AiToolsSection() {
           viewport={{ once: true }}
           className="mt-10 text-sm font-normal text-muted-foreground"
         >
-          All prompt tools are included with every Pro plan. $890/year ($74.17/month).
+          All prompt tools are included with every Pro plan. $890/year ($74/month).
         </motion.p>
       </div>
     </section>
