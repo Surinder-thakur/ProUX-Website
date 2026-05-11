@@ -160,38 +160,6 @@ function ProIcon() {
   );
 }
 
-function LifetimeIcon() {
-  return (
-    <div className="relative shrink-0 size-8">
-      <div className="absolute inset-[8.33%_8.33%_4.17%_12.5%]">
-        <div className="absolute inset-[-2.68%_-2.96%]">
-          <svg className="block size-full" fill="none" viewBox="0 0 27 30">
-            <path
-              d="M12.0833 27.4167C6.74075 27.4167 4.06946 27.4167 2.40973 25.464C0.750001 23.5114 0.75 20.3687 0.75 14.0833C0.75 7.79794 0.75 4.65524 2.40973 2.70262C4.06946 0.750001 6.74075 0.750001 12.0833 0.750001C17.4259 0.75 20.0972 0.75 21.7569 2.70262C23.093 4.27443 23.3535 6.61739 23.4044 10.75"
-              stroke="white"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              strokeWidth="1.5"
-            />
-            <path
-              d="M7.41667 8.75045H16.75M7.41667 15.4171H11.4167"
-              stroke="white"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              strokeWidth="1.5"
-            />
-            <path
-              d="M23.9641 23.0379C25.2485 22.1379 26.0833 20.6795 26.0833 19.0333C26.0833 16.2995 23.7808 14.0833 20.9405 14.0833H20.5595C17.7192 14.0833 15.4167 16.2995 15.4167 19.0333C15.4167 20.6795 16.2515 22.1379 17.5359 23.0379M23.9641 23.0379C23.1154 23.6325 22.0705 23.9833 20.9405 23.9833H20.5595C19.4295 23.9833 18.3846 23.6325 17.5359 23.0379M23.9641 23.0379L24.8522 25.7293C25.1909 26.7558 25.3602 27.269 25.3139 27.5887C25.2175 28.2539 24.6539 28.7477 23.9884 28.75C23.6686 28.7511 23.1896 28.5092 22.2316 28.0253C21.8208 27.8178 21.6153 27.714 21.4052 27.653C20.9771 27.5287 20.5229 27.5287 20.0948 27.653C19.8847 27.714 19.6792 27.8178 19.2684 28.0253C18.3104 28.5092 17.8314 28.7511 17.5116 28.75C16.8461 28.7477 16.2825 28.2539 16.1861 27.5887C16.1398 27.269 16.3091 26.7558 16.6478 25.7293L17.5359 23.0379"
-              stroke="hsl(var(--sidebar-border))"
-              strokeWidth="1.5"
-            />
-          </svg>
-        </div>
-      </div>
-    </div>
-  );
-}
-
 function ShieldIcon({ color = "hsl(var(--annotation-green-600))" }: { color?: string }) {
   return (
     <div className="relative shrink-0 size-6">
@@ -288,43 +256,6 @@ function LayerIcon() {
           fill="white"
         />
       </svg>
-    </div>
-  );
-}
-
-function UserGroupIcon() {
-  return (
-    <div className="relative shrink-0 size-6">
-      <div className="absolute inset-[16.67%_4.17%]">
-        <div className="absolute inset-[-4.69%_-3.41%]">
-          <svg className="block size-full" fill="none" viewBox="0 0 24 18">
-            <path
-              d="M20.5241 14.75C21.2734 14.75 21.8694 14.2785 22.4045 13.6191C23.4999 12.2694 21.7014 11.1908 21.0154 10.6626C20.3181 10.1256 19.5394 9.82142 18.75 9.75M17.75 7.75C19.1307 7.75 20.25 6.63071 20.25 5.25C20.25 3.86929 19.1307 2.75 17.75 2.75"
-              stroke="hsl(var(--muted))"
-              strokeLinecap="round"
-              strokeWidth="1.5"
-            />
-            <path
-              d="M2.976 14.75C2.2267 14.75 1.63071 14.2785 1.09559 13.6191C0.000132078 12.2694 1.79871 11.1908 2.48469 10.6626C3.18202 10.1256 3.96063 9.82142 4.75004 9.75M5.25004 7.75C3.86933 7.75 2.75004 6.63071 2.75004 5.25C2.75004 3.86929 3.86933 2.75 5.25004 2.75"
-              stroke="hsl(var(--muted))"
-              strokeLinecap="round"
-              strokeWidth="1.5"
-            />
-            <path
-              d="M7.83381 11.8612C6.81203 12.493 4.13299 13.7831 5.76471 15.3974C6.56179 16.186 7.44953 16.75 8.56564 16.75H14.9344C16.0505 16.75 16.9382 16.186 17.7353 15.3974C19.367 13.7831 16.688 12.493 15.6662 11.8612C13.2702 10.3796 10.2299 10.3796 7.83381 11.8612Z"
-              stroke="hsl(var(--muted))"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              strokeWidth="1.5"
-            />
-            <path
-              d="M15.25 4.25C15.25 6.183 13.683 7.75 11.75 7.75C9.81701 7.75 8.25001 6.183 8.25001 4.25C8.25001 2.317 9.81701 0.75 11.75 0.75C13.683 0.75 15.25 2.317 15.25 4.25Z"
-              stroke="hsl(var(--muted))"
-              strokeWidth="1.5"
-            />
-          </svg>
-        </div>
-      </div>
     </div>
   );
 }
@@ -557,7 +488,7 @@ const tiers: PricingTier[] = [
     name: "Pro",
     tagline:
       "For designers who want to master AI and ship world\u2011class products fast.",
-    price: "$9.99/mo",
+    price: "$99/mo",
     billing: "",
     buttonLabel: "Upgrade to Pro",
     buttonVariant: "filled",
@@ -660,86 +591,6 @@ const tiers: PricingTier[] = [
     ],
   },
 
-  /* ── Lifetime ($299) ── */
-  {
-    icon: <LifetimeIcon />,
-    name: "Lifetime Access",
-    tagline:
-      "Pay once. Get lifetime access to everything. Including all future updates.",
-    price: "$299",
-    billing: "One-time payment",
-    buttonLabel: "Claim Lifetime",
-    buttonVariant: "outline-light",
-    isDark: true,
-    showGuarantee: true,
-    bottomBadge: (
-      <div
-        className="flex flex-col gap-2 items-center px-0 py-3 w-[250px] mx-auto rounded-[calc(var(--radius)+6px)]"
-        style={{ backgroundColor: "rgba(255,255,255,0.07)" }}
-      >
-        <UserGroupIcon />
-        <p className="text-sm font-medium text-primary-foreground leading-5 tracking-[-0.154px]">
-          Limited to first <span className="font-bold">1,000</span> members
-        </p>
-      </div>
-    ),
-    features: [
-      {
-        category: "Everything in Pro, For Life",
-        items: [
-          {
-            label: (
-              <>
-                <B>All Pro features, unlimited – forever</B> (AI tools,
-                Scanner, full research vault)
-              </>
-            ),
-            tooltip:
-              "Every tool, every scan, every guideline \u2014 yours forever with no recurring fees. Includes unlimited AI prompt enhancement, design scans, and the complete research library.",
-          },
-        ],
-      },
-      {
-        category: "Future-Proof Access",
-        items: [
-          {
-            label: (
-              <>
-                <B>Lifetime access</B> as the library expands to{" "}
-                <B>350+ (and growing) guidelines & insights</B>
-              </>
-            ),
-            tooltip:
-              "Our team continuously adds new principles, case studies, and guidelines. As a lifetime member, every addition lands in your account automatically \u2014 no extra charge, ever.",
-          },
-          {
-            label: (
-              <>
-                <B>Every new tool, guideline set</B>, and case study we add
-                – included at <B>no extra cost</B>
-              </>
-            ),
-            tooltip:
-              "New AI specialists, scanner improvements, guideline packs, and product analyses \u2014 everything we ship in the future is included in your lifetime membership.",
-          },
-        ],
-      },
-      {
-        category: "VIP Perks",
-        items: [
-          {
-            label: (
-              <>
-                <B>Priority support</B> – fast help when you need it most
-              </>
-            ),
-            tooltip:
-              "Lifetime members get priority in our support queue. Expect faster response times and direct access to our UX team for questions about your scans or design decisions.",
-          },
-        ],
-      },
-    ],
-  },
 ];
 
 /* ══════════════════════════════════════════════════════════════════════════
@@ -868,21 +719,21 @@ function PricingCard({
             {tier.hasToggle ? (
               <>
                 <p className="text-[16px] font-medium text-[#8a8a8a] line-through leading-5">
-                  {isYearly ? "$120/yr" : "$15/mo"}
+                  {isYearly ? "$1,188/yr" : "$149/mo"}
                 </p>
                 <p
                   className="text-[32px] font-extrabold text-center w-full leading-[40px] tracking-[-0.32px] text-[#1A2130]"
                   style={{ fontFamily: "var(--font-family-display)" }}
                 >
-                  {isYearly ? "$99.99/yr" : "$9.99/mo"}
+                  {isYearly ? "$890/yr" : "$99/mo"}
                 </p>
                 <p className={`text-[13px] font-medium leading-5 ${isYearly ? "text-muted-foreground" : "invisible"}`}>
-                  Just $8.33/mo
+                  Just $74.17/mo
                 </p>
                 <div className="flex items-center gap-1.5 bg-[#e6ebdc] rounded-full border border-[#47ab19] px-3 py-1">
                   <span className="h-1.5 w-1.5 rounded-full bg-[#47ab19] flex-shrink-0" />
                   <span className="text-xs font-semibold text-[#47ab19] whitespace-nowrap">
-                    {isYearly ? "Save 17% vs monthly" : "Launch Offer — 33% off"}
+                    {isYearly ? "Save 25%" : "Save 33%"}
                   </span>
                 </div>
               </>
@@ -982,12 +833,12 @@ function PricingCard({
           )}
           {tier.hasToggle ? (
             <div className="flex flex-col items-center gap-1 w-full">
-              <p className="text-[16px] font-medium text-[#8a8a8a] line-through">{isYearly ? "$120/yr" : "$15/mo"}</p>
-              <p className="text-[32px] font-extrabold text-center text-[#1A2130]" style={{ fontFamily: "var(--font-family-display)" }}>{isYearly ? "$99.99/yr" : "$9.99/mo"}</p>
-              {isYearly && <p className="text-[13px] font-medium text-muted-foreground">Just $8.33/mo</p>}
+              <p className="text-[16px] font-medium text-[#8a8a8a] line-through">{isYearly ? "$1,188/yr" : "$149/mo"}</p>
+              <p className="text-[32px] font-extrabold text-center text-[#1A2130]" style={{ fontFamily: "var(--font-family-display)" }}>{isYearly ? "$890/yr" : "$99/mo"}</p>
+              {isYearly && <p className="text-[13px] font-medium text-muted-foreground">Just $74.17/mo</p>}
               <div className="flex items-center gap-1.5 bg-[#e6ebdc] rounded-full border border-[#47ab19] px-3 py-1">
                 <span className="h-1.5 w-1.5 rounded-full bg-[#47ab19]" />
-                <span className="text-xs font-semibold text-[#47ab19]">{isYearly ? "Save 17% vs monthly" : "Launch Offer — 33% off"}</span>
+                <span className="text-xs font-semibold text-[#47ab19]">{isYearly ? "Save 25%" : "Save 33%"}</span>
               </div>
             </div>
           ) : (
@@ -1087,7 +938,6 @@ export default function PricingSection() {
           <div className="flex flex-col md:flex-row gap-5 items-stretch justify-center w-full flex-wrap">
             <PricingCard tier={tiers[0]} order="order-2 md:order-1" />
             <PricingCard tier={tiers[1]} order="order-1 md:order-2" />
-            <PricingCard tier={tiers[2]} order="order-3" />
           </div>
         </TooltipProvider>
       </div>

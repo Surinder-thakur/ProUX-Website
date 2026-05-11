@@ -2,9 +2,9 @@ import type { Metadata } from "next";
 import PricingSection from "@/components/sections/pricing";
 
 export const metadata: Metadata = {
-  title: "Pricing — ProUX",
+  title: "Pricing | ProUX",
   description:
-    "Everything ProUX costs at a glance. Free forever tier, Pro annual plan, Lifetime access, and live AI Design Workshops.",
+    "Everything ProUX costs at a glance. Free forever tier, Pro monthly and yearly plans, and live AI Design Workshops.",
 };
 
 export default function PricingPage() {

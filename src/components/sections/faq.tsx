@@ -47,12 +47,12 @@ const faqs: FaqEntry[] = [
   {
     question: "How is ProUX different from hiring a UX consultant?",
     answer:
-      "ProUX gives you instant expert-level feedback 24/7 at a fraction of the cost. While consultants take days or weeks and charge thousands per project, ProUX analyzes designs in under 60 seconds for $384/year. Plus, you get access to our entire principles library and real product examples to learn as you go.",
+      "ProUX gives you instant expert-level feedback 24/7 at a fraction of the cost. While consultants take days or weeks and charge thousands per project, ProUX analyzes designs in under 60 seconds for $890/year. Plus, you get access to our entire principles library and real product examples to learn as you go.",
   },
   {
     question: "What\u2019s the difference between Free and Pro?",
     answer:
-      "Free users get limited tokens for design scans per month with basic AI feedback and restricted access to the guidelines library. Pro members ($384/year) get unlimited tokens for scans, access to all AI specialists, the complete principles library with annotated examples, priority support, and new features as we release them.",
+      "Free users get limited tokens for design scans per month with basic AI feedback and restricted access to the guidelines library. Pro members ($890/year, or $99/month) get unlimited tokens for scans, access to all AI specialists, the complete principles library with annotated examples, priority support, and new features as we release them.",
   },
   {
     question: "Can I try Pro before paying?",
@@ -72,7 +72,7 @@ const faqs: FaqEntry[] = [
   {
     question: "Can I pay monthly instead of annually?",
     answer:
-      "Currently, we offer annual plans ($384/year, which works out to $32/month) to ensure you have enough time to see real results. Monthly billing may be available in the future.",
+      "Yes. Pro is available as both monthly ($99/month) and yearly ($890/year, which works out to $74.17/month) plans. The yearly plan saves you 25% compared to paying monthly.",
   },
   {
     question: "What payment methods do you accept?",
